@@ -1,10 +1,10 @@
 {
   "name": "@tezjs/strapi",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "lib/module.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preview": "standard-version"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/tezjs/tez.js/issues"
   },
-  "homepage": "https://github.com/tezjs/tez.js#readme"
+  "homepage": "https://github.com/tezjs/tez.js#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "standard-version": "^9.3.0"
+  }
 }
