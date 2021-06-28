@@ -2,6 +2,7 @@ import { CollectionResultQueryConfig } from "./collection-result-query-config";
 import { MediaConfig } from "./media-config";
 import { PageCollectionConfig } from "./page-collection-config";
 import { SerializeJsonConfig } from "./serialize-json-config";
+import { UserCredential } from "./user-credential-config";
 
 export interface StrapiModuleConfig {
     apiUri: string;
@@ -16,4 +17,6 @@ export interface StrapiModuleConfig {
     limit?: number;
     siteUrl?: string;
     serializeJson?: SerializeJsonConfig;
+    userCredential?: UserCredential;
+    enableInternationalization?: boolean;
 }

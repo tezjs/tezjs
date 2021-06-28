@@ -104,3 +104,4 @@ dist
 .tern-port
 /.vs
 /packages/strapi/package-lock.json
+/packages/strapi/runtime/static/payload

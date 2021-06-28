@@ -1,4 +1,8 @@
 import path from 'path';
-export function getPath(pathCollection: string[]): string {
-    return path.join(...pathCollection);
+import { createPath } from './create-path';
+export function getPath(pathCollection: string[], isCreateFolder: boolean = false): string {
+    const currentPath = path.join(...pathCollection);
+    if (isCreateFolder)
+        createPath(currentPath)
+    return currentPath;
 }

@@ -8,6 +8,7 @@ module.exports = {
         apiUri: process.env.API_URL,
         componentNames: componentNames,
         collectionQuery: collectionQuery, 
-        componentDataFieldSelectors: componentDataFieldSelectors
+        componentDataFieldSelectors: componentDataFieldSelectors,
     }
-}
+}   
+  

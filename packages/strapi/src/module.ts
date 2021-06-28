@@ -1,9 +1,7 @@
 import type { Module } from "@nuxt/types";
 import { name, version } from '../package.json';
-import { NAME } from './const/app.const'
 import { defaultContainer } from "./const/core.const";
 import { PageCollection } from "./domain/page-collection";
-import parseStrapiData from "./domain/parse-strapi-data";
 import { StrapiModuleConfig } from "./interface/strapi-module-config";
 
 const strapiModule: Module<any> = async function strapiModule(moduleOptions: StrapiModuleConfig) {
@@ -14,8 +12,8 @@ const strapiModule: Module<any> = async function strapiModule(moduleOptions: Str
         console.log(`Strapi payload generator start`)
         if (nuxtInstance.options.tez && nuxtInstance.options.tez.strapi)
             defaultContainer.setOption(nuxtInstance.options.tez.strapi)
-        var pageCollection = new PageCollection();
-        await pageCollection.generate(builder);
+        var pageCollection = new PageCollection(builder);
+        await pageCollection.generate();
         console.log(`Strapi payload generator end`)
 
     })
