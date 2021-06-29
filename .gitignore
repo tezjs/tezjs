@@ -105,3 +105,4 @@ dist
 /.vs
 /packages/strapi/package-lock.json
 /packages/strapi/runtime/static/payload
+/packages/firebase/package-lock.json
