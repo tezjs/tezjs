@@ -1,4 +1,3 @@
 export interface FirebaseConfigOption {
-    replaceProps: { [key: string]: any };
-    addOrUpdateProps: { [key: string]: any };
+    overrideConfig: { [key: string]: any }
 }

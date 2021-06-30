@@ -12,8 +12,9 @@
     "lint": "npm run lint:js"
   },
   "dependencies": {
-    "@nuxtjs/pwa": "^3.3.5",
-    "core-js": "^3.9.1",
+    "@nuxtjs/html-minifier": "^0.1.2",
+    "core-js": "^3.15.2",
+    "firebase-tools": "^9.14.0",
     "nuxt": "^2.15.3",
     "nuxt-purgecss": "^1.0.0"
   },

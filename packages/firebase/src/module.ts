@@ -7,7 +7,7 @@ const firebaseModule: any = async function firebase() {
         if (nuxtInstance.options.tez && nuxtInstance.options.tez.strapi) {
             console.log(`Updating firebase json`)
             const firebaseDomain = new FirebaseDomain();
-            await firebaseDomain.generate(builder, nuxtInstance.options.tez.strapi);
+            await firebaseDomain.generate(builder, nuxtInstance);
             console.log(`firebase json updated.`)
         }
     })
