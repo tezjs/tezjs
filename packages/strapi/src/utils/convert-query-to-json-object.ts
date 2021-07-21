@@ -1,18 +1,12 @@
+import { getValueByPath } from "./get-value-by-path";
+
 export default function converQueryToJsonObject(queryObject, entity) {
     var query = {};
-    if (queryObject && queryObject.query) {
+    if (queryObject && queryObject.query && !queryObject.query.queryString) {
         Object.keys(queryObject.query).forEach(key => {
             let keyValue = queryObject.query[key];
             if (keyValue.startsWith("#")) {
-                const splitText = keyValue.split(".");
-                var text = undefined;
-                splitText.forEach(t => {
-                    if (!text)
-                        text = entity[t.replace("#", "")];
-                    else
-                        text = text[t];
-                })
-                keyValue = text;
+                keyValue = getValueByPath(keyValue, entity);
             }
             query[key] = keyValue;
         });

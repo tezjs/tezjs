@@ -16,7 +16,7 @@ export class PageCollection {
         this.internationalizationService = new InternationalizationService(this.requestService);
         this.pageRoute = new PageRoute(this.requestService, builder)
         this.payloadGenerator = new PayloadGenerator(this.requestService, builder);
-        this.pathResolver = new PathResolver(builder);
+        this.pathResolver = new PathResolver();
     }
     async generate() {
         await this.requestService.login()

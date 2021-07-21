@@ -5,7 +5,8 @@ export default {
     buildModules: [
         // https://go.nuxtjs.dev/typescript
         '@nuxt/typescript-build',
-        [require('../'),tez]
+        [require('../')]  
     ],
-    tez: tez
-}
+    tez: tez   
+}   
+  

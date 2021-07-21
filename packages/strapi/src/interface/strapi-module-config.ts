@@ -1,6 +1,8 @@
 import { CollectionResultQueryConfig } from "./collection-result-query-config";
 import { MediaConfig } from "./media-config";
+import { OptimizationConfig } from "./optimization-config";
 import { PageCollectionConfig } from "./page-collection-config";
+import { PaginationConfig } from "./pagination-config";
 import { SerializeJsonConfig } from "./serialize-json-config";
 import { UserCredential } from "./user-credential-config";
 
@@ -19,4 +21,6 @@ export interface StrapiModuleConfig {
     serializeJson?: SerializeJsonConfig;
     userCredential?: UserCredential;
     enableInternationalization?: boolean;
+    optimization: OptimizationConfig;
+    pagination: PaginationConfig;
 }

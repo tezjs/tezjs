@@ -12,7 +12,12 @@ export default async function dataRequest(queryObject, entity) {
             queryObject.query = {};
         queryObject.query["_sort"] = "created_at:DESC";
     }
-    const response = await axios.get(`${apiUri}/${strapiEntity}/?${jsonToString(converQueryToJsonObject(queryObject, entity))}`);
+    let url = `${apiUri}/${strapiEntity}`;
+    if (queryObject && queryObject.query && queryObject.query.queryString)
+        url = `${url}/?${queryObject.query.queryString}`
+    else
+        url = `${url}/?${jsonToString(converQueryToJsonObject(queryObject, entity))}`
+    const response = await axios.get(url);
     return response.data || [];
 }
 

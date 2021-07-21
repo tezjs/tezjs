@@ -46,7 +46,10 @@ export const DATA_CONTROL_FIELD_VALUE: string = "data-control.get-data-by-field-
 
 export const UNDERSCORE: string = "_";
 
-export const CACHE_PATH:string = "node_modules/.cache/tez"
+export const CACHE_PATH: string = "node_modules/.cache/tez";
 
+export const URL_PROPS: string[] = ["url", "navurl", "slug"];
 
+export const TITLE_PROPS: string[] = ["title", "name"];
 
+export const VUE_COMPONENT_NAME: string = "VueComponentName";

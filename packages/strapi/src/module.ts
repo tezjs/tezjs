@@ -9,6 +9,7 @@ const strapiModule: any = async function strapiModule(moduleOptions: StrapiModul
         console.log(`Strapi payload generator start`)
         if (nuxtInstance.options.tez && nuxtInstance.options.tez.strapi) {
             nuxtInstance.options.tez.strapi.siteUrl = nuxtInstance.options.tez.siteUrl;
+            defaultContainer.nuxtInstance = nuxtInstance;
             defaultContainer.setOption(nuxtInstance.options.tez.strapi)
         }
         const pageCollection = new PageCollection(builder);

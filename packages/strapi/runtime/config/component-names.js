@@ -60,5 +60,9 @@ module.exports = {
     "TC_Upload_Photo": "upload-form",
     "TC_Payment": "paypal",
     "Landing_Page_Jewelry_Contact": "landing-contactus-jewelry",
-    "TCM_LPF_Photo_Retouching_India": "landing-retouching-form"
+    "TCM_LPF_Photo_Retouching_India": "landing-retouching-form",
+
+    "Header": "Header",
+    "Articles": "Articles",
+    "Categories":"Categories"
 }

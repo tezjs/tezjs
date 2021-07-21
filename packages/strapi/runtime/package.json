@@ -6,8 +6,10 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
     "generate:dev": "nuxt generate --dotenv environments/.env",
+    "generate:stage": "nuxt generate --dotenv environments/.env.stage",
+    "generate:production": "nuxt generate --dotenv environments/.env.production",
+    "generate:prelive": "nuxt generate --dotenv environments/.env.prelive",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint": "npm run lint:js"
   },

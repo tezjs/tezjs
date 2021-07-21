@@ -3,15 +3,14 @@ import { defaultContainer } from "../const/core.const";
 import { getPath } from "../utils/get-path";
 
 export class PathResolver {
-    constructor(private builder: any) { }
 
     get payloadPath() {
         const { payloadRootPath } = defaultContainer.moduleOptions
-        return getPath([this.builder.nuxt.options.rootDir, payloadRootPath, 'payload'], true);
+        return getPath([defaultContainer.nuxtInstance.nuxt.options.rootDir, payloadRootPath, 'payload'], true);
     }
 
     get rootPath() {
-        return getPath([this.builder.nuxt.options.rootDir, CACHE_PATH],true)
+        return getPath([defaultContainer.nuxtInstance.nuxt.options.rootDir, CACHE_PATH],true)
     }
 
     get routesJsonPath() {
@@ -20,5 +19,13 @@ export class PathResolver {
 
     get sitemapJsonPath() {
         return getPath([this.rootPath, "sitemap.json"]);
+    }
+
+    getCollectionPayloadPath(collectionName: string): string {
+        return getPath([this.payloadPath, "collections", collectionName], true);
+    }
+
+    getFilterCollectionPayloadPath(collectionName: string): string {
+        return getPath([this.payloadPath, "filter-collections", collectionName], true);
     }
 }

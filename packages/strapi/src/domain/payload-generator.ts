@@ -18,7 +18,7 @@ export class PayloadGenerator {
     constructor(private requestService: RequestService, builder: any) {
         const { pageCollectionConfig, payloadRootPath } = defaultContainer.moduleOptions;
         this.pageCollectionConfig = pageCollectionConfig;
-        this.pathResolver = new PathResolver(builder);
+        this.pathResolver = new PathResolver();
     }
 
     async generate(route: Route, dynamicPageRoute: { [key: string]: any }): Promise<{ [key: string]: any } | null> {

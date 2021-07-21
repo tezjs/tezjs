@@ -1,10 +1,12 @@
-import {  UNDERSCORE } from "../const/app.const";
+import {  TITLE_PROPS, UNDERSCORE, URL_PROPS } from "../const/app.const";
 import { REMOVE_SPECIAL_CHARACTERS } from "../const/app.regex";
 import { defaultContainer } from "../const/core.const";
 import { PageCollectionConfig } from "../interface/page-collection-config";
 import { PageRouteResponse } from "../interface/page-route-response";
 import SnakeCaseSanitizer from "../sanitizers/snake-case.sanitizer";
 import getUrl from "../utils/get-url";
+import { mergeUrl } from "../utils/merge-url";
+import { readProp } from "../utils/read-prop";
 import { writeFileSync } from "../utils/write-file";
 import { PathResolver } from "./path-resolver";
 import { RequestService } from "./request.server";
@@ -17,7 +19,7 @@ export class PageRoute {
         const { pageCollectionConfig , limit} = defaultContainer.moduleOptions;
         this.pageCollectionConfig = pageCollectionConfig;
         this.limit = limit;
-        this.pathResolver = new PathResolver(builder);
+        this.pathResolver = new PathResolver();
     }
 
     async getRoutes(locale:string): Promise<PageRouteResponse> {
@@ -33,13 +35,16 @@ export class PageRoute {
                 const dynamicItems = await this.requestService.get(`/${SnakeCaseSanitizer(item.DynamicPage)}`);
                 for (let j = 0; j < dynamicItems.length; j++) {
                     const dynamicItem = dynamicItems[j];
-                    dynamicPageRoute[dynamicItem.NavURL] = {
-                        url: item.URL, data: { id: dynamicItem.id, title: dynamicItem.Title, content: dynamicItem.Content, metaTags: dynamicItem.MetaTags, seo: dynamicItem.SEO }
+                    let url = readProp(dynamicItem, URL_PROPS);
+                    url = mergeUrl(item.URL, url);
+                    const title = readProp(dynamicItem, TITLE_PROPS);
+                    dynamicPageRoute[url] = {
+                        url: item.URL, data: { id: dynamicItem.id, title: title || '', content: dynamicItem.Content || [], metaTags: dynamicItem.MetaTags || [], seo: dynamicItem.SEO || [] }
                     };
-                    const path = getUrl(dynamicItem.NavURL);
+                    const path = getUrl(url);
                     if (routes.filter(t => t.path === path).length === 0) {
                         routes.push({
-                            name: dynamicItem.Title.replace(REMOVE_SPECIAL_CHARACTERS, UNDERSCORE),
+                            name: title.replace(REMOVE_SPECIAL_CHARACTERS, UNDERSCORE),
                             path: path
                         })
                     }

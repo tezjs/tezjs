@@ -1,15 +1,18 @@
-import { CANONICAL, DATA_CONTROL_ALL, DATA_CONTROL_FIELD_VALUE, META_TAGS, STRAPI_COMPONENT_FIELD, TAGS_SEO, VUE_REFERENCE_CODE } from "../const/app.const";
+import { CANONICAL, DATA_CONTROL_ALL, DATA_CONTROL_FIELD_VALUE, META_TAGS, STRAPI_COMPONENT_FIELD, TAGS_SEO, VUE_COMPONENT_NAME, VUE_REFERENCE_CODE } from "../const/app.const";
 import { defaultContainer } from "../const/core.const";
 import cleanObject from "../sanitizers/clean-object.sanitizer";
 import removeSpace from "../sanitizers/remove-space.sanitizer";
 import dataFieldSelector from "../utils/data-field-selector";
 import getUrl from "../utils/get-url";
+import { parseQueryString } from "../utils/parse-query-string";
+import { CollectionIndexer } from "./collection-indexer";
 import DataResolver from "./data-resolver";
 import getSitemapObject from "./get-sitemap-object";
 import dataRequest from "./query";
 import tagBuilder from "./tag-builder";
 
 export default async function parseStrapiData(pageContent, url, dynamicData) {
+    const collectionIndexer = new CollectionIndexer();
     const moduleOptions = defaultContainer.moduleOptions;
     let GenericSection = [];
     pageContent = await DataResolver(pageContent);
@@ -21,19 +24,27 @@ export default async function parseStrapiData(pageContent, url, dynamicData) {
     let components = [];
     for (let i = 0; i < GenericSection.length; i++) {
         let item = GenericSection[i];
-        let componentName = removeSpace(item[VUE_REFERENCE_CODE] || item[STRAPI_COMPONENT_FIELD]);
+        let componentName = removeSpace(item[VUE_REFERENCE_CODE] || item[VUE_COMPONENT_NAME] || item[STRAPI_COMPONENT_FIELD]);
         item.dynamic = dynamicData;
         if (moduleOptions.componentNames[componentName]) {
             if ((item[STRAPI_COMPONENT_FIELD] === DATA_CONTROL_ALL || item[STRAPI_COMPONENT_FIELD] === DATA_CONTROL_FIELD_VALUE) && moduleOptions.componentDataFieldSelectors[moduleOptions.componentNames[componentName]]) {
-                let query = {};
-                if (item[STRAPI_COMPONENT_FIELD] === DATA_CONTROL_FIELD_VALUE)
-                    query[item.Field] = item.Value;
-                let queryResult = await dataRequest({ entity: item.CollectionType, query: query }, item);
-                let result = dataFieldSelector(queryResult, moduleOptions.componentDataFieldSelectors[moduleOptions.componentNames[componentName]]);
+                let query: { [key: string]: any } = {};
+                if (item[STRAPI_COMPONENT_FIELD] === DATA_CONTROL_FIELD_VALUE) {
+                    if (item.Field)
+                        query[item.Field] = item.Value;
+                    else if (item.FilterQueryString)
+                        query.queryString = parseQueryString(item.FilterQueryString, item);
+                }
+                const queryResult = await dataRequest({ entity: item.CollectionType, query: query }, item);
+                const result = dataFieldSelector(queryResult, moduleOptions.componentDataFieldSelectors[moduleOptions.componentNames[componentName]]);
                 result.forEach(t => { t.hide = false });
-                item.dynamicResult = result;
+                if (moduleOptions.optimization.sourcePagination) 
+                    item.dynamicSourcePath = await collectionIndexer.paginate(result, item.CollectionType.toLowerCase(), query.queryString);
+                else
+                    item.dynamicResult = result;
             }
-            components.push({ id: parseInt(String( Math.random() * 10000000)), name: moduleOptions.componentNames[componentName], style: { 'min-height': 'auto' }, data: cleanObject(item), serverBinding: i > 2 ? false : true });
+            components.push({ id: defaultContainer.getUniqueId(), name: moduleOptions.componentNames[componentName], style: { 'min-height': 'auto' }, data: cleanObject(item), serverBinding: i > 2 ? false : true
+        });
         }
         else if (item[STRAPI_COMPONENT_FIELD] === META_TAGS || item[STRAPI_COMPONENT_FIELD] === TAGS_SEO) {
             tagBuilder(item, Tag);
