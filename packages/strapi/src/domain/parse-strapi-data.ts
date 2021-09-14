@@ -3,6 +3,7 @@ import { defaultContainer } from "../const/core.const";
 import cleanObject from "../sanitizers/clean-object.sanitizer";
 import removeSpace from "../sanitizers/remove-space.sanitizer";
 import dataFieldSelector from "../utils/data-field-selector";
+import { getDynamicPageRecord } from "../utils/get-dynamic-page-record";
 import getUrl from "../utils/get-url";
 import { parseQueryString } from "../utils/parse-query-string";
 import { CollectionIndexer } from "./collection-indexer";
@@ -35,10 +36,10 @@ export default async function parseStrapiData(pageContent, url, dynamicData) {
                     else if (item.FilterQueryString)
                         query.queryString = parseQueryString(item.FilterQueryString, item);
                 }
-                const queryResult = await dataRequest({ entity: item.CollectionType, query: query }, item);
+                const queryResult = item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_GET_RECORD ? getDynamicPageRecord(pageContent,Tag, url) : await dataRequest({ entity: item.CollectionType, query: query }, item);
                 const result = dataFieldSelector(queryResult, moduleOptions.componentDataFieldSelectors[moduleOptions.componentNames[componentName]]);
                 result.forEach(t => { t.hide = false });
-                if (moduleOptions.optimization.sourcePagination) 
+                if (moduleOptions.optimization.sourcePagination && item[FIELD_DATA_TYPE_RESULT] !== DATA_CONTROL_GET_RECORD) 
                     item.dynamicSourcePath = await collectionIndexer.paginate(result, item.CollectionType.toLowerCase(), query.queryString);
                 else
                     item.dynamicResult = result;

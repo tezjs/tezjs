@@ -33,6 +33,7 @@ export class PageRoute {
             const item = dataItems[i];
             if (item.DynamicPage) {
                 const dynamicItems = await this.requestService.get(`/${SnakeCaseSanitizer(item.DynamicPage)}`);
+                defaultContainer.cacheDynamicPageCollection(item.DynamicPage, dynamicItems);
                 for (let j = 0; j < dynamicItems.length; j++) {
                     const dynamicItem = dynamicItems[j];
                     let url = readProp(dynamicItem, URL_PROPS);

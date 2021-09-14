@@ -1,4 +1,4 @@
-import { META_TAGS, STRAPI_COMPONENT_FIELD, TAGS_SEO } from "../const/app.const";
+import { META_TAGS, TAGS_SEO } from "../const/app.const";
 import { defaultContainer } from "../const/core.const";
 import Query from './query';
 export default async function DataResolver(pageContent) {
@@ -8,10 +8,10 @@ export default async function DataResolver(pageContent) {
         if (!pageContent.GenericSection)
             pageContent.GenericSection = [];
         result.forEach(t => {
-            if (t.MetaTags)
-                pageContent.GenericSection.push({ [STRAPI_COMPONENT_FIELD]: META_TAGS, ...t.MetaTags });
-            if (t.SEO)
-                pageContent.GenericSection.push({ [STRAPI_COMPONENT_FIELD]: TAGS_SEO, ...t.SEO });
+            //if (t.MetaTags)
+            //    pageContent.GenericSection.push({ [STRAPI_COMPONENT_FIELD]: META_TAGS, ...t.MetaTags });
+            //if (t.SEO)
+            //    pageContent.GenericSection.push({ [STRAPI_COMPONENT_FIELD]: TAGS_SEO, ...t.SEO });
 
             pageContent.GenericSection.push(t);
         });

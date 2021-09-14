@@ -8,7 +8,10 @@ export const defaultContainer:
         filterCollectionState: { [key: string]: any };
         collectionState: { [key: string]: any };
         getUniqueId(): string;
+        cacheDynamicPageCollection(collectionName: string, data: any[]): void;
+        getDynamicPageCollection(collectionName: string, filterExpression: any): { [key: string]: any };
     } = new (class {
+        dynamicPageCollection: { [key: string]: any[] } = {};
         collectionState: { [key: string]: any } = {};
         filterCollectionState: { [key: string]: any } = {};
         nuxtInstance: any = undefined;
@@ -47,5 +50,13 @@ export const defaultContainer:
 
         getUniqueId(): string {
             return String(parseInt(String(Math.random() * 10000000)));
+        }
+
+        cacheDynamicPageCollection(collectionName: string, data: any[]) {
+            this.dynamicPageCollection[collectionName] = data;
+        }
+
+        getDynamicPageCollection(collectionName: string, filterExpression: any) {
+            return this.dynamicPageCollection[collectionName] ? this.dynamicPageCollection[collectionName].filter(filterExpression) : [];
         }
     })();

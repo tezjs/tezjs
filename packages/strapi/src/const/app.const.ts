@@ -55,3 +55,7 @@ export const URL_PROPS: string[] = ["url", "navurl", "slug"];
 export const TITLE_PROPS: string[] = ["title", "name"];
 
 export const VUE_COMPONENT_NAME: string = "VueComponentName";
+
+export const ASTERISK: string = "*";
+
+export const BLANK: string = "";
