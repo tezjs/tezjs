@@ -1,4 +1,4 @@
-import { CANONICAL, DATA_CONTROL_ALL, DATA_CONTROL_FIELD_VALUE, META_TAGS, STRAPI_COMPONENT_FIELD, TAGS_SEO, VUE_COMPONENT_NAME, VUE_REFERENCE_CODE } from "../const/app.const";
+import { CANONICAL, DATA_CONTROL_ALL, DATA_CONTROL_FILTER, DATA_CONTROL_GET_RECORD, FIELD_DATA_TYPE_RESULT, META_TAGS, TAGS_SEO, VUE_COMPONENT_NAME, VUE_REFERENCE_CODE } from "../const/app.const";
 import { defaultContainer } from "../const/core.const";
 import cleanObject from "../sanitizers/clean-object.sanitizer";
 import removeSpace from "../sanitizers/remove-space.sanitizer";
@@ -24,12 +24,12 @@ export default async function parseStrapiData(pageContent, url, dynamicData) {
     let components = [];
     for (let i = 0; i < GenericSection.length; i++) {
         let item = GenericSection[i];
-        let componentName = removeSpace(item[VUE_REFERENCE_CODE] || item[VUE_COMPONENT_NAME] || item[STRAPI_COMPONENT_FIELD]);
+        let componentName = removeSpace(item[VUE_REFERENCE_CODE] || item[VUE_COMPONENT_NAME]);
         item.dynamic = dynamicData;
         if (moduleOptions.componentNames[componentName]) {
-            if ((item[STRAPI_COMPONENT_FIELD] === DATA_CONTROL_ALL || item[STRAPI_COMPONENT_FIELD] === DATA_CONTROL_FIELD_VALUE) && moduleOptions.componentDataFieldSelectors[moduleOptions.componentNames[componentName]]) {
+            if ((item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_ALL || item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_FILTER || item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_GET_RECORD) && moduleOptions.componentDataFieldSelectors[moduleOptions.componentNames[componentName]]) {
                 let query: { [key: string]: any } = {};
-                if (item[STRAPI_COMPONENT_FIELD] === DATA_CONTROL_FIELD_VALUE) {
+                if (item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_FILTER) {
                     if (item.Field)
                         query[item.Field] = item.Value;
                     else if (item.FilterQueryString)
@@ -46,7 +46,7 @@ export default async function parseStrapiData(pageContent, url, dynamicData) {
             components.push({ id: defaultContainer.getUniqueId(), name: moduleOptions.componentNames[componentName], style: { 'min-height': 'auto' }, data: cleanObject(item), serverBinding: i > 2 ? false : true
         });
         }
-        else if (item[STRAPI_COMPONENT_FIELD] === META_TAGS || item[STRAPI_COMPONENT_FIELD] === TAGS_SEO) {
+        else if (item[FIELD_DATA_TYPE_RESULT] === META_TAGS || item[FIELD_DATA_TYPE_RESULT] === TAGS_SEO) {
             tagBuilder(item, Tag);
         }
     }

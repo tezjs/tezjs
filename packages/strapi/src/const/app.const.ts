@@ -32,17 +32,19 @@ export const PROPERTY: string = "property";
 
 export const CANONICAL: string = "canonical";
 
-export const STRAPI_COMPONENT_FIELD: string = '__component';
+export const FIELD_DATA_TYPE_RESULT: string = 'DataTypeResult';
 
-export const META_TAGS: string = "tags.meta-tags";
+export const META_TAGS: string = "MetaTags";
 
-export const TAGS_SEO: string = "tags.seo";
+export const TAGS_SEO: string = "SEO";
 
 export const VUE_REFERENCE_CODE: string = "VueReferenceCode";
 
-export const DATA_CONTROL_ALL: string = "data-control.get-all-data";
+export const DATA_CONTROL_ALL: string = "GetAllData";
 
-export const DATA_CONTROL_FIELD_VALUE: string = "data-control.get-data-by-field-value";
+export const DATA_CONTROL_GET_RECORD: string = "GetRecord";
+
+export const DATA_CONTROL_FILTER: string = "GetFilterData";
 
 export const UNDERSCORE: string = "_";
 
