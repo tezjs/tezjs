@@ -6,7 +6,7 @@ import { StrapiModuleConfig } from "./interface/strapi-module-config";
 const strapiModule: any = async function strapiModule(moduleOptions: StrapiModuleConfig) {
     const nuxtInstance = this;
     nuxtInstance.nuxt.hook('build:before', async (builder) => {
-        console.log(`Strapi payload generator start`)
+        console.log(`Strapi payload generator start.`)
         if (nuxtInstance.options.tez && nuxtInstance.options.tez.strapi) {
             nuxtInstance.options.tez.strapi.siteUrl = nuxtInstance.options.tez.siteUrl;
             defaultContainer.nuxtInstance = nuxtInstance;
@@ -14,7 +14,7 @@ const strapiModule: any = async function strapiModule(moduleOptions: StrapiModul
         }
         const pageCollection = new PageCollection(builder);
         await pageCollection.generate();
-        console.log(`Strapi payload generator end`)
+        console.log(`Strapi payload generator end.`)
 
     })
 };
