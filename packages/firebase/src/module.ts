@@ -8,7 +8,7 @@ const firebaseModule: any = async function firebase() {
             console.log(`Updating firebase json`)
             const firebaseDomain = new FirebaseDomain();
             await firebaseDomain.generate(builder, nuxtInstance);
-            console.log(`firebase json updated.`)
+            console.log(`firebase json updated`)
         }
     })
 };
