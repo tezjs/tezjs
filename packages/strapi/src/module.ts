@@ -3,7 +3,7 @@ import { defaultContainer } from "./const/core.const";
 import { PageCollection } from "./domain/page-collection";
 import { StrapiModuleConfig } from "./interface/strapi-module-config";
 
-const strapiModule: any = async function strapiModule(moduleOptions: StrapiModuleConfig) {
+const strapiModule: any = async function strapiModule() {
     const nuxtInstance = this;
     nuxtInstance.nuxt.hook('build:before', async (builder) => {
         console.log(`Strapi payload generator start.`)
