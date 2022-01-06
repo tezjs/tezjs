@@ -1,5 +1,5 @@
 export function readProp(jObject: { [key: string]: any },props:string[]) {
-    let value = '';
+    let value = null;
     if (jObject) {
         const objectProps = Object.keys(jObject);
         for (const prop of objectProps) {

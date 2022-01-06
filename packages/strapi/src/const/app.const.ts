@@ -32,6 +32,16 @@ export const PROPERTY: string = "property";
 
 export const CANONICAL: string = "canonical";
 
+export const FIELD_COMPONENT_TYPE_NAME = "__component";
+
+export const META_TAGS_COMPONENT_NAME = "tags.meta-tags";
+
+export const META_TAGS_SEO_COMPONENT_NAME = "tags.seo";
+
+export const FIELD_COMPONENT_NAME_GET_ALL_DATA: string = "data-control.get-all-data";
+
+export const FIELD_COMPONENT_NAME_GET_DATA_FIELD_VALUE: string = "data-control.get-data-by-field-value";
+
 export const FIELD_DATA_TYPE_RESULT: string = 'DataTypeResult';
 
 export const META_TAGS: string = "MetaTags";
@@ -53,6 +63,10 @@ export const CACHE_PATH: string = "node_modules/.cache/tez";
 export const URL_PROPS: string[] = ["url", "navurl", "slug"];
 
 export const TITLE_PROPS: string[] = ["title", "name"];
+
+export const PRE_SECTION_PROPS: string[] = ["headersection", "pre", "precomponents"];
+
+export const POST_SECTION_PROPS: string[] = ["footersection", "post", "postcomponents"];
 
 export const VUE_COMPONENT_NAME: string = "VueComponentName";
 

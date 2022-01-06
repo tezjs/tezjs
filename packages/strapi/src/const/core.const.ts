@@ -1,4 +1,5 @@
 import { StrapiModuleConfig } from "../interface/strapi-module-config";
+import { deepMerge } from "./merge-object";
 const DEFAULT_STRAPI_URL = 'http://localhost:1337'
 export const defaultContainer:
     {
@@ -41,10 +42,15 @@ export const defaultContainer:
             },
             pagination: {
                 pageSize: 2
+            },
+            payload:{
+                page:{maxPreLoadComponent:3 }
             }
+            
         };
         setOption(moduleOptions: StrapiModuleConfig) {
-            this.moduleOptions = { ...this.moduleOptions, ...moduleOptions };
+            
+            this.moduleOptions = deepMerge(this.moduleOptions, moduleOptions);
             this.moduleOptions.ignoreColumns = this.moduleOptions.ignoreColumns ? this.moduleOptions.ignoreColumns.concat(...this.ignoreColumns) : this.ignoreColumns;
         }
 

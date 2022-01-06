@@ -1,4 +1,25 @@
 const shortText = require('../sanitizers/short-text.sanitizer');
 module.exports = {
-    "Articles":["title","description","content","image"]
+    "blog-list": ["Title", "Category", "PublishedDate", "Image", "NavURL", "BlogAuthor", "Classification", "LongText", "ReadingTime",],
+    "insights-listing": ["Title", "Category", "PublishedDate", "Image", "NavURL", "BlogAuthor", "Classification", "LongText", "ReadingTime", "IsAvailableOnInsights"],
+    "insight-banner-slider": ["Title", "Category", "PublishedDate", "Image", "NavURL", "BlogAuthor", "Classification", "LongText", "ReadingTime","IsAvailableOnInsights"],
+    "blog-detail": ["Title", "LongText", "BlogAuthor", "Category", "PublishedDate", "Image", "NavURL", "RelatedBlogs"],
+    "blog-categories": ["Title", "NavURL"],
+    "blog-featured": ["Featured", "Title", "Category", "PublishedDate", "Image", "NavURL", "BlogTags", ["LongText", shortText]],
+    "project-success": ["Title", "Image", "NavURL", "LongText", "Category"],
+    "case-studies-list": ["id", "Title", "Image", "NavURL", "Category"],
+    "case-studies-categories": ["id", "Title"],
+    "case-studies-detail": ["Title", "LongText", "Category", "Image", "NavURL"],
+    "video-list": ["id", "Title", "Image", "NavURL", "VideoURL", "ShortText", "Category", "Classification","IsAvailableOnInsights"],
+    "video-categories": ["id", "Title"],
+    "classifications": ["id", "Title"],
+    "whitepaper-list": ["id", "Title", "Image", "Source", "NavURL", "Category", "Classification", "Attachment"],
+    "guide-list": ["id", "Title", "Image", "Source", "NavURL", "Category", "Classification"],
+    "author-banner": ["Name", "Designation", "ShortText", "Image"],
+    "joblisting": ["JobTitle", "NavURL"],
+    "current-opening-sidebar": ["JobTitle", "NavURL"],
+    "opening-page": ["JobTitle", "JobType", "Experience", "JobCode", "NavURL", "Opening", "Qualification", "Experience", "ShortText", "LongText", "Image"],
+    "career-details": ["JobTitle", "JobType", "Experience", "JobCode", "NavURL", "Opening", "Qualification", "Experience", "ShortText", "LongText", "Image"],
+    "news-list": ["Title", "PublishedDate", "Image", "NavURL"],
+    "news_description": ["Title", "PublishedDate", "Image", "NavURL"]
 };

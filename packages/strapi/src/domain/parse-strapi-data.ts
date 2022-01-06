@@ -1,4 +1,4 @@
-import { CANONICAL, DATA_CONTROL_ALL, DATA_CONTROL_FILTER, DATA_CONTROL_GET_RECORD, FIELD_DATA_TYPE_RESULT, META_TAGS, TAGS_SEO, VUE_COMPONENT_NAME, VUE_REFERENCE_CODE } from "../const/app.const";
+import { CANONICAL, DATA_CONTROL_ALL, DATA_CONTROL_FILTER, DATA_CONTROL_GET_RECORD, FIELD_COMPONENT_NAME_GET_ALL_DATA, FIELD_COMPONENT_NAME_GET_DATA_FIELD_VALUE, FIELD_COMPONENT_TYPE_NAME, FIELD_DATA_TYPE_RESULT, META_TAGS, META_TAGS_COMPONENT_NAME, META_TAGS_SEO_COMPONENT_NAME, POST_SECTION_PROPS, PRE_SECTION_PROPS, TAGS_SEO, VUE_COMPONENT_NAME, VUE_REFERENCE_CODE } from "../const/app.const";
 import { defaultContainer } from "../const/core.const";
 import cleanObject from "../sanitizers/clean-object.sanitizer";
 import removeSpace from "../sanitizers/remove-space.sanitizer";
@@ -6,6 +6,9 @@ import dataFieldSelector from "../utils/data-field-selector";
 import { getDynamicPageRecord } from "../utils/get-dynamic-page-record";
 import getUrl from "../utils/get-url";
 import { parseQueryString } from "../utils/parse-query-string";
+import { getPagePrePostComponents } from "../utils/pre-post-layout";
+import { readProp } from "../utils/read-prop";
+import { runDataSanitizer } from "../utils/run-data-sanitizer";
 import { CollectionIndexer } from "./collection-indexer";
 import DataResolver from "./data-resolver";
 import getSitemapObject from "./get-sitemap-object";
@@ -26,19 +29,22 @@ export default async function parseStrapiData(pageContent, url, dynamicData) {
     for (let i = 0; i < GenericSection.length; i++) {
         let item = GenericSection[i];
         let componentName = removeSpace(item[VUE_REFERENCE_CODE] || item[VUE_COMPONENT_NAME]);
+        item = runDataSanitizer(moduleOptions.payload.page.dataSanitizers,GenericSection[i],url,componentName);
         item.dynamic = dynamicData;
         if (moduleOptions.componentNames[componentName]) {
-            if ((item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_ALL || item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_FILTER || item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_GET_RECORD) && moduleOptions.componentDataFieldSelectors[moduleOptions.componentNames[componentName]]) {
+            if ((item[FIELD_COMPONENT_TYPE_NAME] === FIELD_COMPONENT_NAME_GET_ALL_DATA || item[FIELD_COMPONENT_TYPE_NAME] === FIELD_COMPONENT_NAME_GET_DATA_FIELD_VALUE || item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_ALL || item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_FILTER || item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_GET_RECORD) && moduleOptions.componentDataFieldSelectors[moduleOptions.componentNames[componentName]]) {
                 let query: { [key: string]: any } = {};
-                if (item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_FILTER) {
+                if (item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_FILTER || item[FIELD_COMPONENT_TYPE_NAME] === FIELD_COMPONENT_NAME_GET_DATA_FIELD_VALUE) {
                     if (item.Field)
                         query[item.Field] = item.Value;
                     else if (item.FilterQueryString)
                         query.queryString = parseQueryString(item.FilterQueryString, item);
                 }
                 const queryResult = item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_GET_RECORD ? getDynamicPageRecord(pageContent,Tag, url) : await dataRequest({ entity: item.CollectionType, query: query }, item);
+                queryResult.forEach((dataItem,index) => { queryResult[index] = runDataSanitizer(moduleOptions.payload.page.dataSanitizers,GenericSection[i],url,removeSpace(dataItem[VUE_REFERENCE_CODE] || dataItem[VUE_COMPONENT_NAME])); })
                 const result = dataFieldSelector(queryResult, moduleOptions.componentDataFieldSelectors[moduleOptions.componentNames[componentName]]);
                 result.forEach(t => { t.hide = false });
+                console.log(queryResult)
                 if (moduleOptions.optimization.sourcePagination && item[FIELD_DATA_TYPE_RESULT] !== DATA_CONTROL_GET_RECORD) 
                     item.dynamicSourcePath = await collectionIndexer.paginate(result, item.CollectionType.toLowerCase(), query.queryString);
                 else
@@ -47,7 +53,7 @@ export default async function parseStrapiData(pageContent, url, dynamicData) {
             components.push({ id: defaultContainer.getUniqueId(), name: moduleOptions.componentNames[componentName], style: { 'min-height': 'auto' }, data: cleanObject(item), serverBinding: i > 2 ? false : true
         });
         }
-        else if (item[FIELD_DATA_TYPE_RESULT] === META_TAGS || item[FIELD_DATA_TYPE_RESULT] === TAGS_SEO) {
+        else if (item[FIELD_DATA_TYPE_RESULT] === META_TAGS || item[FIELD_DATA_TYPE_RESULT] === TAGS_SEO || item[FIELD_COMPONENT_TYPE_NAME] === META_TAGS_COMPONENT_NAME || item[FIELD_COMPONENT_TYPE_NAME] === META_TAGS_SEO_COMPONENT_NAME) {
             tagBuilder(item, Tag);
         }
     }
@@ -82,6 +88,6 @@ export default async function parseStrapiData(pageContent, url, dynamicData) {
 
     })
     return {
-        components: components, tags: Tag, siteMap: getSitemapObject(pageContent, Tag)
+        components: components, tags: Tag, siteMap: getSitemapObject(pageContent, Tag), sections:getPagePrePostComponents(readProp(pageContent,PRE_SECTION_PROPS)),footerSections:getPagePrePostComponents(readProp(pageContent,POST_SECTION_PROPS))
     };
 }

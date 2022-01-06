@@ -37,20 +37,21 @@ export class PageRoute {
                 for (let j = 0; j < dynamicItems.length; j++) {
                     const dynamicItem = dynamicItems[j];
                     let url = readProp(dynamicItem, URL_PROPS);
-                    url = mergeUrl(item.URL, url);
-                    const title = readProp(dynamicItem, TITLE_PROPS);
-                    dynamicPageRoute[url] = {
-                        url: item.URL, data: { id: dynamicItem.id, title: title || '', content: dynamicItem.Content || [], metaTags: dynamicItem.MetaTags || [], seo: dynamicItem.SEO || [] }
-                    };
-                    const path = getUrl(url);
-                    if (routes.filter(t => t.path === path).length === 0) {
-                        routes.push({
-                            name: title.replace(REMOVE_SPECIAL_CHARACTERS, UNDERSCORE),
-                            path: path
-                        })
+                    if(url){
+                        url = mergeUrl(item.URL, url);
+                        const title = readProp(dynamicItem, TITLE_PROPS);
+                        dynamicPageRoute[url] = {
+                            url: item.URL, data: { id: dynamicItem.id, title: title || '', content: dynamicItem.Content || [], metaTags: dynamicItem.MetaTags || [], seo: dynamicItem.SEO || [] }
+                        };
+                        const path = getUrl(url);
+                        if (routes.filter(t => t.path === path).length === 0) {
+                            routes.push({
+                                name: title.replace(REMOVE_SPECIAL_CHARACTERS, UNDERSCORE),
+                                path: path
+                            })
+                        }
                     }
                 }
-
             } else {
                 routes.push({
                     name: item.Title.replace(REMOVE_SPECIAL_CHARACTERS, UNDERSCORE),

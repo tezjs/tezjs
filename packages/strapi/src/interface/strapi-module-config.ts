@@ -3,6 +3,7 @@ import { MediaConfig } from "./media-config";
 import { OptimizationConfig } from "./optimization-config";
 import { PageCollectionConfig } from "./page-collection-config";
 import { PaginationConfig } from "./pagination-config";
+import { PayloadConfig } from "./payload-config";
 import { SerializeJsonConfig } from "./serialize-json-config";
 import { UserCredential } from "./user-credential-config";
 
@@ -23,4 +24,5 @@ export interface StrapiModuleConfig {
     enableInternationalization?: boolean;
     optimization: OptimizationConfig;
     pagination: PaginationConfig;
+    payload:PayloadConfig;
 }
