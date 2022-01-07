@@ -68,6 +68,8 @@ export const PRE_SECTION_PROPS: string[] = ["headersection", "pre", "precomponen
 
 export const POST_SECTION_PROPS: string[] = ["footersection", "post", "postcomponents"];
 
+export const COMPONENT_REFERENCE_PATH:string[] = ["componentreferencepath"]
+
 export const VUE_COMPONENT_NAME: string = "VueComponentName";
 
 export const ASTERISK: string = "*";

@@ -5,7 +5,14 @@ import { defaultContainer } from "../const/core.const";
 export const MarkdownIt = require('markdown-it')(MARK_DOWN_CONFIG);
 const imageDefaultRender = MarkdownIt.renderer.rules.image;
 const linkDefaultRender = MarkdownIt.renderer.rules.link_open;
-console.log(MarkdownIt.renderer.rules)
+import anchorLink from './anchor-tag';
+MarkdownIt.use(anchorLink, {
+    pattern: /^https:/,
+    attrs: {
+      target: '_blank',
+      rel: 'noopener nofollow'
+    }
+  })
 MarkdownIt.renderer.rules.image = function (tokens, idx, options, env, self) {
     try {
         const imageCdn = defaultContainer.moduleOptions.media.cdnUri;
@@ -66,26 +73,3 @@ MarkdownIt.renderer.rules.image = function (tokens, idx, options, env, self) {
 
     return imageDefaultRender(tokens, idx, options, env, self);
 };
-
-//MarkdownIt.renderer.rules.link_open = function (tokens, idx, options, env, self) {
-//    const config = attributeBinding(tokens[idx])
-//    if (config.length > 0) {
-//        config.forEach(t => {
-//            tokens[idx].attrs.push(t);
-//        })
-//    }
-//    return linkDefaultRender(tokens, idx, options, env, self);
-//}
-function attributeBinding(link) {
-    const href = link.attrs[link.attrIndex('href')][1];
-    let tokens = [];
-    if (href.indexOf("https://") !== -1) {
-        tokens.push(['target', '_blank']);
-        tokens.push(['rel', 'noopener']);
-    } else
-        tokens.push(['class', "nuxt-anchore"]);
-    return tokens;
-}
-
-
-

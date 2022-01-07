@@ -41,7 +41,7 @@ export class PageRoute {
                         url = mergeUrl(item.URL, url);
                         const title = readProp(dynamicItem, TITLE_PROPS);
                         dynamicPageRoute[url] = {
-                            url: item.URL, data: { id: dynamicItem.id, title: title || '', content: dynamicItem.Content || [], metaTags: dynamicItem.MetaTags || [], seo: dynamicItem.SEO || [] }
+                            url: item.URL, data: { id: dynamicItem.id, title: title || '', content: dynamicItem.Content || undefined, metaTags: dynamicItem.MetaTags || undefined, seo: dynamicItem.SEO || undefined }
                         };
                         const path = getUrl(url);
                         if (routes.filter(t => t.path === path).length === 0) {

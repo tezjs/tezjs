@@ -11,7 +11,7 @@ export function getPagePrePostComponents(collection:any[]):any[]{
             componentName = moduleOptions.componentNames[splitComponentNames[0]];
             let mobileComponentName = moduleOptions.componentNames[splitComponentNames[1]];
             if (splitComponentNames.length === 1 && componentName)
-                result.push([componentName])
+                result.push([{},componentName])
             else if(splitComponentNames.length === 2 && componentName && mobileComponentName)
                 result.push([{ mobileComponentName:mobileComponentName,clientComponentName:componentName  },componentName])
         })

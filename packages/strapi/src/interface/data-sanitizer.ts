@@ -1,5 +1,4 @@
 export interface DataSanitizer{
-    componentName?:string
-    urlPattern?:RegExp;
+    toPass?(url:string,componentName:string,parentComponentName:string):boolean;
     sanitizer:Function;
 }

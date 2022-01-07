@@ -8,5 +8,5 @@ export default {
         [require('../')]  
     ],
     tez: tez   
-}   
-  
+}    
+   

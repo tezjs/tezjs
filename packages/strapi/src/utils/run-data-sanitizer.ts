@@ -1,17 +1,13 @@
 import { DataSanitizer } from "../interface/data-sanitizer";
 
-export function runDataSanitizer(dataSanitizers:DataSanitizer[],dataItem:any,url:string,componentName:string){
+export function runDataSanitizer(dataSanitizers:DataSanitizer[],dataItem:any,url:string,componentName:string,parentComponentName?:string){
+    
     if(dataSanitizers){
         dataSanitizers.forEach(santizerConfig=>{
-            if(!santizerConfig.urlPattern && !santizerConfig.componentName)
+            if(santizerConfig.toPass && santizerConfig.toPass(url,componentName,parentComponentName))
                 dataItem = santizerConfig.sanitizer(dataItem);
-            else if(santizerConfig.urlPattern && santizerConfig.urlPattern.test(url) && !santizerConfig.componentName)
+            else if (santizerConfig.toPass === undefined && santizerConfig.sanitizer)
                 dataItem = santizerConfig.sanitizer(dataItem);
-            else if(!santizerConfig.urlPattern && santizerConfig.componentName === componentName)
-                dataItem = santizerConfig.sanitizer(dataItem);
-            else if(santizerConfig.urlPattern && santizerConfig.componentName && santizerConfig.urlPattern.test(url) && santizerConfig.componentName === componentName)
-                dataItem = santizerConfig.sanitizer(dataItem);
-
         })
     }
     return dataItem

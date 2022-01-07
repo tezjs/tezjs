@@ -7,6 +7,7 @@ import urlReplacer from "./url-replacer.sanitizer";
 
 
 function clear(jsonObject: { [key: string]: any }, isRoot: boolean) {
+    let htmlSanitizer = defaultContainer.moduleOptions.payload.page.htmlSanitizer;
     var jObject = {};
     Object.keys(jsonObject).forEach(t => {
         var keyName = toCamelCase(t);
@@ -35,7 +36,9 @@ function clear(jsonObject: { [key: string]: any }, isRoot: boolean) {
                     }
                 }
                 content = MarkdownIt.render(masterContent);
-                content = content ? content.split("\n") : content;
+                content = content ? content.split("\n").map((x:any)=>x.trim()) : content;
+                if(htmlSanitizer)
+                    content = htmlSanitizer(content);
             }
             jObject[keyName] = urlReplacer(content);
         }

@@ -6,11 +6,12 @@ import converQueryToJsonObject from "../utils/convert-query-to-json-object";
 
 export default async function dataRequest(queryObject, entity) {
     const apiUri = defaultContainer.moduleOptions.apiUri
+    const entityQueryParams = defaultContainer.moduleOptions.payload.entityQueryParams;
     const strapiEntity = SnakeCase(queryObject.entity);
-    if (strapiEntity.trim() === "blogs") {
+    if (entityQueryParams && entityQueryParams[strapiEntity.trim()]) {
         if (queryObject && !queryObject.query)
             queryObject.query = {};
-        queryObject.query["_sort"] = "created_at:DESC";
+        Object.keys(entityQueryParams[strapiEntity.trim()]).forEach(key=>queryObject.query[key] = entityQueryParams[strapiEntity.trim()][key])
     }
     let url = `${apiUri}/${strapiEntity}`;
     if (queryObject && queryObject.query && queryObject.query.queryString)

@@ -45,21 +45,21 @@ export class PayloadGenerator {
             if (page) {
                 let componentIds = [];
                 let preComponentCount = page.sections.length;
-                console.log(page.sections.length)
                 page.sections.forEach(section=>preLoadJson.names.push(section[section.length -1]))
                 for (let j = 0; j < page.components.length; j++) {
                     const component = page.components[j];
-                    componentIds.push(component.id);
+                    let componentId = `${j}-${component.name}`
+                    componentIds.push(componentId);
                     const filePath = path.join(
                         directoryPath,
-                        component.id + ".json"
+                        componentId + ".json"
                     );
                     component.data.clientComponentName = component.name;
                     await writeFileSync(filePath, component.data);
-                    page.sections.push((this.payload.page.maxPreLoadComponent - preComponentCount) > j  ? [component.data,component.id] : [component.id])
+                    page.sections.push((this.payload.page.maxPreLoadComponent - preComponentCount) > j  ? [component.data,componentId] : [componentId])
                     preLoadJson.names.push(component.name)
-                    if(this.payload.page.maxPreLoadComponent <= j)
-                        preLoadJson.data.push(component.id)
+                    if((this.payload.page.maxPreLoadComponent - preComponentCount) <= j)
+                        preLoadJson.data.push(componentId)
                 }
                 page.footerSections.forEach(section=>{
                     page.sections.push(section);
