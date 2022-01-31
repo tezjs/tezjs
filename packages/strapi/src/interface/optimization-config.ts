@@ -1,3 +1,6 @@
+import { SourcePaginationByUrl } from "./source-pagination-by-url";
+
 export interface OptimizationConfig {
-    sourcePagination: boolean
+    sourcePagination: boolean;
+    sourcePaginationByUrl?:SourcePaginationByUrl[];
 }

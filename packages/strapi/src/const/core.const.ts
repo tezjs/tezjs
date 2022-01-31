@@ -38,7 +38,7 @@ export const defaultContainer:
             siteUrl: "http://127.0.0.1",
             serializeJson: { isCamelCase: true },
             optimization: {
-                sourcePagination: true
+                sourcePagination:false
             },
             pagination: {
                 pageSize: 2

@@ -9,6 +9,7 @@ import { parseQueryString } from "../utils/parse-query-string";
 import { getPagePrePostComponents } from "../utils/pre-post-layout";
 import { readProp } from "../utils/read-prop";
 import { runDataSanitizer } from "../utils/run-data-sanitizer";
+import { sourcePaginationByUrl } from "../utils/source-pagination-by-url";
 import { CollectionIndexer } from "./collection-indexer";
 import DataResolver from "./data-resolver";
 import getSitemapObject from "./get-sitemap-object";
@@ -45,8 +46,11 @@ export default async function parseStrapiData(pageContent, url, dynamicData) {
                 queryResult.forEach((dataItem,index) => { queryResult[index] = runDataSanitizer(moduleOptions.payload.page.dataSanitizers,dataItem,url,removeSpace(dataItem[VUE_REFERENCE_CODE] || dataItem[VUE_COMPONENT_NAME]),componentName); })
                 const result = dataFieldSelector(queryResult, moduleOptions.componentDataFieldSelectors[moduleOptions.componentNames[componentName]]);
                 result.forEach(t => { t.hide = false });
+
                 
-                if (moduleOptions.optimization.sourcePagination && item[FIELD_DATA_TYPE_RESULT] !== DATA_CONTROL_GET_RECORD) 
+                if ((moduleOptions.optimization.sourcePagination && item[FIELD_DATA_TYPE_RESULT] !== DATA_CONTROL_GET_RECORD) 
+                    ||
+                    sourcePaginationByUrl(url, moduleOptions.componentNames[componentName],item)) 
                     item.dynamicSourcePath = await collectionIndexer.paginate(result, item.CollectionType.toLowerCase(), query.queryString);
                 else
                     item.dynamicResult = result;

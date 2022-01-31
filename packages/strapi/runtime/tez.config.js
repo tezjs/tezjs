@@ -21,7 +21,7 @@ function readingTime(dataItem) {
         return dataItem;
     }
     return dataItem;
-  };
+  }; 
     
   
  
@@ -88,7 +88,7 @@ module.exports = {
         collectionQuery: collectionQuery,   
         componentDataFieldSelectors: componentDataFieldSelectors,
         optimization: {
-                sourcePagination: false
+                sourcePaginationByUrl:[{url:'/blog',components:["blog-list"]}]
             },
         media:{
             uris:process.env.STRAPI_IMAGE_URIS, 

@@ -26,6 +26,7 @@ export class PageRoute {
         let uri = `/${this.pageCollectionConfig.name}?_limit=${this.limit}`
         if (locale)
             uri = `/${uri}&_locale=${locale}`;
+        
         const dataItems = await this.requestService.get(uri);
         const routes = [];
         const dynamicPageRoute = {};
