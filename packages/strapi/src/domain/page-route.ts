@@ -1,9 +1,10 @@
-import {  TITLE_PROPS, UNDERSCORE, URL_PROPS } from "../const/app.const";
+import {  CONTENT_PROP_NAMES, DYNAMIC_PROP_NAMES, META_TAG_PROP_NAMES, SEO_PROP_NAMES, TITLE_PROPS, UNDERSCORE, URL_PROPS } from "../const/app.const";
 import { REMOVE_SPECIAL_CHARACTERS } from "../const/app.regex";
 import { defaultContainer } from "../const/core.const";
 import { PageCollectionConfig } from "../interface/page-collection-config";
 import { PageRouteResponse } from "../interface/page-route-response";
 import SnakeCaseSanitizer from "../sanitizers/snake-case.sanitizer";
+import { getQueryParams } from "../utils/get-query-params";
 import getUrl from "../utils/get-url";
 import { mergeUrl } from "../utils/merge-url";
 import { readProp } from "../utils/read-prop";
@@ -13,36 +14,37 @@ import { RequestService } from "./request.server";
 
 export class PageRoute {
     private pageCollectionConfig: PageCollectionConfig;
-    private limit: number;
     private pathResolver: PathResolver;
     constructor(private requestService: RequestService, private builder: any) {
-        const { pageCollectionConfig , limit} = defaultContainer.moduleOptions;
+        const { pageCollectionConfig } = defaultContainer.moduleOptions;
         this.pageCollectionConfig = pageCollectionConfig;
-        this.limit = limit;
         this.pathResolver = new PathResolver();
     }
 
     async getRoutes(locale:string): Promise<PageRouteResponse> {
-        let uri = `/${this.pageCollectionConfig.name}?_limit=${this.limit}`
+        let uri = `/${this.pageCollectionConfig.name}?${getQueryParams('limit')}`
         if (locale)
-            uri = `/${uri}&_locale=${locale}`;
+            uri = `/${uri}&${getQueryParams('locale',locale)}`;
         
         const dataItems = await this.requestService.get(uri);
         const routes = [];
         const dynamicPageRoute = {};
         for (let i = 0; i < dataItems.length; i++) {
             const item = dataItems[i];
-            if (item.DynamicPage) {
-                const dynamicItems = await this.requestService.get(`/${SnakeCaseSanitizer(item.DynamicPage)}`);
-                defaultContainer.cacheDynamicPageCollection(item.DynamicPage, dynamicItems);
+            const dynamicPage = readProp(item,DYNAMIC_PROP_NAMES);
+            if (dynamicPage) {
+                const dynamicItems = await this.requestService.get(`/${SnakeCaseSanitizer(dynamicPage)}`);
+                defaultContainer.cacheDynamicPageCollection(dynamicPage, dynamicItems);
                 for (let j = 0; j < dynamicItems.length; j++) {
                     const dynamicItem = dynamicItems[j];
                     let url = readProp(dynamicItem, URL_PROPS);
                     if(url){
-                        url = mergeUrl(item.URL, url);
+                        url = mergeUrl(readProp(item, URL_PROPS), url);
                         const title = readProp(dynamicItem, TITLE_PROPS);
                         dynamicPageRoute[url] = {
-                            url: item.URL, data: { id: dynamicItem.id, title: title || '', content: dynamicItem.Content || undefined, metaTags: dynamicItem.MetaTags || undefined, seo: dynamicItem.SEO || undefined }
+                            url: readProp(item, URL_PROPS), data: { id: dynamicItem.id, title: title || '', content:readProp(dynamicItem, CONTENT_PROP_NAMES) || undefined, metaTags: readProp(dynamicItem, META_TAG_PROP_NAMES) || undefined, seo: readProp(dynamicItem, SEO_PROP_NAMES) || undefined },
+                            referenceData:dynamicItem,
+                            collectionName:dynamicPage
                         };
                         const path = getUrl(url);
                         if (routes.filter(t => t.path === path).length === 0) {
@@ -55,11 +57,12 @@ export class PageRoute {
                 }
             } else {
                 routes.push({
-                    name: item.Title.replace(REMOVE_SPECIAL_CHARACTERS, UNDERSCORE),
-                    path: getUrl(item.URL)
+                    name: readProp(item,TITLE_PROPS).replace(REMOVE_SPECIAL_CHARACTERS, UNDERSCORE),
+                    path: readProp(item, URL_PROPS)
                 })
             }
         }
+        
         await writeFileSync(this.pathResolver.routesJsonPath, routes)
         return { routes: routes, dynamicPageRoute: dynamicPageRoute };
     }

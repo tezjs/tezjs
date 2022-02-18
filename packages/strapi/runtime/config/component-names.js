@@ -1,4 +1,7 @@
 module.exports = {
+    "article":"article",
+    "header":"header",
+    "articles":"articles",
     'InnerBanner': 'banner',
     'TC_Center_WhiteBG': 'common-heading',
     'TC_Center_WhiteBG90': 'common-heading',

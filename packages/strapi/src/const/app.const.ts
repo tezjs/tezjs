@@ -64,6 +64,12 @@ export const URL_PROPS: string[] = ["url", "navurl", "slug"];
 
 export const TITLE_PROPS: string[] = ["title", "name"];
 
+export const COMPONENT_DATA_PROPS: string[] = ["genericsection", "genericcollections"];
+
+export const COLLECTION_TYPE_PROPS: string[] = ["collectiontype"];
+
+export const VUE_COMPONENT_NAME_PROPS: string[] = ["vuecomponentname","vuereferencecode","componentname"];
+
 export const PRE_SECTION_PROPS: string[] = ["headersection", "pre", "precomponents"];
 
 export const POST_SECTION_PROPS: string[] = ["footersection", "post", "postcomponents"];
@@ -75,3 +81,12 @@ export const VUE_COMPONENT_NAME: string = "VueComponentName";
 export const ASTERISK: string = "*";
 
 export const BLANK: string = "";
+
+export const FIELDS:string = "fields";
+
+export const POPULATES:string = "populate";
+
+export const DYNAMIC_PROP_NAMES:string[] = ["dynamicpage","referencepages"];
+export const CONTENT_PROP_NAMES:string[] = ["content"];
+export const META_TAG_PROP_NAMES:string[] = ["metatags"];
+export const SEO_PROP_NAMES:string[] = ["seo"];

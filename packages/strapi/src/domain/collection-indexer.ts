@@ -26,7 +26,7 @@ export class CollectionIndexer {
                     filePath = `${this.pathResolver.getFilterCollectionPayloadPath(folderKey)}/${index}.json`
                 else
                     defaultContainer.collectionState[collectionName] = true;
-                await writeFileSync(filePath,cleanObject({ items:sourceItems, totalCount:totalCount }));
+                await writeFileSync(filePath,{ items:sourceItems, totalCount:totalCount });
                 index++;
             } while (source.length > 0)
         }

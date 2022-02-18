@@ -58,10 +58,10 @@ function assignId(elementString,elementStrings) {
         elementString= elementString.replace(extractId[0],"");
         elementString= elementString.replace(extractElement[0],`${extractElement[0]} id="${id}"`);
         elementStrings.push(elementString)
-    }else
+    }else  
     elementStrings.push(elementString);
 }
-
+                  
 
 function htmlParser(htmlStrings){
       var elementStrings = [];
@@ -77,25 +77,27 @@ function htmlParser(htmlStrings){
           }
       }
       return elementStrings;
-  }
-
+  } 
+     
 module.exports = {
+      
     isProd: process.env.IS_PROD,
-    siteUrl: process.env.SITE_URL, 
+    siteUrl: process.env.SITE_URL,  
     strapi: { 
-        apiUri: process.env.API_URL,  
+        version:4,
+        apiUri: process.env.API_URL,   
         componentNames: componentNames,
         collectionQuery: collectionQuery,   
         componentDataFieldSelectors: componentDataFieldSelectors,
         optimization: {
+                sourcePagination:true,
                 sourcePaginationByUrl:[{url:'/blog',components:["blog-list"]}]
             },
         media:{
             uris:process.env.STRAPI_IMAGE_URIS, 
             cdnUri:process.env.IMAGE_CDN_URL
-        },
-        serializeJson: { isCamelCase: false },
-        payload:{
+        }  ,  
+        payload:{ 
             page:{  
                 dataSanitizers:[
                     { 

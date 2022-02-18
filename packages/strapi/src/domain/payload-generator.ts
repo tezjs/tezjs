@@ -6,7 +6,9 @@ import { PayloadConfig } from "../interface/payload-config";
 import { Route } from "../interface/route";
 import cleanObject from "../sanitizers/clean-object.sanitizer";
 import { createPath } from "../utils/create-path";
+import { getFilterQueryParams } from "../utils/get-filter-query-params";
 import { getPath } from "../utils/get-path";
+import { getQueryParams } from "../utils/get-query-params";
 import getUrl from "../utils/get-url";
 import { getPagePrePostComponents } from "../utils/pre-post-layout";
 import { writeFileSync } from "../utils/write-file";
@@ -29,23 +31,31 @@ export class PayloadGenerator {
         let url = getUrl(route.path);
         let baseUrl = url;
         let dynamicData = undefined;
-
+        let referenceData = undefined;
+        let collectionName = undefined;
         if (dynamicPageRoute[url]) {
             dynamicData = dynamicPageRoute[url].data;
             baseUrl = url;
+            referenceData = dynamicPageRoute[url].referenceData;
+            collectionName = dynamicPageRoute[url].collectionName;
             url = dynamicPageRoute[url].url;
+            
         }
         const directoryPath = path.join(this.pathResolver.payloadPath, baseUrl);
         const isNotExits = createPath(directoryPath);
         if (isNotExits) {
             console.log(baseUrl)
-            const result = await this.requestService.get(`/${this.pageCollectionConfig.name}?${this.pageCollectionConfig.fieldName.uri}=` + url);
-            const page = await parseStrapiData(result[0], baseUrl, dynamicData);
+            let filterQuery = {[this.pageCollectionConfig.fieldName.uri]:getUrl(url)};
+            if(collectionName)
+                filterQuery["ReferencePages"] = collectionName;
+            const result = await this.requestService.get(`/${this.pageCollectionConfig.name}?${getFilterQueryParams(filterQuery)}`);
+            const page = await parseStrapiData(result[0], baseUrl, dynamicData,referenceData);
             const preLoadJson:{names:string[],data:string[]} = {names:[],data:[]};
             if (page) {
                 let componentIds = [];
                 let preComponentCount = page.sections.length;
                 page.sections.forEach(section=>preLoadJson.names.push(section[section.length -1]))
+                console.log(page.components)
                 for (let j = 0; j < page.components.length; j++) {
                     const component = page.components[j];
                     let componentId = `${j}-${component.name}`
@@ -54,12 +64,14 @@ export class PayloadGenerator {
                         directoryPath,
                         componentId + ".json"
                     );
-                    component.data.clientComponentName = component.name;
-                    await writeFileSync(filePath, component.data);
+                    //component.data.clientComponentName = component.name;
+                    
                     page.sections.push((this.payload.page.maxPreLoadComponent - preComponentCount) > j  ? [component.data,componentId] : [componentId])
                     preLoadJson.names.push(component.name)
                     if((this.payload.page.maxPreLoadComponent - preComponentCount) <= j)
                         preLoadJson.data.push(componentId)
+                    else
+                        await writeFileSync(filePath, component.data);
                 }
                 page.footerSections.forEach(section=>{
                     page.sections.push(section);

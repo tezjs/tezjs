@@ -8,6 +8,7 @@ import { SerializeJsonConfig } from "./serialize-json-config";
 import { UserCredential } from "./user-credential-config";
 
 export interface StrapiModuleConfig {
+    version?:number;
     apiUri: string;
     isDev: boolean;
     payloadRootPath?: string;
