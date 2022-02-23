@@ -90,3 +90,21 @@ export const DYNAMIC_PROP_NAMES:string[] = ["dynamicpage","referencepages"];
 export const CONTENT_PROP_NAMES:string[] = ["content"];
 export const META_TAG_PROP_NAMES:string[] = ["metatags"];
 export const SEO_PROP_NAMES:string[] = ["seo"];
+
+export const UPDATED_AT:string[]= ["updated_at","updatedat"]
+
+export const CHANGE_FREQUENCY:string[]= ["changefrequency"]
+
+export const PRIORITY:string[]= ["priority"]
+
+export const SEO_POPULATE:string[] = [
+    "Seo",
+    "Seo.MetaTags",
+    "Seo.Sitemap",
+    "MasterPage",
+    "MasterPage.Pre",
+    "MasterPage.Post",
+    "MasterPage.Seo",
+    "MasterPage.Seo.MetaTags",
+    "MasterPage.Seo.Sitemap"
+];

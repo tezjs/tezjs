@@ -4,6 +4,11 @@ import { getPath } from "../utils/get-path";
 
 export class PathResolver {
 
+    get publicFolder() {
+        const { payloadRootPath } = defaultContainer.moduleOptions
+        return getPath([defaultContainer.nuxtInstance.nuxt.options.rootDir, payloadRootPath], true);
+    }
+
     get payloadPath() {
         const { payloadRootPath } = defaultContainer.moduleOptions
         return getPath([defaultContainer.nuxtInstance.nuxt.options.rootDir, payloadRootPath, 'payload'], true);
@@ -17,8 +22,20 @@ export class PathResolver {
         return getPath([this.rootPath, "routes.json"]);
     }
 
+    get robotsTxtPath() {
+        return getPath([this.publicFolder, "robots.txt"]);
+    }
+
     get sitemapJsonPath() {
-        return getPath([this.rootPath, "sitemap.json"]);
+        return getPath([this.publicFolder, "sitemap.json"]);
+    }
+
+    get sitemapXmlPath() {
+        return getPath([this.publicFolder, "sitemap.xml"]);
+    }
+
+    get sitemapNotMappedJsonPath() {
+        return getPath([this.publicFolder, "sitemap-not-mapped.json"]);
     }
 
     getCollectionPayloadPath(collectionName: string): string {

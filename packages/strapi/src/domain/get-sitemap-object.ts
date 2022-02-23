@@ -1,12 +1,16 @@
-export default function getSitemapObject(pageObject, tag) {
+import { CHANGE_FREQUENCY, PRIORITY } from "../const/app.const";
+import { readProp } from "../utils/read-prop";
+
+export default function getSitemapObject(pageObject, url,updated) {
     var jObject:any = {};
-    var linkHref = tag.Link.href;
-    if (pageObject.updated_at && pageObject.ChangeFrequency && pageObject.Priority) {
-        var dt = new Date(pageObject.updated_at);
-        var date = dt.getFullYear() + '-' + ('0' + (dt.getMonth() + 1)).slice(-2) + '-' + ('0' + dt.getDate()).slice(-2);
-        jObject = { loc: linkHref, lastmod: date, changefreq: pageObject.changeFrequency, priority: pageObject.Priority == 1 ? '1.0' : pageObject.Priority}
-    } else {
-        jObject.loc = linkHref;
-    }
+    const changeFrequency = readProp(pageObject,CHANGE_FREQUENCY);
+    const priority = readProp(pageObject,PRIORITY);
+        if (updated && changeFrequency && priority !== undefined) {
+            var dt = new Date(updated);
+            var date = dt.getFullYear() + '-' + ('0' + (dt.getMonth() + 1)).slice(-2) + '-' + ('0' + dt.getDate()).slice(-2);
+            jObject = { loc: url, lastmod: date, changefreq: changeFrequency, priority: priority == 1 ? '1.0' : priority}
+        } else {
+            jObject.loc = url;
+        }
     return jObject;
 }

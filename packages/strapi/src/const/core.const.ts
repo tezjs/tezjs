@@ -16,12 +16,12 @@ export const defaultContainer:
         collectionState: { [key: string]: any } = {};
         filterCollectionState: { [key: string]: any } = {};
         nuxtInstance: any = undefined;
-        ignoreColumns: Array<string> = ["createdAt","updatedAt","publishedAt","id","published_at", "created_at", "updated_at", "ParentPage", "ChangeFrequency", "Priority", "__component", "provider"]
+        ignoreColumns: Array<string> = ["createdAt","publishedAt","id","published_at", "created_at", "ParentPage", "__component", "provider"]
         moduleOptions: StrapiModuleConfig = {
             version:4,
             payloadRootPath: "static",
             isDev: true,
-            componentNames: [],
+            
             apiUri: DEFAULT_STRAPI_URL,
             pageCollectionConfig: {
                 name: "pages",

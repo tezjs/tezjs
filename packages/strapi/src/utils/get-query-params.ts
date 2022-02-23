@@ -3,14 +3,20 @@ import { QUERY_PARAMS } from "../const/query-params.const";
 import { getQueryString } from './get-query-string';
 import isObject from './is-object';
 
-export function getQueryParams(name:string,value:any = "") {
+export function getQueryParams(name:string | string[],value:any = "") {
     const strapiVersion = defaultContainer.moduleOptions.version;
-    let queryParamsObject = QUERY_PARAMS[strapiVersion][name];
-    if(queryParamsObject){
-        queryParamsObject = getParams(queryParamsObject,value);
-       return getQueryString(queryParamsObject);
-    }
-    return '';
+    let queryParamsObject = undefined;
+    let names:string[] =typeof name === "string" ? [name]:name; 
+    let queryString:string= '';
+    names.forEach(name=>{
+        queryParamsObject = QUERY_PARAMS[strapiVersion][name];
+        if(queryParamsObject){
+            queryParamsObject = getParams(queryParamsObject,value);
+           queryString+= getQueryString(queryParamsObject);
+           queryString+="&"
+        }
+    });
+    return queryString;
 }
 
 function getParams(queryParamsObject:{[key:string]:any},value:any){

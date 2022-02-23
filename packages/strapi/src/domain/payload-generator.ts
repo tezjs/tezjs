@@ -12,6 +12,7 @@ import { getQueryParams } from "../utils/get-query-params";
 import getUrl from "../utils/get-url";
 import { getPagePrePostComponents } from "../utils/pre-post-layout";
 import { writeFileSync } from "../utils/write-file";
+import { MasterPageCollection } from "./master-page.collection";
 import parseStrapiData from "./parse-strapi-data";
 import { PathResolver } from "./path-resolver";
 import { RequestService } from "./request.server";
@@ -20,11 +21,13 @@ export class PayloadGenerator {
     private pageCollectionConfig: PageCollectionConfig;
     private pathResolver: PathResolver;
     private payload:PayloadConfig;
+    private masterPageCollection:MasterPageCollection;
     constructor(private requestService: RequestService, builder: any) {
         const { pageCollectionConfig, payloadRootPath,payload } = defaultContainer.moduleOptions;
         this.pageCollectionConfig = pageCollectionConfig;
         this.pathResolver = new PathResolver();
         this.payload = payload;
+        this.masterPageCollection = new MasterPageCollection();
     }
 
     async generate(route: Route, dynamicPageRoute: { [key: string]: any }): Promise<{ [key: string]: any } | null> {
@@ -48,14 +51,16 @@ export class PayloadGenerator {
             let filterQuery = {[this.pageCollectionConfig.fieldName.uri]:getUrl(url)};
             if(collectionName)
                 filterQuery["ReferencePages"] = collectionName;
+            
             const result = await this.requestService.get(`/${this.pageCollectionConfig.name}?${getFilterQueryParams(filterQuery)}`);
-            const page = await parseStrapiData(result[0], baseUrl, dynamicData,referenceData);
+            let item = (result && result[0]) ? result[0]:{}
+            await this.masterPageCollection.setMasterPageInfo(this.pageCollectionConfig.name,filterQuery,item);
+            const page = await parseStrapiData(item, baseUrl, dynamicData,referenceData);
             const preLoadJson:{names:string[],data:string[]} = {names:[],data:[]};
             if (page) {
                 let componentIds = [];
                 let preComponentCount = page.sections.length;
                 page.sections.forEach(section=>preLoadJson.names.push(section[section.length -1]))
-                console.log(page.components)
                 for (let j = 0; j < page.components.length; j++) {
                     const component = page.components[j];
                     let componentId = `${j}-${component.name}`
@@ -68,10 +73,10 @@ export class PayloadGenerator {
                     
                     page.sections.push((this.payload.page.maxPreLoadComponent - preComponentCount) > j  ? [component.data,componentId] : [componentId])
                     preLoadJson.names.push(component.name)
+                    if((this.payload.page.maxPreLoadComponent - preComponentCount) < j)
+                    await writeFileSync(filePath, component.data);
                     if((this.payload.page.maxPreLoadComponent - preComponentCount) <= j)
                         preLoadJson.data.push(componentId)
-                    else
-                        await writeFileSync(filePath, component.data);
                 }
                 page.footerSections.forEach(section=>{
                     page.sections.push(section);

@@ -22,9 +22,9 @@ export class PageRoute {
     }
 
     async getRoutes(locale:string): Promise<PageRouteResponse> {
-        let uri = `/${this.pageCollectionConfig.name}?${getQueryParams('limit')}`
+        let uri = `/${this.pageCollectionConfig.name}?${getQueryParams(['limit','populate'])}`
         if (locale)
-            uri = `/${uri}&${getQueryParams('locale',locale)}`;
+            uri = `/${uri}&${getQueryParams(['locale','limit','populate'],locale)}`;
         
         const dataItems = await this.requestService.get(uri);
         const routes = [];
@@ -33,11 +33,20 @@ export class PageRoute {
             const item = dataItems[i];
             const dynamicPage = readProp(item,DYNAMIC_PROP_NAMES);
             if (dynamicPage) {
-                const dynamicItems = await this.requestService.get(`/${SnakeCaseSanitizer(dynamicPage)}`);
+                const dynamicItems = await this.requestService.get(`/${SnakeCaseSanitizer(dynamicPage)}?${getQueryParams(['limit','populate'])}`);
+                const seoItems = await this.requestService.get(`/${SnakeCaseSanitizer(dynamicPage)}?${getQueryParams(['limit','seoPopulate'])}`);
+                
                 defaultContainer.cacheDynamicPageCollection(dynamicPage, dynamicItems);
                 for (let j = 0; j < dynamicItems.length; j++) {
                     const dynamicItem = dynamicItems[j];
+                    const seoItem = seoItems[j]
+                    let compareUrl = readProp(seoItem, URL_PROPS);
                     let url = readProp(dynamicItem, URL_PROPS);
+                    if(compareUrl === url){
+                        dynamicItem.seo = seoItem.seo;
+                        dynamicItem.masterPage = seoItem.masterPage;
+                    }
+                        
                     if(url){
                         url = mergeUrl(readProp(item, URL_PROPS), url);
                         const title = readProp(dynamicItem, TITLE_PROPS);

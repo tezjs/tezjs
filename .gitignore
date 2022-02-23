@@ -107,3 +107,6 @@ dist
 /packages/strapi/runtime/static/payload
 /packages/firebase/package-lock.json
 /packages/strapi/runtime/.vs
+/packages/strapi/runtime/static/sitemap.xml
+/packages/strapi/runtime/static/robots.txt
+/packages/strapi/runtime/static/sitemap-not-mapped.json

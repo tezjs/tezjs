@@ -1,3 +1,4 @@
+import { SEO_POPULATE } from "./app.const";
 import { defaultContainer } from "./core.const";
 
 export const QUERY_PARAMS : { [key:string] :any} = {
@@ -17,6 +18,8 @@ export const QUERY_PARAMS : { [key:string] :any} = {
         },
         locale: {
           "locale": (value) => value
-        }
+        },
+        populate:{ populate: '*'},
+        seoPopulate:{populate:SEO_POPULATE}
     }
 }

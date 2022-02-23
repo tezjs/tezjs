@@ -7,14 +7,32 @@ export default function tagBuilder(data, tag) {
     if (data.PageSchema)
         tag.PageSchema = data.PageSchema;
 
-    if (data.MetaTitle)
-        tag.title = data.MetaTitle;
+    if(data.metaTags)
+        {
+            tag.metaTag = {};
+            data.metaTags.forEach(meta=>{
+                let typeName = meta.type.toLowerCase();
+                if(!tag.metaTag[typeName])
+                    tag.metaTag[typeName] = {};
+                tag.metaTag[typeName][meta.key] = meta.value
+            })
+        }
+    if (data.MetaTitle || data.title)
+        tag.title = data.MetaTitle || data.title;
 
+    if(data.description)
+    {
+        if(!tag.metaTag)
+            tag.metaTag = {name:{}};
+        if(!tag.metaTag.name)
+            tag.metaTag.name = {};
+        tag.metaTag["name"]["description"] = data.description;
+    }
     if (data.MetaDescription)
-        tag.MetaNameTags.push({ type: NAME, title: DESCRIPTION, content: data.MetaDescription });
+        tag.MetaNameTags.push({ type: NAME, title: DESCRIPTION, content: data.MetaDescription|| data.description });
 
-    if (data.MetaKeywords)
-        tag.MetaNameTags.push({ type: NAME, title: KEYWORDS, content: data.MetaKeywords });
+    if (data.MetaKeywords || data.keywords)
+        tag.MetaNameTags.push({ type: NAME, title: KEYWORDS, content: data.MetaKeywords || data.keywords});
 
     if (data.LinkTags)
         data.LinkTags.forEach(t => {
@@ -49,4 +67,6 @@ export default function tagBuilder(data, tag) {
             if (t.Content && t.Property)
                 tag.MetaNameTags.push({ type: PROPERTY, title: t.Property.Title, content: `${imageCdn}${t.Content.name}` });
         });
+
+    
 }

@@ -1,7 +1,7 @@
 import { defaultContainer } from "../const/core.const";
 import { getQueryString } from "./get-query-string";
 
-export function getFilterQueryParams(filterJson:{[key:string]:any}){
+export function getFilterQueryParams(filterJson:{[key:string]:any},populate:any="*"){
     const version = defaultContainer.moduleOptions.version;
     if(version === 4)
     {
@@ -11,7 +11,7 @@ export function getFilterQueryParams(filterJson:{[key:string]:any}){
                 '$eq':filterJson[key]
             }
         });
-        return getQueryString({filters:jObject});
+        return getQueryString({filters:jObject,populate:populate});
     } else {
         return getQueryString(filterJson)
     }

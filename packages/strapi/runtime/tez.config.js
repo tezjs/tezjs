@@ -74,19 +74,22 @@ function htmlParser(htmlStrings){
               assignId(htmlString,elementStrings);
           } else  {
               elementStrings.push(htmlString);
-          }
+          } 
       }
       return elementStrings;
   } 
-     
-module.exports = {
+           
+module.exports = {  
       
     isProd: process.env.IS_PROD,
     siteUrl: process.env.SITE_URL,  
     strapi: { 
         version:4,
-        apiUri: process.env.API_URL,   
-        componentNames: componentNames,
+        apiUri: process.env.API_URL,  
+        robots:{
+            environmentName:process.env.ROBOTS_ENVIRONMENT_NAME
+        }, 
+        // componentNames: componentNames,
         collectionQuery: collectionQuery,   
         componentDataFieldSelectors: componentDataFieldSelectors,
         optimization: {
@@ -94,7 +97,7 @@ module.exports = {
                 sourcePaginationByUrl:[{url:'/blog',components:["blog-list"]}]
             },
         media:{
-            uris:process.env.STRAPI_IMAGE_URIS, 
+            uris:process.env.STRAPI_IMAGE_URIS,   
             cdnUri:process.env.IMAGE_CDN_URL
         }  ,  
         payload:{ 
