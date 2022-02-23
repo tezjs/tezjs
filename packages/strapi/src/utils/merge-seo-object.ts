@@ -27,6 +27,7 @@ export function mergeSeoObject(objects:any[]){
         
         setMetaTags(topObject.metaTags,jObject)
         setMetaTags(bottomObject.metaTags,jObject)
+        jObject.redirectRoutes= topObject.redirectRoutes;
         }
     return jObject;
 }
@@ -42,5 +43,4 @@ function setMetaTags(metaTags:any[],jObject:any){
                 metas.push(meta)
         })
     }
-    
 }

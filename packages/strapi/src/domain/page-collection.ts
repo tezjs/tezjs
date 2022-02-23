@@ -7,6 +7,7 @@ import { PayloadGenerator } from "./payload-generator";
 import { PathResolver } from "./path-resolver";
 import { Sitemap } from "./sitemap";
 import { RobotTxtGenerator } from "./robot-txt-generator";
+import { RedirectRoute } from "./redirect-routes";
 export class PageCollection {
     private requestService: RequestService;
     private internationalizationService: InternationalizationService;
@@ -15,6 +16,7 @@ export class PageCollection {
     private pathResolver: PathResolver;
     private sitemap:Sitemap;
     private robotsGenerator:RobotTxtGenerator;
+    private redirectRoute:RedirectRoute;
     constructor(builder: any) {
         this.requestService = new RequestService();
         this.internationalizationService = new InternationalizationService(this.requestService);
@@ -23,6 +25,7 @@ export class PageCollection {
         this.pathResolver = new PathResolver();
         this.sitemap = new Sitemap();
         this.robotsGenerator = new RobotTxtGenerator();
+        this.redirectRoute = new RedirectRoute();
     }
     async generate() {
         await this.requestService.login()
@@ -32,10 +35,12 @@ export class PageCollection {
             for (let i = 0; i < pageRouteResponse.routes.length; i++) {
                 const route = pageRouteResponse.routes[i];
                 const page = await this.payloadGenerator.generate(route, pageRouteResponse.dynamicPageRoute)
-                this.sitemap.add(page)
+                this.sitemap.add(page);
+                this.redirectRoute.add(page);
             }
         }
         this.sitemap.save()
         await this.robotsGenerator.generate();
+        this.redirectRoute.save();
     }
 }

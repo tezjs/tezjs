@@ -26,6 +26,10 @@ export class PathResolver {
         return getPath([this.publicFolder, "robots.txt"]);
     }
 
+    get redirectRoutesJsonPath() {
+        return getPath([this.publicFolder, "redirect-routes.json"]);
+    }
+
     get sitemapJsonPath() {
         return getPath([this.publicFolder, "sitemap.json"]);
     }

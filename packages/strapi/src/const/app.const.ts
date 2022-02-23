@@ -101,10 +101,12 @@ export const SEO_POPULATE:string[] = [
     "Seo",
     "Seo.MetaTags",
     "Seo.Sitemap",
+    "Seo.RedirectRoutes",
     "MasterPage",
     "MasterPage.Pre",
     "MasterPage.Post",
     "MasterPage.Seo",
     "MasterPage.Seo.MetaTags",
-    "MasterPage.Seo.Sitemap"
+    "MasterPage.Seo.Sitemap",
+    "MasterPage.Seo.RedirectRoutes"
 ];
