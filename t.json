@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "attributes": {
+            "Title": "My Personal Strapi Blog",
+            "Slug": "/",
+            "createdAt": "2022-02-09T10:05:14.851Z",
+            "updatedAt": "2022-02-23T10:15:52.350Z",
+            "publishedAt": "2022-02-10T09:34:47.375Z",
+            "ReferencePages": null,
+            "Seo": {
+                "id": 7,
+                "Title": "My Personal Strapi Blog",
+                "Description": "My Personal Strapi Blog",
+                "Canonical": "/",
+                "Priority": null,
+                "Sitemap": {
+                    "id": 5,
+                    "ChangeFrequency": "always",
+                    "Priority": 1
+                },
+                "MetaTags": []
+            },
+            "MasterPage": {
+                "data": {
+                    "id": 1,
+                    "attributes": {
+                        "createdAt": "2022-02-10T08:09:32.547Z",
+                        "updatedAt": "2022-02-23T10:04:38.535Z",
+                        "publishedAt": "2022-02-22T10:02:27.090Z",
+                        "Title": "Standard Layout",
+                        "Seo": {
+                            "id": 8,
+                            "Title": "Blogs Site",
+                            "Description": null,
+                            "Canonical": null,
+                            "Priority": null,
+                            "MetaTags": [],
+                            "Sitemap": {
+                                "id": 1,
+                                "ChangeFrequency": "monthly",
+                                "Priority": 1
+                            }
+                        },
+                        "Post": [
+                            {
+                                "id": 1,
+                                "__component": "components.component-only",
+                                "ComponentName": "footer"
+                            }
+                        ],
+                        "Pre": [
+                            {
+                                "id": 3,
+                                "__component": "data-control.get-all-data",
+                                "CollectionType": "Categories",
+                                "QueryParams": null,
+                                "ComponentName": "header"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+]
