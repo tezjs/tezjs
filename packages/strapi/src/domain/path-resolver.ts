@@ -27,11 +27,11 @@ export class PathResolver {
     }
 
     get redirectRoutesJsonPath() {
-        return getPath([this.publicFolder, "redirect-routes.json"]);
+        return getPath([this.rootPath, "redirect-routes.json"]);
     }
 
     get sitemapJsonPath() {
-        return getPath([this.publicFolder, "sitemap.json"]);
+        return getPath([this.rootPath, "sitemap.json"]);
     }
 
     get sitemapXmlPath() {

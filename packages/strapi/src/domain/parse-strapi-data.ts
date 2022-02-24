@@ -15,6 +15,7 @@ import { qsStringify } from "../utils/qs-stringify";
 import { readProp } from "../utils/read-prop";
 import { runDataSanitizer } from "../utils/run-data-sanitizer";
 import { sourcePaginationByUrl } from "../utils/source-pagination-by-url";
+import { parseObjectValue } from "../utils/value-parser";
 import { CollectionIndexer } from "./collection-indexer";
 import DataResolver from "./data-resolver";
 import getSitemapObject from "./get-sitemap-object";
@@ -29,6 +30,7 @@ export default async function parseStrapiData(pageContent, url, dynamicData,refe
     pageContent = await DataResolver(pageContent,url);
     if (pageContent)
     genericSection = getGenericSections(pageContent.masterPage,readProp(pageContent,COMPONENT_DATA_PROPS))
+    let parseObjectItem = {referencePageData:referenceData,genericCollections:genericSection};
     const Tag:any = {
         title: '', Link: {}, MetaPropertyTags: [], MetaNameTags: [], PageSchema: ''
     };
@@ -50,7 +52,7 @@ export default async function parseStrapiData(pageContent, url, dynamicData,refe
                     else if (item.FilterQueryString)
                         query.queryString = parseQueryString(item.FilterQueryString, item);
                 }else if(item.queryParams)
-                    query.queryString = `${qsStringify(item.queryParams)}&${getQueryParams(['limit','populate'])}` 
+                    query.queryString = `${qsStringify(parseObjectValue(item.queryParams,parseObjectItem))}&${getQueryParams(['limit','populate'])}` 
                 const queryResult = item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_GET_RECORD ? getDynamicPageRecord(pageContent,Tag, url) : await dataRequest({ entity: collectionType, query: query }, item);
                 queryResult.forEach((dataItem,index) => { queryResult[index] = runDataSanitizer(moduleOptions.payload.page.dataSanitizers,dataItem,url,removeSpace( readProp(dataItem,VUE_COMPONENT_NAME_PROPS)),componentName); })
                 const result = dataFieldSelector(queryResult, moduleOptions.componentDataFieldSelectors[getComponentName(componentName)]);
@@ -123,6 +125,6 @@ export default async function parseStrapiData(pageContent, url, dynamicData,refe
         delete Tag.MetaNameTags;
     }
     return {
-        components: components,url:getUrl(url), tags: Tag,redirectRoutes:seo ?seo.redirectRoutes:[], sitemap: getSitemapObject(seo.sitemap || pageContent, Tag.Link.href,readProp(pageContent,UPDATED_AT)), sections:getPagePrePostComponents(readProp(pageContent,PRE_SECTION_PROPS)),footerSections:getPagePrePostComponents(readProp(pageContent,POST_SECTION_PROPS))
+        components: components,url:getUrl(url), tags: parseObjectValue(Tag,parseObjectItem),redirectRoutes:seo ?seo.redirectRoutes:[], sitemap: getSitemapObject(seo.sitemap || pageContent, Tag.Link.href,readProp(pageContent,UPDATED_AT)), sections:getPagePrePostComponents(readProp(pageContent,PRE_SECTION_PROPS)),footerSections:getPagePrePostComponents(readProp(pageContent,POST_SECTION_PROPS))
     };
 }
