@@ -12,7 +12,7 @@ const strapiModule: any = async function strapiModule() {
             defaultContainer.nuxtInstance = nuxtInstance;
             defaultContainer.setOption(nuxtInstance.options.tez.strapi)
         }
-        const pageCollection = new PageCollection(builder);
+        const pageCollection = new PageCollection(builder,nuxtInstance.options.tez.strapi);
         await pageCollection.generate();
         console.log(`Strapi payload generator end.`)
 

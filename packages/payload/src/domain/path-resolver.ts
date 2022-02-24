@@ -6,16 +6,16 @@ export class PathResolver {
 
     get publicFolder() {
         const { payloadRootPath } = defaultContainer.moduleOptions
-        return getPath([defaultContainer.nuxtInstance.nuxt.options.rootDir, payloadRootPath], true);
+        return getPath([process.cwd(), payloadRootPath], true);
     }
 
     get payloadPath() {
         const { payloadRootPath } = defaultContainer.moduleOptions
-        return getPath([defaultContainer.nuxtInstance.nuxt.options.rootDir, payloadRootPath, 'payload'], true);
+        return getPath([process.cwd(), payloadRootPath, 'payload'], true);
     }
 
     get rootPath() {
-        return getPath([defaultContainer.nuxtInstance.nuxt.options.rootDir, CACHE_PATH],true)
+        return getPath([process.cwd(), CACHE_PATH],true)
     }
 
     get routesJsonPath() {

@@ -8,6 +8,8 @@ import { PathResolver } from "./path-resolver";
 import { Sitemap } from "./sitemap";
 import { RobotTxtGenerator } from "./robot-txt-generator";
 import { RedirectRoute } from "./redirect-routes";
+import { StrapiModuleConfig } from "..";
+import { defaultContainer } from "../const/core.const";
 export class PageCollection {
     private requestService: RequestService;
     private internationalizationService: InternationalizationService;
@@ -17,7 +19,8 @@ export class PageCollection {
     private sitemap:Sitemap;
     private robotsGenerator:RobotTxtGenerator;
     private redirectRoute:RedirectRoute;
-    constructor(builder: any) {
+    constructor(builder: any,tezConfig:StrapiModuleConfig) {
+        defaultContainer.setOption(tezConfig)
         this.requestService = new RequestService();
         this.internationalizationService = new InternationalizationService(this.requestService);
         this.pageRoute = new PageRoute(this.requestService, builder)
