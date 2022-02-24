@@ -1,8 +1,8 @@
 {
-  "name": "@tezjs/vue-router",
+  "name": "@tezjs/strapi",
   "version": "0.0.1",
   "description": "",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "watch": "npm run clean && tsc --watch",
     "clean": "rimraf ./dist"

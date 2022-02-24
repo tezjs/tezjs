@@ -42,8 +42,7 @@
     "resolveJsonModule": true
   },
   "include": [
-    "./**/*.ts",
-    "./**/*.js"
+    "./**/*.ts"
   ],
-  "exclude": [ "dist" ]
+  "exclude": [ "dist","runtime" ]
 }

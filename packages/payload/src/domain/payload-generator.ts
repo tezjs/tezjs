@@ -22,7 +22,7 @@ export class PayloadGenerator {
     private pathResolver: PathResolver;
     private payload:PayloadConfig;
     private masterPageCollection:MasterPageCollection;
-    constructor(private requestService: RequestService, builder: any) {
+    constructor(private requestService: RequestService) {
         const { pageCollectionConfig, payloadRootPath,payload } = defaultContainer.moduleOptions;
         this.pageCollectionConfig = pageCollectionConfig;
         this.pathResolver = new PathResolver();

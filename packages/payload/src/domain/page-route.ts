@@ -15,7 +15,7 @@ import { RequestService } from "./request.server";
 export class PageRoute {
     private pageCollectionConfig: PageCollectionConfig;
     private pathResolver: PathResolver;
-    constructor(private requestService: RequestService, private builder: any) {
+    constructor(private requestService: RequestService) {
         const { pageCollectionConfig } = defaultContainer.moduleOptions;
         this.pageCollectionConfig = pageCollectionConfig;
         this.pathResolver = new PathResolver();

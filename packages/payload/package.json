@@ -1,6 +1,6 @@
 {
-  "name": "@tezjs/strapi",
-  "version": "1.0.1",
+  "name": "@tezjs/payload",
+  "version": "0.0.1",
   "description": "",
   "homepage": "https://github.com/tezjs/tez.js#readme",
   "bugs": {
@@ -12,24 +12,26 @@
   },
   "license": "MIT",
   "author": "ajayojha",
-  "main": "dist/module.js",
+  "main": "dist/index.js",
   "scripts": {
-    "preview": "standard-version -f"
+    "watch": "npm run clean && tsc --watch",
+    "clean": "rimraf ./dist"
   },
   "dependencies": {
+    "rimraf": "^3.0.2",
+    "tslib": "^2.3.1",
     "@nuxt/types": "^2.15.7",
     "axios": "^0.21.1",
     "fs": "0.0.1-security",
     "markdown-it": "^12.0.6",
     "path": "^0.12.7",
     "qs": "^6.10.3",
-    "standard-version": "^9.3.0",
-    "tslib": "^2.3.0"
+    "standard-version": "^9.3.0"
   },
   "devDependencies": {
     "siroc": "^0.11.1",
-    "ts-node": "^10.0.0",
+    "ts-node": "^10.5.0",
     "tslint": "^6.1.3",
-    "typescript": "^4.3.4"
+    "typescript": "^4.5.5"
   }
 }

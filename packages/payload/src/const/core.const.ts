@@ -1,3 +1,4 @@
+import { existsSync } from "fs";
 import { StrapiModuleConfig } from "../interface/strapi-module-config";
 import { deepMerge } from "./merge-object";
 const DEFAULT_STRAPI_URL = 'http://localhost:1337'
@@ -53,6 +54,16 @@ export const defaultContainer:
             
             this.moduleOptions = deepMerge(this.moduleOptions, moduleOptions);
             this.moduleOptions.ignoreColumns = this.moduleOptions.ignoreColumns ? this.moduleOptions.ignoreColumns.concat(...this.ignoreColumns) : this.ignoreColumns;
+            this.setPayloadPath()
+        }
+
+        setPayloadPath(){
+            let publicFolder = `${process.cwd()}\\public`;
+            let staticFolder = `${process.cwd()}\\static`;
+          if(existsSync(publicFolder))
+            this.moduleOptions.payloadRootPath = "public";
+          else if(existsSync(staticFolder))
+            this.moduleOptions.payloadRootPath = "static";
         }
 
         getUniqueId(): string {
