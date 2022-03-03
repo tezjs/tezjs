@@ -12,10 +12,14 @@ export function tezVite(): Plugin {
 				let routes = commonContainer.getAppRoutes();
 				
 				for(var route of routes){
-					let htmlPage = new HtmlPage(html)
+					let htmlPage = new HtmlPage(html,route)
 					htmlPage.createPage(route)
 				}
-				var files = []
+				var files = Object.entries(ctx.bundle).map(t=> {
+					const [, value] = t;
+				return (<any>value).fileName;
+				} )
+				console.log(files)
 				// Get the bundle
 				let extraCode = ""
 				for (const [, value] of Object.entries(ctx.bundle)) {

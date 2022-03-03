@@ -13,6 +13,13 @@ export function mergeSeoObject(objects:any[]){
             jObject.description = bottomObject.description;
         else if(topObject.description)
             jObject.description = topObject.description;
+
+        if(!topObject.linkingData && bottomObject.linkingData && !jObject.linkingData)
+            jObject.linkingData = bottomObject.linkingData;
+        else if(topObject.linkingData)
+            jObject.linkingData = topObject.linkingData;
+
+
         if(!jObject.sitemap)
             jObject.sitemap = {};
         if((!topObject.sitemap) && (bottomObject.sitemap && bottomObject.sitemap.changeFrequency) && !jObject.sitemap.changeFrequency)

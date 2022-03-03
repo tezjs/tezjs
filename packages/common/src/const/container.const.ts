@@ -9,7 +9,7 @@ export const commonContainer:
         tezConfig:TezConfig
         getAppRoutes():any[]
     } = new (class {
-        tezConfig:{[key:string]:any} = {};
+        tezConfig:TezConfig = {};
         setupConfig(){
             let configPath = resolvePath('tez.config.js');
             this.tezConfig = require(configPath)
@@ -22,13 +22,8 @@ export const commonContainer:
         }
 
         setPayloadPath(){
-        //     if(this.tezConfig.)
-        //     let publicFolder = `${process.cwd()}\\public`;
-        //     let staticFolder = `${process.cwd()}\\static`;
-        //   if(existsSync(publicFolder))
-        //     this.moduleOptions.payloadRootPath = "public";
-        //   else if(existsSync(staticFolder))
-        //     this.moduleOptions.payloadRootPath = "static";
+            
+            
         }
 
     })();

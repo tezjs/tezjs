@@ -10,8 +10,11 @@ export function parseObjectValue(jObject:{[key:string]:any},item:any){
                 jObject[key][i] = isObject(jObject[key][i]) ? parseObjectValue(jObject[key][i],item) : parseValue(jObject[key][i],item)
         }else if(isObject(jObject[key])){
             jObject[key] = parseObjectValue(jObject[key],item)
-        }else
-            jObject[key] = parseValue(jObject[key],item)
+        }else{
+            jObject[key] = parseValue(jObject[key],item);
+            if(jObject[key] && typeof jObject[key] === "string")
+                jObject[key] = jObject[key].replace(/"/g,"'");
+        }
     })
     return jObject;
 }
