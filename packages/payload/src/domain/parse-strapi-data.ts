@@ -78,7 +78,7 @@ export default async function parseStrapiData(pageContent, url, dynamicData,refe
 
     let seo:any = {};
     if(pageContent && pageContent.masterPage)
-        seo = mergeSeoObject([pageContent.masterPage.seo,pageContent.seo || {}])
+        seo = mergeSeoObject([pageContent.masterPage.seo || {},pageContent.seo || {}])
     else if(pageContent.seo)
         seo = mergeSeoObject([{},pageContent.seo || {}])
 

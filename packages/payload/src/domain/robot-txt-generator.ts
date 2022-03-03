@@ -1,5 +1,5 @@
 import { defaultContainer } from "../const/core.const";
-import { RobotsConfig } from "../interface/robots.config";
+import { RobotsConfig } from "@tezjs/types";
 import { getFilterQueryParams } from "../utils/get-filter-query-params";
 import { writeFileSync } from "../utils/write-file";
 import { PathResolver } from "./path-resolver";

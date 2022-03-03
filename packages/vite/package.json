@@ -1,0 +1,32 @@
+{
+  "name": "@tezjs/common",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "npm run clean && tsc --watch",
+    "clean": "rimraf ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tezjs/tez.js.git"
+  },
+  "author": "ajayojha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tezjs/tez.js/issues"
+  },
+  "homepage": "https://github.com/tezjs/tez.js#readme",
+  "devDependencies": {
+    "ts-node": "^10.5.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@tezjs/payload": "0.0.1",
+    "rimraf": "^3.0.2",
+    "tslib": "^2.3.1",
+    "vite": "^2.8.6",
+    "vue-router": "^4.0.12"
+  }
+}

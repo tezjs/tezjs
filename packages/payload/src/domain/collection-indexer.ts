@@ -1,5 +1,5 @@
 import { defaultContainer } from "../const/core.const";
-import { PaginationConfig } from "../interface/pagination-config"
+import { PaginationConfig } from "@tezjs/types"
 import cleanObject from "../sanitizers/clean-object.sanitizer";
 import { writeFileSync } from "../utils/write-file";
 import { PathResolver } from "./path-resolver";

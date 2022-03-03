@@ -1,4 +1,4 @@
-import { readFileSync } from "../utils/read-file-sync";
+import { readFileSync } from "@tezjs/common";
 import { writeFileSync } from "../utils/write-file";
 import { PathResolver } from "./path-resolver";
 

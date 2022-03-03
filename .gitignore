@@ -111,3 +111,5 @@ dist
 /packages/strapi/runtime/static/robots.txt
 /packages/strapi/runtime/static/sitemap-not-mapped.json
 /packages/strapi/runtime/static/redirect-routes.json
+packages/common/package-lock.json
+package-lock.json

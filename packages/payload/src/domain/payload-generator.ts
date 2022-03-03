@@ -1,13 +1,12 @@
 import axios from "axios";
 import path from "path";
 import { defaultContainer } from "../const/core.const";
-import { PageCollectionConfig } from "../interface/page-collection-config";
-import { PayloadConfig } from "../interface/payload-config";
-import { Route } from "../interface/route";
+import { PageCollectionConfig } from "@tezjs/types";
+import { PayloadConfig } from "@tezjs/types";
+import { Route } from "@tezjs/types";
 import cleanObject from "../sanitizers/clean-object.sanitizer";
-import { createPath } from "../utils/create-path";
+import { createPath } from "@tezjs/common";
 import { getFilterQueryParams } from "../utils/get-filter-query-params";
-import { getPath } from "../utils/get-path";
 import { getQueryParams } from "../utils/get-query-params";
 import getUrl from "../utils/get-url";
 import { getPagePrePostComponents } from "../utils/pre-post-layout";

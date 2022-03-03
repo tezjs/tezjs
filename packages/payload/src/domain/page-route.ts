@@ -1,8 +1,8 @@
 import {  CONTENT_PROP_NAMES, DYNAMIC_PROP_NAMES, META_TAG_PROP_NAMES, SEO_PROP_NAMES, TITLE_PROPS, UNDERSCORE, URL_PROPS } from "../const/app.const";
 import { REMOVE_SPECIAL_CHARACTERS } from "../const/app.regex";
 import { defaultContainer } from "../const/core.const";
-import { PageCollectionConfig } from "../interface/page-collection-config";
-import { PageRouteResponse } from "../interface/page-route-response";
+import { PageCollectionConfig } from "@tezjs/types";
+import { PageRouteResponse } from "@tezjs/types";
 import SnakeCaseSanitizer from "../sanitizers/snake-case.sanitizer";
 import { getQueryParams } from "../utils/get-query-params";
 import getUrl from "../utils/get-url";

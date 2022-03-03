@@ -1,9 +1,11 @@
-import { CACHE_PATH } from "../const/app.const";
 import { defaultContainer } from "../const/core.const";
-import { getPath } from "../utils/get-path";
+import { CommonPathResolver,getPath } from "@tezjs/common"
 
 export class PathResolver {
-
+    private commonPath:CommonPathResolver;
+    constructor(){
+        this.commonPath = new CommonPathResolver();
+    }
     get publicFolder() {
         const { payloadRootPath } = defaultContainer.moduleOptions
         return getPath([process.cwd(), payloadRootPath], true);
@@ -15,11 +17,11 @@ export class PathResolver {
     }
 
     get rootPath() {
-        return getPath([process.cwd(), CACHE_PATH],true)
+        return this.commonPath.rootPath;
     }
 
     get routesJsonPath() {
-        return getPath([this.rootPath, "routes.json"]);
+        return this.commonPath.routesJsonPath;
     }
 
     get robotsTxtPath() {
@@ -27,7 +29,7 @@ export class PathResolver {
     }
 
     get redirectRoutesJsonPath() {
-        return getPath([this.rootPath, "redirect-routes.json"]);
+        return this.commonPath.redirectRoutesJsonPath;
     }
 
     get sitemapJsonPath() {

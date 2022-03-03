@@ -1,4 +1,4 @@
-import { DataSanitizer } from "../interface/data-sanitizer";
+import { DataSanitizer } from "@tezjs/types";
 
 export function runDataSanitizer(dataSanitizers:DataSanitizer[],dataItem:any,url:string,componentName:string,parentComponentName?:string){
     

@@ -11,7 +11,7 @@ export class RedirectRoute{
 
     add(page:any){
         if(page && page.redirectRoutes&& Array.isArray(page.redirectRoutes))
-            page.redirectRoutes.forEach(item=>this.routes.push({...item,...{url:page.url}}))
+            page.redirectRoutes.forEach(item=>this.routes.push({...item,...{to:page.url}}))
     }
     save(){
         writeFileSync(this.pathResolver.redirectRoutesJsonPath,this.routes)

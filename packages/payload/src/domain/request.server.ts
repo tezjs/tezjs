@@ -1,6 +1,6 @@
 import { defaultContainer } from "../const/core.const";
 import axios from 'axios';
-import { UserCredential } from "../interface/user-credential-config";
+import { UserCredential } from "@tezjs/types";
 import cleanObject from "../sanitizers/clean-object.sanitizer";
 import { swapDataPropValue } from "../sanitizers/swap-data-prop-value";
 export class RequestService {

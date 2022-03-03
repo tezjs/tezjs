@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+      "rootDir": ".",
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true,
+       "noUnusedLocals": false,
+       "noImplicitAny": false,
+       "noImplicitReturns": false,
+       "noImplicitThis": false,
+       "noImplicitUseStrict": false,
+      "removeComments": true,
+      "declaration": true,
+      "experimentalDecorators": true,
+      "skipLibCheck": true,
+      "target": "es2019",
+      "lib": [
+        "es2019"
+      ],
+      "module": "commonjs",
+      "outDir": "./dist/",
+      "sourceMap": true,
+      "typeRoots": [
+        "./node_modules/@types"
+      ],
+      "paths": {
+        "@tezjs/payload":["../payload"],
+        "@tezjs/common":["../common"],
+        "@tezjs/core":["../core"],
+        "@tezjs/vue-router":["../router"],
+        "@tezjs/strapi":["../strapi"],
+        "@tezjs/vite":["../vite"],
+      }
+    },
+    "include": [
+      "./packages/**/*.ts",
+      "./packages/**/package.json"
+    ],
+    "exclude": ["dist","src"]
+   
+  }
+  
