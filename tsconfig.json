@@ -18,24 +18,25 @@
       ],
       "module": "commonjs",
       "outDir": "./dist/",
-      "sourceMap": true,
+      "sourceMap": false,
       "typeRoots": [
         "./node_modules/@types"
       ],
       "paths": {
-        "@tezjs/payload":["../payload"],
-        "@tezjs/common":["../common"],
-        "@tezjs/core":["../core"],
-        "@tezjs/vue-router":["../router"],
-        "@tezjs/strapi":["../strapi"],
-        "@tezjs/vite":["../vite"],
+        "@tezjs/payload":["./packages/payload"],
+        "@tezjs/common":["./packages/common"],
+        "@tezjs/core":["./packages/core"],
+        "@tezjs/vue-router":["./packages/router"],
+        "@tezjs/strapi":["./packages/strapi"],
+        "@tezjs/vite":["./packages/vite"],
+        "@tezjs/types":["./packages/types"]
       }
     },
     "include": [
       "./packages/**/*.ts",
       "./packages/**/package.json"
     ],
-    "exclude": ["dist","src"]
+    "exclude": ["dist","src","./**/node_modules/**","./node_modules/**"]
    
   }
   
