@@ -8,17 +8,17 @@ export class Seo extends HtmlElement {
     seo: TezSeo;
     constructor(route: { [key: string]: any }) {
         super();
-        this.seo = readFileSync(getPath([this.commonPath.payloadFolderPath, route.path, "tags.json"])) as TezSeo;
+        this.seo = readFileSync(getPath([this.commonPath.payloadFolderPath,"payload", route.path, "tags.json"])) as TezSeo;
     }
 
     addTitle() {
         if (this.seo && this.seo.title)
-            this.addElement(`<title>${this.seo.title}</title>`)
+            this.addElement(`<title data-head="tezjs">${this.seo.title}</title>`,true)
     }
 
     addCanonical() {
         if (this.seo && this.seo.canonical)
-            this.addElement(`<link data-head="tezjs" rel="canonical" href="${this.seo.canonical}"></link>`)
+            this.addElement(`<link data-head="tezjs" rel="canonical" href="${this.seo.canonical}"></link>`,false)
     }
 
     setMetaTags(){
@@ -31,23 +31,26 @@ export class Seo extends HtmlElement {
     addMetaTags(type:string)
     {
         if(this.seo.metaTag[type]){
-            Object.keys(this.seo.metaTag[type]).forEach(item=>{
-                for(let key of item)
-                    this.addMeta(type,key,item[key])
+            Object.keys(this.seo.metaTag[type]).forEach(key=>{
+                    this.addMeta(type,key,this.seo.metaTag[type][key])
             })
         }
     }
 
     addMeta(type:string,key:string,content:string){
-        this.addElement(`<meta data-head="tezjs" ${type}="${key}" content="${content}">`)
+        this.addElement(`<meta data-head="tezjs" ${type}="${key}" content="${content}">`,false)
     }
 
     addPageSchema(){
-        if(this.seo.linkingData)
-            this.addElement(`<script type="application/ld+json">${this.seo.linkingData}</script>`)
+        if(this.seo && this.seo.linkingData)
+            this.addElement(`<script type="application/ld+json">${this.seo.linkingData}</script>`,false)
     }
 
-    addPreload(path:string){
-        this.addElement(`<link data-head="tezjs-preload" rel="preload" as="fetch" crossorigin href="${path}">`)
+    addPreload(path:string,as:string){
+        this.addElement(`<link data-head="tezjs-preload" rel="preload" as="${as}" ${as === "script" ? "crossorigin":''}  href="${path.replace(/\/\//g, "/")}">`,true)
+    }
+
+    addModulePreload(path:string){
+        this.addElement(`<link data-head="tezjs-preload"  rel="modulepreload" href="${path}">`,true)
     }
 }

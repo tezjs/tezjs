@@ -113,3 +113,8 @@ dist
 /packages/strapi/runtime/static/redirect-routes.json
 packages/common/package-lock.json
 package-lock.json
+/src/packages
+/src/public/payload
+/src/public/robots.txt
+/src/public/sitemap.xml
+/src/public/sitemap-not-mapped.json

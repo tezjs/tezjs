@@ -110,3 +110,4 @@ export const SEO_POPULATE:string[] = [
     "MasterPage.Seo.Sitemap",
     "MasterPage.Seo.RedirectRoutes"
 ];
+export const DEFAULT_STRAPI_URL = 'http://localhost:1337'

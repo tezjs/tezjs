@@ -54,7 +54,7 @@ function clear(jsonObject: { [key: string]: any }, isRoot: boolean):any {
 }
 
 function ignoreColumns(name, isRoot) {
-    let columns = defaultContainer.moduleOptions.ignoreColumns;
+    let columns = defaultContainer.moduleOptions.ignoreColumns || [];
     //columns = isRoot ? columns : columns.concat(["MetaTags", "SEO"]);
     return columns.filter(t => t === name)[0]
 }

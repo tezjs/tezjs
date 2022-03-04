@@ -1,8 +1,9 @@
 import { defaultContainer } from "../const/core.const";
-import axios from 'axios';
+import * as  axios from 'axios';
 import { UserCredential } from "@tezjs/types";
 import cleanObject from "../sanitizers/clean-object.sanitizer";
 import { swapDataPropValue } from "../sanitizers/swap-data-prop-value";
+import { DEFAULT_STRAPI_URL } from "../const/app.const";
 export class RequestService {
     private token: string;
     private apiUri: string;
@@ -10,7 +11,7 @@ export class RequestService {
     private apiString:string;
     constructor() {
         const { apiUri, userCredential,version } = defaultContainer.moduleOptions;
-        this.apiUri = apiUri;
+        this.apiUri = apiUri || DEFAULT_STRAPI_URL;
         this.userCredential = userCredential;
         this.apiString = version === 4 ? "/api":""
     }

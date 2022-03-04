@@ -1,4 +1,4 @@
-import qs from "qs";
+import * as qs from "qs";
 export function getQueryString(queryParamsObject:{[key:string]:any}){
        return qs.stringify(
         queryParamsObject

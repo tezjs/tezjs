@@ -1,4 +1,4 @@
-import path from 'path';
+import * as path from 'path';
 import { createPath } from './create-path';
 export function getPath(pathCollection: string[], isCreateFolder: boolean = false): string {
     const currentPath = path.join(...pathCollection);

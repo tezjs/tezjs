@@ -1,5 +1,4 @@
-import axios from "axios";
-import path from "path";
+import * as path from "path";
 import { defaultContainer } from "../const/core.const";
 import { PageCollectionConfig } from "@tezjs/types";
 import { PayloadConfig } from "@tezjs/types";

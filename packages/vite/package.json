@@ -1,5 +1,5 @@
 {
-  "name": "@tezjs/common",
+  "name": "@tezjs/vite",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -24,9 +24,10 @@
   },
   "dependencies": {
     "@tezjs/payload": "0.0.1",
+    "express": "^4.17.3",
     "rimraf": "^3.0.2",
     "tslib": "^2.3.1",
     "vite": "^2.8.6",
-    "vue-router": "^4.0.12"
+    "html-minifier": "^4.0.0"
   }
 }

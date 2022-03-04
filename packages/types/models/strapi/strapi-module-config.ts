@@ -10,12 +10,12 @@ import { UserCredential } from "./user-credential-config";
 
 export interface StrapiModuleConfig {
     version?:number;
-    apiUri: string;
-    isDev: boolean;
+    apiUri?: string;
+    isDev?: boolean;
     payloadRootPath?: string;
     componentNames?: { [key: string]: string } | Array<string>;
     pageCollectionConfig?: PageCollectionConfig;
-    media: MediaConfig;
+    media?: MediaConfig;
     ignoreColumns?: Array<string>;
     collectionQuery?: CollectionResultQueryConfig;
     componentDataFieldSelectors?: { [key: string]: any };
@@ -24,8 +24,8 @@ export interface StrapiModuleConfig {
     serializeJson?: SerializeJsonConfig;
     userCredential?: UserCredential;
     enableInternationalization?: boolean;
-    optimization: OptimizationConfig;
-    pagination: PaginationConfig;
-    payload:PayloadConfig;
+    optimization?: OptimizationConfig;
+    pagination?: PaginationConfig;
+    payload?:PayloadConfig;
     robots?:RobotsConfig;
 }

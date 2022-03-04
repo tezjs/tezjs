@@ -17,7 +17,7 @@ export class PathResolver {
     }
 
     get rootPath() {
-        return this.commonPath.rootPath;
+        return this.commonPath.cachePath;
     }
 
     get routesJsonPath() {

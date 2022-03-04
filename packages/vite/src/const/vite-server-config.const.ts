@@ -1,4 +1,4 @@
-import { APP_ROOT_PATH } from "./app.core.const";
+import { APP_ROOT_PATH } from "./core.const";
 
 export const VITE_SERVER_CONFIG:{[key:string]:any} = {
     root:APP_ROOT_PATH,

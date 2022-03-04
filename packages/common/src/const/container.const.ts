@@ -8,11 +8,30 @@ export const commonContainer:
         setupConfig():void,
         tezConfig:TezConfig
         getAppRoutes():any[]
+        expressConfig:{[key:string]:any}
     } = new (class {
         tezConfig:TezConfig = {};
+        expressConfig = {};
         setupConfig(){
+
             let configPath = resolvePath('tez.config.js');
-            this.tezConfig = require(configPath)
+            if(existsSync(configPath))
+                this.tezConfig = require(configPath)
+            else
+                this.tezConfig = {
+                    strapi:{
+                        version:4,
+                        siteUrl:"http://localhost:3000",
+                        apiUri: "http://localhost:1337",  
+                        robots:{
+                            environmentName:"Dev"
+                        }, 
+                        optimization: {
+                            sourcePagination:true,
+                        }
+                    }
+                };
+            this.setExpress();
         }
 
         getAppRoutes():any[]{
@@ -21,9 +40,12 @@ export const commonContainer:
             return routes;
         }
 
-        setPayloadPath(){
-            
-            
+        setExpress(){
+            if(this.tezConfig && this.tezConfig.express && this.tezConfig.express.path){
+                let configPath = resolvePath(this.tezConfig.express.path);
+                if(existsSync(configPath))
+                this.expressConfig = require(configPath)
+            }
         }
 
     })();

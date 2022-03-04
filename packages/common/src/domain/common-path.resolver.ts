@@ -6,15 +6,19 @@ import { getPath } from "../functions/get-path";
 export class CommonPathResolver {
 
     get rootPath() {
+        return getPath([process.cwd()],true)
+    }
+
+    get cachePath() {
         return getPath([process.cwd(), CACHE_PATH],true)
     }
 
     get routesJsonPath() {
-        return getPath([this.rootPath, "routes.json"]);
+        return getPath([this.cachePath, "routes.json"]);
     }
 
     get redirectRoutesJsonPath() {
-        return getPath([this.rootPath, "redirect-routes.json"]);
+        return getPath([this.cachePath, "redirect-routes.json"]);
     }
 
     get payloadFolderPath(){

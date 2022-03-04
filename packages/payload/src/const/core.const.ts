@@ -1,7 +1,8 @@
 import { existsSync } from "fs";
 import { StrapiModuleConfig } from "@tezjs/types";
 import { deepMerge } from "./merge-object";
-const DEFAULT_STRAPI_URL = 'http://localhost:1337'
+import { DEFAULT_STRAPI_URL } from "./app.const";
+
 export const defaultContainer:
     {
         setOption(moduleOptions: StrapiModuleConfig): void;

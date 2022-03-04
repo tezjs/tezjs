@@ -1,7 +1,5 @@
-import { tezRouter } from "@tezjs/vue-router"
+import { tezRouter } from "@tezjs/vue"
 
 import Index from './pages/index.vue';
-console.log(import.meta.env.SSR)
 
-
-export default tezRouter(Index,{ssr:import.meta.env.SSR}); 
+export default tezRouter(Index); 
