@@ -30,7 +30,6 @@ export class HtmlPage extends Seo {
      this.addCanonical();
      this.addPageSchema();
      this.buildHtml();
-     console.log(this.html)
     }
 
     buildHtml(){

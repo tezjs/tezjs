@@ -16,7 +16,6 @@ export class RequestService {
         this.apiString = version === 4 ? "/api":""
     }
     async get(uri: string) {
-        console.log(`${this.apiUri}${this.apiString}${uri}`)
         const { data } = await axios.get(`${this.apiUri}${this.apiString}${uri}`, this.headers);
         return this.camalizeData(data.data);
     }
