@@ -16,8 +16,8 @@
       "lib": [
         "es2019"
       ],
-      "module": "commonjs",
-      "outDir": "./src",
+      "module": "ES2015",
+      "outDir": "./src/node_modules",
       "sourceMap": false,
       "typeRoots": [
         "./node_modules/@types"

@@ -1,9 +1,10 @@
 import vue from 'rollup-plugin-vue'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
-
+import alias from '@rollup/plugin-alias';
+import typescript from 'rollup-plugin-typescript2'  
 export default [
   {
-    input: 'src/index.js',
+    input: 'index.ts',
     output: [
       {
         format: 'esm',
@@ -15,7 +16,9 @@ export default [
       }
     ],
     plugins: [
-      vue(), peerDepsExternal()
+      vue(), peerDepsExternal(), typescript({
+        check: false 
+   }),  alias({ entries: [{ find:/^@\/(.+)/, replacement: './$1' }] })
     ]
   }
 ]

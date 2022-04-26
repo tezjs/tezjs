@@ -1,25 +1,14 @@
-<script >
-export default{
-  data(){
-    return {
-      count:0
-    }
-  },
-   props:["msg"],
-  mounted(){
-    var components = import.meta.glob('./*.vue');
-    console.log(components)
-    if(components["footer"]){
-      
-    }
-  }
-}
+<script setup lang="ts">
+import { ref } from 'vue'
 
+defineProps<{ msg: string }>()
+
+const count = ref(0)
 </script>
 
 <template>
   <h1 class="text-3xl font-bold underline" >{{ msg }}</h1>
-<InputTextarea></InputTextarea>
+
   <p>
     Recommended IDE setup:
     <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
@@ -37,7 +26,7 @@ export default{
     <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
   </p>
 
-  <button type="button" @click="count++">count is: {{ count }}</button> 
+  <button type="button" @click="count++">count is: {{ count }}</button>
   <p>
     Edit
     <code>components/HelloWorld.vue</code> to test hot module replacement.
