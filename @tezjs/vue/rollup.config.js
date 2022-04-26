@@ -4,15 +4,16 @@ import alias from '@rollup/plugin-alias';
 import typescript from 'rollup-plugin-typescript2'  
 export default [
   {
+    external: ['vuex'] ,
     input: 'index.ts',
     output: [
       {
         format: 'esm',
-        file: 'dist/library.mjs'
+        file: '../../tz-app/node_modules/@tezjs/vue/index.mjs'
       },
       {
         format: 'cjs',
-        file: 'dist/library.js'
+        file: '../../tz-app/node_modules/@tezjs/vue/index.js'
       }
     ],
     plugins: [

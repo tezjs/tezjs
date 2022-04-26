@@ -34,8 +34,10 @@ export class PageCollection {
     async generate() {
         await this.requestService.login()
         const locales = await this.internationalizationService.getLocales();
+        
         for (let j = 0; j < locales.length; j++) {
             const pageRouteResponse = await this.pageRoute.getRoutes(locales.length === 1 ? "" : locales[j]);
+            
             for (let i = 0; i < pageRouteResponse.routes.length; i++) {
                 const route = pageRouteResponse.routes[i];
                 const page = await this.payloadGenerator.generate(route, pageRouteResponse.dynamicPageRoute)

@@ -16,25 +16,26 @@
       "lib": [
         "es2019"
       ],
-      "module": "ES2015",
-      "outDir": "./src/node_modules",
+      "module": "commonjs",
+      "outDir": "./tz-app/node_modules",
       "sourceMap": false,
       "typeRoots": [
         "./node_modules/@types"
       ],
       "paths": {
-        "@tezjs/payload":["./packages/payload"],
-        "@tezjs/common":["./packages/common"],
-        "@tezjs/core":["./packages/core"],
-        "@tezjs/vue-router":["./packages/router"],
-        "@tezjs/strapi":["./packages/strapi"],
-        "@tezjs/vite":["./packages/vite"],
-        "@tezjs/types":["./packages/types"]
+        "@tezjs/payload":["./@tezjs/payload"],
+        "@tezjs/common":["./@tezjs/common"],
+        "@tezjs/core":["./@tezjs/core"],
+        "@tezjs/vue-router":["./@tezjs/router"],
+        "@tezjs/strapi":["./@tezjs/strapi"],
+        "@tezjs/vite":["./@tezjs/vite"],
+        "@tezjs/types":["./@tezjs/types"]
       }
     },
     "include": [
-      "./packages/**/*.ts",
-      "./packages/**/package.json"
+      "./@tezjs/**/*.ts",
+      "./@tezjs/**/package.json"
+
     ],
     "exclude": ["dist","src","./**/node_modules/**","./node_modules/**"]
    

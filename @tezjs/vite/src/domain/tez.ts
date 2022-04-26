@@ -2,6 +2,8 @@ import { IndexHtmlTransformContext, IndexHtmlTransformResult, Plugin } from "vit
 import { commonContainer } from "@tezjs/common"
 import { HtmlPage } from "./html-page";
 import { PageCollection } from "@tezjs/payload";
+import { overrideEnvVariables } from "../functions/override-env-variables";
+import { BLANK, ENVIRONMENTS } from "../const/core.const";
 export function tez(): Plugin {
 	return {
 		name: "vite:tez",
@@ -22,8 +24,8 @@ export function tez(): Plugin {
 			},
 		},
         async buildStart() {
-			const pageCollection = new PageCollection(commonContainer.tezConfig.strapi);
-      		await pageCollection.generate();
+			 const pageCollection = new PageCollection(commonContainer.tezConfig.strapi);
+      		 await pageCollection.generate();
           }
 	}
 }

@@ -4,12 +4,8 @@ declare global {
     }
   }
 
-export * from './src/funcs/tez-router'
-export * from './src/plugins'
-export * as TezComponent from './src/components/tez-component.vue'
-export * as  RxBind from './src/components/rx-bind.vue'
-
-
-import { appContainer } from './src/const/app-container'
-if(Object.keys(appContainer.components).length === 0)
-        appContainer.components = import.meta.glob('./*.vue');
+export {tezRouter} from './src/funcs/tez-router'
+export { tez } from './src/plugins/index'
+// export {TezSlot}  from './src/components/index'
+// export * as TzStore from './src/store/index'
+// export * from './src/const/component-state'
