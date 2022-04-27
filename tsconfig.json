@@ -37,7 +37,7 @@
       "./@tezjs/**/package.json"
 
     ],
-    "exclude": ["dist","src","./**/node_modules/**","./node_modules/**"]
+    "exclude": ["dist","src","@tezjs/payload/runtime/**","./**/node_modules/**","./node_modules/**"]
    
   }
   

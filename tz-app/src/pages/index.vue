@@ -1,17 +1,7 @@
 <template>
-  <main>
-<tez-slot></tez-slot>
- <tem></tem>   
-  </main>
+  <tez-slot slotName="header" slotCategory="master"></tez-slot>
+  <tez-slot></tez-slot>
+    <tez-slot slotName="footer" slotCategory="master"></tez-slot>
 </template>
-
-<script  >
-export default {
-  components:{
-  tem:tem.default
-  },
-mounted(){
-  console.log("mounted")
-}
-};
+<script setup lang="ts">
 </script>

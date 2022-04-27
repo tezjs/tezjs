@@ -32,7 +32,7 @@ export default async function parseStrapiData(pageContent, url, dynamicData,refe
     genericSection = getGenericSections(pageContent.masterPage,readProp(pageContent,COMPONENT_DATA_PROPS))
     let parseObjectItem = {referencePageData:referenceData,genericCollections:genericSection};
     const Tag:any = {
-        title: '', Link: {}, MetaPropertyTags: [], MetaNameTags: [], PageSchema: ''
+        title: '', canonical: '', MetaPropertyTags: [], MetaNameTags: [], PageSchema: ''
     };
     let components = [];
     for (let i = 0; i < genericSection.length; i++) {
@@ -94,8 +94,8 @@ export default async function parseStrapiData(pageContent, url, dynamicData,refe
     else
         tagBuilder(seo,Tag)
 
-    if (Object.keys(Tag.Link).length === 0)
-        Tag.Link = { rel: CANONICAL, href: moduleOptions.siteUrl + getUrl(url) };
+    if (!Tag.canonical)
+        Tag.canonical = moduleOptions.siteUrl + getUrl(url);
     let removeIndex = [];
     components.forEach((component, index) => {
         let componentReferencePath = readProp(component.data,COMPONENT_REFERENCE_PATH);
@@ -124,7 +124,7 @@ export default async function parseStrapiData(pageContent, url, dynamicData,refe
         delete Tag.MetaPropertyTags;
         delete Tag.MetaNameTags;
     }
-    return {
-        components: components,url:getUrl(url), tags: parseObjectValue(Tag,parseObjectItem),redirectRoutes:seo ?seo.redirectRoutes:[], sitemap: getSitemapObject(seo.sitemap || pageContent, Tag.Link.href,readProp(pageContent,UPDATED_AT)), sections:getPagePrePostComponents(readProp(pageContent,PRE_SECTION_PROPS)),footerSections:getPagePrePostComponents(readProp(pageContent,POST_SECTION_PROPS))
+    return {masterPageName:pageContent && pageContent.masterPage && pageContent.masterPage.title ? pageContent.masterPage.title:'',
+        components: components,url:getUrl(url), tags: parseObjectValue(Tag,parseObjectItem),redirectRoutes:seo ?seo.redirectRoutes:[], sitemap: getSitemapObject(seo.sitemap || pageContent, Tag.canonical,readProp(pageContent,UPDATED_AT)), sections:getPagePrePostComponents(readProp(pageContent,PRE_SECTION_PROPS)),footerSections:getPagePrePostComponents(readProp(pageContent,POST_SECTION_PROPS))
     };
 }

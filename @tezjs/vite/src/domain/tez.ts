@@ -4,6 +4,7 @@ import { HtmlPage } from "./html-page";
 import { PageCollection } from "@tezjs/payload";
 import { overrideEnvVariables } from "../functions/override-env-variables";
 import { BLANK, ENVIRONMENTS } from "../const/core.const";
+import { generateSW } from "./service-worker/generate-sw";
 export function tez(): Plugin {
 	return {
 		name: "vite:tez",
@@ -23,7 +24,13 @@ export function tez(): Plugin {
 				return html;
 			},
 		},
+		closeBundle(){
+			if(commonContainer.tezConfig.pwa)
+				generateSW();
+		},
         async buildStart() {
+			await overrideEnvVariables(BLANK,ENVIRONMENTS);  
+			commonContainer.setupConfig();
 			 const pageCollection = new PageCollection(commonContainer.tezConfig.strapi);
       		 await pageCollection.generate();
           }

@@ -6,7 +6,7 @@ export default function tagBuilder(data, tag) {
     const siteUrl = defaultContainer.moduleOptions.siteUrl;
     if (data.PageSchema)
         tag.PageSchema = data.PageSchema;
-
+console.log(data)
     if(data.metaTags)
         {
             tag.metaTag = {};
@@ -36,7 +36,7 @@ export default function tagBuilder(data, tag) {
 
     if (data.LinkTags)
         data.LinkTags.forEach(t => {
-            tag.Link = { rel: CANONICAL, href: siteUrl + t.Href };
+            tag.canonical = siteUrl + t.Href;
         });
 
     if (data.MetaNameTag)

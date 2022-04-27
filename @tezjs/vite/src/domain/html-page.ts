@@ -8,7 +8,7 @@ import { Seo } from "./seo";
 export class HtmlPage extends Seo {
     tags:{[key:string]:any};
     commonPath:CommonPathResolver
-    components:any[];
+    components:{slots:{[key:string]:any[]},masterPage;string};
     lastUrlPath:string;
     private files:string[]
     preloads:Array<Array<string>> = new Array<Array<string>>()
@@ -16,7 +16,12 @@ export class HtmlPage extends Seo {
         super(route);
         route.path = getUrl(route.path)
         this.lastUrlPath = getUrlLastPath(route.path);
-        this.components = readFileSync( getPath([this.commonPath.payloadFolderPath,"payload",route.path,`${this.lastUrlPath}.json`])) as any[];
+        this.components = readFileSync( getPath([this.commonPath.payloadFolderPath,"payload",route.path,`${this.lastUrlPath}.json`])) as {slots:{[key:string]:any[]},masterPage;string};
+        if(this.components && this.components.masterPage){
+            let masterPage = readFileSync( getPath([this.commonPath.payloadFolderPath,"payload","master-pages",`${this.components.masterPage.replace(/ /g,"-").toLowerCase()}.json`])) as {slots:{[key:string]:any[]}};
+            if(masterPage)
+                this.components.slots = {...this.components.slots,...masterPage.slots}
+        }
         this.commonPath = new CommonPathResolver();
     }
 
@@ -29,6 +34,10 @@ export class HtmlPage extends Seo {
      this.setMetaTags();
      this.addCanonical();
      this.addPageSchema();
+     if(commonContainer.tezConfig.pwa){
+        this.addScript('/registerSW.js');
+        this.addManifestJson();
+     }
      this.buildHtml();
     }
 
@@ -47,21 +56,27 @@ export class HtmlPage extends Seo {
     }
 
     addComponentDependencies(){
-        if(this.components && Array.isArray(this.components)){
-            this.components.forEach((item:any)=>{
-                let componentName = getComponentName(item.length == 2 ? item[1]:item[0]);
-                let assets = this.getAssets(componentName);
-                if(assets.length>0)
-                this.preloads.push(assets)
+        if(this.components && this.components.slots){
+            Object.keys(this.components.slots).forEach(slotName=>{
+                this.components.slots[slotName].forEach((item:any)=>{
+                    let componentName = getComponentName(item.length == 2 ? item[1]:item[0]);
+                    let assets = this.getAssets(componentName);
+                    if(assets.length>0 && this.preloads.indexOf(assets) === -1)
+                    this.preloads.push(assets)
+                })
             })
+            let addedItems:string[] = [];
             var lengthItem = this.preloads.length >3 ?3 : this.preloads.length;
             for(var i=0;i<lengthItem;i++){
                 let item = this.preloads[i];
                 let filePath = item[0];
-                this.addPreload(filePath,filePath.indexOf(".js") !== -1 ? "script":"style");
-                if(item.length>1){
-                    filePath = item[1]
+                if(addedItems.indexOf(filePath) === -1){
+                    addedItems.push(filePath)
                     this.addPreload(filePath,filePath.indexOf(".js") !== -1 ? "script":"style");
+                    if(item.length>1){
+                        filePath = item[1]
+                        this.addPreload(filePath,filePath.indexOf(".js") !== -1 ? "script":"style");
+                    }
                 }
             }
         }

@@ -3,12 +3,12 @@ import { TezSeo } from "@tezjs/types";
 import { PROPERTY } from "../../../payload/src/const/app.const";
 import { NAME } from "../const/core.const";
 import { HtmlElement } from "./html-element";
-
+import getUrl from '../functions/get-url'
 export class Seo extends HtmlElement {
     seo: TezSeo;
     constructor(route: { [key: string]: any }) {
         super();
-        this.seo = readFileSync(getPath([this.commonPath.payloadFolderPath,"payload", route.path, "tags.json"])) as TezSeo;
+        this.seo = readFileSync(getPath([this.commonPath.payloadFolderPath,"payload", getUrl(route.path), "tags.json"])) as TezSeo;
     }
 
     addTitle() {
@@ -49,8 +49,17 @@ export class Seo extends HtmlElement {
     addPreload(path:string,as:string){
         this.addElement(`<link data-head="tezjs-preload" rel="preload" as="${as}" ${as === "script" ? "crossorigin":''}  href="${path.replace(/\/\//g, "/")}">`,true)
     }
+//
 
     addModulePreload(path:string){
         this.addElement(`<link data-head="tezjs-preload"  rel="modulepreload" href="${path}">`,true)
+    }
+
+    addScript(path:string){
+        this.addElement(`<script crossorigin="" src="${path}"></script>`,false)
+    }
+
+    addManifestJson(){
+        this.addElement(`<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">`,true)
     }
 }

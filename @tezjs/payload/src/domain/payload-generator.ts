@@ -14,6 +14,8 @@ import { MasterPageCollection } from "./master-page.collection";
 import parseStrapiData from "./parse-strapi-data";
 import { PathResolver } from "./path-resolver";
 import { RequestService } from "./request.server";
+import { PageSlot } from "./page-slot";
+import { replaceSpace } from "../utils/replace-space";
 
 export class PayloadGenerator {
     private pageCollectionConfig: PageCollectionConfig;
@@ -54,32 +56,34 @@ export class PayloadGenerator {
             let item = (result && result[0]) ? result[0]:{}
             await this.masterPageCollection.setMasterPageInfo(this.pageCollectionConfig.name,filterQuery,item);
             const page = await parseStrapiData(item, baseUrl, dynamicData,referenceData);
-            const preLoadJson:{names:string[],data:string[]} = {names:[],data:[]};
+            
+            let slots = {};
             if (page) {
                 let componentIds = [];
                 let preComponentCount = page.sections.length;
-                page.sections.forEach(section=>preLoadJson.names.push(section[section.length -1]))
+                // page.sections.forEach(section=>preLoadJson.names.push(section[section.length -1]))
+                let pageSlot = new PageSlot();
                 for (let j = 0; j < page.components.length; j++) {
                     const component = page.components[j];
                     let componentId = `${j}-${component.name}`
                     componentIds.push(componentId);
+                    let slot = pageSlot.getSlot(component.slotName);
                     const filePath = path.join(
                         directoryPath,
                         componentId + ".json"
                     );
                     //component.data.clientComponentName = component.name;
                     
-                    page.sections.push((this.payload.page.maxPreLoadComponent - preComponentCount) > j  ? [component.data,componentId] : [componentId])
-                    preLoadJson.names.push(component.name)
+                    slot.push((this.payload.page.maxPreLoadComponent - preComponentCount) > j  ? [component.data,componentId] : [componentId])
+                    
                     if((this.payload.page.maxPreLoadComponent - preComponentCount) < j)
                     await writeFileSync(filePath, component.data);
-                    if((this.payload.page.maxPreLoadComponent - preComponentCount) <= j)
-                        preLoadJson.data.push(componentId)
+                    
                 }
-                page.footerSections.forEach(section=>{
-                    page.sections.push(section);
-                    preLoadJson.names.push(section[section.length -1]);
-                });
+                // page.footerSections.forEach(section=>{
+                //     page.sections.push(section);
+                //     preLoadJson.names.push(section[section.length -1]);
+                // });
                 let filePath = path.join(
                     directoryPath,
                     "tags.json"
@@ -91,11 +95,10 @@ export class PayloadGenerator {
                     directoryPath,
                     fileName[fileName.length - 1] + ".json"
                 );
-                await writeFileSync(filePath, page.sections);
-                await writeFileSync(path.join(
-                    directoryPath,
-                    "pre-load.json"
-                ), preLoadJson);
+                let pageJson = {slots:pageSlot.slots};
+                if(page.masterPageName)
+                    pageJson["masterPage"] = replaceSpace(page.masterPageName)
+                await writeFileSync(filePath, pageJson);
             }
             return page;
         }

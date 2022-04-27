@@ -10,7 +10,7 @@ interface DataPoint {
     lazyRef: VNode | null;
     isInView: Boolean;
     previousState: Boolean | null;
-    observer: IntersectionObserver | null
+    observer: any | null
 }
 export default defineComponent({
     data(): DataPoint {
@@ -92,10 +92,6 @@ export default defineComponent({
             }
         }
     },
-    mounted() {
-       // this.dataState = new TezDataState(this.slotCategory)
-    },
-
     render() {
         let vNodes: Array<VNode> = new Array<VNode>();
         if(this.dataState && this.dataState.state){
