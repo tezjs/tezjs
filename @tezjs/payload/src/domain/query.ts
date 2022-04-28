@@ -1,5 +1,4 @@
 import SnakeCase from "../sanitizers/snake-case.sanitizer"
-import axios from 'axios';
 import jsonToString from "../utils/json-to-string";
 import { defaultContainer } from "../const/core.const";
 import converQueryToJsonObject from "../utils/convert-query-to-json-object";

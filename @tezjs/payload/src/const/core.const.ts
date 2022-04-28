@@ -10,10 +10,12 @@ export const defaultContainer:
         nuxtInstance: any;
         filterCollectionState: { [key: string]: any };
         collectionState: { [key: string]: any };
+        writeImageUris:Array<string>;
         getUniqueId(): string;
         cacheDynamicPageCollection(collectionName: string, data: any[]): void;
         getDynamicPageCollection(collectionName: string, filterExpression: any): { [key: string]: any };
     } = new (class {
+        writeImageUris:Array<string>= new Array<string>();
         dynamicPageCollection: { [key: string]: any[] } = {};
         collectionState: { [key: string]: any } = {};
         filterCollectionState: { [key: string]: any } = {};

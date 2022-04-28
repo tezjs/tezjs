@@ -1,6 +1,6 @@
 declare const window:any;
 export const requestIdleCallback = window.requestIdleCallback ||
-  function (cb) {
+  function (cb:any) {
     const start = Date.now()
     return setTimeout(function () {
       cb({

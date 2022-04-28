@@ -56,7 +56,6 @@ export default defineComponent({
             return await getJsonPayload(name);
         },
         tzTicked() {
-            console.log(this.isInView)
             if (this.isInView)
                 this.goToNextComponent(false);
         },
@@ -96,10 +95,12 @@ export default defineComponent({
         let vNodes: Array<VNode> = new Array<VNode>();
         if(this.dataState && this.dataState.state){
             for (let component of this.dataState.state.components) {
-                if (!this.dataState.state.vNodes[component.itemName]){
-                    this.dataState.state.vNodes[component.itemName] = h(defineAsyncComponent(() => componentState.components[component.path]()), { data: component.data });
-                 }
-                vNodes.push(h(KeepAlive, { key: component.itemName }, this.dataState.state.vNodes[component.itemName]))
+                if(componentState.components[component.path]){
+                    if (!this.dataState.state.vNodes[component.itemName]){
+                        this.dataState.state.vNodes[component.itemName] = h(defineAsyncComponent(() => componentState.components[component.path]()), { data: component.data });
+                     }
+                    vNodes.push(h(KeepAlive, { key: component.itemName }, this.dataState.state.vNodes[component.itemName]))
+                }
             }
         }
         if (!this.lazyRef)

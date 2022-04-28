@@ -12,6 +12,7 @@ export function tez(): Plugin {
 			enforce: "post",
 			transform(html: string, ctx?: IndexHtmlTransformContext): IndexHtmlTransformResult {
 				if (!ctx || !ctx.bundle) return html
+				let minifiedHtml = '';
 				let routes = commonContainer.getAppRoutes();
 				var files = Object.entries(ctx.bundle).map(t=> {
 					const [, value] = t;
@@ -20,12 +21,14 @@ export function tez(): Plugin {
 				for(var route of routes){
 					let htmlPage = new HtmlPage(html,route)
 					htmlPage.createPage(files)
+					console.log(route.path)
+					if(route.path == "/index")
+						minifiedHtml = htmlPage.html
 				}
-				return html;
+				return minifiedHtml || html;
 			},
 		},
 		closeBundle(){
-			if(commonContainer.tezConfig.pwa)
 				generateSW();
 		},
         async buildStart() {

@@ -1,4 +1,4 @@
-import { SEO_POPULATE, VUE_COMPONENT_NAME_PROPS } from "../const/app.const";
+import { SEO_POPULATE } from "../const/app.const";
 import { getFilterQueryParams } from "../utils/get-filter-query-params";
 import parseStrapiData from "./parse-strapi-data";
 import { RequestService } from "./request.server";

@@ -51,4 +51,8 @@ export class PathResolver {
     getFilterCollectionPayloadPath(collectionName: string): string {
         return getPath([this.payloadPath, "filter-collections", collectionName], true);
     }
+
+    pathExists(path:string){
+        return this.commonPath.pathExists(path);
+    }
 }

@@ -1,4 +1,4 @@
-import { CANONICAL, CHARSET, DESCRIPTION, KEYWORDS, NAME, PROPERTY } from "../const/app.const";
+import { CHARSET, DESCRIPTION, KEYWORDS, NAME, PROPERTY } from "../const/app.const";
 import { defaultContainer } from "../const/core.const";
 
 export default function tagBuilder(data, tag) {
@@ -6,7 +6,6 @@ export default function tagBuilder(data, tag) {
     const siteUrl = defaultContainer.moduleOptions.siteUrl;
     if (data.PageSchema)
         tag.PageSchema = data.PageSchema;
-console.log(data)
     if(data.metaTags)
         {
             tag.metaTag = {};

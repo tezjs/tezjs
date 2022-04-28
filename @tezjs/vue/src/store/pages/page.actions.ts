@@ -1,4 +1,3 @@
-import { getComponentName } from "../../funcs/get-component-name";
 import { getJsonPayload } from "../../funcs/payload/get-json-payload";
 import { setSlots } from "./page.func";
 

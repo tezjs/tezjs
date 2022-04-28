@@ -8,13 +8,14 @@ import { RobotTxtGenerator } from "./robot-txt-generator";
 import { RedirectRoute } from "./redirect-routes";
 import { StrapiModuleConfig } from "@tezjs/types";
 import { defaultContainer } from "../const/core.const";
-import { commonContainer } from '@tezjs/common'
+import { commonContainer,CommonPathResolver } from '@tezjs/common'
 export class PageCollection {
     private requestService: RequestService;
     private internationalizationService: InternationalizationService;
     private pageRoute: PageRoute;
     private payloadGenerator: PayloadGenerator;
     private pathResolver: PathResolver;
+    private commonPathResolver:CommonPathResolver;
     private sitemap:Sitemap;
     private robotsGenerator:RobotTxtGenerator;
     private redirectRoute:RedirectRoute;
@@ -30,23 +31,31 @@ export class PageCollection {
         this.sitemap = new Sitemap();
         this.robotsGenerator = new RobotTxtGenerator();
         this.redirectRoute = new RedirectRoute();
+        this.commonPathResolver = new CommonPathResolver();
     }
-    async generate() {
+    async generate(routePath?:string) {
         await this.requestService.login()
         const locales = await this.internationalizationService.getLocales();
-        
         for (let j = 0; j < locales.length; j++) {
             const pageRouteResponse = await this.pageRoute.getRoutes(locales.length === 1 ? "" : locales[j]);
-            
             for (let i = 0; i < pageRouteResponse.routes.length; i++) {
                 const route = pageRouteResponse.routes[i];
-                const page = await this.payloadGenerator.generate(route, pageRouteResponse.dynamicPageRoute)
-                this.sitemap.add(page);
-                this.redirectRoute.add(page);
+                if((routePath === route.path) || !routePath){
+                    if(routePath === route.path)
+                        this.deletePayloadItem(`${this.pathResolver.payloadPath}${routePath}`)
+                    const page = await this.payloadGenerator.generate(route, pageRouteResponse.dynamicPageRoute)
+                    this.sitemap.add(page);
+                    this.redirectRoute.add(page);
+                }
+                
             }
         }
         this.sitemap.save()
         await this.robotsGenerator.generate();
         this.redirectRoute.save();
+    }
+
+    deletePayloadItem(routePath:string){
+        this.commonPathResolver.removeDirSync(routePath);
     }
 }

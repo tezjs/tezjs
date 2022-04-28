@@ -17,7 +17,7 @@ export class RoutesRouter{
 
     get = async (request:express.Request,response:express.Response) => {
       const pageCollection = new PageCollection(this.tezConfig.strapi);
-      await pageCollection.generate();
+      await pageCollection.generate(request.query?.path);
       response.status(200).end();
     }
 

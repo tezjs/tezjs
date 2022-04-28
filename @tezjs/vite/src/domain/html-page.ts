@@ -12,7 +12,7 @@ export class HtmlPage extends Seo {
     lastUrlPath:string;
     private files:string[]
     preloads:Array<Array<string>> = new Array<Array<string>>()
-    constructor(private html:string,private route:{[key:string]:any}){
+    constructor(public html:string,private route:{[key:string]:any}){
         super(route);
         route.path = getUrl(route.path)
         this.lastUrlPath = getUrlLastPath(route.path);
@@ -34,10 +34,9 @@ export class HtmlPage extends Seo {
      this.setMetaTags();
      this.addCanonical();
      this.addPageSchema();
-     if(commonContainer.tezConfig.pwa){
-        this.addScript('/registerSW.js');
+     this.addScript('/registerSW.js');
+     if(commonContainer.tezConfig.pwa)
         this.addManifestJson();
-     }
      this.buildHtml();
     }
 

@@ -6,9 +6,7 @@ import { Route } from "@tezjs/types";
 import cleanObject from "../sanitizers/clean-object.sanitizer";
 import { createPath } from "@tezjs/common";
 import { getFilterQueryParams } from "../utils/get-filter-query-params";
-import { getQueryParams } from "../utils/get-query-params";
 import getUrl from "../utils/get-url";
-import { getPagePrePostComponents } from "../utils/pre-post-layout";
 import { writeFileSync } from "../utils/write-file";
 import { MasterPageCollection } from "./master-page.collection";
 import parseStrapiData from "./parse-strapi-data";
@@ -16,6 +14,7 @@ import { PathResolver } from "./path-resolver";
 import { RequestService } from "./request.server";
 import { PageSlot } from "./page-slot";
 import { replaceSpace } from "../utils/replace-space";
+import { writeImage } from "../utils/write-image";
 
 export class PayloadGenerator {
     private pageCollectionConfig: PageCollectionConfig;
@@ -61,7 +60,6 @@ export class PayloadGenerator {
             if (page) {
                 let componentIds = [];
                 let preComponentCount = page.sections.length;
-                // page.sections.forEach(section=>preLoadJson.names.push(section[section.length -1]))
                 let pageSlot = new PageSlot();
                 for (let j = 0; j < page.components.length; j++) {
                     const component = page.components[j];
@@ -72,18 +70,11 @@ export class PayloadGenerator {
                         directoryPath,
                         componentId + ".json"
                     );
-                    //component.data.clientComponentName = component.name;
-                    
                     slot.push((this.payload.page.maxPreLoadComponent - preComponentCount) > j  ? [component.data,componentId] : [componentId])
-                    
                     if((this.payload.page.maxPreLoadComponent - preComponentCount) < j)
                     await writeFileSync(filePath, component.data);
                     
                 }
-                // page.footerSections.forEach(section=>{
-                //     page.sections.push(section);
-                //     preLoadJson.names.push(section[section.length -1]);
-                // });
                 let filePath = path.join(
                     directoryPath,
                     "tags.json"
@@ -100,8 +91,14 @@ export class PayloadGenerator {
                     pageJson["masterPage"] = replaceSpace(page.masterPageName)
                 await writeFileSync(filePath, pageJson);
             }
+            await this.writeImages();
             return page;
         }
         return null;
+    }
+
+    async writeImages(){
+        for(const uri of defaultContainer.writeImageUris)
+            await writeImage(uri)
     }
 }

@@ -1,7 +1,9 @@
+import { IMAGE_EXTENSION_REGEX } from "../const/app.const";
 import { defaultContainer } from "../const/core.const";
 import { MarkdownIt } from "../markdown/markdown-it";
 import isArray from "../utils/is-array";
 import isObject from "../utils/is-object";
+import { writeImage } from "../utils/write-image";
 import { toCamelCase } from "./to-camelcase.sanitizer";
 import urlReplacer from "./url-replacer.sanitizer";
 
@@ -45,7 +47,7 @@ function clear(jsonObject: { [key: string]: any }, isRoot: boolean):any {
                 if(htmlSanitizer)
                     content = htmlSanitizer(content);
             }
-            jObject[keyName] = urlReplacer(content);
+            jObject[keyName] = urlReplacer(content,keyName);
         }
 
 
@@ -55,7 +57,6 @@ function clear(jsonObject: { [key: string]: any }, isRoot: boolean):any {
 
 function ignoreColumns(name, isRoot) {
     let columns = defaultContainer.moduleOptions.ignoreColumns || [];
-    //columns = isRoot ? columns : columns.concat(["MetaTags", "SEO"]);
     return columns.filter(t => t === name)[0]
 }
 

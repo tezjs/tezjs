@@ -5,5 +5,4 @@ const store = createStore({
       page:pageModule
     }
   })
-console.log(store)
   export default store;

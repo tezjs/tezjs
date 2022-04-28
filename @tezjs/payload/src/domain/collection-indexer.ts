@@ -1,8 +1,8 @@
 import { defaultContainer } from "../const/core.const";
 import { PaginationConfig } from "@tezjs/types"
-import cleanObject from "../sanitizers/clean-object.sanitizer";
 import { writeFileSync } from "../utils/write-file";
 import { PathResolver } from "./path-resolver";
+import { getChecksum } from "../utils/get-checksum";
 
 export class CollectionIndexer {
     pagination: PaginationConfig;
@@ -15,7 +15,7 @@ export class CollectionIndexer {
     async paginate(source: Array<{ [key: string]: any }>, collectionName: string, filterString: string) {
         let index = 1;
         const filterKey = `${collectionName}-${filterString}`.toLowerCase();;
-        let folderKey: string = defaultContainer.getUniqueId();
+        let folderKey: string = getChecksum(filterKey);
         if ((filterString && !defaultContainer.filterCollectionState[filterKey]) || (!filterString && !defaultContainer.collectionState[collectionName])) {
             let totalCount = source.length;
             do {

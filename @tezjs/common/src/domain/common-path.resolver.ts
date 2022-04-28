@@ -2,6 +2,7 @@ import { existsSync } from "fs";
 import { CACHE_PATH } from "../const/app.const";
 import { commonContainer } from "../const/container.const";
 import { getPath } from "../functions/get-path";
+import { removePath } from "../functions/remove-path";
 
 export class CommonPathResolver {
 
@@ -32,6 +33,19 @@ export class CommonPathResolver {
             path = commonContainer.tezConfig.payloadPath = "static";
         }
         return getPath([process.cwd(), path]);
+    }
+
+    get imageFolderPath(){
+        getPath([this.payloadFolderPath,'\\uploads'],true)
+        return this.payloadFolderPath;
+    }
+
+    pathExists(filePath:string){
+        return existsSync(filePath);
+    }
+
+    removeDirSync(path:string){
+        removePath(path);
     }
     
 }
