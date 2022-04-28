@@ -3,10 +3,6 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "watch": "npm run clean && tsc --watch",
-    "clean": "rimraf ./dist"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tezjs/tez.js.git"

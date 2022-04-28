@@ -113,7 +113,8 @@ dist
 /@tezjs/strapi/runtime/static/redirect-routes.json
 /@tezjs/common/package-lock.json
 package-lock.json
-/tz-app/public/payload
-/tz-app/public/robots.txt
-/tz-app/public/sitemap.xml
-/tz-app/public/sitemap-not-mapped.json
+/tz-app/tez-strapi-app/tez/public/payload
+/tz-app/tez-strapi-app/tez/public/uploads
+/tz-app/tez-strapi-app/tez/public/robots.txt
+/tz-app/tez-strapi-app/tez/public/sitemap.xml
+/tz-app/tez-strapi-app/tez/public/sitemap-not-mapped.json

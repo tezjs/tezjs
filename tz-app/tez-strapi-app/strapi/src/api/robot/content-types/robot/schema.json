@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "robots",
+  "info": {
+    "singularName": "robot",
+    "pluralName": "robots",
+    "displayName": "Robots",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Environment": {
+      "type": "enumeration",
+      "enum": [
+        "Dev",
+        "Stage",
+        "Production"
+      ]
+    },
+    "Rules": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_components_dynamic_page_data",
+  "info": {
+    "displayName": "ReferencePageData",
+    "icon": "apple-alt",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "ReferenceCollection": {
+      "type": "enumeration",
+      "enum": [
+        "Data"
+      ],
+      "default": "Data",
+      "required": true
+    },
+    "SlotName": {
+      "type": "string"
+    }
+  }
+}

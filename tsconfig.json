@@ -17,7 +17,7 @@
         "es2019"
       ],
       "module": "commonjs",
-      "outDir": "./tz-app/node_modules",
+      "outDir": "./tz-app/tez-strapi-app/tez/node_modules",
       "sourceMap": false,
       "typeRoots": [
         "./node_modules/@types"
@@ -25,19 +25,17 @@
       "paths": {
         "@tezjs/payload":["./@tezjs/payload"],
         "@tezjs/common":["./@tezjs/common"],
-        "@tezjs/core":["./@tezjs/core"],
-        "@tezjs/vue-router":["./@tezjs/router"],
-        "@tezjs/strapi":["./@tezjs/strapi"],
         "@tezjs/vite":["./@tezjs/vite"],
+        "@tezjs/vue":["./@tezjs/vue"],
         "@tezjs/types":["./@tezjs/types"]
-      }
+      },
     },
     "include": [
       "./@tezjs/**/*.ts",
       "./@tezjs/**/package.json"
 
     ],
-    "exclude": ["dist","src","@tezjs/payload/runtime/**","./**/node_modules/**","./node_modules/**"]
+    "exclude": ["dist","tz-app","src","@tezjs/payload/runtime/**","./**/node_modules/**","./node_modules/**"]
    
   }
   

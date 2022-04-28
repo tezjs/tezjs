@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_search_engine_optimization_redirect_routes",
+  "info": {
+    "displayName": "RedirectRoutes",
+    "icon": "angle-right",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "From": {
+      "type": "string"
+    },
+    "StatusCode": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 declare const webWorker: any;
+declare const document:any;
 export const appContainer:
   {
     componentPath(components: { [key: string]: any }): void,

@@ -14,11 +14,6 @@
   "license": "MIT",
   "author": "ajayojha",
   "main": "dist/index.js",
-  "scripts": {
-    "watch": "npm run clean && tsc --watch",
-    "clean": "rimraf ./dist",
-    "prepack": "pnpm build"
-  },
   "dependencies": {
     "rimraf": "^3.0.2",
     "tslib": "^2.3.1",
