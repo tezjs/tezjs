@@ -4,7 +4,6 @@ const IMAGE_STATE:{[key:string]:any} = {};
 let REQUEST_COUNT:number = 0;
 const imageRequestBroadcaster = new BroadcastChannel('image-request');
 imageRequestBroadcaster.onmessage = (event) => {
-  console.log(event.data)
         if(IMAGE_STATE[event.data.index] && IMAGE_STATE[event.data.index].url === event.data.url){
           IMAGE_DATA_STRING[event.data.url] = event.data.baseString;
           setImageSource.call(IMAGE_STATE[event.data.index].instance,IMAGE_DATA_STRING[event.data.url])

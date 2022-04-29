@@ -42,8 +42,12 @@ export class Seo extends HtmlElement {
     }
 
     addPageSchema(){
-        if(this.seo && this.seo.linkingData)
-            this.addElement(`<script type="application/ld+json">${this.seo.linkingData}</script>`,false)
+        if(this.seo && this.seo.linkingData){
+            const splitLinkingData = this.seo.linkingData.split("--");
+            splitLinkingData.forEach(data=>{
+                this.addElement(`<script data-head="tezjs"  type="application/ld+json">${data.trim()}</script>`,false)
+            })
+        }
     }
 
     addPreload(path:string,as:string){

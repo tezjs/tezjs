@@ -4,8 +4,8 @@ import { defaultContainer } from "../const/core.const";
 export default function tagBuilder(data, tag) {
     const imageCdn = defaultContainer.moduleOptions.media.cdnUri;
     const siteUrl = defaultContainer.moduleOptions.siteUrl;
-    if (data.PageSchema)
-        tag.PageSchema = data.PageSchema;
+    if (data.linkingData)
+        tag.linkingData = data.linkingData;
     if(data.metaTags)
         {
             tag.metaTag = {};
