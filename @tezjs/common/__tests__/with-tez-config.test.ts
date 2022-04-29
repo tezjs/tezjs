@@ -42,6 +42,33 @@ describe('express custom configuration', () => {
     });
 });
 
+
+describe('PWA custom configuration', () => {
+  beforeEach(()=>{
+      writeFileSync(filePath,readFileSync(`${directoryPath}\\tez-config.pwa.js.txt`,true),true);
+      commonContainer.setupConfig();
+  })
+  it('check tez config  PWA configuration', () => {
+  expect(commonContainer.tezConfig.pwa).toBeDefined()
+  expect(commonContainer.tezConfig.pwa).toMatchObject({
+    "name": "Tez App",
+    "short_name": "Tez",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#fff",
+    "theme_color": "#fff",
+    "icons": [
+      {
+        "src": "icons/icon-72x72.png",
+        "sizes": "72x72",
+        "type": "image/png"
+      }
+    ]
+  })
+  });
+});
+
 afterEach(() => {
     commonPathResolver.removeDirSync(filePath)
     commonPathResolver.removeDirSync(expressFilePath)
