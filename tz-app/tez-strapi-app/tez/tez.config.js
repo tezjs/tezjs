@@ -2,6 +2,9 @@ module.exports = {
     express:{
         path:'api/index.js'
     },
+    image:{
+      enableWebPConversion:true
+    },
     pwa:{
         "name": "ajay",
         "short_name": "Radixweb",

@@ -1,13 +1,17 @@
 import * as fs from 'fs';
 import * as  axios from 'axios';
+import * as sharp from 'sharp';
 import {CommonPathResolver, commonContainer } from "@tezjs/common";
 const pathResolver = new CommonPathResolver();
 export async function writeImage(imagePath:string){
     return new Promise(async (resolve, reject) => {
             try {
-                if(!pathResolver.pathExists(`${pathResolver.imageFolderPath}${imagePath}`)){
+                let filePath = `${pathResolver.imageFolderPath}${imagePath}`;
+                
+                if(!pathResolver.pathExists(filePath)){
+                    let fileExtension = filePath.split('.').pop();
                     const response = await getImage(imagePath)
-                    const writer = fs.createWriteStream(`${pathResolver.imageFolderPath}${imagePath}`);
+                    const writer = fs.createWriteStream(filePath);
                     writer.on("error", (err) => {
                         console.log("downloadFileFn writer error called → ", err);
                         error = err;
@@ -16,7 +20,14 @@ export async function writeImage(imagePath:string){
                     });
                     writer.on("close", () => {
                         if (!error) {
-                            resolve(true);
+                            if(commonContainer.tezConfig.image?.enableWebPConversion){
+                                sharp(filePath).webp().toBuffer().then(t=>{
+                                    sharp(t).toFile(filePath.replace(`.${fileExtension}`,'.webp'));
+                                    resolve(true);
+                                })
+                            }else
+                                resolve(true);
+                            
                         }
                     });
                     response.data.pipe(writer);
