@@ -19,7 +19,10 @@ function setImageSource(this:HTMLImageElement, source:string){
   export function overrideImageSourceProp(){
     Object.defineProperty(Image.prototype, "src", {
       set(src) {
-        if(!IMAGE_DATA_STRING[src]){
+        if(window.location.hostname.indexOf("localhost") !== -1){
+          this.setAttribute("src",src);
+        }
+        else if(!IMAGE_DATA_STRING[src]){
           REQUEST_COUNT = REQUEST_COUNT+1;
           IMAGE_STATE[REQUEST_COUNT] = {instance:this,url:src}
           imageRequestBroadcaster.postMessage({
