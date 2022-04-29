@@ -46,7 +46,7 @@ export const commonContainer:
             if(this.tezConfig && this.tezConfig.express && this.tezConfig.express.path){
                 let configPath = resolvePath(this.tezConfig.express.path);
                 if(existsSync(configPath))
-                this.expressConfig = tzRequire(configPath)
+                this.expressConfig = require(configPath)
             }
         }
     })();
