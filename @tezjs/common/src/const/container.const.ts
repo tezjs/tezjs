@@ -3,6 +3,8 @@ import { CommonPathResolver } from "../domain/common-path.resolver";
 import { readFileSync } from "../functions/read-file-sync";
 import { resolvePath } from "../functions/resolve-path";
 import { TezConfig } from "@tezjs/types"
+import { tzRequire } from "../functions/tz-require";
+
 export const commonContainer:
     {
         setupConfig():void,
@@ -13,10 +15,10 @@ export const commonContainer:
         tezConfig:TezConfig = {};
         expressConfig = {};
         setupConfig(){
-
-            let configPath = resolvePath('tez.config.js');
-            if(existsSync(configPath))
-                this.tezConfig = require(configPath)
+            let configPath = resolvePath(`tez.config.js`);
+            if(existsSync(configPath)){
+                this.tezConfig = tzRequire(configPath)
+            }
             else
                 this.tezConfig = {
                     strapi:{
@@ -44,8 +46,7 @@ export const commonContainer:
             if(this.tezConfig && this.tezConfig.express && this.tezConfig.express.path){
                 let configPath = resolvePath(this.tezConfig.express.path);
                 if(existsSync(configPath))
-                this.expressConfig = require(configPath)
+                this.expressConfig = tzRequire(configPath)
             }
         }
-
     })();

@@ -1,0 +1,13 @@
+module.exports = {  
+    strapi: { 
+        siteUrl:"http://localhost:4200",
+        apiUri: "http://localhost:4100",  
+        robots:{
+            environmentName:"prod"
+        }, 
+        optimization: {
+            sourcePagination:false,
+        }
+    } 
+}       
+                   

@@ -3,7 +3,6 @@ import { CACHE_PATH } from "../const/app.const";
 import { commonContainer } from "../const/container.const";
 import { getPath } from "../functions/get-path";
 import { removePath } from "../functions/remove-path";
-
 export class CommonPathResolver {
 
     get rootPath() {
@@ -25,12 +24,11 @@ export class CommonPathResolver {
     get payloadFolderPath(){
         let path = commonContainer.tezConfig.payloadPath;
         if(!path){
-            let publicFolder = `${process.cwd()}\\public`;
             let staticFolder = `${process.cwd()}\\static`;
-          if(existsSync(publicFolder))
-            path = commonContainer.tezConfig.payloadPath = "public";
-          else if(existsSync(staticFolder))
-            path = commonContainer.tezConfig.payloadPath = "static";
+           if(existsSync(staticFolder))
+                path = commonContainer.tezConfig.payloadPath = "static";
+            else
+                path = commonContainer.tezConfig.payloadPath = "public";
         }
         return getPath([process.cwd(), path]);
     }

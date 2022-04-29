@@ -1,0 +1,6 @@
+module.exports = {  
+    express:{
+        path:'express.index.js'
+    },
+}       
+                   
