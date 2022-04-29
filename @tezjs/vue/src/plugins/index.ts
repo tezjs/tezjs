@@ -2,6 +2,8 @@ import TezSlot from "../components/tez-slot"
 import { componentState } from '../const/component-state';
 import TzTickedMixin from '../mixins/tz-ticked.mixin'
 import store from '../store';
+import {overrideImageSourceProp} from '../funcs/override-image-source'
+overrideImageSourceProp();
 export const tez:
 {
     components:(components:Record<string, () => Promise<{

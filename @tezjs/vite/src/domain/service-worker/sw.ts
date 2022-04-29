@@ -1,3 +1,5 @@
+declare const BroadcastChannel:any;
+declare const FileReader:any;
 declare const caches:any;
 declare const self:any;
 declare const assets:any;
@@ -74,3 +76,20 @@ self.addEventListener("install", async (event) => {
 self.addEventListener("fetch", (event) => {
     return event.respondWith(cacheFirstStrategy(event.request));
 });
+
+const broadcast = new BroadcastChannel('image-request');
+broadcast.onmessage = (event) => {
+   fetch(event.data.url)
+    .then(response => {
+  return response.blob();
+    })
+    .then(blob => new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        broadcast.postMessage({ index:event.data.index,url:event.data.url,baseString:reader.result  }); 
+        resolve(reader.result)
+      }
+      reader.onerror = reject
+      reader.readAsDataURL(blob)
+    }))
+};
