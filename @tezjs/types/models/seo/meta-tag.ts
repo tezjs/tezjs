@@ -1,4 +1,4 @@
 export interface MetaTag{
-    name:{[key:string]:any}
-    property:{[key:string]:any}
+    name?:{[key:string]:any}
+    property?:{[key:string]:any}
 }
