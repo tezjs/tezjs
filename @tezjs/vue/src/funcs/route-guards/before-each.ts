@@ -9,7 +9,8 @@ export  function beforeEach(routes:any) {
   if(window.location.hostname.indexOf("localhost") !== -1)
       await fetch(`/routes?path=${to.path}`);
     let url = getUrl(to.path);
-    if(routes.filter((route:any)=>route.path == url).length === 0){
+    let routeItem = routes.filter((route:any)=>route.path == url)[0];
+    if(!routeItem){
       let isBindMetaTags = Object.keys(PAGE_STATE).length !== 0;
       if(!PAGE_STATE[url]){
         var data = await getJsonPayload('',to.path);
@@ -20,7 +21,8 @@ export  function beforeEach(routes:any) {
         setMetaInfo(await getJsonPayload('tags',to.path))
       }
       setTimeout(async function(){ await store.dispatch("page/changePageUrl",url)})
-    }
+    }else if(routeItem.seo)
+        setMetaInfo(routeItem.seo)
     return true;
 }
   
