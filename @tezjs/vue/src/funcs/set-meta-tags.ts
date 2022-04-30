@@ -25,7 +25,8 @@ export function setMetaInfo(metaInfo: { [key: string]: any }) {
       }
       if (metaInfo.metaTag)
         addMetas(metaInfo.metaTag, canonical)
-      addPageSchema(metaInfo,canonical);
+      if(metaInfo.linkingData)
+      addPageSchema(metaInfo.linkingData,canonical);
 }
 
 function addMetas(metaTag: { [key: string]: any }, insertBeforeElement: any) {

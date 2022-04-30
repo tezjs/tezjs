@@ -51,16 +51,16 @@ export class Seo extends HtmlElement {
     }
 
     addPreload(path:string,as:string){
-        this.addElement(`<link data-head="tezjs-preload" rel="preload" as="${as}" ${as === "script" ? "crossorigin":''}  href="${path.replace(/\/\//g, "/")}">`,true)
+        this.addElement(`<link data-head="tezjs-preload" rel="preload" as="${as}" ${as === "script" ? "crossorigin":''}  href="/${path.replace(/\/\//g, "/")}">`,true)
     }
 //
 
     addModulePreload(path:string){
-        this.addElement(`<link data-head="tezjs-preload"  rel="modulepreload" href="${path}">`,true)
+        this.addElement(`<link data-head="tezjs-preload"  rel="modulepreload" href="/${path}">`,true)
     }
 
     addScript(path:string){
-        this.addElement(`<script crossorigin="" src="${path}"></script>`,false)
+        this.addElement(`<script crossorigin="" src="/${path}"></script>`,false)
     }
 
     addManifestJson(){

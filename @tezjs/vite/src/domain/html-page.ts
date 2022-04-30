@@ -29,12 +29,12 @@ export class HtmlPage extends Seo {
         this.files = files;
      this.addTitle();  
      this.addVendor();
-     this.addPreload(`${commonContainer.tezConfig.payloadPath}/${this.route.path}/${this.lastUrlPath}.json`,'fetch')
+     this.addPreload(`payload${this.route.path}${this.lastUrlPath}.json`,'fetch')
      this.addComponentDependencies();
      this.setMetaTags();
      this.addCanonical();
      this.addPageSchema();
-     this.addScript('/registerSW.js');
+     this.addScript('registerSW.js');
      if(commonContainer.tezConfig.pwa)
         this.addManifestJson();
      this.buildHtml();
