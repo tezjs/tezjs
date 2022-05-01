@@ -22,6 +22,7 @@ export const TEZ_CONFIG:TezConfig = {
           }
         ]
       },
+      
     strapi: { 
         version:4,
         siteUrl:process.env.VITE_SITE_URL,
