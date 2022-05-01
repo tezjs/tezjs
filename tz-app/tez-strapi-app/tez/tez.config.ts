@@ -1,4 +1,5 @@
-module.exports = {  
+import { TezConfig } from "@tezjs/types"
+export const TEZ_CONFIG:TezConfig = {  
     express:{
         path:'api/index.js'
     },
@@ -32,5 +33,6 @@ module.exports = {
             sourcePagination:true,
         }
     } 
-}       
+} 
+
                    

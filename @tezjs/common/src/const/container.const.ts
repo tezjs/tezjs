@@ -7,18 +7,16 @@ import { tzRequire } from "../functions/tz-require";
 
 export const commonContainer:
     {
-        setupConfig():void,
+        setupConfig(tezConfig?:TezConfig):void,
         tezConfig:TezConfig
         getAppRoutes():any[]
         expressConfig:{[key:string]:any}
     } = new (class {
         tezConfig:TezConfig = {};
         expressConfig = {};
-        setupConfig(){
-            let configPath = resolvePath(`tez.config.js`);
-            if(existsSync(configPath)){
-                this.tezConfig = tzRequire(configPath)
-            }
+        setupConfig(tezConfig?:TezConfig){
+            if(tezConfig)
+                this.tezConfig = tezConfig
             else
                 this.tezConfig = {
                     strapi:{
