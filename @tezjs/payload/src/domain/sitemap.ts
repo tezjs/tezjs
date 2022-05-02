@@ -32,9 +32,9 @@ export class Sitemap{
     xmlElement(sitemap: { [key: string]: any }) {
         return `<url>\n
                  <loc>${sitemap.loc}</loc>\n
-                 <lastmod>${sitemap.lastModified}</lastmod>\n
-                 <changefreq>${sitemap.changeFrequency}</changefreq>\n
-                 <priority>${sitemap.priority}</priority>\n
+                 ${sitemap.lastModified ? `<lastmod>${sitemap.lastModified}</lastmod>\n` : ``}
+                 ${sitemap.changeFrequency ? `<changefreq>${sitemap.changeFrequency}</changefreq>\n` : ``}
+                 ${sitemap.priority ? `<priority>${sitemap.priority}</priority>\n` : ``}
                 </url>\n`;
     }
 }

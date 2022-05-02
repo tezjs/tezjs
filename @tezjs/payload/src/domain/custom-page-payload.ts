@@ -18,6 +18,7 @@ export class CustomPagePayload extends BaseGenerator{
         const pages = commonContainer.tezConfig.pages;
         for(let page of pages){
             let url = getUrl(page.url);
+            console.log(url)
             const directoryPath = path.join(this.pathResolver.payloadPath, url);
             const isNotExits = createPath(directoryPath);
             if(isNotExits) {
