@@ -6,9 +6,10 @@ import { PathResolver } from "./path-resolver";
 import { Sitemap } from "./sitemap";
 import { RobotTxtGenerator } from "./robot-txt-generator";
 import { RedirectRoute } from "./redirect-routes";
-import { StrapiModuleConfig } from "@tezjs/types";
+import { TezConfig } from "@tezjs/types";
 import { defaultContainer } from "../const/core.const";
 import { commonContainer,CommonPathResolver } from '@tezjs/common'
+import { CustomPagePayload } from "./custom-page-payload";
 export class PageCollection {
     private requestService: RequestService;
     private internationalizationService: InternationalizationService;
@@ -19,21 +20,34 @@ export class PageCollection {
     private sitemap:Sitemap;
     private robotsGenerator:RobotTxtGenerator;
     private redirectRoute:RedirectRoute;
-    constructor(tezConfig:StrapiModuleConfig) {
-        commonContainer.setupConfig();
+    private customPagePayload:CustomPagePayload;
+    constructor(tezConfig:TezConfig) {
+        commonContainer.setupConfig(tezConfig);
         if(commonContainer.tezConfig.strapi)
             defaultContainer.setOption(commonContainer.tezConfig.strapi)
         this.requestService = new RequestService();
         this.internationalizationService = new InternationalizationService(this.requestService);
         this.pageRoute = new PageRoute(this.requestService)
-        this.payloadGenerator = new PayloadGenerator(this.requestService);
-        this.pathResolver = new PathResolver();
         this.sitemap = new Sitemap();
         this.robotsGenerator = new RobotTxtGenerator();
         this.redirectRoute = new RedirectRoute();
+        this.payloadGenerator = new PayloadGenerator(this.requestService,this.redirectRoute,this.sitemap);
+        this.pathResolver = new PathResolver();
+        
         this.commonPathResolver = new CommonPathResolver();
+        this.customPagePayload = new CustomPagePayload(this.redirectRoute,this.sitemap);
     }
-    async generate(routePath?:string) {
+    async generate(routePath?:string){
+        if(commonContainer.tezConfig.strapi)
+            await this.generateStrapiPayload(routePath)
+        if(commonContainer.tezConfig.pages)
+            await this.customPagePayload.generate(routePath)
+
+            this.sitemap.save()
+            await this.robotsGenerator.generate();
+            this.redirectRoute.save();
+    }
+    async generateStrapiPayload(routePath?:string) {
         await this.requestService.login()
         const locales = await this.internationalizationService.getLocales();
         for (let j = 0; j < locales.length; j++) {
@@ -44,18 +58,16 @@ export class PageCollection {
                     if(routePath === route.path)
                         this.deletePayloadItem(`${this.pathResolver.payloadPath}${routePath}`)
                     const page = await this.payloadGenerator.generate(route, pageRouteResponse.dynamicPageRoute)
-                    this.sitemap.add(page);
-                    this.redirectRoute.add(page);
+                    
                 }
                 
             }
         }
-        this.sitemap.save()
-        await this.robotsGenerator.generate();
-        this.redirectRoute.save();
+
     }
 
     deletePayloadItem(routePath:string){
         this.commonPathResolver.removeDirSync(routePath);
     }
+
 }

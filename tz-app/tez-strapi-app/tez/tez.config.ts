@@ -33,7 +33,30 @@ export const TEZ_CONFIG:TezConfig = {
         optimization: {
             sourcePagination:true,
         }
-    } 
+    },
+    pages:[
+      {
+        redirectRoutes:[{
+          from:"/abc",
+          statusCode:200
+        }],
+        sitemap:{
+          priority:1
+        },
+          url:'/custom-page',
+          masterPage:'',
+          seo:{"title":"My Personal Strapi Blog","canonical":"http://localhost:3000/","metaTag":{"name":{"description":"My Personal Strapi Blog"}}},
+          components:[
+            {
+              name:'header',
+            },
+            {
+              name:'canidate-home',
+              data:{'t':"abc"}
+            }
+        ]
+      }
+  ]
 } 
 
                    

@@ -32,8 +32,8 @@ export class Sitemap{
     xmlElement(sitemap: { [key: string]: any }) {
         return `<url>\n
                  <loc>${sitemap.loc}</loc>\n
-                 <lastmod>${sitemap.lastmod}</lastmod>\n
-                 <changefreq>${sitemap.changefreq}</changefreq>\n
+                 <lastmod>${sitemap.lastModified}</lastmod>\n
+                 <changefreq>${sitemap.changeFrequency}</changefreq>\n
                  <priority>${sitemap.priority}</priority>\n
                 </url>\n`;
     }

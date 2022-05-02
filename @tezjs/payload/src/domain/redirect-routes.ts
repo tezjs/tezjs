@@ -10,6 +10,7 @@ export class RedirectRoute{
     }
 
     add(page:any){
+        
         if(page && page.redirectRoutes&& Array.isArray(page.redirectRoutes))
             page.redirectRoutes.forEach(item=>this.routes.push({...item,...{to:page.url}}))
     }

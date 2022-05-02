@@ -42,4 +42,9 @@ export class RequestService {
         else
             return {};
     }   
+
+    async payloadRequest(uri:string){
+        const { data } = await axios.get(uri, this.headers);
+        return this.camalizeData(data.data);
+    }
 }

@@ -15,17 +15,17 @@ import { RequestService } from "./request.server";
 import { PageSlot } from "./page-slot";
 import { replaceSpace } from "../utils/replace-space";
 import { writeImage } from "../utils/write-image";
+import { BaseGenerator } from "./base-generator";
+import { RedirectRoute } from "./redirect-routes";
+import { Sitemap } from "./sitemap";
 
-export class PayloadGenerator {
+export class PayloadGenerator extends BaseGenerator{
     private pageCollectionConfig: PageCollectionConfig;
-    private pathResolver: PathResolver;
-    private payload:PayloadConfig;
     private masterPageCollection:MasterPageCollection;
-    constructor(private requestService: RequestService) {
-        const { pageCollectionConfig, payloadRootPath,payload } = defaultContainer.moduleOptions;
+    constructor(private requestService: RequestService,redirectRoute:RedirectRoute,sitemap:Sitemap) {
+        super(redirectRoute,sitemap);
+        const { pageCollectionConfig, payloadRootPath } = defaultContainer.moduleOptions;
         this.pageCollectionConfig = pageCollectionConfig;
-        this.pathResolver = new PathResolver();
-        this.payload = payload;
         this.masterPageCollection = new MasterPageCollection();
     }
 
@@ -56,40 +56,8 @@ export class PayloadGenerator {
             await this.masterPageCollection.setMasterPageInfo(this.pageCollectionConfig.name,filterQuery,item);
             const page = await parseStrapiData(item, baseUrl, dynamicData,referenceData);
             
-            let slots = {};
             if (page) {
-                let componentIds = [];
-                let preComponentCount = page.sections.length;
-                let pageSlot = new PageSlot();
-                for (let j = 0; j < page.components.length; j++) {
-                    const component = page.components[j];
-                    let componentId = `${j}-${component.name}`
-                    componentIds.push(componentId);
-                    let slot = pageSlot.getSlot(component.slotName);
-                    const filePath = path.join(
-                        directoryPath,
-                        componentId + ".json"
-                    );
-                    slot.push((this.payload.page.maxPreLoadComponent - preComponentCount) > j  ? [component.data,componentId] : [componentId])
-                    if((this.payload.page.maxPreLoadComponent - preComponentCount) < j)
-                    await writeFileSync(filePath, component.data);
-                    
-                }
-                let filePath = path.join(
-                    directoryPath,
-                    "tags.json"
-                );
-                await writeFileSync(filePath, cleanObject(page.tags));
-                const fileName = baseUrl.split('/');
-
-                filePath = path.join(
-                    directoryPath,
-                    fileName[fileName.length - 1] + ".json"
-                );
-                let pageJson = {slots:pageSlot.slots};
-                if(page.masterPageName)
-                    pageJson["masterPage"] = replaceSpace(page.masterPageName)
-                await writeFileSync(filePath, pageJson);
+               await this.generatePage(page)
             }
             await this.writeImages();
             return page;

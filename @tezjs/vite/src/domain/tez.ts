@@ -35,7 +35,7 @@ export function tez(tezConfig:TezConfig): Plugin {
         async buildStart() {
 			await overrideEnvVariables(BLANK,ENVIRONMENTS);  
 			commonContainer.setupConfig(tezConfig);
-			 const pageCollection = new PageCollection(commonContainer.tezConfig.strapi);
+			 const pageCollection = new PageCollection(tezConfig);
       		 await pageCollection.generate();
           }
 	}

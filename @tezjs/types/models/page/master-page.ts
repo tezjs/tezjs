@@ -1,5 +1,5 @@
 import { TezSeo } from "../seo/seo";
-import { Component } from "./components";
+import { Component } from "./component";
 
     export interface MasterPage{
         name:string

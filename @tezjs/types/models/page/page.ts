@@ -1,13 +1,13 @@
 import { TezSeo } from "../seo/seo";
 import { Sitemap } from "../seo/sitemap";
-import { Component } from "./components";
+import { Component } from "./component";
 import { PageRedirect } from "./page-redirect";
 
 export interface Page{
     url:string;
-    masterPage?:string;
+    masterPageName?:string;
     seo?:TezSeo;
     components:Component[];
-    reditects?:PageRedirect[];
+    redirectRoutes?:PageRedirect[];
     sitemap?:Sitemap;
 }
