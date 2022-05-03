@@ -1,0 +1,14 @@
+{
+  "name": "create-tez",
+  "version": "0.0.1",
+  "description": "Create Tez Application Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ajayojha",
+  "license": "MIT",
+  "dependencies": {
+    "kolorist": "^1.5.1"
+  }
+}

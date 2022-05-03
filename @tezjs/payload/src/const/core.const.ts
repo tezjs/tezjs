@@ -23,7 +23,7 @@ export const defaultContainer:
         ignoreColumns: Array<string> = ["createdAt","publishedAt","id","published_at", "created_at", "ParentPage", "__component", "provider"]
         moduleOptions: StrapiModuleConfig = {
             version:4,
-            payloadRootPath: "static",
+            payloadRootPath: "public",
             isDev: true,
             
             apiUri: DEFAULT_STRAPI_URL,

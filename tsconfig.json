@@ -35,7 +35,7 @@
       "./@tezjs/**/package.json"
 
     ],
-    "exclude": ["dist","tz-app","src","@tezjs/payload/runtime/**","./**/node_modules/**","./node_modules/**"]
+    "exclude": ["dist","tz-app","src","@tezjs/payload/runtime/**","@tezjs/create-tez/**","./**/node_modules/**","./**/dist/**","./**/__tests__/**","./node_modules/**"]
    
   }
   

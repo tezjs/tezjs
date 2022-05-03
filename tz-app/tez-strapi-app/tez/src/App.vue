@@ -6,11 +6,12 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
-  <TezLazy sourcePath="filter-collections/cdf6b4d2679ec5dc957c418865fe7731" v-slot="item" >
+  <!-- <img alt="Vue logo" src="./assets/logo.png" />
+  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
+  <!-- <TezLazy sourcePath="filter-collections/cdf6b4d2679ec5dc957c418865fe7731" v-slot="item" >
    <h1> {{item}}</h1>
-  </TezLazy>
+  </TezLazy> -->
+    <tez-slot></tez-slot>
   <router-link to="/custom">Custom</router-link><br/>
   <router-link to="/test">Test</router-link><br/>
   <router-link to="/articles/a-bug-is-becoming-a-meme-on-the-internet">a-bug-is-becoming-a-meme-on-the-internet</router-link><br/>
