@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@tezjs/common": "0.0.2",
-    "@tezjs/payload": "0.0.2",
+    "@tezjs/payload": "0.0.3",
     "express": "^4.17.3",
     "rimraf": "^3.0.2",
     "tslib": "^2.3.1",
