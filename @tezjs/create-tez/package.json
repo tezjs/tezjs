@@ -1,6 +1,6 @@
 {
   "name": "create-tez",
-  "version": "0.0.1",
+  "version": "0.0.7",
   "description": "Create Tez Application Project",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,16 @@
   },
   "author": "ajayojha",
   "license": "MIT",
+  "bin": {
+    "create-tez": "index.js",
+    "tez-app": "index.js"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "dependencies": {
-    "kolorist": "^1.5.1"
+    "kolorist": "^1.5.1",
+    "minimist": "^1.2.6",
+    "prompts": "^2.4.2"
   }
 }

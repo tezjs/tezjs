@@ -6,35 +6,31 @@ defineProps<{ data: Array<string> }>()
 </script>
 
 <template>
-  <div
-    class="mainBody"
-  >
-    
+  <div class="mainBody">
     <div class="introSection">
-      <a
-        class="logo"
-        href="#"
-        target="_blank"
-      >
-        <img alt="Tez logo" src="../assets/logo.png" />
-      </a>
-      <div class="card ">
-        <h2>
-          Welcome to your Tez Application
-        </h2>
-        <p>
-          We recommend you take a look at the
-          , whether you are new or have previous experience with the
-          framework.
-        </p>
-        <p class="description">
-          To get started, remove. Have fun!
-        </p>
+      <div class="card items-center">
+        <div class="col-40">
+          <a class="logo" href="#" target="_blank">
+            <img alt="Tez logo" src="../assets/logo.png" />
+          </a>
+        </div>
+        <div class="col-60">
+          <h2>
+            {{data.title}}
+          </h2>
+          <p>
+            {{data.info}}
+          </p>
+          <ul v-for="feature of data.features">
+            <li>{{feature}}</li>
+          </ul>
+          <p class="description">{{data.getStarted}} </p>
+        </div>
       </div>
       <div class="gitHub">
         <a href="#" target="_blank"
           ><svg
-            class=" githubIcon"
+            class="githubIcon"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             aria-hidden="true"
@@ -74,61 +70,106 @@ defineProps<{ data: Array<string> }>()
  
 
 <style scoped>
-.mainBody{
-    position: relative;
-    display: flex;
-    justify-content: center;
+.col-40 {
+  width: 40%;
 }
-.introSection{
-    max-width: 56rem;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 2rem;
-    padding-right: 2rem;
+.col-60 {
+  width: 60%;
 }
-.logo{
-    display: flex;
-    justify-content: center;
-    padding-top: 2rem;
-
+.items-center {
+  align-items: center;
 }
-.card{
-    margin-top: 2rem;
-    background-color: #ffffff;
-    overflow: hidden;
-    border-radius: 0.5rem;
-    --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-    padding: 1.5rem;
-    text-align: left;
+.mainBody {
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
-h2{
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 600;
-    line-height: 1.75rem;
+.introSection {
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
-p.description{
-    border-top: 2px dashed #6d6c6c;
-    margin-top: 2rem;
-    padding-top: 2rem;
-
+.logo {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  align-items: center;
 }
-.gitHub{
-    display: flex;
-    justify-content: center;
-    padding-top: 1rem;
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  background-color: #ffffff;
+  overflow: hidden;
+  border-radius: 1.875rem;
+  -webkit-box-shadow: 1.5px 2.598px 6.5px rgba(0,0,0,0.23);
+  -moz-box-shadow: 1.5px 2.598px 6.5px rgba(0,0,0,0.23);
+  box-shadow: 1.5px 2.598px 6.5px rgba(0,0,0,0.23);
+  padding: 1.5rem;
+  text-align: left;
 }
-.githubIcon, .twitterIcon{
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    height: 2rem;
-    width: 2rem;
-    color: #b6b6b6;
+span.bg-graident{
+  background: linear-gradient(to right bottom, #3aabdf, #00b5d5, #00bcb8, #00be8e, #63bd5e);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
-.githubIcon:hover, .twitterIcon:hover{
-    color: #6d6c6c;
+h2 {
+  font-size: 1.875rem;
+  line-height: 2rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+}
+p{
+  font-size: 1.375rem;
+  line-height: 30px;
+}
+p.description {
+  font-size: 1.375rem;
+  line-height: 3.125rem;
+  border-top: 2px solid #6d6c6c;
+  margin-top: 2rem;
+  padding-top: 2rem;
+}
+ul {
+  font-size: 1.375rem;
+  line-height: 1.875rem;
+  margin-top: 1rem;
+  padding-left: 14px;
+}
+ul li {
+  margin-top: 1rem;
+  list-style: none;
+}
+ul li::before {
+  position: relative;
+  top: -2px;
+  left:-5px;
+  content: "";
+  background: linear-gradient(to right bottom, #3aabdf, #00b5d5, #00bcb8, #00be8e, #63bd5e);
+  font-weight: bold;
+  display: inline-block; 
+  width: 8px;
+  height: 8px;
+  border-radius:100%;
+  margin-right:0.3125rem;
+}
+.gitHub {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+}
+.githubIcon,
+.twitterIcon {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  height: 2rem;
+  width: 2rem;
+  color: #b6b6b6;
+}
+.githubIcon:hover,
+.twitterIcon:hover {
+  color: #6d6c6c;
 }
 </style>
-

@@ -9,11 +9,6 @@
   },
   "dependencies": {
     "@tezjs/vue": "0.0.1",
-    "express": "^4.18.1",
-    "html-minifier": "^4.0.0",
-    "markdown-it": "^13.0.0",
-    "qs": "^6.10.3",
-    "sharp": "^0.30.4",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14",
     "vuex": "^4.0.2"
@@ -24,6 +19,6 @@
     "vite": "^2.9.7",
     "vue-tsc": "^0.34.7",
     "@tezjs/vite": "0.0.3",
-    "@tezjs/types":"0.0.1"
+    "@tezjs/types":"0.0.2"
   }
 }
