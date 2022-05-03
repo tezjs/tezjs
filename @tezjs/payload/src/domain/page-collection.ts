@@ -35,17 +35,17 @@ export class PageCollection {
         this.pathResolver = new PathResolver();
         
         this.commonPathResolver = new CommonPathResolver();
-        this.customPagePayload = new CustomPagePayload(this.redirectRoute,this.sitemap);
+        this.customPagePayload = new CustomPagePayload(this.redirectRoute,this.sitemap,this.pageRoute);
     }
     async generate(routePath?:string){
         if(commonContainer.tezConfig.strapi)
             await this.generateStrapiPayload(routePath)
         if(commonContainer.tezConfig.pages)
             await this.customPagePayload.generate(routePath)
-
-            this.sitemap.save()
-            await this.robotsGenerator.generate();
-            this.redirectRoute.save();
+        this.pageRoute.save();
+        this.sitemap.save()
+        await this.robotsGenerator.generate();
+        this.redirectRoute.save();
     }
     async generateStrapiPayload(routePath?:string) {
         await this.requestService.login()

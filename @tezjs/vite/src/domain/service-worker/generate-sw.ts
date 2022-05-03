@@ -18,6 +18,7 @@ export async function generateSW(){
             var registerSW = readFileSync(REGISTER_SERVICE_WORKER_JS_PATH,true);
             writeFileSync('./dist/registerSW.js',minifyJs(registerSW as string),true);
             writeFileSync('./dist/sw.js',minifyJs(`${code}${swScript}` as string),true);
-            writeFileSync('./dist/manifest.json',commonContainer.tezConfig.pwa);
+            if(commonContainer.tezConfig.pwa)
+                  writeFileSync('./dist/manifest.json',commonContainer.tezConfig.pwa);
       }
 }

@@ -7,10 +7,11 @@ import { RequestService } from "./request.server";
 import { BaseGenerator } from "./base-generator";
 import { RedirectRoute } from "./redirect-routes";
 import {Sitemap} from './sitemap'
+import { PageRoute } from "./page-route";
 
 export class CustomPagePayload extends BaseGenerator{
     private requestService:RequestService;
-    constructor(redirectRoute:RedirectRoute,sitemap:Sitemap){
+    constructor(redirectRoute:RedirectRoute,sitemap:Sitemap,private pageRoute:PageRoute){
         super(redirectRoute,sitemap)
         this.requestService = new RequestService();
     }
@@ -19,6 +20,7 @@ export class CustomPagePayload extends BaseGenerator{
         for(let page of pages){
             let url = getUrl(page.url);
             console.log(url)
+            this.pageRoute.addRoute({path:url});
             const directoryPath = path.join(this.pathResolver.payloadPath, url);
             const isNotExits = createPath(directoryPath);
             if(isNotExits) {
@@ -29,6 +31,7 @@ export class CustomPagePayload extends BaseGenerator{
             }
            await this.generatePage(page)
         }
+        this.pageRoute.save();
     }
 
     async getPayload(component:Component,url:string){

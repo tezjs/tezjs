@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/vite",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "repository": {
@@ -19,7 +19,8 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "@tezjs/payload": "0.0.1",
+    "@tezjs/common": "0.0.2",
+    "@tezjs/payload": "0.0.2",
     "express": "^4.17.3",
     "rimraf": "^3.0.2",
     "tslib": "^2.3.1",

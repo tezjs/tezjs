@@ -37,7 +37,7 @@ export const commonContainer:
         getAppRoutes():any[]{
             var commonPath = new CommonPathResolver();
             let routes:any = readFileSync(commonPath.routesJsonPath)
-            return routes;
+            return routes || [];
         }
 
         setExpress(){

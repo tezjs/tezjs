@@ -4,6 +4,7 @@ import { getFilterQueryParams } from "../utils/get-filter-query-params";
 import { writeFileSync } from "../utils/write-file";
 import { PathResolver } from "./path-resolver";
 import { RequestService } from "./request.server";
+import { commonContainer } from "@tezjs/common";
 
 export class RobotTxtGenerator{
     private request:RequestService;
@@ -20,7 +21,15 @@ export class RobotTxtGenerator{
             const result = await this.request.get(`/robots?${getFilterQueryParams({Environment:this.robotsConfig.environmentName})}`);
             const item = result &&  result[0] ? result[0] : undefined;
             if(item)
-                writeFileSync(this.pathResolver.robotsTxtPath,item.rules,true);
+                this.save(item.rules)
+        } else if(!commonContainer.tezConfig.robots || commonContainer.tezConfig.robots[commonContainer.tezConfig.envName]){
+            let text =commonContainer.tezConfig.robots && commonContainer.tezConfig.robots[commonContainer.tezConfig.envName]  ? commonContainer.tezConfig.robots[commonContainer.tezConfig.envName] : 
+            `User-agent: *\nDisallow: /`
+            this.save(text);
         }
+    }
+
+    save(text:string){
+        writeFileSync(this.pathResolver.robotsTxtPath,text,true);
     }
 }

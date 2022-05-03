@@ -11,4 +11,5 @@ export interface TezConfig {
     image?:ImageTransform;
     pages?:Page[];
     robots?:{[key:string]:string}
+    envName?:string;
 }

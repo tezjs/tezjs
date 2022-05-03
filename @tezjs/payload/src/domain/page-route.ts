@@ -11,14 +11,17 @@ import { readProp } from "../utils/read-prop";
 import { writeFileSync } from "../utils/write-file";
 import { PathResolver } from "./path-resolver";
 import { RequestService } from "./request.server";
+import { commonContainer } from "@tezjs/common";
 
 export class PageRoute {
     private pageCollectionConfig: PageCollectionConfig;
     private pathResolver: PathResolver;
+    private routes:Array<{name:string,path:string}> = new Array<{name:string,path:string}>();
     constructor(private requestService: RequestService) {
         const { pageCollectionConfig } = defaultContainer.moduleOptions;
         this.pageCollectionConfig = pageCollectionConfig;
         this.pathResolver = new PathResolver();
+        this.routes = commonContainer.getAppRoutes();
     }
 
     async getRoutes(locale:string): Promise<PageRouteResponse> {
@@ -27,7 +30,8 @@ export class PageRoute {
             uri = `/${uri}&${getQueryParams(['locale','limit','populate'],locale)}`;
         
         const dataItems = await this.requestService.get(uri);
-        const routes = [];
+        let routes = [];
+        this.routes  = routes = [];
         const dynamicPageRoute = {};
         for (let i = 0; i < dataItems.length; i++) {
             const item = dataItems[i];
@@ -57,22 +61,33 @@ export class PageRoute {
                         };
                         const path = getUrl(url);
                         if (routes.filter(t => t.path === path).length === 0) {
-                            routes.push({
-                                name: title.replace(REMOVE_SPECIAL_CHARACTERS, UNDERSCORE),
+                            this.addRoute({
+                                name: title,
                                 path: path
                             })
                         }
                     }
                 }
             } else {
-                routes.push({
-                    name: readProp(item,TITLE_PROPS).replace(REMOVE_SPECIAL_CHARACTERS, UNDERSCORE),
+                this.addRoute({
+                    name: readProp(item,TITLE_PROPS),
                     path: readProp(item, URL_PROPS)
                 })
             }
         }
         
-        await writeFileSync(this.pathResolver.routesJsonPath, routes)
         return { routes: routes, dynamicPageRoute: dynamicPageRoute };
+    }
+
+    addRoute(routeItem:{name?:string,path:string}){
+        if(this.routes.filter(t=>t.path === routeItem.path).length === 0)
+        this.routes.push({
+            name: (routeItem.name || routeItem.path).replace(REMOVE_SPECIAL_CHARACTERS, UNDERSCORE),
+            path: routeItem.path
+        })
+    }
+
+    async save(){
+        await writeFileSync(this.pathResolver.routesJsonPath, this.routes)
     }
 }

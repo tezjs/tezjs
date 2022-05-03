@@ -23,7 +23,7 @@
     "typescript": "^4.5.4",
     "vite": "^2.9.7",
     "vue-tsc": "^0.34.7",
-    "@tezjs/vite": "0.0.1",
+    "@tezjs/vite": "0.0.3",
     "@tezjs/types":"0.0.1"
   }
 }
