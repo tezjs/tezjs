@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-defineProps<{ data: Array<string> }>()
+defineProps<{ data: any }>()
 
 </script>
 
