@@ -1,7 +1,8 @@
 <p align="center">
-  
+  <a href="#">
     <img width="180" src="https://user-images.githubusercontent.com/20392302/166857418-b5f88b27-bc0a-4afa-bda1-4f4006b000e4.png" alt="Tez logo">
-</p>
+  </a>
+    </p>
 <br/>
 <br/>
 
