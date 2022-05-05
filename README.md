@@ -1,7 +1,6 @@
 <p align="center">
-  <a href="https://vitejs.dev" target="_blank" rel="noopener noreferrer">
+  
     <img width="180" src="https://user-images.githubusercontent.com/20392302/166857418-b5f88b27-bc0a-4afa-bda1-4f4006b000e4.png" alt="Tez logo">
-  </a>
 </p>
 <br/>
 <br/>
