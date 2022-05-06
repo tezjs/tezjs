@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as  axios from 'axios';
 import * as sharp from 'sharp';
 import {CommonPathResolver, commonContainer } from "@tezjs/common";
+import { defaultContainer } from '../const/core.const';
 const pathResolver = new CommonPathResolver();
 export async function writeImage(imagePath:string){
     return new Promise(async (resolve, reject) => {
@@ -45,7 +46,7 @@ export async function writeImage(imagePath:string){
 async function getImage(imageUrl:string){
     return await axios({
         method: "get",
-        url: `${commonContainer.tezConfig.strapi.apiUri}${imageUrl}`,
+        url: `${defaultContainer.moduleOptions.apiUri}${imageUrl}`,
         responseType: "stream",
     });
 }
