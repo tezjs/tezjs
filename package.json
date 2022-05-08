@@ -10,6 +10,8 @@
   "scripts": {
     "lint": "eslint",
     "test": "jest",
+    "tez": "node ./packages/cli/bin/tez.mjs",
+    "dev": "yarn run tez --mode=dev playground",
     "stub": "lerna run prepack -- --stub",
     "build": "lerna run prepack --stream --no-prefix",
     "develop:package": "tsc --watch",
@@ -56,6 +58,7 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^27.0.0",
     "tslib": "^2.3.1",
-    "unbuild": "^0.7.4"
+    "unbuild": "^0.7.4",
+    "vue-tsc": "^0.34.11"
   }
 }
