@@ -104,7 +104,7 @@ export default defineComponent({
             }
         }
         if (!this.lazyRef)
-            this.lazyRef = h('div', { ref: 'divLazy' }, "");
+            this.lazyRef = h('div', { ref: 'divLazy',style:{'height':'2px'} }, "");
         vNodes.push(this.lazyRef)
         return h('div', vNodes)
     }

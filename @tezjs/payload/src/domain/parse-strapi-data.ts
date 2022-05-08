@@ -59,7 +59,7 @@ export default async function parseStrapiData(pageContent, url, dynamicData,refe
                 if ((moduleOptions.optimization.sourcePagination && item[FIELD_DATA_TYPE_RESULT] !== DATA_CONTROL_GET_RECORD) 
                     ||
                     sourcePaginationByUrl(url, getComponentName(componentName),item)) 
-                    item.dynamicSourcePath = await collectionIndexer.paginate(result, collectionType.toLowerCase(), query.queryString);
+                    item.dynamicSourcePath = await collectionIndexer.paginate(result, collectionType.toLowerCase(), query.queryString,item.pagination);
                 else
                     item.dynamicResult = result;
             }

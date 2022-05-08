@@ -12,14 +12,14 @@ export class CollectionIndexer {
         this.pathResolver = new PathResolver();
     }
 
-    async paginate(source: Array<{ [key: string]: any }>, collectionName: string, filterString: string) {
+    async paginate(source: Array<{ [key: string]: any }>, collectionName: string, filterString: string,pagination:boolean) {
         let index = 1;
         const filterKey = `${collectionName}-${filterString}`.toLowerCase();;
         let folderKey: string = getChecksum(filterKey);
         if ((filterString && !defaultContainer.filterCollectionState[filterKey]) || (!filterString && !defaultContainer.collectionState[collectionName])) {
-            let totalCount = source.length;
+            let totalCount =  source.length;
             do {
-                const pageSize = source.length > this.pagination.pageSize ? this.pagination.pageSize : source.length;
+                const pageSize = pagination ? source.length : source.length > this.pagination.pageSize ? this.pagination.pageSize : source.length;
                 const sourceItems = source.splice(0, pageSize);
                 let filePath = `${this.pathResolver.getCollectionPayloadPath(collectionName)}/${index}.json`;
                 if (filterString)

@@ -46,7 +46,7 @@ export const defaultContainer:
                 sourcePagination:false
             },
             pagination: {
-                pageSize: 2
+                pageSize: 10
             },
             payload:{
                 page:{maxPreLoadComponent:3 }

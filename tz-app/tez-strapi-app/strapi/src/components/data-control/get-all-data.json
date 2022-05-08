@@ -22,6 +22,10 @@
     },
     "SlotName": {
       "type": "string"
+    },
+    "Pagination": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

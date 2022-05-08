@@ -42,11 +42,12 @@ export default defineComponent({
             }
         },
         async loadJson(){
-            if(this.sourcePath && (!this.lastItem || this.lastItem.totalCount > this.index)){
+            if(this.sourcePath && (!this.lastItem || (this.lastItem.totalCount > (this.index * this.lastItem.items.length)))){
                     let source  = await getJsonPayload(String(this.index),`/${this.sourcePath}`);
                     source.items.forEach((t:any)=>{
                         this.items.push(t)
                     })
+                    this.lastItem = source;
             }else
                 this.observer.unsubscribe(this.$refs.divLazy)
         },
