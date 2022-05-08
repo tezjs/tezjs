@@ -57,7 +57,7 @@ export class PageCollection {
                 if((routePath === route.path) || !routePath){
                     if(routePath === route.path)
                         this.deletePayloadItem(`${this.pathResolver.payloadPath}${routePath}`)
-                    const page = await this.payloadGenerator.generate(route, pageRouteResponse.dynamicPageRoute)
+                   await this.payloadGenerator.generate(route, pageRouteResponse.dynamicPageRoute)
                     
                 }
                 

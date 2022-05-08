@@ -9,7 +9,7 @@
     "dist"
   ],
   "scripts": {
-
+    "prepack": "unbuild"
   },
   "homepage": "https://github.com/tezjs/tez.js#readme",
   "bugs": {

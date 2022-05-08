@@ -1,4 +1,4 @@
-import { createWebHistory,createMemoryHistory, createRouter, RouterOptions } from "vue-router";
+import { createWebHistory,createMemoryHistory, createRouter } from "vue-router";
 import { TezRouterOptions } from "../models/tez-router-options";
 import { getRoutes } from "./get-routes";
 import { beforeEach } from "./route-guards/before-each";
