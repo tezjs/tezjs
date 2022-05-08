@@ -2,6 +2,15 @@
   "name": "@tezjs/payload",
   "version": "0.0.3",
   "description": "",
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "unbuild"
+  },
   "homepage": "https://github.com/tezjs/tez.js#readme",
   "bugs": {
     "url": "https://github.com/tezjs/tez.js/issues"
@@ -13,16 +22,16 @@
   },
   "license": "MIT",
   "author": "ajayojha",
-  "main": "dist/index.js",
   "dependencies": {
-    "rimraf": "^3.0.2",
-    "tslib": "^2.3.1",
     "axios": "^0.21.1",
     "fs": "0.0.1-security",
     "markdown-it": "^12.0.6",
     "path": "^0.12.7",
     "qs": "^6.10.3",
-    "sharp":"^0.30.4"
+    "rimraf": "^3.0.2",
+    "sharp": "^0.30.4",
+    "tslib": "^2.3.1",
+    "unbuild": "^0.7.4"
   },
   "devDependencies": {
     "ts-node": "^10.5.0",

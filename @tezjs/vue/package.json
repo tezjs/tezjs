@@ -2,7 +2,15 @@
   "name": "@tezjs/vue",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "unbuild"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tezjs/tez.js.git"
@@ -26,6 +34,7 @@
     "rimraf": "^3.0.2",
     "rollup-plugin-typescript2": "^0.31.2",
     "tslib": "^2.3.1",
+    "unbuild": "^0.7.4",
     "vue": "^3.2.25",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2"
