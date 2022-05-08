@@ -4,7 +4,7 @@
   "useWorkspaces": true,
   "conventionalCommits": true,
   "packages": [
-    "@tezjs/*"
-  ],
-  "version": "0.0.0"
+    "@tezjs/*",
+    "playground"
+  ]
 }

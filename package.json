@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  
+  "workspaces": [
+    "@tezjs/*",
+    "playground"
+  ],
   "scripts": {
     "lint": "eslint",
     "test": "jest",
+    "stub": "lerna run prepack -- --stub",
     "develop:package": "tsc --watch",
     "develop:strapi": "yarn --cwd ./tz-app/tez-strapi-app/strapi develop",
     "develop:tez": "wait-on http://localhost:1337/admin && yarn --cwd ./tz-app/tez-strapi-app/tez dev",
@@ -23,10 +27,14 @@
     "url": "https://github.com/tezjs/tez.js/issues"
   },
   "homepage": "https://github.com/tezjs/tez.js#readme",
-  "workspaces": [
-    "packages/*",
-    "src/*"
-  ],
+  "resolutions": {
+    "@tezjs/common": "link:./@tezjs/common",
+    "@tezjs/payload": "link:./@tezjs/payload",
+    "@tezjs/types": "link:./@tezjs/types",
+    "@tezjs/vite": "link:./@tezjs/vite",
+    "@tezjs/vue": "link:./@tezjs/vue",
+    "tez": "link:./@tezjs/cli"
+  },
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.22.0",

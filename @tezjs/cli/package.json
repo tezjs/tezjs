@@ -1,0 +1,32 @@
+{
+  "name": "@tezjs/cli",
+  "version": "0.0.10",
+  "description": "Create Tez Application Project",
+  "main": "index.js",
+  "author": "ajayojha",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    "./cli": "./bin/tez.mjs"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "unbuild"
+  },
+  "bin": {
+    "tez":"./bin/tez.mjs"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "dependencies": {
+    "kolorist": "^1.5.1",
+    "minimist": "^1.2.6",
+    "mri": "^1.2.0",
+    "prompts": "^2.4.2",
+    "unbuild": "^0.7.4"
+  }
+}
