@@ -3,7 +3,6 @@ import { CommonPathResolver } from "../domain/common-path.resolver";
 import { readFileSync } from "../functions/read-file-sync";
 import { resolvePath } from "../functions/resolve-path";
 import { TezConfig } from "@tezjs/types"
-import { tzRequire } from "../functions/tz-require";
 
 export const commonContainer:
     {

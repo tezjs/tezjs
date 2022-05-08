@@ -5,9 +5,11 @@ export default defineBuildConfig({
   entries: [
     './index'
   ],
+  dependencies:[],
 externals:[
   "axios",
   "markdown-it",
-  "sharp"
+  "sharp",
+  "@tezjs/common"
 ]
 })

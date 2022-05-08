@@ -1,26 +1,17 @@
 {
     "compilerOptions": {
-      "rootDir": ".",
+      "esModuleInterop": false,
       "allowSyntheticDefaultImports": true,
-      "resolveJsonModule": true,
-       "noUnusedLocals": false,
-       "noImplicitAny": false,
-       "noImplicitReturns": false,
-       "noImplicitThis": false,
-       "noImplicitUseStrict": false,
-      "removeComments": true,
-      "declaration": true,
-      "experimentalDecorators": true,
       "skipLibCheck": true,
-      "target": "es2019",
-      "lib": [
-        "es2019"
-      ],
-      "module": "commonjs",
-      "outDir": "./tz-app/tez-strapi-app/tez/node_modules",
-      "sourceMap": false,
-      "typeRoots": [
-        "./node_modules/@types"
+      "target": "ESNext",
+      "module": "ESNext",
+      "moduleResolution": "Node",
+      "strict": false,
+      "allowJs": true,
+      "noUnusedLocals": true,
+      "resolveJsonModule": true,
+      "types": [
+        "node"
       ],
       "paths": {
         "@tezjs/payload":["./@tezjs/payload"],
@@ -28,14 +19,10 @@
         "@tezjs/vite":["./@tezjs/vite"],
         "@tezjs/vue":["./@tezjs/vue"],
         "@tezjs/types":["./@tezjs/types"]
-      },
+      }
     },
-    "include": [
-      "./@tezjs/**/*.ts",
-      "./@tezjs/**/package.json"
 
-    ],
     "exclude": ["dist","tz-app","src","@tezjs/payload/runtime/**","@tezjs/create-tez/**","./**/node_modules/**","./**/dist/**","./**/__tests__/**","./node_modules/**"]
-   
-  }
+}
+  
   

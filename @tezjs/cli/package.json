@@ -13,9 +13,6 @@
     "bin",
     "dist"
   ],
-  "scripts": {
-    "prepack": "unbuild"
-  },
   "bin": {
     "tez":"./bin/tez.mjs"
   },

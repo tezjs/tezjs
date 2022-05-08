@@ -11,6 +11,7 @@
     "lint": "eslint",
     "test": "jest",
     "stub": "lerna run prepack -- --stub",
+    "build": "lerna run prepack --stream --no-prefix",
     "develop:package": "tsc --watch",
     "develop:strapi": "yarn --cwd ./tz-app/tez-strapi-app/strapi develop",
     "develop:tez": "wait-on http://localhost:1337/admin && yarn --cwd ./tz-app/tez-strapi-app/tez dev",
@@ -33,7 +34,8 @@
     "@tezjs/types": "link:./@tezjs/types",
     "@tezjs/vite": "link:./@tezjs/vite",
     "@tezjs/vue": "link:./@tezjs/vue",
-    "tez": "link:./@tezjs/cli"
+    "tez": "link:./@tezjs/cli",
+    "unbuild": "^0.7.4"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
@@ -53,6 +55,7 @@
     "jest": "^27.5.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.0.0",
-    "tslib": "^2.3.1"
+    "tslib": "^2.3.1",
+    "unbuild": "^0.7.4"
   }
 }
