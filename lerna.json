@@ -1,0 +1,10 @@
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "conventionalCommits": true,
+  "packages": [
+    "@tezjs/*"
+  ],
+  "version": "0.0.0"
+}
