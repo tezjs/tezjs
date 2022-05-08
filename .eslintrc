@@ -1,0 +1,48 @@
+{
+  "globals": {
+    "NodeJS": true,
+    "$fetch": true
+  },
+  "plugins": [
+    "jsdoc"
+  ],
+  "extends": [
+    "plugin:import/typescript"
+  ],
+  "rules": {
+    "unicorn/prefer-node-protocol": "error",
+    "no-console": "off",
+    "vue/multi-word-component-names": "off",
+    "vue/one-component-per-file": "off",
+    "vue/require-default-prop": "off",
+    "vue/no-multiple-template-root": "off",
+    "jsdoc/require-jsdoc": "off",
+    "jsdoc/require-param": "off",
+    "jsdoc/require-returns": "off",
+    "jsdoc/require-param-type": "off",
+    "import/no-restricted-paths": [
+      "error",
+      {
+        "zones": [
+          
+        ]
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ]
+  },
+  "settings": {
+    "jsdoc": {
+      "tagNamePreference": {
+        "warning": "warning",
+        "note": "note"
+      }
+    }
+  }
+}
