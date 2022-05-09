@@ -1,5 +1,4 @@
-import * as express from 'express'
-
+import express from 'express'
 import { RouterModel } from "../../interface/router.model";
 import { commonContainer } from "@tezjs/common"
 export class AppRouter {

@@ -7,5 +7,8 @@ export default defineBuildConfig({
   },
   entries: [
     'src/cli'
+  ],
+  externals:[
+    "@tezjs/vite"
   ]
 })

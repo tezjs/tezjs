@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
   "workspaces": [
     "packages/*",
     "playground"
@@ -31,12 +32,12 @@
   },
   "homepage": "https://github.com/tezjs/tez.js#readme",
   "resolutions": {
-    "@tezjs/common": "link:./@tezjs/common",
-    "@tezjs/payload": "link:./@tezjs/payload",
-    "@tezjs/types": "link:./@tezjs/types",
-    "@tezjs/vite": "link:./@tezjs/vite",
-    "@tezjs/vue": "link:./@tezjs/vue",
-    "tez": "link:./@tezjs/cli",
+    "@tezjs/common": "link:./packages/common",
+    "@tezjs/payload": "link:./packages/payload",
+    "@tezjs/types": "link:./packages/types",
+    "@tezjs/vite": "link:./packages/vite",
+    "@tezjs/vue": "link:./packages/vue",
+    "tez": "link:./packages/cli",
     "unbuild": "^0.7.4"
   },
   "devDependencies": {
@@ -54,6 +55,7 @@
     "wait-on": "5.2.1"
   },
   "dependencies": {
+    "express": "^4.18.1",
     "jest": "^27.5.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.0.0",
