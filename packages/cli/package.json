@@ -23,6 +23,9 @@
     "node": ">=12.0.0"
   },
   "dependencies": {
+    "c12": "^0.2.7",
+    "dotenv": "^16.0.0",
+    "dotenv-expand": "^8.0.3",
     "kolorist": "^1.5.1",
     "minimist": "^1.2.6",
     "mri": "^1.2.0",
@@ -30,6 +33,8 @@
     "unbuild": "^0.7.4"
   },
   "devDependencies": {
+    "@tezjs/vite": "^0.0.2",
+    "@tezjs/types": "^0.0.2",
     "@vitejs/plugin-vue": "^2.3.2",
     "vite": "^2.9.8"
   }

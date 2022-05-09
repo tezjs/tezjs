@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "workspaces": [
-    "@tezjs/*",
+    "packages/*",
     "playground"
   ],
   "scripts": {
     "lint": "eslint",
     "test": "jest",
     "tez": "node ./packages/cli/bin/tez.mjs",
-    "dev": "yarn run tez --mode=dev playground",
+    "dev": "yarn run tez dev playground",
     "stub": "lerna run prepack -- --stub",
     "build": "lerna run prepack --stream --no-prefix",
     "develop:package": "tsc --watch",
