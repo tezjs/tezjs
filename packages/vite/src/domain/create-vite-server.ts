@@ -4,6 +4,6 @@ import { overrideEnvVariables } from "../functions/override-env-variables"
 export async function createViteServer(rootPath:string){
   await overrideEnvVariables(BLANK,ENVIRONMENTS);  
   const { createServer: createViteServer } = require('vite')
-  let config = {...VITE_SERVER_CONFIG,...{root:rootPath}};
+  let config = rootPath ? {...VITE_SERVER_CONFIG,...{root:rootPath}} : VITE_SERVER_CONFIG;
   return await createViteServer(config);
 }

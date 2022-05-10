@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import * as  axios from 'axios';
+import axios from 'axios';
 import * as sharp from 'sharp';
 import {CommonPathResolver, commonContainer } from "@tezjs/common";
 import { defaultContainer } from '../const/core.const';

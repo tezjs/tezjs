@@ -2,8 +2,7 @@
   "name": "@tezjs/types",
   "version": "0.0.2",
   "description": "",
-  "type": "module",
-  "main": "./dist/index.mjs",
+  "main": "./dist/index.d.ts",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
