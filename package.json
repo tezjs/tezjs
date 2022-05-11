@@ -9,6 +9,7 @@
     "playground"
   ],
   "scripts": {
+    "release":"node ./scripts/release.js",
     "lint": "eslint",
     "test": "jest",
     "tez": "node ./packages/cli/bin/tez.mjs",
@@ -49,7 +50,7 @@
     "eslint-plugin-vue": "^8.7.1",
     "lerna": "^4.0.0",
     "npm-run-all": "4.1.5",
-    "ts-node": "^10.5.0",
+    "ts-node": "^10.7.0",
     "tslint": "^6.1.3",
     "typescript": "^4.5.5",
     "wait-on": "5.2.1"
@@ -58,6 +59,7 @@
     "express": "^4.18.1",
     "jest": "^27.5.1",
     "rimraf": "^3.0.2",
+    "semver": "^7.3.7",
     "ts-jest": "^27.0.0",
     "tslib": "^2.3.1",
     "unbuild": "^0.7.4",
