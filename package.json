@@ -9,7 +9,7 @@
     "playground"
   ],
   "scripts": {
-    "release":"node ./scripts/release.js",
+    "release": "node ./scripts/release.js",
     "lint": "eslint",
     "test": "jest",
     "tez": "node ./packages/cli/bin/tez.mjs",
@@ -56,6 +56,7 @@
     "wait-on": "5.2.1"
   },
   "dependencies": {
+    "execa": "^6.1.0",
     "express": "^4.18.1",
     "jest": "^27.5.1",
     "rimraf": "^3.0.2",

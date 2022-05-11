@@ -22,9 +22,10 @@ const packages = ["cli","common","create-tez","payload","types","vite","vue"];
 const rootDir = process.cwd();
 const packagesFolderName = 'packages';
 function getPackageInfo(packageName){
-    const packagePath = path.resolve(rootDir,packagesFolderName,packageName,'package.json');
+    const packageDirectory = path.resolve(rootDir,packagesFolderName,packageName);
+    const packagePath = path.resolve(packageDirectory,'package.json');
     const packageJson = require(packagePath);
-    return {packageJson,packagePath}; 
+    return {packageJson,packagePath,packageDirectory}; 
 }
 
 function getVersion(currentVersion,releaseType){
@@ -48,7 +49,7 @@ async function getReleaseType(){
       return releaseType;
 }
 
-function updateDependencies(packageState){
+async function updateDependencies(packageState){
     const packageNames = Object.keys(packageState);
     for(const packageName of packageNames){
         const {package,packagePath}  = packageState[packageName];
@@ -59,7 +60,18 @@ function updateDependencies(packageState){
                 package.devDependencies[dependencyPackageName] = packageState[dependencyPackageName].package.version
         }
         fs.writeFileSync(packagePath,JSON.stringify(package, null, 2) + '\n')
+        await publishPackage('npm',['publish', '--access', 'public'],{
+            stdio: 'pipe',
+            cwd: package.packageDirectory
+          })
     }
+}
+
+async function publishPackage( bin,
+    args,
+    opts = {}){
+        console.log(bin,args,opts)
+    
 }
 
 async function init(){
@@ -67,14 +79,13 @@ async function init(){
     
     const packageState = {};
     for(let packageName of packages){
-        const {packageJson,packagePath} = getPackageInfo(packageName);
+        const {packageJson,packagePath,packageDirectory} = getPackageInfo(packageName);
         console.log(packageJson.version)
         packageJson.version = getVersion(packageJson.version,releaseType);
         console.log(packageJson.name,packageJson.version)
-        packageState[packageJson.name] = {package:packageJson,packagePath:packagePath};
+        packageState[packageJson.name] = {package:packageJson,packagePath:packagePath,packageDirectory:packageDirectory};
     }
-    updateDependencies(packageState)
-    
+    await updateDependencies(packageState)  
 }
 
 init()
