@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/common",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "description": "",
   "module": "./dist/index.mjs",
   "main": "./dist/index.cjs",
@@ -9,7 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "prepack": "unbuild"
+    "stub": "unbuild"
   },
   "repository": {
     "type": "git",
@@ -23,10 +23,11 @@
   "homepage": "https://github.com/tezjs/tez.js#readme",
   "devDependencies": {
     "@types/node": "^17.0.21",
-    "@tezjs/types":"^0.0.2",
+    "@tezjs/types": "0.0.6",
     "ts-node": "^10.5.0",
     "tslint": "^6.1.3",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "unbuild": "latest"
   },
   "dependencies": {
     "tslib": "^2.3.1"
