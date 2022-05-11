@@ -2,7 +2,7 @@
   "name": "@tezjs/common",
   "version": "0.0.2",
   "description": "",
-  "type": "module",
+  "module": "./dist/index.mjs",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
   "files": [

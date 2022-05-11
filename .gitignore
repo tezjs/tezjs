@@ -118,3 +118,4 @@ package-lock.json
 /tz-app/tez-strapi-app/tez/public/robots.txt
 /tz-app/tez-strapi-app/tez/public/sitemap.xml
 /tz-app/tez-strapi-app/tez/public/sitemap-not-mapped.json
+yarn.lock

@@ -2,7 +2,7 @@
   "name": "@tezjs/payload",
   "version": "0.0.3",
   "description": "",
-  "type": "module",
+  "module": "./dist/index.mjs",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
   "files": [

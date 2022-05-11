@@ -2,15 +2,19 @@
   "name": "create-tez",
   "version": "0.0.10",
   "description": "Create Tez Application Project",
-  "main": "index.js",
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ajayojha",
   "license": "MIT",
   "bin": {
-    "create-tez": "index.js",
-    "tez-app": "index.js"
+    "create-tez": "./dist/index.cjs",
+    "tez-app": "./dist/index.cjs"
   },
   "engines": {
     "node": ">=12.0.0"
