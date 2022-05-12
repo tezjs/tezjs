@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "private": true,
+  "type": "module",
   "workspaces": [
     "packages/*",
     "playground"
   ],
+  "engines": {
+    "node": ">=14.6.0"
+  },
   "scripts": {
     "release": "node ./scripts/release.js",
+    "release-test": "node --experimental-specifier-resolution=node --loader ts-node/esm ./scripts/release.ts",
     "lint": "eslint",
     "test": "jest",
     "tez": "node ./packages/cli/bin/tez.mjs",
@@ -56,6 +61,7 @@
     "wait-on": "5.2.1"
   },
   "dependencies": {
+    "conventional-changelog": "^3.1.25",
     "execa": "^6.1.0",
     "express": "^4.18.1",
     "jest": "^27.5.1",
