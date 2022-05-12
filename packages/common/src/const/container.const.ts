@@ -14,7 +14,7 @@ export const commonContainer:
         tezConfig:TezConfig = {};
         expressConfig = {};
         setupConfig(tezConfig?:TezConfig){
-            if(tezConfig)
+            if(tezConfig && typeof tezConfig === "boolean")
                 this.tezConfig = tezConfig
             else
                 this.tezConfig = {

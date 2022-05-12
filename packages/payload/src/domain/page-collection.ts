@@ -6,7 +6,7 @@ import { PathResolver } from "./path-resolver";
 import { Sitemap } from "./sitemap";
 import { RobotTxtGenerator } from "./robot-txt-generator";
 import { RedirectRoute } from "./redirect-routes";
-import { TezConfig } from "@tezjs/types";
+import { TezConfig,StrapiModuleConfig } from "@tezjs/types";
 import { defaultContainer } from "../const/core.const";
 import { commonContainer,CommonPathResolver } from '@tezjs/common'
 import { CustomPagePayload } from "./custom-page-payload";
@@ -24,7 +24,7 @@ export class PageCollection {
     constructor(tezConfig:TezConfig) {
         commonContainer.setupConfig(tezConfig);
         if(commonContainer.tezConfig.strapi)
-            defaultContainer.setOption(commonContainer.tezConfig.strapi)
+            defaultContainer.setOption(<StrapiModuleConfig>commonContainer.tezConfig.strapi)
         this.requestService = new RequestService();
         this.internationalizationService = new InternationalizationService(this.requestService);
         this.pageRoute = new PageRoute(this.requestService)

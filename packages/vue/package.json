@@ -2,9 +2,14 @@
   "name": "@tezjs/vue",
   "version": "0.0.6",
   "description": "",
-  "module": "./dist/index.mjs",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
   "files": [
     "dist"
   ],

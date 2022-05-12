@@ -2,9 +2,14 @@
   "name": "@tezjs/vite",
   "version": "0.0.6",
   "description": "",
-  "module": "./dist/index.mjs",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -28,6 +33,7 @@
     "unbuild": "^0.7.4"
   },
   "dependencies": {
+    "get-port-please":"2.5.0",
     "@tezjs/common": "0.0.6",
     "@tezjs/payload": "0.0.6",
     "express": "^4.17.3",

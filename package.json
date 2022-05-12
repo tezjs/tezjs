@@ -18,7 +18,7 @@
     "lint": "eslint",
     "test": "jest",
     "tez": "node ./packages/cli/bin/tez.mjs",
-    "dev": "yarn run tez dev playground",
+    "dev:strapi": "yarn run tez dev playgrounds/strapi",
     "stub": "lerna run stub -- --stub",
     "build": "lerna run stub --stream --no-prefix",
     "develop:package": "tsc --watch",
