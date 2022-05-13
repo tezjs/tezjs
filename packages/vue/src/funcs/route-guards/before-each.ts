@@ -1,4 +1,4 @@
-import store from "../../store";
+import {store} from "../../store";
 import { getUrl } from "../get-url";
 import { getJsonPayload } from "../payload/get-json-payload";
 import {setMetaInfo } from '../set-meta-tags'

@@ -30,6 +30,8 @@ export const JSON:string = 'json';
 
 export const ENCODING_UTF:string = 'utf-8';
 
+export const TEZ_ENV_ID:string = "@tezjs/env"
+
 
 export const SERVICE_WORKER_JS_PATH = ()=> `${commonContainer.tezConfig.rootDir}\\node_modules\\@tezjs\\vite\\templates\\sw._ts`
 

@@ -20,6 +20,10 @@ export class CommonPathResolver {
         return getPath([process.cwd(), CACHE_PATH],true)
     }
 
+    get clientEnvPath() {
+        return getPath([this.cachePath, "client-env.ts"]);
+    }
+
     get routesJsonPath() {
         return getPath([this.cachePath, "routes.json"]);
     }

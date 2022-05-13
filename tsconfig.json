@@ -11,7 +11,7 @@
       "noUnusedLocals": true,
       "resolveJsonModule": true,
       "types": [
-        "node"
+        "node","vite/client"
       ],
       "paths": {
         "@tezjs/payload":["./packages/payload"],

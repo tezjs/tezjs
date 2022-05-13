@@ -1,9 +1,9 @@
 import { ComponentItem } from "../models/component-item";
 import { DataState } from "../models/data-state";
-import store from '../store';
+import {store} from '../store';
 export class TezDataState{
     _url:string = '';
-    _state:{[key:string]:DataState} = {};
+    _state:any = {};
     acitvePageUrl:string = "page/activePageUrl"
     acitveMasterPageName:string = "page/activeMasterPageName"
     _propName:string;

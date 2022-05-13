@@ -9,6 +9,7 @@ export default defineBuildConfig({
     'src/cli'
   ],
   externals:[
-    "@tezjs/vite"
+    "@tezjs/vite",
+    "@tezjs/common"
   ]
 })

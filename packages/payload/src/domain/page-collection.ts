@@ -6,7 +6,6 @@ import { PathResolver } from "./path-resolver";
 import { Sitemap } from "./sitemap";
 import { RobotTxtGenerator } from "./robot-txt-generator";
 import { RedirectRoute } from "./redirect-routes";
-import { TezConfig } from "@tezjs/types";
 
 import { commonContainer,CommonPathResolver } from '@tezjs/common'
 import { CustomPagePayload } from "./custom-page-payload";
