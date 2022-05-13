@@ -7,7 +7,7 @@ import { tez } from "./tez";
 export async function createViteServer(tezConfig:TezConfig,rootPath:string){
   await overrideEnvVariables(BLANK,ENVIRONMENTS);  
   
-  VITE_SERVER_CONFIG.plugins.push(tez(tezConfig))
+  VITE_SERVER_CONFIG.plugins.push(tez(tezConfig,rootPath))
   let config = rootPath ? mergeConfig(VITE_SERVER_CONFIG,{root:rootPath}) : VITE_SERVER_CONFIG;
   return await createServer(config);
 }

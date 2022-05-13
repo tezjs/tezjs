@@ -3,8 +3,9 @@ import axios from 'axios';
 import * as sharp from 'sharp';
 import {CommonPathResolver, commonContainer } from "@tezjs/common";
 
-const pathResolver = new CommonPathResolver();
+
 export async function writeImage(imagePath:string){
+    const pathResolver = new CommonPathResolver();
     return new Promise(async (resolve, reject) => {
             try {
                 let filePath = `${pathResolver.imageFolderPath}${imagePath}`;

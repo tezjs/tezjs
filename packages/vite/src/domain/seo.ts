@@ -8,7 +8,7 @@ export class Seo extends HtmlElement {
     seo: TezSeo;
     constructor(route: { [key: string]: any }) {
         super();
-        this.seo = readFileSync(getPath([this.commonPath.payloadFolderPath,"payload", getUrl(route.path), "tags.json"])) as TezSeo;
+        this.seo = readFileSync(getPath([this.commonPath.payloadPath,"payload", getUrl(route.path), "tags.json"])) as TezSeo;
     }
 
     addTitle() {

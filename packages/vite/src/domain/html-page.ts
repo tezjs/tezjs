@@ -7,7 +7,6 @@ import { Seo } from "./seo";
 
 export class HtmlPage extends Seo {
     tags:{[key:string]:any};
-    commonPath:CommonPathResolver
     components:{slots:{[key:string]:any[]},masterPage;string};
     lastUrlPath:string;
     private files:string[]
@@ -16,13 +15,12 @@ export class HtmlPage extends Seo {
         super(route);
         route.path = getUrl(route.path)
         this.lastUrlPath = getUrlLastPath(route.path);
-        this.components = readFileSync( getPath([this.commonPath.payloadFolderPath,"payload",route.path,`${this.lastUrlPath}.json`])) as {slots:{[key:string]:any[]},masterPage;string};
+        this.components = readFileSync( getPath([this.commonPath.payloadPath,"payload",route.path,`${this.lastUrlPath}.json`])) as {slots:{[key:string]:any[]},masterPage;string};
         if(this.components && this.components.masterPage){
-            let masterPage = readFileSync( getPath([this.commonPath.payloadFolderPath,"payload","master-pages",`${this.components.masterPage.replace(/ /g,"-").toLowerCase()}.json`])) as {slots:{[key:string]:any[]}};
+            let masterPage = readFileSync( getPath([this.commonPath.payloadPath,"payload","master-pages",`${this.components.masterPage.replace(/ /g,"-").toLowerCase()}.json`])) as {slots:{[key:string]:any[]}};
             if(masterPage)
                 this.components.slots = {...this.components.slots,...masterPage.slots}
         }
-        this.commonPath = new CommonPathResolver();
     }
 
     createPage(files:string[]) {

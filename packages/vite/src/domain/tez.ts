@@ -6,7 +6,7 @@ import { overrideEnvVariables } from "../functions/override-env-variables";
 import { BLANK, ENVIRONMENTS } from "../const/core.const";
 import { generateSW } from "./service-worker/generate-sw";
 import { TezConfig } from "@tezjs/types";
-export function tez(tezConfig:TezConfig): Plugin {
+export function tez(tezConfig:TezConfig,rootPath:string): Plugin {
 	return {
 		name: "vite:tez",
 		transformIndexHtml: {
@@ -34,8 +34,8 @@ export function tez(tezConfig:TezConfig): Plugin {
 		},
         async buildStart() {
 			await overrideEnvVariables(BLANK,ENVIRONMENTS);  
-			commonContainer.setupConfig(tezConfig);
-			 const pageCollection = new PageCollection(tezConfig);
+			commonContainer.setupConfig(tezConfig,rootPath);
+			 const pageCollection = new PageCollection();
       		 await pageCollection.generate();
           }
 	}

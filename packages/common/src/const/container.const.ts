@@ -8,7 +8,7 @@ import { deepMerge } from "../functions/deep-merge";
 
 export const commonContainer:
     {
-        setupConfig(tezConfig?:TezConfig):void,
+        setupConfig(tezConfig?:TezConfig,rootDir?:string):void,
         tezConfig:TezConfig
         getAppRoutes():any[]
         expressConfig:{[key:string]:any}
@@ -53,8 +53,8 @@ export const commonContainer:
         }
         setupConfig(tezConfig?:TezConfig,rootDir?:string){
             if(tezConfig){
-                this.tezConfig.rootDir= rootDir?rootDir:process.cwd();
                 this.tezConfig = tezConfig
+                this.tezConfig.rootDir= rootDir?rootDir:process.cwd();
                 this.setDefaultStrapi();
                 this.setExpress();
             }
@@ -63,9 +63,7 @@ export const commonContainer:
 
         setDefaultStrapi(){
             if(typeof this.tezConfig.strapi === "boolean")
-                this.tezConfig = {
-                    strapi:this.strapiModuleConfig
-                };
+                this.tezConfig.strapi = this.strapiModuleConfig
             if(this.tezConfig.strapi){
                 let strapi = <StrapiModuleConfig>this.tezConfig.strapi;
                 strapi = deepMerge(this.strapiModuleConfig,this.tezConfig.strapi);

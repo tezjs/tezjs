@@ -4,9 +4,16 @@ import { commonContainer } from "../const/container.const";
 import { getPath } from "../functions/get-path";
 import { removePath } from "../functions/remove-path";
 export class CommonPathResolver {
-
+    private payloadRootPath:string = '';
+    constructor(){
+        this.payloadRootPath = commonContainer.getStrapiConfig().payloadRootPath;
+    }
     get rootPath() {
-        return getPath([process.cwd()],true)
+        return getPath([commonContainer.tezConfig.rootDir],true)
+    }
+
+    get publicFolder() {
+        return getPath([commonContainer.tezConfig.rootDir, this.payloadRootPath], true);
     }
 
     get cachePath() {
@@ -21,21 +28,13 @@ export class CommonPathResolver {
         return getPath([this.cachePath, "redirect-routes.json"]);
     }
 
-    get payloadFolderPath(){
-        let path = commonContainer.tezConfig.payloadPath;
-        if(!path){
-            let staticFolder = `${process.cwd()}\\static`;
-           if(existsSync(staticFolder))
-                path = commonContainer.tezConfig.payloadPath = "static";
-            else
-                path = commonContainer.tezConfig.payloadPath = "public";
-        }
-        return getPath([process.cwd(), path]);
+    get payloadPath() {
+        return getPath([this.publicFolder, 'payload'], true);
     }
 
     get imageFolderPath(){
-        getPath([this.payloadFolderPath,'\\uploads'],true)
-        return this.payloadFolderPath;
+        getPath([this.publicFolder,'\\uploads'],true)
+        return this.publicFolder;
     }
 
     pathExists(filePath:string){

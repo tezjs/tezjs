@@ -20,54 +20,6 @@ export const defaultContainer:
         collectionState: { [key: string]: any } = {};
         filterCollectionState: { [key: string]: any } = {};
         nuxtInstance: any = undefined;
-        ignoreColumns: Array<string> = ["createdAt","publishedAt","id","published_at", "created_at", "ParentPage", "__component", "provider"]
-        moduleOptions: StrapiModuleConfig = {
-            version:4,
-            payloadRootPath: "public",
-            isDev: true,
-            
-            apiUri: DEFAULT_STRAPI_URL,
-            pageCollectionConfig: {
-                name: "pages",
-                fieldName: {
-                    title: "title",
-                    uri: "Slug"
-                }
-            },
-            media: {
-                uris: [DEFAULT_STRAPI_URL],
-                cdnUri: DEFAULT_STRAPI_URL
-            },
-            componentDataFieldSelectors: {},
-            limit: 10000,
-            siteUrl: "http://127.0.0.1",
-            serializeJson: { isCamelCase: true },
-            optimization: {
-                sourcePagination:false
-            },
-            pagination: {
-                pageSize: 10
-            },
-            payload:{
-                page:{maxPreLoadComponent:3 }
-            }
-            
-        };
-        setOption(moduleOptions: StrapiModuleConfig) {
-            
-            this.moduleOptions = deepMerge(this.moduleOptions, moduleOptions);
-            this.moduleOptions.ignoreColumns = this.moduleOptions.ignoreColumns ? this.moduleOptions.ignoreColumns.concat(...this.ignoreColumns) : this.ignoreColumns;
-            this.setPayloadPath()
-        }
-
-        setPayloadPath(){
-            let publicFolder = `${process.cwd()}\\public`;
-            let staticFolder = `${process.cwd()}\\static`;
-          if(existsSync(publicFolder))
-            this.moduleOptions.payloadRootPath = "public";
-          else if(existsSync(staticFolder))
-            this.moduleOptions.payloadRootPath = "static";
-        }
 
         getUniqueId(): string {
             return String(parseInt(String(Math.random() * 10000000)));

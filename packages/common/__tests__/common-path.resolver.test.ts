@@ -28,7 +28,7 @@ test('redirect routes json should be in tez cache directory', () => {
 
 test('payload folder name should be "public" ', () => {
   commonContainer.setupConfig();
-  expect(commonPathResolver.payloadFolderPath).toBe(`${process.cwd()}\\public`);
+  expect(commonPathResolver.payloadPath).toBe(`${process.cwd()}\\public`);
 });
 
 test('image folder path should be in public folder ', () => {
@@ -42,7 +42,7 @@ afterAll(() => {
   return removeDirectory();
 });
 function removeDirectory(){
-  let folderPath = commonPathResolver.payloadFolderPath;
+  let folderPath = commonPathResolver.payloadPath;
   if(commonPathResolver.pathExists(folderPath))
     commonPathResolver.removeDirSync(folderPath)
     commonPathResolver.removeDirSync(commonPathResolver.cachePath)
