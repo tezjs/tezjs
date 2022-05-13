@@ -2,8 +2,6 @@ import { IndexHtmlTransformContext, IndexHtmlTransformResult, Plugin } from "vit
 import { commonContainer } from "@tezjs/common"
 import { HtmlPage } from "./html-page";
 import { PageCollection } from "@tezjs/payload";
-import { overrideEnvVariables } from "../functions/override-env-variables";
-import { BLANK, ENVIRONMENTS } from "../const/core.const";
 import { generateSW } from "./service-worker/generate-sw";
 import { TezConfig } from "@tezjs/types";
 export function tez(tezConfig:TezConfig,rootPath:string): Plugin {
@@ -33,7 +31,6 @@ export function tez(tezConfig:TezConfig,rootPath:string): Plugin {
 				generateSW();
 		},
         async buildStart() {
-			await overrideEnvVariables(BLANK,ENVIRONMENTS);  
 			commonContainer.setupConfig(tezConfig,rootPath);
 			 const pageCollection = new PageCollection();
       		 await pageCollection.generate();
