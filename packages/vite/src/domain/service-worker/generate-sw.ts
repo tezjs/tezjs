@@ -14,8 +14,8 @@ export async function generateSW(){
             html:${JSON.stringify(jObject.html)},
             json:${JSON.stringify(jObject.json).replace(/\\/g, "/").replace(new RegExp("//","g"), "/")}
             };`
-            var swScript = readFileSync(SERVICE_WORKER_JS_PATH,true);
-            var registerSW = readFileSync(REGISTER_SERVICE_WORKER_JS_PATH,true);
+            var swScript = readFileSync(SERVICE_WORKER_JS_PATH(),true);
+            var registerSW = readFileSync(REGISTER_SERVICE_WORKER_JS_PATH(),true);
             writeFileSync('./dist/registerSW.js',minifyJs(registerSW as string),true);
             writeFileSync('./dist/sw.js',minifyJs(`${code}${swScript}` as string),true);
             if(commonContainer.tezConfig.pwa)

@@ -1,3 +1,5 @@
+import { commonContainer } from "@tezjs/common";
+
 export const NAME:string = "name";
 export const PROPERTY:string = "property"
 
@@ -29,7 +31,7 @@ export const JSON:string = 'json';
 export const ENCODING_UTF:string = 'utf-8';
 
 
-export const SERVICE_WORKER_JS_PATH = `${APP_ROOT_PATH}\\node_modules\\@tezjs\\vite\\src\\domain\\service-worker\\sw.js`
+export const SERVICE_WORKER_JS_PATH = ()=> `${commonContainer.tezConfig.rootDir}\\node_modules\\@tezjs\\vite\\templates\\sw._ts`
 
-export const REGISTER_SERVICE_WORKER_JS_PATH = `${APP_ROOT_PATH}\\node_modules\\@tezjs\\vite\\src\\domain\\service-worker\\registerSW.js`
+export const REGISTER_SERVICE_WORKER_JS_PATH = ()=> `${commonContainer.tezConfig.rootDir}\\node_modules\\@tezjs\\vite\\templates\\registerSW._ts`
 
