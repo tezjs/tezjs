@@ -1,5 +1,4 @@
-import { defaultContainer } from "../const/core.const";
-
+import { commonContainer } from "@tezjs/common"
 export function getComponentName(componentName){
-    return defaultContainer.moduleOptions.componentNames ? defaultContainer.moduleOptions.componentNames[componentName] : componentName
+    return commonContainer.getStrapiConfig().componentNames ? commonContainer.getStrapiConfig().componentNames[componentName] : componentName
 }

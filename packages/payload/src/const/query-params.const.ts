@@ -1,10 +1,9 @@
 import { SEO_POPULATE } from "./app.const";
-import { defaultContainer } from "./core.const";
-
+import { commonContainer } from '@tezjs/common'
 export const QUERY_PARAMS : { [key:string] :any} = {
     3:{
         limit:{
-            "_limit":()=> defaultContainer.moduleOptions.limit
+            "_limit":()=> commonContainer.getStrapiConfig().limit
         },
         locale:{
             "_locale":(value)=>value
@@ -13,7 +12,7 @@ export const QUERY_PARAMS : { [key:string] :any} = {
     4:{
         limit: {
           pagination: {
-            pageSize: () => defaultContainer.moduleOptions.limit,
+            pageSize: () => commonContainer.getStrapiConfig().limit,
           },
         },
         locale: {

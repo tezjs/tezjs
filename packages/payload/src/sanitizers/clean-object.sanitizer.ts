@@ -1,16 +1,14 @@
-import { IMAGE_EXTENSION_REGEX } from "../const/app.const";
-import { defaultContainer } from "../const/core.const";
 import { MarkdownIt } from "../markdown/markdown-it";
-import isArray from "../utils/is-array";
-import isObject from "../utils/is-object";
-import { writeImage } from "../utils/write-image";
+import { isArray,isObject } from "@tezjs/common"
+
 import { toCamelCase } from "./to-camelcase.sanitizer";
 import urlReplacer from "./url-replacer.sanitizer";
-
+import { commonContainer } from "@tezjs/common"
 
 function clear(jsonObject: { [key: string]: any }, isRoot: boolean):any {
-    let htmlSanitizer = defaultContainer.moduleOptions.payload.page.htmlSanitizer;
-    const version = defaultContainer.moduleOptions.version;
+    let strapiConfig = commonContainer.getStrapiConfig();
+    let htmlSanitizer = strapiConfig.payload.page.htmlSanitizer;
+    const version = strapiConfig.version;
     var jObject = {};
     Object.keys(jsonObject).forEach(t => {
         var keyName = toCamelCase(t);
@@ -56,7 +54,7 @@ function clear(jsonObject: { [key: string]: any }, isRoot: boolean):any {
 }
 
 function ignoreColumns(name, isRoot) {
-    let columns = defaultContainer.moduleOptions.ignoreColumns || [];
+    let columns = commonContainer.getStrapiConfig().ignoreColumns || [];
     return columns.filter(t => t === name)[0]
 }
 

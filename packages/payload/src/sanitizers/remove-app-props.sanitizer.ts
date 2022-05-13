@@ -1,4 +1,4 @@
-import isObject from "../utils/is-object";
+import { isObject } from '@tezjs/common';
 
 export function removeAppProps(jObject:any) {
     let igNoreAppKeys = ["queryParams","collectionType"];

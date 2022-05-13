@@ -1,8 +1,7 @@
-import { defaultContainer } from "../const/core.const";
 import { getQueryString } from "./get-query-string";
-
+import { commonContainer } from "@tezjs/common"
 export function getFilterQueryParams(filterJson:{[key:string]:any},populate:any="*"){
-    const version = defaultContainer.moduleOptions.version;
+    const version = commonContainer.getStrapiConfig().version;
     if(version === 4)
     {
         let jObject = {};

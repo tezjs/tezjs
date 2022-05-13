@@ -1,3 +1,4 @@
+import { commonContainer } from "@tezjs/common"
 import { defaultContainer } from "../const/core.const";
 import { PaginationConfig } from "@tezjs/types"
 import { writeFileSync } from "../utils/write-file";
@@ -8,7 +9,7 @@ export class CollectionIndexer {
     pagination: PaginationConfig;
     pathResolver: PathResolver;
     constructor() {
-        this.pagination = defaultContainer.moduleOptions.pagination;
+        this.pagination = commonContainer.getStrapiConfig().pagination;
         this.pathResolver = new PathResolver();
     }
 

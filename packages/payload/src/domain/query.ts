@@ -1,12 +1,12 @@
 import SnakeCase from "../sanitizers/snake-case.sanitizer"
 import jsonToString from "../utils/json-to-string";
-import { defaultContainer } from "../const/core.const";
 import converQueryToJsonObject from "../utils/convert-query-to-json-object";
 import { RequestService } from "./request.server";
 import { getQueryParams } from "../utils/get-query-params";
+import { commonContainer } from "@tezjs/common"
 
 export default async function dataRequest(queryObject, entity) {
-    const entityQueryParams = defaultContainer.moduleOptions.payload.entityQueryParams;
+    const entityQueryParams = commonContainer.getStrapiConfig().payload.entityQueryParams;
     const strapiEntity = SnakeCase(queryObject.entity);
     const requestService = new RequestService();
     if (entityQueryParams && entityQueryParams[strapiEntity.trim()]) {

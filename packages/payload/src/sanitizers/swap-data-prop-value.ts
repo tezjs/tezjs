@@ -1,5 +1,4 @@
-
-import isObject from "../utils/is-object";
+import { isObject } from '@tezjs/common';
 export function swapDataPropValue(jObject:any){
     let jsonObject:any = {}
     if(Array.isArray(jObject) && jObject[0] && isObject(jObject[0])){

@@ -1,19 +1,19 @@
-import { defaultContainer } from "../const/core.const";
-import { CommonPathResolver,getPath } from "@tezjs/common"
+import { CommonPathResolver,getPath,commonContainer } from "@tezjs/common"
 
 export class PathResolver {
     private commonPath:CommonPathResolver;
+    private payloadRootPath:string = '';
+     
     constructor(){
         this.commonPath = new CommonPathResolver();
+        this.payloadRootPath = commonContainer.getStrapiConfig().payloadRootPath;
     }
     get publicFolder() {
-        const { payloadRootPath } = defaultContainer.moduleOptions
-        return getPath([process.cwd(), payloadRootPath], true);
+        return getPath([commonContainer.tezConfig.rootDir, this.payloadRootPath], true);
     }
 
     get payloadPath() {
-        const { payloadRootPath } = defaultContainer.moduleOptions
-        return getPath([process.cwd(), payloadRootPath, 'payload'], true);
+        return getPath([this.publicFolder, 'payload'], true);
     }
 
     get rootPath() {

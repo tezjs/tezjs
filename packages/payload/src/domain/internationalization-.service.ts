@@ -1,11 +1,11 @@
-import { defaultContainer } from "../const/core.const";
 import { RequestService } from "./request.server";
+import { commonContainer } from "@tezjs/common"
 
 export class InternationalizationService {
     private enableInternationalization: boolean;
     private version:number;
     constructor(private requestService: RequestService) {
-        const { enableInternationalization,version } = defaultContainer.moduleOptions;
+        const { enableInternationalization,version } = commonContainer.getStrapiConfig();
         this.enableInternationalization = enableInternationalization;
         this.version = version;
     }

@@ -1,10 +1,9 @@
-import { defaultContainer } from "../const/core.const";
 import { QUERY_PARAMS } from "../const/query-params.const";
 import { getQueryString } from './get-query-string';
 import isObject from './is-object';
-
+import { commonContainer } from "@tezjs/common"
 export function getQueryParams(name:string | string[],value:any = "") {
-    const strapiVersion = defaultContainer.moduleOptions.version;
+    const strapiVersion = commonContainer.getStrapiConfig().version;
     let queryParamsObject = undefined;
     let names:string[] =typeof name === "string" ? [name]:name; 
     let queryString:string= '';

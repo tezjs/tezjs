@@ -1,30 +1,24 @@
 import * as path from "path";
 import { defaultContainer } from "../const/core.const";
 import { PageCollectionConfig } from "@tezjs/types";
-import { PayloadConfig } from "@tezjs/types";
 import { Route } from "@tezjs/types";
-import cleanObject from "../sanitizers/clean-object.sanitizer";
 import { createPath } from "@tezjs/common";
 import { getFilterQueryParams } from "../utils/get-filter-query-params";
 import getUrl from "../utils/get-url";
-import { writeFileSync } from "../utils/write-file";
 import { MasterPageCollection } from "./master-page.collection";
 import parseStrapiData from "./parse-strapi-data";
-import { PathResolver } from "./path-resolver";
 import { RequestService } from "./request.server";
-import { PageSlot } from "./page-slot";
-import { replaceSpace } from "../utils/replace-space";
 import { writeImage } from "../utils/write-image";
 import { BaseGenerator } from "./base-generator";
 import { RedirectRoute } from "./redirect-routes";
 import { Sitemap } from "./sitemap";
-
+import { commonContainer } from "@tezjs/common"
 export class PayloadGenerator extends BaseGenerator{
     private pageCollectionConfig: PageCollectionConfig;
     private masterPageCollection:MasterPageCollection;
     constructor(private requestService: RequestService,redirectRoute:RedirectRoute,sitemap:Sitemap) {
         super(redirectRoute,sitemap);
-        const { pageCollectionConfig, payloadRootPath } = defaultContainer.moduleOptions;
+        const { pageCollectionConfig } = commonContainer.getStrapiConfig();
         this.pageCollectionConfig = pageCollectionConfig;
         this.masterPageCollection = new MasterPageCollection();
     }

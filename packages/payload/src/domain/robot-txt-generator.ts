@@ -1,10 +1,9 @@
-import { defaultContainer } from "../const/core.const";
+import { commonContainer } from "@tezjs/common"
 import { RobotsConfig } from "@tezjs/types";
 import { getFilterQueryParams } from "../utils/get-filter-query-params";
 import { writeFileSync } from "../utils/write-file";
 import { PathResolver } from "./path-resolver";
 import { RequestService } from "./request.server";
-import { commonContainer } from "@tezjs/common";
 
 export class RobotTxtGenerator{
     private request:RequestService;
@@ -13,7 +12,7 @@ export class RobotTxtGenerator{
     constructor(){
         this.request = new RequestService();
         this.pathResolver = new PathResolver();
-        this.robotsConfig = defaultContainer.moduleOptions.robots
+        this.robotsConfig = commonContainer.getStrapiConfig().robots
     }
 
     async generate(){

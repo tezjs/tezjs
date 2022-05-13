@@ -1,9 +1,9 @@
 import { CHARSET, DESCRIPTION, KEYWORDS, NAME, PROPERTY } from "../const/app.const";
-import { defaultContainer } from "../const/core.const";
-
+import { commonContainer } from "@tezjs/common"
 export default function tagBuilder(data, tag) {
-    const imageCdn = defaultContainer.moduleOptions.media.cdnUri;
-    const siteUrl = defaultContainer.moduleOptions.siteUrl;
+    let strapiConfig = commonContainer.getStrapiConfig();
+    const imageCdn = strapiConfig.media.cdnUri;
+    const siteUrl = strapiConfig.siteUrl;
     if (data.linkingData)
         tag.linkingData = data.linkingData;
     if(data.metaTags)

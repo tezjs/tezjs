@@ -1,10 +1,9 @@
 import { MARK_DOWN_CONFIG } from "./markdown.config";
 import urlReplacer from '../sanitizers/url-replacer.sanitizer'
 import { ALT, EQUALTO, EQUALTO_SPACE, HTTPS, LAZY, LOADING, PIPE, SPACE, SRC, TITLE } from "../const/app.const";
-import { defaultContainer } from "../const/core.const";
+import { commonContainer } from "@tezjs/common"
 export const MarkdownIt = require('markdown-it')(MARK_DOWN_CONFIG);
 const imageDefaultRender = MarkdownIt.renderer.rules.image;
-const linkDefaultRender = MarkdownIt.renderer.rules.link_open;
 import anchorLink from './anchor-tag';
 MarkdownIt.use(anchorLink, {
     pattern: /^https:/,
@@ -15,7 +14,7 @@ MarkdownIt.use(anchorLink, {
   })
 MarkdownIt.renderer.rules.image = function (tokens, idx, options, env, self) {
     try {
-        const imageCdn = defaultContainer.moduleOptions.media.cdnUri;
+        const imageCdn = commonContainer.getStrapiConfig().media.cdnUri;
         const token = tokens[idx];
         token.attrs.push([LOADING, LAZY]);
         let titleText = '';

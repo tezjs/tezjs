@@ -1,11 +1,11 @@
 import { FIELD_COMPONENT_TYPE_NAME,  META_TAGS_COMPONENT_NAME, META_TAGS_SEO_COMPONENT_NAME, VUE_COMPONENT_NAME, VUE_REFERENCE_CODE } from "../const/app.const";
-import { defaultContainer } from "../const/core.const";
+import { commonContainer } from '@tezjs/common'
 import removeSpace from "../sanitizers/remove-space.sanitizer";
 import { runDataSanitizer } from "../utils/run-data-sanitizer";
 import Query from './query';
 export default async function DataResolver(pageContent,url) {
-    const collectionQuery = defaultContainer.moduleOptions.collectionQuery;
-    const moduleOptions = defaultContainer.moduleOptions;
+    const moduleOptions = commonContainer.getStrapiConfig();
+    const collectionQuery = moduleOptions.collectionQuery;
     if (collectionQuery && collectionQuery[pageContent.Type]) {
         const result = await Query(collectionQuery[pageContent.Type], pageContent);
         if (!pageContent.GenericSection)

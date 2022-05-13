@@ -1,19 +1,20 @@
-import { Component, PayloadConfig,Page } from "@tezjs/types";
+import { PayloadConfig,Page } from "@tezjs/types";
+import { commonContainer } from '@tezjs/common'
 import { PageSlot } from "./page-slot";
 import * as path from "path";
 import { PathResolver } from "./path-resolver";
-import { defaultContainer } from "../const/core.const";
 import { writeFileSync } from "@tezjs/common";
 import { replaceSpace } from "../utils/replace-space";
 import cleanObject from "../sanitizers/clean-object.sanitizer";
 import getUrl from "../utils/get-url";
 import { Sitemap } from "./sitemap";
 import { RedirectRoute } from "./redirect-routes";
+
 export abstract class BaseGenerator{
     pathResolver:PathResolver;
     payload:PayloadConfig;
     constructor(private redirectRoute:RedirectRoute,private sitemap:Sitemap){
-        const { payload } = defaultContainer.moduleOptions;
+        const { payload } = commonContainer.getStrapiConfig();
         this.pathResolver = new PathResolver();
         this.payload = payload;
     }

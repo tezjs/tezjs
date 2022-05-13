@@ -21,10 +21,10 @@ import DataResolver from "./data-resolver";
 import getSitemapObject from "./get-sitemap-object";
 import dataRequest from "./query";
 import tagBuilder from "./tag-builder";
-
+import { commonContainer } from "@tezjs/common";
 export default async function parseStrapiData(pageContent, url, dynamicData,referenceData) {
     const collectionIndexer = new CollectionIndexer();
-    const moduleOptions = defaultContainer.moduleOptions;
+    const moduleOptions = commonContainer.getStrapiConfig();
     let genericSection = [];
     
     pageContent = await DataResolver(pageContent,url);

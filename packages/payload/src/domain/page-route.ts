@@ -18,7 +18,7 @@ export class PageRoute {
     private pathResolver: PathResolver;
     private routes:Array<{name:string,path:string}> = new Array<{name:string,path:string}>();
     constructor(private requestService: RequestService) {
-        const { pageCollectionConfig } = defaultContainer.moduleOptions;
+        const { pageCollectionConfig } = commonContainer.getStrapiConfig();
         this.pageCollectionConfig = pageCollectionConfig;
         this.pathResolver = new PathResolver();
         this.routes = commonContainer.getAppRoutes();
