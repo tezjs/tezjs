@@ -119,3 +119,9 @@ package-lock.json
 /tz-app/tez-strapi-app/tez/public/sitemap.xml
 /tz-app/tez-strapi-app/tez/public/sitemap-not-mapped.json
 yarn.lock
+/playgrounds/strapi/public
+/playgrounds/strapi/public/payload
+/playgrounds/strapi/public/uploads
+/playgrounds/strapi/public/robots.txt
+/playgrounds/strapi/public/sitemap.xml
+/playgrounds/strapi/sitemap-not-mapped.json

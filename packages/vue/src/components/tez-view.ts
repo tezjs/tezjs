@@ -5,7 +5,7 @@ import TezIndex from './tez-index'
 export default defineComponent({
     computed: {
         ...mapGetters({
-            activeMasterPage: "page/activeMasterPageName"
+            activeMasterPage: "page/getActiveMasterPage"
         })
     },
     render() {

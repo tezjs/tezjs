@@ -15,7 +15,7 @@ export const tez:
     register(tezAppOptions:TezAppOptions){
     componentState.componentPath(tezAppOptions.components)
     if(tezAppOptions.layouts)
-      componentState.componentPath(tezAppOptions.layouts)
+      componentState.layoutPath(tezAppOptions.layouts)
     return {
       install (Vue:any) {
         Vue.component("TezIndex", TezIndex);

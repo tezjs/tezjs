@@ -1,10 +1,13 @@
-import { getCurrentUrl } from "../../funcs/payload/get-current-url";
-import { getUrl } from "../../funcs/payload/get-url";
 
 export default {
     getActivePage(state:any) {
         let pages = state.pages;
         return pages[state.activePageUrl] || [];
+    },
+
+    getActiveMasterPage(state:any){
+        let page = state.pages[state.activePageUrl];
+        return page? state.masterPages[page.masterPage] : undefined
     },
 
     activePageUrl(state:any){

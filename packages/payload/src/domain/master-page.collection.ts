@@ -42,7 +42,7 @@ export class MasterPageCollection{
                 directoryPath,
                 `${replaceSpace(item.masterPage.title)}.json`
             );
-            await writeFileSync(filePath, {slots:this.pageSlot.slots});
+            await writeFileSync(filePath, {layoutName:item.masterPage.layoutName,slots:this.pageSlot.slots});
             this.isGenerated  = true;
         }
         
