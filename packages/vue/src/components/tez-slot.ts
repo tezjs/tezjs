@@ -15,7 +15,7 @@ interface DataPoint {
 export default defineComponent({
     data(): DataPoint {
         return {
-            dataState:new TezDataState(this.slotCategory),
+            dataState:undefined,
             url:'',
             previousState: null,
             isInView: false,
@@ -36,15 +36,9 @@ export default defineComponent({
             maxComponentsCount:'page/maxComponentsCount'
         }),
     },
-    watch: {
-        activePageUrl:function(value:string){
-            if(value !== this.url)
-             {
-                     this.url = value;
-                     this.dataState.urlChanged(value)
-                     this.goToNextComponent(false)
-             }
-        }
+    mounted(){
+        this.dataState = new TezDataState(this.slotCategory)
+        this.goToNextComponent(false)
     },
     methods: {
         splice(name: string) {
