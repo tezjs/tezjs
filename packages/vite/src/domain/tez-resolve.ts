@@ -7,7 +7,6 @@ export function tezResolve(): Plugin {
 		name: "vite:tez:pre",
         enforce: 'pre',
         async resolveId(id) {
-            console.log("resolve called")
             if(id === TEZ_ENV_ID)
                 return pathResolver.clientEnvPath;      
           }
