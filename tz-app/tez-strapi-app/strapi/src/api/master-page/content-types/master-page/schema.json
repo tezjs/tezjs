@@ -27,6 +27,9 @@
         "components.dynamic-page-data",
         "data-control.get-all-data"
       ]
+    },
+    "LayoutName": {
+      "type": "string"
     }
   }
 }
