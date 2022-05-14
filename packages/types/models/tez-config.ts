@@ -4,6 +4,7 @@ import { Page } from "./page/page";
 import { StrapiModuleConfig } from "./strapi/strapi-module-config";
 
 export interface TezConfig {
+    port?:number;
     rootDir?:string;
     payloadPath?:string;
     strapi?:boolean | StrapiModuleConfig;
