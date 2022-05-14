@@ -9,6 +9,7 @@ import { RedirectRoute } from "./redirect-routes";
 
 import { commonContainer,CommonPathResolver } from '@tezjs/common'
 import { CustomPagePayload } from "./custom-page-payload";
+import getUrl from "../utils/get-url";
 export class PageCollection {
     private requestService: RequestService;
     private internationalizationService: InternationalizationService;
@@ -52,7 +53,7 @@ export class PageCollection {
                 const route = pageRouteResponse.routes[i];
                 if((routePath === route.path) || !routePath){
                     if(routePath === route.path)
-                        this.deletePayloadItem(`${this.pathResolver.payloadPath}${routePath}`)
+                        this.deletePayloadItem(`${this.pathResolver.payloadPath}${ getUrl( routePath)}`)
                    await this.payloadGenerator.generate(route, pageRouteResponse.dynamicPageRoute)
                     
                 }
