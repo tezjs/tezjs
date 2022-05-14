@@ -48,7 +48,7 @@ export default defineComponent({
                         this.items.push(t)
                     })
                     this.lastItem = source;
-            }else
+            }else if(this.observer)
                 this.observer.unsubscribe(this.$refs.divLazy)
         },
     },
