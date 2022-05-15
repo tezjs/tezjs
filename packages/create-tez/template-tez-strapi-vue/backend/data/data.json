@@ -1,0 +1,283 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "Name": "News",
+            "Slug": "/categories/news"
+        },
+        {
+            "id": 2,
+                "Name": "Tech",
+                "Slug": "/categories/tech"
+        },
+        {
+            "id": 3,
+                "Name": "Nature",
+                "Slug": "/categories/nature"
+        },
+        {
+            "id": 4,
+                "Name": "Story",
+                "Slug": "/categories/story"
+        },
+        {
+            "id": 5,
+                "Name": "Food",
+                "Slug": "/categories/food"
+        }
+    ],
+    "articles":[
+        {
+            "id": 1,
+                "Title": "A bug is becoming a meme on the internet",
+                "Content": "It's the story of a user named **Omer Barnir** who reported a bug in 2005 on the MySQL [bug report platform](https://bugs.mysql.com/)\n\nBut the thing is that Omer never get an answer. 15 years later, the bug has never been fix and people are starting to make fun out of it. We let you take a look at the conversation [here](https://bugs.mysql.com/bug.php?id=11472), it's pretty funny\n\nOct 8th 20",
+                "Slug": "/articles/a-bug-is-becoming-a-meme-on-the-internet",
+                "ComponentName": "article",
+                "Image": null,
+                "Seo": {
+                    "id": 1,
+                    "Title": "{{referencePageData.title}} changed",
+                    "Description": "A bug is becoming a meme on the internet",
+                    "Canonical": "/articles/a-bug-is-becoming-a-meme-on-the-internet",
+                    "LinkingData": null
+                },
+                "categories": [{"id":2}],
+                "author": [{"id":2}]
+        },
+        {
+            "id": 2,
+                "Title": "What's inside a Black Hole",
+                "Content": "Well, we don't know yet...\n\nOct 8th 20",
+                "Slug": "/articles/what-s-inside-a-black-hole",
+                "ComponentName": "article",
+                "Image": null,
+                "Seo": {
+                    "id": 2,
+                    "Title": "What's inside a Black Hole",
+                    "Description": null,
+                    "Canonical": null,
+                    "LinkingData": "{\"@context\": \"http://www.schema.org\",\"@type\": \"Corporation\",\"name\": \"Radixweb\",\"url\": \"https://radixweb.com\",\"sameAs\": [\"https://www.facebook.com/radixweb\",\"https://twitter.com/radixweb\",\"https://www.instagram.com/radixweb\",\"https://www.youtube.com/user/Radixweb2000\",\"https://www.linkedin.com/company/radixweb\",\"https://in.pinterest.com/pin/141511613270009577/\",\"https://radixweb.com/\"],\"logo\": \"https://s3.ap-south-1.amazonaws.com/stage.radixweb.com/logo_radix_4c5179b806.png\",\"description\": \"Radixweb is India’s top software development and consulting company for 20+ years offering customized software and web development services. Contact us now.\",\"address\": {\"@type\": \"PostalAddress\",\"streetAddress\": \"Ekyarth, B/H Nirma University, Chharodi\",\"addressLocality\": \"Ahmedabad\",\"addressRegion\": \"Gujarat\",\"postalCode\": \"382481\",\"addressCountry\": \"India\"},\"geo\": {\"@type\": \"GeoCoordinates\",\"latitude\": \"23.1202° N\",\"longitude\": \"72.5470° E\"},\"hasMap\": \"https://g.page/radixweb\"}\n--\n{\"@context\": \"http://www.schema.org\",\"@type\": \"Corporation\",\"name\": \"Ajay\",\"url\": \"https://radixweb.com\",\"sameAs\": [\"https://www.facebook.com/radixweb\",\"https://twitter.com/radixweb\",\"https://www.instagram.com/radixweb\",\"https://www.youtube.com/user/Radixweb2000\",\"https://www.linkedin.com/company/radixweb\",\"https://in.pinterest.com/pin/141511613270009577/\",\"https://radixweb.com/\"],\"logo\": \"https://s3.ap-south-1.amazonaws.com/stage.radixweb.com/logo_radix_4c5179b806.png\",\"description\": \"Radixweb is India’s top software development and consulting company for 20+ years offering customized software and web development services. Contact us now.\",\"address\": {\"@type\": \"PostalAddress\",\"streetAddress\": \"Ekyarth, B/H Nirma University, Chharodi\",\"addressLocality\": \"Ahmedabad\",\"addressRegion\": \"Gujarat\",\"postalCode\": \"382481\",\"addressCountry\": \"India\"},\"geo\": {\"@type\": \"GeoCoordinates\",\"latitude\": \"23.1202° N\",\"longitude\": \"72.5470° E\"},\"hasMap\": \"https://g.page/radixweb\"}"
+                },
+                "categories": [{"id":1}],
+                "author": [{"id":2}]
+        },
+        {
+            "id": 3,
+            "Title": "We love Pizza",
+            "Content": "We love pizza at Strapi, what about you?\n\nOct 8th 20",
+            "Slug": "/articles/we-love-pizza",
+                "ComponentName": "article",
+                "Image": null,
+                "Seo": {
+                    "id": 3,
+                    "Title": "We love Pizza",
+                    "Description": "We love Pizza",
+                    "Canonical": "/articles/we-love-pizza",
+                    "LinkingData": null
+                },
+                "categories": [{"id":3}],
+                "author": {
+                        "id": 1
+                }
+        },
+        {
+            "id": 4,
+                "Title": "This shrimp is awesome",
+                "Content": "# Badass\n\nMantis shrimps, or stomatopods, are marine crustaceans of the order Stomatopoda. Some species have specialised calcified \"clubs\" that can strike with **great power**, while others have sharp forelimbs used to capture prey. They branched from other members of the class Malacostraca around 340 million years ago. Mantis shrimps typically grow to around 10 cm (3.9 in) in length. A few can reach up to 38 cm (15 in). The largest mantis shrimp ever caught had a length of 46 cm (18 in); it was caught in the Indian River near Fort Pierce, Florida, in the United States. A mantis shrimp's carapace (the bony, thick shell that covers crustaceans and some other species) covers only the rear part of the head and the first four segments of the thorax. Varieties range in color from shades of brown to vivid colors, with more than 450 species of mantis shrimps being known. They are among the most important predators in many shallow, tropical and subtropical marine habitats. However, despite being common, they are poorly understood, as many species spend most of their lives tucked away in burrows and holes.\n\nCalled \"sea locusts\" by ancient Assyrians, \"prawn killers\" in Australia, and now sometimes referred to as \"thumb splitters\"—because of the animal's ability to inflict painful gashes if handled incautiously—mantis shrimps have powerful claws that are used to attack and kill prey by spearing, stunning, or dismembering.\n\n\nMantis shrimps have, like mantis, ravishing legs. But theirs are so resilient that they inspire the military to make the armor of the future. Above all, their speed and striking power are the responsibility of the superpowers. As the comic book The Oatmeal recounts, the squid's ravishing legs move at the speed of a bullet fired by a 22 caliber and can strike a prey in 1/3000 of a second, with a force of 1,500 Newtons. One tenth of that speed, deployed by a human arm, \"would be enough to send a baseball into orbit.\"\n\nA speed such as it boils water around ravishing legs and creates a shock wave capable of killing a prey missed by the strike.\n\nKept in an aquarium, crustaceans make carnage by dismembering and devouring crabs, shrimps, octopuses, snails and shells (whose shells they break). They would even be able to break the windows of overly fragile aquariums.\n\nOct 8th 20",
+                "Slug": "/articles/this-shrimp-is-awesome",
+                "ComponentName": "article",
+                "Image": null,
+                "Seo": {
+                    "id": 4,
+                    "Title": "This shrimp is awesome",
+                    "Description": "This shrimp is awesome",
+                    "Canonical": "/articles/this-shrimp-is-awesome",
+                    "LinkingData": null
+                },
+                "categories": [{"id":4}],
+                "author": {"id":1}
+        },
+        {
+            "id": 5,
+                "Title": "Beautiful picture",
+                "Content": "This is an empty blog post with a beautiful picture\n\nOct 8th 20",
+                "Slug": "/articles/beautiful-picture",
+                "ComponentName": "article",
+                "Image": null,
+                "Seo": {
+                    "id": 5,
+                    "Title": "Beautiful picture",
+                    "Description": "Beautiful picture",
+                    "Canonical": "/articles/beautiful-picture",
+                    "LinkingData": null
+                },
+                "categories": [{"id":4}],
+                "author": {"id":2}
+        },
+        {
+            "id": 6,
+                "Title": "The internet's Own boy",
+                "Content": "# The Story of Aaron Swartz\n\nAaron Hillel Swartz (November 8, 1986 – January 11, 2013) was an American computer programmer, entrepreneur, writer, political organizer, and Internet hacktivist. He was involved in the development of the web feed format RSS, the Markdown publishing format, the organization Creative Commons, and the website framework [web.py](http://web.py/), and was a co-founder of the social news site [Reddit](https://reddit.com/). He was given the title of co-founder of Reddit by Y Combinator owner [Paul Graham](https://en.wikipedia.org/wiki/Paul_Graham_(programmer)) after the formation of Not a Bug, Inc. (a merger of Swartz's project Infogami and Redbrick Solutions, a company run by Alexis Ohanian and Steve Huffman).\n\nSwartz's work also focused on civic awareness and activism. He helped launch the Progressive Change Campaign Committee in 2009 to learn more about effective online activism. In 2010, he became a research fellow at Harvard University's Safra Research Lab on Institutional Corruption, directed by Lawrence Lessig. He founded the online group Demand Progress, known for its campaign against the Stop Online Piracy Act.\n\n\nIn 2011, Swartz was arrested by Massachusetts Institute of Technology (MIT) police on state breaking-and-entering charges, after connecting a computer to the MIT network in an unmarked and unlocked closet, and setting it to download academic journal articles systematically from JSTOR using a guest user account issued to him by MIT. Federal prosecutors later charged him with two counts of wire fraud and eleven violations of the Computer Fraud and Abuse Act,[14] carrying a cumulative maximum penalty of $1 million in fines, 35 years in prison, asset forfeiture, restitution, and supervised release.\n\nSwartz declined a plea bargain under which he would have served six months in federal prison. Two days after the prosecution rejected a counter-offer by Swartz, he was found dead in his Brooklyn apartment, where he had hanged himself.\n\nIn 2013, Swartz was inducted posthumously into the [Internet Hall of Fame](https://www.internethalloffame.org//).\n\nOct 8th 20",
+                "Slug": "/articles/the-internet-s-own-boy",
+                "ComponentName": "article",
+                "Image": null,
+                "Seo": {
+                    "id": 6,
+                    "Title": "The internet's Own boy",
+                    "Description": "The internet's Own boy",
+                    "Canonical": "/articles/the-internet-s-own-boy",
+                    "LinkingData": null
+                },
+                "categories": [{"id":5}],
+                "author": {"id":1}
+        }
+    ],
+    "authors":[
+        {
+            "id": 1,
+                "Name": "David Doe",
+                "Info": "Professional Writer",
+                "Slug": "authors/david-doe",
+                "Picture": null
+        },
+        {
+            "id": 2,
+                "Name": "Sarah Baker",
+                "Info": "Profession Writer",
+                "Slug": "authors/sarah-baker",
+                "Picture": null
+        }
+    ],
+    "robots":[
+        {
+            "id": 1,
+                "Environment": "Dev",
+                "Rules": "User-agent: *\nDisallow: /\n"
+        },
+        {
+            "id": 2,
+                "Environment": "Stage",
+                "Rules": "User-agent: SemrushBot-SA\nAllow: /\nUser-agent: rogerbot\nAllow: /\nUser-agent: Screaming Frog SEO Spider\nAllow: /\nUser-agent: SiteAuditBot\nAllow: /\nUser-agent: *\nDisallow: /\n"
+        },
+        {
+            "id": 3,
+                "Environment": "Production",
+                "Rules": "User-agent: *\nAllow: /\n"
+        }
+    ],
+    "masterpages":[
+        {
+            "id": 1,
+                "Title": "Standard Layout",
+                "LayoutName": "main",
+                "Seo": {
+                    "id": 8,
+                    "Title": "Blogs Site",
+                    "Description": null,
+                    "Canonical": null,
+                    "LinkingData": null
+                },
+                "GenericCollections": [
+                    {
+                        "id": 5,
+                        "__component": "data-control.get-all-data",
+                        "CollectionType": "Categories",
+                        "QueryParams": null,
+                        "ComponentName": "header",
+                        "SlotName": "header",
+                        "Pagination": null
+                    },
+                    {
+                        "id": 4,
+                        "__component": "components.component-only",
+                        "ComponentName": "footer",
+                        "SlotName": "footer"
+                    }
+                ]
+        }
+    ],
+    "pages":[
+        {
+            "id": 1,
+                "Title": "My Personal Strapi Blog",
+                "Slug": "/",
+                "ReferencePages": null,
+                "GenericCollections": [
+                    {
+                        "id": 2,
+                        "__component": "data-control.get-all-data",
+                        "CollectionType": "Articles",
+                        "QueryParams": null,
+                        "ComponentName": "articles",
+                        "SlotName": null,
+                        "Pagination": null
+                    }
+                ],
+                "Seo": {
+                    "id": 7,
+                    "Title": "My Personal Strapi Blog",
+                    "Description": "My Personal Strapi Blog",
+                    "Canonical": "/",
+                    "LinkingData": null
+                },
+                "MasterPage": {
+                        "id": 1
+                }
+        },
+        {
+            "id": 3,
+                "Title": "Categories",
+                "Slug": "/*",
+                "ReferencePages": "Categories",
+                "GenericCollections": [
+                    {
+                        "id": 4,
+                        "__component": "data-control.get-all-data",
+                        "CollectionType": "Articles",
+                        "QueryParams": {
+                            "filters": {
+                                "categories": {
+                                    "name": {
+                                        "$eq": "{{referencePageData.name}}"
+                                    }
+                                }
+                            }
+                        },
+                        "ComponentName": "articles",
+                        "SlotName": null,
+                        "Pagination": null
+                    }
+                ],
+                "Seo": {
+                    "id": 9,
+                    "Title": "{{referencePageData.name}} Category Articles",
+                    "Description": "{{referencePageData.name}} Articles",
+                    "Canonical": null,
+                    "LinkingData": null
+                },
+                "MasterPage": {"id":1}
+        },
+        {
+            "id": 4,
+                "Title": "Articles",
+                "Slug": "/*",
+                "ReferencePages": "Articles",
+                "GenericCollections": [
+                    {
+                        "id": 1,
+                        "__component": "components.dynamic-page-data",
+                        "ReferenceCollection": "Data",
+                        "SlotName": null
+                    }
+                ],
+                "Seo": {
+                    "id": 10,
+                    "Title": null,
+                    "Description": null,
+                    "Canonical": null,
+                    "LinkingData": null
+                },
+                "MasterPage": {"id":1}
+        }
+    ]
+}
