@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "master_pages",
+  "info": {
+    "singularName": "master-page",
+    "pluralName": "master-pages",
+    "displayName": "MasterPages",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "search-engine-optimization.seo"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "GenericCollections": {
+      "type": "dynamiczone",
+      "components": [
+        "components.component-only",
+        "components.dynamic-page-data",
+        "data-control.get-all-data"
+      ]
+    },
+    "LayoutName": {
+      "type": "string"
+    }
+  }
+}

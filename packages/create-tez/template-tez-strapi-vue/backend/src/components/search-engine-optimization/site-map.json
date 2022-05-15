@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_search_engine_optimization_site_maps",
+  "info": {
+    "displayName": "Sitemap",
+    "icon": "align-left",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "ChangeFrequency": {
+      "type": "enumeration",
+      "enum": [
+        "always",
+        "hourly",
+        "daily",
+        "weekly",
+        "monthly",
+        "yearly",
+        "never"
+      ]
+    },
+    "Priority": {
+      "type": "float"
+    }
+  }
+}

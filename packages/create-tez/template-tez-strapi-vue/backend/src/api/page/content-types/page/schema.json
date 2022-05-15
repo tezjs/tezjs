@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pages",
+  "info": {
+    "singularName": "page",
+    "pluralName": "pages",
+    "displayName": "Pages",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "ReferencePages": {
+      "type": "enumeration",
+      "enum": [
+        "Articles",
+        "Authors",
+        "Categories"
+      ]
+    },
+    "Slug": {
+      "type": "string"
+    },
+    "GenericCollections": {
+      "type": "dynamiczone",
+      "components": [
+        "data-control.get-all-data",
+        "components.component-only",
+        "components.dynamic-page-data"
+      ]
+    },
+    "Seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "search-engine-optimization.seo"
+    },
+    "MasterPage": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::master-page.master-page"
+    }
+  }
+}

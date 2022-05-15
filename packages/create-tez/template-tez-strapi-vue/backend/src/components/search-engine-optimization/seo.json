@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_search_engine_optimization_seos",
+  "info": {
+    "displayName": "Seo",
+    "icon": "at",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "text"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "Canonical": {
+      "type": "string"
+    },
+    "MetaTags": {
+      "type": "component",
+      "repeatable": true,
+      "component": "search-engine-optimization.meta-tags"
+    },
+    "RedirectRoutes": {
+      "type": "component",
+      "repeatable": true,
+      "component": "search-engine-optimization.redirect-routes"
+    },
+    "Sitemap": {
+      "type": "component",
+      "repeatable": false,
+      "component": "search-engine-optimization.site-map"
+    },
+    "LinkingData": {
+      "type": "text"
+    }
+  }
+}

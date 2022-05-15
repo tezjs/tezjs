@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_data_control_get_all_data",
+  "info": {
+    "displayName": "Get Data",
+    "icon": "align-justify",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "CollectionType": {
+      "type": "enumeration",
+      "enum": [
+        "Articles",
+        "Categories"
+      ]
+    },
+    "ComponentName": {
+      "type": "string"
+    },
+    "QueryParams": {
+      "type": "json"
+    },
+    "SlotName": {
+      "type": "string"
+    },
+    "Pagination": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

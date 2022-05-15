@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_components_component_onlies",
+  "info": {
+    "displayName": "ComponentOnly",
+    "icon": "align-right",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "ComponentName": {
+      "type": "string"
+    },
+    "SlotName": {
+      "type": "string"
+    }
+  }
+}
