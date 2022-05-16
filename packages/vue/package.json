@@ -14,7 +14,7 @@
     "dist"
   ],
   "scripts": {
-    "stub": "unbuild"
+    "build": "unbuild"
   },
   "repository": {
     "type": "git",
