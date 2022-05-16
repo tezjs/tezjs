@@ -5,6 +5,6 @@ import TezView from "../components/tez-view"
 
 export function createTezApp(tezAppOptions:TezAppOptions){
     createApp(TezView).
-            use(tez.register(tezAppOptions)).mount('#app')
+            use(tez.register(tezAppOptions)).mount('#tez_app')
     
 }
