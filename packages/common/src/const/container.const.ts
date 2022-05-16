@@ -5,15 +5,18 @@ import { resolvePath } from "../functions/resolve-path";
 import { StrapiModuleConfig, TezConfig } from "@tezjs/types"
 import { DEFAULT_STRAPI_URL } from "./app.const";
 import { deepMerge } from "../functions/deep-merge";
+import { BuildOptions } from "../models/build-options";
 
 export const commonContainer:
     {
-        setupConfig(tezConfig?:TezConfig,rootDir?:string):void,
+        setupConfig(tezConfig?:TezConfig):void,
         tezConfig:TezConfig
         getAppRoutes():any[]
         expressConfig:{[key:string]:any}
-        getStrapiConfig():StrapiModuleConfig
+        getStrapiConfig():StrapiModuleConfig;
+        buildOptions:BuildOptions;
     } = new (class {
+        buildOptions:BuildOptions;
         tezConfig:TezConfig = {};
         expressConfig = {};
         ignoreColumns: Array<string> = ["createdAt","publishedAt","id","published_at", "created_at", "ParentPage", "__component", "provider"]
@@ -51,10 +54,9 @@ export const commonContainer:
             }
             
         }
-        setupConfig(tezConfig?:TezConfig,rootDir?:string){
+        setupConfig(tezConfig?:TezConfig){
             if(tezConfig){
                 this.tezConfig = tezConfig
-                this.tezConfig.rootDir= rootDir?rootDir:process.cwd();
                 this.setDefaultStrapi();
                 this.setExpress();
             }

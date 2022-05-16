@@ -30,10 +30,9 @@ export const JSON:string = 'json';
 
 export const ENCODING_UTF:string = 'utf-8';
 
-export const TEZ_ENV_ID:string = "@tezjs/env"
+export const CLIENT_ENV_SUBSTRING:string  = "client_";
 
+export const SERVICE_WORKER_JS_PATH = ()=> `${commonContainer.buildOptions.rootDir}\\node_modules\\@tezjs\\vite\\templates\\sw._ts`
 
-export const SERVICE_WORKER_JS_PATH = ()=> `${commonContainer.tezConfig.rootDir}\\node_modules\\@tezjs\\vite\\templates\\sw._ts`
-
-export const REGISTER_SERVICE_WORKER_JS_PATH = ()=> `${commonContainer.tezConfig.rootDir}\\node_modules\\@tezjs\\vite\\templates\\registerSW._ts`
+export const REGISTER_SERVICE_WORKER_JS_PATH = ()=> `${commonContainer.buildOptions.rootDir}\\node_modules\\@tezjs\\vite\\templates\\registerSW._ts`
 

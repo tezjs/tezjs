@@ -6,8 +6,6 @@ import { StrapiModuleConfig } from "./strapi/strapi-module-config";
 import {  HtmlPage } from './html/html'
 export interface TezConfig {
     viteOptions?:any;
-    port?:number;
-    rootDir?:string;
     payloadPath?:string;
     strapi?:boolean | StrapiModuleConfig;
     express?:Express;
@@ -17,5 +15,4 @@ export interface TezConfig {
     robots?:{[key:string]:string}
     envName?:string;
     htmlPageConfig?:HtmlPage;
-    mode?:string;
 }

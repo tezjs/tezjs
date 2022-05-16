@@ -3,8 +3,8 @@ import { commonContainer } from "@tezjs/common"
 import { HtmlPage } from "./html-page";
 import { PageCollection } from "@tezjs/payload";
 import { generateSW } from "./service-worker/generate-sw";
-import { TezConfig } from "@tezjs/types";
-export function tez(tezConfig:TezConfig,rootPath:string): Plugin {
+import { readConfig } from "../functions/read-config";
+export function tez(): Plugin {
 	return {
 		name: "vite:tez",
 		transformIndexHtml: {
@@ -31,9 +31,9 @@ export function tez(tezConfig:TezConfig,rootPath:string): Plugin {
 				generateSW();
 		},
         async buildStart() {
-			commonContainer.setupConfig(tezConfig,rootPath);
-			 const pageCollection = new PageCollection();
-      		 await pageCollection.generate();
+			await readConfig();
+			const pageCollection = new PageCollection();
+      		await pageCollection.generate();
           }
 	}
 }

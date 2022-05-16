@@ -9,7 +9,7 @@ export class PathResolver {
         this.payloadRootPath = commonContainer.getStrapiConfig().payloadRootPath;
     }
     get publicFolder() {
-        return getPath([commonContainer.tezConfig.rootDir, this.payloadRootPath], true);
+        return getPath([commonContainer.buildOptions.rootDir, this.payloadRootPath], true);
     }
 
     get payloadPath() {

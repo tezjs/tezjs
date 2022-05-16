@@ -10,15 +10,15 @@ export class CommonPathResolver {
     }
 
     get indexHtmlPath(){
-        return `${commonContainer.tezConfig.rootDir}\\index.html`
+        return `${commonContainer.buildOptions.rootDir}\\index.html`
     }
 
     get rootPath() {
-        return getPath([commonContainer.tezConfig.rootDir],true)
+        return getPath([commonContainer.buildOptions.rootDir],true)
     }
 
     get publicFolder() {
-        return getPath([commonContainer.tezConfig.rootDir, this.payloadRootPath], true);
+        return getPath([commonContainer.buildOptions.rootDir, this.payloadRootPath], true);
     }
 
     get cachePath() {
@@ -27,6 +27,10 @@ export class CommonPathResolver {
 
     get clientEnvPath() {
         return getPath([this.cachePath, "client-env.ts"]);
+    }
+
+    get serverEnvPath() {
+        return getPath([this.cachePath, "server-env.ts"]);
     }
 
     get routesJsonPath() {
