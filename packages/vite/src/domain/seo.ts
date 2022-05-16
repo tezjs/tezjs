@@ -10,7 +10,7 @@ export class Seo extends HtmlElement {
     constructor(route: { [key: string]: any } | Head) {
         super();
         if((<{ [key: string]: any }>route).path)
-            this.seo = readFileSync(getPath([this.commonPath.payloadPath,"payload", getUrl((<{ [key: string]: any }>route).path), "tags.json"])) as TezSeo;
+            this.seo = readFileSync(getPath([this.commonPath.payloadPath, getUrl((<{ [key: string]: any }>route).path), "tags.json"])) as TezSeo;
         else
             this.seo = route as Head;
     }
