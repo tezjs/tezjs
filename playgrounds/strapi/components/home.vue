@@ -11,7 +11,6 @@ defineProps<{ data: any }>()
       <div class="card items-center">
         <div class="col-40">
           <a class="logo" href="#" target="_blank">
-            <img alt="Tez logo" src="../assets/logo.png" />
           </a>
         </div>
         <div class="col-60">

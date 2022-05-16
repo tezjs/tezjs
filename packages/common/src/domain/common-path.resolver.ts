@@ -8,6 +8,11 @@ export class CommonPathResolver {
     constructor(){
         this.payloadRootPath = commonContainer.getStrapiConfig().payloadRootPath;
     }
+
+    get indexHtmlPath(){
+        return `${commonContainer.tezConfig.rootDir}\\index.html`
+    }
+
     get rootPath() {
         return getPath([commonContainer.tezConfig.rootDir],true)
     }

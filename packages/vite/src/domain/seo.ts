@@ -4,11 +4,23 @@ import { PROPERTY } from "../../../payload/src/const/app.const";
 import { NAME } from "../const/core.const";
 import { HtmlElement } from "./html-element";
 import getUrl from '../functions/get-url'
+import { Head } from "@tezjs/types";
 export class Seo extends HtmlElement {
     seo: TezSeo;
-    constructor(route: { [key: string]: any }) {
+    constructor(route: { [key: string]: any } | Head) {
         super();
-        this.seo = readFileSync(getPath([this.commonPath.payloadPath,"payload", getUrl(route.path), "tags.json"])) as TezSeo;
+        if((<{ [key: string]: any }>route).path)
+            this.seo = readFileSync(getPath([this.commonPath.payloadPath,"payload", getUrl((<{ [key: string]: any }>route).path), "tags.json"])) as TezSeo;
+        else
+            this.seo = route as Head;
+    }
+
+    getElements(){
+        this.addTitle();
+        this.addCanonical();
+        this.setMetaTags();
+        this.addPageSchema();
+        return `${this.preElementString}\n${this.postElementString}`;
     }
 
     addTitle() {

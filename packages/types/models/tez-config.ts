@@ -2,9 +2,10 @@ import { Express } from "./express/express";
 import { ImageTransform } from "./image/image";
 import { Page } from "./page/page";
 import { StrapiModuleConfig } from "./strapi/strapi-module-config";
-import {  UserConfig} from "vite"
+
+import {  HtmlPage } from './html/html'
 export interface TezConfig {
-    viteOptions:UserConfig;
+    viteOptions?:any;
     port?:number;
     rootDir?:string;
     payloadPath?:string;
@@ -15,4 +16,6 @@ export interface TezConfig {
     pages?:Page[];
     robots?:{[key:string]:string}
     envName?:string;
+    htmlPageConfig?:HtmlPage;
+    mode?:string;
 }
