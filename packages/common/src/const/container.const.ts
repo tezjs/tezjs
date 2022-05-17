@@ -5,7 +5,7 @@ import { resolvePath } from "../functions/resolve-path";
 import { StrapiModuleConfig, TezConfig } from "@tezjs/types"
 import { DEFAULT_STRAPI_URL } from "./app.const";
 import { deepMerge } from "../functions/deep-merge";
-import { BuildOptions } from "../models/build-options";
+import {  BuildOptions } from "@tezjs/types"
 
 export const commonContainer:
     {

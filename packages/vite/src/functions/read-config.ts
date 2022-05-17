@@ -7,6 +7,7 @@ import { commonContainer } from '@tezjs/common'
 import { getParsedEnv } from './get-parsed-env'
 import { writeEnv } from './write-env'
 import { ParsedEnv } from '../interface/parsed-env.model'
+import { setupConfig } from './setup-config'
 export async function readConfig() {
     let filePath = `${commonContainer.buildOptions.rootDir}\\${ENVIRONMENTS}\\${commonContainer.buildOptions.mode ? `.env.${commonContainer.buildOptions.mode}`: `.env`}`;
     const port = 3000;
@@ -28,6 +29,6 @@ export async function readConfig() {
         dotenv: true,
         cwd:commonContainer.buildOptions.rootDir
     });
-    commonContainer.setupConfig(tezConfig);
+    setupConfig(tezConfig);
     writeEnv(parsedEnv)
 }
