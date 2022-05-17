@@ -10,7 +10,7 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {return {
       alias:[
         {find:'#client-env',replacement:`/node_modules/.cache/tez/client-env.ts`},
         {find:'#server-env',replacement:"/node_modules/.cache/tez/server-env.ts"},
-        { find: '/main.ts', replacement: "/node_modules/.cache/tez/main.ts" },
+        { find: '/tez.ts', replacement: "/node_modules/.cache/tez/tez.ts" },
         { find: '#store', replacement: "/store" },
         { find: '#router', replacement: "/router" }
       ]
