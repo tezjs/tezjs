@@ -4,6 +4,7 @@ import { Page } from "./page/page";
 import { StrapiModuleConfig } from "./strapi/strapi-module-config";
 
 import {  HtmlPage } from './html/html'
+import { ClientEntry } from "./client-entry";
 export interface TezConfig {
     viteOptions?:any;
     payloadPath?:string;
@@ -15,4 +16,5 @@ export interface TezConfig {
     robots?:{[key:string]:string}
     envName?:string;
     htmlPageConfig?:HtmlPage;
+    client?:ClientEntry;
 }

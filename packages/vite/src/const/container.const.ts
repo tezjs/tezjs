@@ -1,4 +1,4 @@
-import { CommonPathResolver, writeFileSync } from "@tezjs/common";
+import { commonContainer, CommonPathResolver, writeFileSync } from "@tezjs/common";
 import { ImportState } from "../interface/import-state";
 import { tezTemplate } from "./tez.template";
 
@@ -12,6 +12,8 @@ export const appContainer:
             let existsFolders = pathResolver.getExistsFolders();
             let refrenceState:ImportState = {imports:'',props:''};
             ['store','router'].forEach(key=> {if(existsFolders[key]) refrenceState.imports += `import * as ${key} from '#${key}';`});
+            if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.imports)
+                commonContainer.tezConfig.client.imports.forEach(item=>refrenceState.imports += `import '${item}';`)
             Object.keys(existsFolders).forEach(key=>{
                 if(existsFolders[key]){
                     if(key === "components" || key === "layouts")
