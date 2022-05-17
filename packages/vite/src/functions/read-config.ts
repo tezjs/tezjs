@@ -9,7 +9,6 @@ import { writeEnv } from './write-env'
 import { ParsedEnv } from '../interface/parsed-env.model'
 export async function readConfig() {
     let filePath = `${commonContainer.buildOptions.rootDir}\\${ENVIRONMENTS}\\${commonContainer.buildOptions.mode ? `.env.${commonContainer.buildOptions.mode}`: `.env`}`;
-    console.log(filePath)
     const port = 3000;
     let parsedEnv:ParsedEnv = {};
     if(existsSync(filePath)){
