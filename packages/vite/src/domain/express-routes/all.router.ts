@@ -1,7 +1,6 @@
-import { commonContainer,CommonPathResolver } from '@tezjs/common';
+import { commonContainer} from '@tezjs/common';
 import * as express from 'express'
-import * as fs from 'fs'
-import { resolvePath } from '../../functions/resolve-path';
+import { appContainer } from '../../const/container.const';
 import { getHtmlTemplate } from '../html/get-html-template';
 
 
@@ -20,7 +19,7 @@ export class AllRouter{
 
     get = async (request:express.Request,response:express.Response)=>{
         try {
-            
+            appContainer.addOrUpdateTezTS();
             if(!this.htmlCache)
                  this.htmlCache = getHtmlTemplate(commonContainer.tezConfig.htmlPageConfig);
             response.status(200).set({ 'Content-Type': 'text/html' }).end(this.htmlCache)

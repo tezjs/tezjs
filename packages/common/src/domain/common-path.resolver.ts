@@ -29,6 +29,10 @@ export class CommonPathResolver {
         return getPath([this.cachePath, "client-env.ts"]);
     }
 
+    get tezTsPath() {
+        return getPath([this.cachePath, "tez.ts"]);
+    }
+
     get serverEnvPath() {
         return getPath([this.cachePath, "server-env.ts"]);
     }
@@ -48,6 +52,31 @@ export class CommonPathResolver {
     get imageFolderPath(){
         getPath([this.publicFolder,'\\uploads'],true)
         return this.publicFolder;
+    }
+
+    get storePath(){
+        return `${commonContainer.buildOptions.rootDir}\\store`
+    }
+
+    get routerPath(){
+        return `${commonContainer.buildOptions.rootDir}\\router`
+    }
+
+    get layoutsPath(){
+        return `${commonContainer.buildOptions.rootDir}\\layouts`
+    }
+
+    get componentsPath(){
+        return `${commonContainer.buildOptions.rootDir}\\layouts`
+    }
+
+    getExistsFolders(){
+        return {
+            components:this.pathExists(this.componentsPath),
+            layouts:this.pathExists(this.layoutsPath),
+            router:this.pathExists(this.routerPath),
+            store:this.pathExists(this.storePath)
+        }
     }
 
     pathExists(filePath:string){
