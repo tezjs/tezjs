@@ -1,8 +1,10 @@
-import { commonContainer } from '@tezjs/common';
+import { commonContainer, CommonPathResolver } from '@tezjs/common';
 import vue from '@vitejs/plugin-vue'
 import { UserConfig } from 'vite'
 import { tez } from "../domain/tez";
-export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {return {
+export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
+  const pathResolver = new CommonPathResolver();
+  return {
     root:commonContainer.buildOptions.rootDir,
     logLevel: 'info',
     envDir:'environments',
@@ -14,6 +16,12 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {return {
         { find: '#store', replacement: "/store" },
         { find: '#router', replacement: "/router" }
       ]
+    },
+    optimizeDeps: {
+      entries: [
+        pathResolver.tezTsPath
+      ],
+      include: ['vue']
     },
     server: {
       middlewareMode: 'ssr',
