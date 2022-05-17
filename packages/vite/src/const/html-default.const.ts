@@ -3,7 +3,13 @@ import { HtmlPage } from "@tezjs/types";
 export const TEZ_HTML_DEFAULT:HtmlPage = {
     lang:"en",
     head:{
-        favicon:{href:'/favicon.icon'},
-        title:'Tez App'
-    }
+        title:'Tez App',
+        metaTag:{
+            name:{
+                charset:'UTF-8',
+                viewport:"width=device-width, initial-scale=1.0"
+            }
+        }
+    },
+    
 }
