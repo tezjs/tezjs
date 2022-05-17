@@ -3,6 +3,7 @@ import { mapGetters } from 'vuex';
 import { getJsonPayload } from '../funcs/payload/get-json-payload';
 import { componentState } from '../const/component-state';
 import { TezDataState } from '../domain/tez-data-state';
+import { isBot } from '../funcs/is-bot';
 
 interface DataPoint {
     dataState:TezDataState;
@@ -80,7 +81,7 @@ export default defineComponent({
                 }
                 this.dataState.state.components.push(componentItem);
                 this.dataState.state.nextIndex++;
-            if (isInfinite)
+            if (isInfinite || isBot())
                this.goToNextComponent(isInfinite);
             }
         }
