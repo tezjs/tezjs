@@ -1,8 +1,9 @@
-import { APP_ROOT_PATH } from "./core.const";
+import { commonContainer } from '@tezjs/common';
 import vue from '@vitejs/plugin-vue'
 import { UserConfig } from 'vite'
-export const VITE_SERVER_CONFIG:UserConfig = {
-    root:APP_ROOT_PATH,
+import { tez } from "../domain/tez";
+export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {return {
+    root:commonContainer.buildOptions.rootDir,
     logLevel: 'info',
     envDir:'environments',
     resolve:{
@@ -26,5 +27,6 @@ export const VITE_SERVER_CONFIG:UserConfig = {
         }
       }
       },
-      plugins: [vue()]
+      plugins: [vue(),tez()]
   }
+}

@@ -1,11 +1,9 @@
 import { CommonPathResolver, writeFileSync } from "@tezjs/common";
 import { ImportState } from "../interface/import-state";
 import { tezTemplate } from "./tez.template";
-import { VITE_SERVER_CONFIG } from "./vite-server-config.const";
 
 export const appContainer:
     {
-        getViteConfig():{[key:string]:any}
         addOrUpdateTezTS():void
     } = new (class {
         tsCodeCache:string
@@ -26,8 +24,5 @@ export const appContainer:
         if(this.tsCodeCache !== tsCode)
             writeFileSync(pathResolver.tezTsPath,tsCode,true);
         this.tsCodeCache = tsCode;
-        }
-        getViteConfig(){
-            return VITE_SERVER_CONFIG
         }
     })();
