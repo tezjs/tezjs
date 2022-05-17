@@ -7,9 +7,13 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {return {
     logLevel: 'info',
     envDir:'environments',
     resolve:{
-      alias:{
-        '#env':"/node_modules/.cache/tez/env.ts"
-      }
+      alias:[
+        {find:'#client-env',replacement:`/node_modules/.cache/tez/client-env.ts`},
+        {find:'#server-env',replacement:"/node_modules/.cache/tez/server-env.ts"},
+        { find: '/main.ts', replacement: "/node_modules/.cache/tez/main.ts" },
+        { find: '#store', replacement: "/store" },
+        { find: '#router', replacement: "/router" }
+      ]
     },
     server: {
       middlewareMode: 'ssr',

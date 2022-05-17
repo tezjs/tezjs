@@ -22,8 +22,10 @@ export class CommonPathResolver {
     }
 
     get cachePath() {
-        return getPath([process.cwd(), CACHE_PATH],true)
+        return getPath([commonContainer.buildOptions.rootDir, CACHE_PATH],true)
     }
+
+    
 
     get clientEnvPath() {
         return getPath([this.cachePath, "client-env.ts"]);

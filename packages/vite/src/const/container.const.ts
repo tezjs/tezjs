@@ -15,7 +15,7 @@ export const appContainer:
             Object.keys(existsFolders).forEach(key=>{
                 if(existsFolders[key]){
                     if(key === "components" || key === "layouts")
-                        refrenceState.props += `${key}:import.meta.glob('./${key}/**/*.vue'),`
+                        refrenceState.props += `${key}:import.meta.glob('/${key}/**/*.vue'),`
                     else
                         refrenceState.props += `${key}:${key},`
             } 

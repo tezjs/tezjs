@@ -16,8 +16,8 @@ export default defineComponent({
         })
     },
     render() {
-        let layoutName  = this.activeMasterPage ? `./layouts/${this.activeMasterPage.layoutName}.layout.vue` : undefined;
-        let layoutComponent = this.activeMasterPage ? componentState.layouts[`./layouts/${this.activeMasterPage.layoutName}.layout.vue`] : undefined;
+        let layoutName  = this.activeMasterPage ? `/layouts/${this.activeMasterPage.layoutName}.vue` : undefined;
+        let layoutComponent = this.activeMasterPage ? componentState.layouts[layoutName] : undefined;
         if(layoutName && !this.state[layoutName] && layoutComponent)
             this.state[layoutName] = this.vNode = h(defineAsyncComponent(() => layoutComponent()));
         else if(this.state[layoutName])

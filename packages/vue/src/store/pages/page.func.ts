@@ -21,7 +21,7 @@ export function setSlots(context:any,url:string,type:string,pageName?:string){
                   if(!pageSlot[slotName])
                      pageSlot[slotName] = []
                   pageSlot[slotName].push({
-                        path:`./components/${componentName}.vue`,data:data,itemName:itemName
+                        path:`/components/${componentName}.vue`,data:data,itemName:itemName
                      });
                }
             }

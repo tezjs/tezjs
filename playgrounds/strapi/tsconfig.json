@@ -15,9 +15,12 @@
       "types": ["vite/client"],
       "baseUrl": "./",
       "paths": {
-        "@tezjs/env": [
-          "node_modules/.cache/tez/env.ts"
+        "#client-env": [
+          "node_modules/.cache/tez/client-env.ts"
         ],
+        "#server-env": [
+          "node_modules/.cache/tez/server-env.ts"
+        ]
       }
     },
     "exclude": ["./tez.config.ts"],
