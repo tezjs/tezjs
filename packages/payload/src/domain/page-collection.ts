@@ -52,10 +52,12 @@ export class PageCollection {
             for (let i = 0; i < pageRouteResponse.routes.length; i++) {
                 const route = pageRouteResponse.routes[i];
                 if((routePath === route.path) || !routePath){
-                    if(routePath === route.path)
+                    let deleteRouteFolder = routePath === route.path;
+                    if(deleteRouteFolder)
                         this.deletePayloadItem(`${this.pathResolver.payloadPath}${ getUrl( routePath)}`)
                    await this.payloadGenerator.generate(route, pageRouteResponse.dynamicPageRoute)
-                    
+                    if(deleteRouteFolder)
+                    break;
                 }
                 
             }
