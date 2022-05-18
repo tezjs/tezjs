@@ -3,7 +3,7 @@ import { mapGetters } from 'vuex';
 import { getJsonPayload } from '../funcs/payload/get-json-payload';
 import { componentState } from '../const/component-state';
 import { TezDataState } from '../domain/tez-data-state';
-import { isBot } from '../funcs/is-bot';
+import { isBot } from '@tezjs/js';
 
 interface DataPoint {
     dataState:TezDataState;
