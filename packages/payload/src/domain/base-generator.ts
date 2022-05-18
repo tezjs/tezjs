@@ -14,7 +14,7 @@ export abstract class BaseGenerator{
     pathResolver:PathResolver;
     payload:PayloadConfig;
     constructor(private redirectRoute:RedirectRoute,private sitemap:Sitemap){
-        const { payload } = commonContainer.getStrapiConfig();
+        const { payload } = commonContainer.tezConfig;
         this.pathResolver = new PathResolver();
         this.payload = payload;
     }

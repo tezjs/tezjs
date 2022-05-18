@@ -20,6 +20,11 @@ export const commonContainer:
         tezConfig:TezConfig = {};
         expressConfig = {};
         ignoreColumns: Array<string> = ["createdAt","publishedAt","id","published_at", "created_at", "ParentPage", "__component", "provider"]
+        defaultTezConfig:TezConfig = {
+            payload:{
+                page:{maxPreLoadComponent:3 }
+            }
+        }
         strapiModuleConfig:StrapiModuleConfig = {
             version:4,
             payloadRootPath: "public",
@@ -49,9 +54,7 @@ export const commonContainer:
             pagination: {
                 pageSize: 10
             },
-            payload:{
-                page:{maxPreLoadComponent:3 }
-            }
+            
             
         }
         setupConfig(tezConfig?:TezConfig){
@@ -59,6 +62,7 @@ export const commonContainer:
                 this.tezConfig = tezConfig
                 this.setDefaultStrapi();
                 this.setExpress();
+                this.tezConfig = deepMerge(this.defaultTezConfig, this.tezConfig)
             }
             
         }

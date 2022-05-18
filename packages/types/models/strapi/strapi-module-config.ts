@@ -26,6 +26,5 @@ export interface StrapiModuleConfig {
     enableInternationalization?: boolean;
     optimization?: OptimizationConfig;
     pagination?: PaginationConfig;
-    payload?:PayloadConfig;
     robots?:RobotsConfig;
 }
