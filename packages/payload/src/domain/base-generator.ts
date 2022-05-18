@@ -39,7 +39,7 @@ export abstract class BaseGenerator{
             directoryPath,
             "tags.json"
         );
-        await writeFileSync(filePath, cleanObject(page.seo));
+        await writeFileSync(filePath, cleanObject(page.seo || {}));
         const fileName = url.split('/');
         filePath = path.join(
             directoryPath,
