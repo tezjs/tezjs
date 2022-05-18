@@ -18,6 +18,8 @@ export const tez:
       componentState.layoutPath(tezAppOptions.layouts)
     return {
       install (Vue:any) {
+        if(tezAppOptions.useVue)
+          tezAppOptions.useVue(Vue);
         Vue.component("TezIndex", TezIndex);
         Vue.component("TezSlot", TezSlot);
         Vue.component("TezLazy", TezLazy);

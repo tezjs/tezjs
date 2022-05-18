@@ -15,4 +15,5 @@ export interface TezAppOptions {
 
     store?:ModuleTree<unknown>;
 
+    useVue?:(vue:any)=>void;
 }

@@ -76,13 +76,18 @@ export class CommonPathResolver {
         return `${commonContainer.buildOptions.rootDir}\\layouts`
     }
 
+    get pluginsPath(){
+        return `${commonContainer.buildOptions.rootDir}\\plugins\\index.ts`
+    }
+
     getExistsFilesOrFolders(){
         return {
             components:this.pathExists(this.componentsPath),
             layouts:this.pathExists(this.layoutsPath),
             router:this.pathExists(this.routerPath),
             store:this.pathExists(this.storePath),
-            addLib:this.pathExists(this.addLibPath)
+            addLib:this.pathExists(this.addLibPath),
+            useVue:this.pathExists(this.pluginsPath),
         }
     }
 
