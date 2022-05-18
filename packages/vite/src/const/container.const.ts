@@ -23,7 +23,7 @@ export const appContainer:
                     if(key === "components" || key === "layouts")
                         refrenceState.props += `${key}:import.meta.glob('/${key}/**/*.vue'),`
                     else
-                        refrenceState.props += `${key}:${key},`
+                        refrenceState.props += `${key}:${key}.default,`
             } 
         })
         let tsCode = tezTemplate(refrenceState);
