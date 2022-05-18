@@ -21,7 +21,7 @@ export class AllRouter{
         try {
             appContainer.addOrUpdateTezTS();
             if(!this.htmlCache)
-                 this.htmlCache = getHtmlTemplate(commonContainer.tezConfig.htmlPageConfig);
+                 this.htmlCache = getHtmlTemplate(commonContainer.tezConfig.htmlMeta);
             response.status(200).set({ 'Content-Type': 'text/html' }).end(this.htmlCache)
         } catch (e) {
           this.vite && this.vite.ssrFixStacktrace(e)

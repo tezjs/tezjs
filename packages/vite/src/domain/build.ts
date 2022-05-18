@@ -7,7 +7,7 @@ export  async function build(){
     readConfig();
     let tezConfig = commonContainer.tezConfig;
     const pathResolver = new CommonPathResolver();
-    let template = getHtmlTemplate(tezConfig.htmlPageConfig);
+    let template = getHtmlTemplate(tezConfig.htmlMeta);
     writeFileSync(pathResolver.indexHtmlPath,template,true);
     const userConfig = tezConfig.viteOptions || {};
     const viteConfig:UserConfig = mergeConfig(

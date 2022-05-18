@@ -15,6 +15,6 @@ export interface TezConfig {
     pages?:Page[];
     robots?:{[key:string]:string}
     envName?:string;
-    htmlPageConfig?:HtmlPage;
+    htmlMeta?:HtmlPage;
     client?:ClientEntry;
 }
