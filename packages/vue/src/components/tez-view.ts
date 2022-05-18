@@ -12,7 +12,8 @@ export default defineComponent({
     },
     computed: {
         ...mapGetters({
-            activeMasterPage: "page/getActiveMasterPage"
+            activeMasterPage: "page/getActiveMasterPage",
+            activePageUrl: "page/activePageUrl"
         })
     },
     render() {
@@ -22,8 +23,10 @@ export default defineComponent({
             this.state[layoutName] = this.vNode = h(defineAsyncComponent(() => layoutComponent()));
         else if(this.state[layoutName])
             this.vNode = this.state[layoutName];
-        else
+        else if(this.activePageUrl)
             this.vNode = this.tezNode;
+        else
+            this.vNode = h('div');
         return h(h(KeepAlive,null,this.vNode));
     }
   })
