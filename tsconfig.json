@@ -18,7 +18,8 @@
         "@tezjs/common":["./packages/common"],
         "@tezjs/vite":["./packages/vite"],
         "@tezjs/vue":["./packages/vue"],
-        "@tezjs/types":["./packages/types"]
+        "@tezjs/types":["./packages/types"],
+        "@tezjs/js":["./packages/js"]
       }
     },
 
