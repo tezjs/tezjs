@@ -6,9 +6,8 @@ import urlReplacer from "./url-replacer.sanitizer";
 import { commonContainer } from "@tezjs/common"
 
 function clear(jsonObject: { [key: string]: any }, isRoot: boolean):any {
-    let strapiConfig = commonContainer.getStrapiConfig();
-    let htmlSanitizer = strapiConfig.payload.page.htmlSanitizer;
-    const version = strapiConfig.version;
+    let htmlSanitizer = commonContainer.tezConfig.payload.page.htmlSanitizer;
+    const version = 4;
     var jObject = {};
     Object.keys(jsonObject).forEach(t => {
         var keyName = toCamelCase(t);
