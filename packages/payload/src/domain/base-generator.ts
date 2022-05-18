@@ -31,7 +31,7 @@ export abstract class BaseGenerator{
                 directoryPath,
                 componentId + ".json"
             );
-            slot.push((this.payload.page.maxPreLoadComponent) > j  ? [component.data,componentId] : [componentId])
+            slot.push((this.payload.page.maxPreLoadComponent) > j  ? [component.data || {},componentId] : [componentId])
             if((this.payload.page.maxPreLoadComponent) < j)
             await writeFileSync(filePath, component.data);
         }
