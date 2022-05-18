@@ -125,3 +125,6 @@ yarn.lock
 /playgrounds/strapi/public/robots.txt
 /playgrounds/strapi/public/sitemap.xml
 /playgrounds/strapi/sitemap-not-mapped.json
+playgrounds/env/public/robots.txt
+playgrounds/env/public/sitemap-not-mapped.json
+playgrounds/env/public/sitemap.xml

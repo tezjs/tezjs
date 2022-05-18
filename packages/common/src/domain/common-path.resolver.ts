@@ -4,9 +4,7 @@ import { commonContainer } from "../const/container.const";
 import { getPath } from "../functions/get-path";
 import { removePath } from "../functions/remove-path";
 export class CommonPathResolver {
-    private payloadRootPath:string = '';
     constructor(){
-        this.payloadRootPath = commonContainer.getStrapiConfig().payloadRootPath;
     }
 
     get indexHtmlPath(){
@@ -18,7 +16,7 @@ export class CommonPathResolver {
     }
 
     get publicFolder() {
-        return getPath([commonContainer.buildOptions.rootDir, this.payloadRootPath], true);
+        return getPath([commonContainer.buildOptions.rootDir, 'public'], true);
     }
 
     get cachePath() {
