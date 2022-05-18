@@ -20,6 +20,7 @@
     "tez": "node ./packages/cli/bin/tez.mjs",
     "build:strapi": "yarn run tez build playgrounds/strapi",
     "dev:strapi": "yarn run tez dev playgrounds/strapi",
+    "dev:playground:env": "yarn run tez dev playgrounds/env",
     "stub": "lerna run stub -- --stub && npm run build:vue",
     "build:vue": "lerna run build --stream --no-prefix",
     "build": "lerna run stub --stream --no-prefix",

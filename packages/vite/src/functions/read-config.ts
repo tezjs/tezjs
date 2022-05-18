@@ -19,7 +19,7 @@ export async function readConfig() {
           })
 
           parsedEnv =getParsedEnv(parsed);
-          dotenvExpand.expand({ parsed:parsedEnv.server.env })
+          dotenvExpand.expand({ parsed:parsedEnv.parsed })
           if(!commonContainer.buildOptions.port)
           commonContainer.buildOptions.port  = parsedEnv.server.env.PORT || parsedEnv.server.env.TEZ_PORT || port;
     }

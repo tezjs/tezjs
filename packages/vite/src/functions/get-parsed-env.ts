@@ -21,6 +21,7 @@ export function getParsedEnv(parsed:{[key:string]:any}){
                     clientTypedDefinition[keyName] = definition;
                     clientEnv[keyName] = transformValue;
                     serverEnv[keyName] = transformValue
+                    parsed[keyName] = parsed[key] 
                 }else{
                     serverTypedDefinition[keyName]= definition;
                     serverEnv[keyName] = transformValue;
@@ -29,5 +30,5 @@ export function getParsedEnv(parsed:{[key:string]:any}){
             });
         }
     }
-    return {client:{env:clientEnv,typedDefinition:clientTypedDefinition},server:{env:serverEnv || parsed,typedDefinition:serverTypedDefinition}};
+    return {parsed:parsed, client:{env:clientEnv,typedDefinition:clientTypedDefinition},server:{env:serverEnv || parsed,typedDefinition:serverTypedDefinition}};
 }
