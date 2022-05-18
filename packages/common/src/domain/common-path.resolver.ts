@@ -73,7 +73,7 @@ export class CommonPathResolver {
     }
 
     get componentsPath(){
-        return `${commonContainer.buildOptions.rootDir}\\layouts`
+        return `${commonContainer.buildOptions.rootDir}\\components`
     }
 
     get pluginsPath(){
