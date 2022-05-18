@@ -20,6 +20,7 @@
     "tez": "node ./packages/cli/bin/tez.mjs",
     "build:strapi": "yarn run tez build playgrounds/strapi",
     "dev:strapi": "yarn run tez dev playgrounds/strapi",
+    "build:playground:tailwind": "yarn run tez build playgrounds/tailwind",
     "dev:playground:tailwind": "yarn run tez dev playgrounds/tailwind",
     "dev:playground:env": "yarn run tez dev playgrounds/env",
     "stub": "lerna run stub -- --stub && npm run build:vue",
