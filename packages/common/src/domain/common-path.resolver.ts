@@ -39,6 +39,10 @@ export class CommonPathResolver {
         return getPath([this.cachePath, "server-env.ts"]);
     }
 
+    get addLibPath() {
+        return `${commonContainer.buildOptions.rootDir}\\add-lib.ts`;
+    }
+
     get routesJsonPath() {
         return getPath([this.cachePath, "routes.json"]);
     }
@@ -72,12 +76,13 @@ export class CommonPathResolver {
         return `${commonContainer.buildOptions.rootDir}\\layouts`
     }
 
-    getExistsFolders(){
+    getExistsFilesOrFolders(){
         return {
             components:this.pathExists(this.componentsPath),
             layouts:this.pathExists(this.layoutsPath),
             router:this.pathExists(this.routerPath),
-            store:this.pathExists(this.storePath)
+            store:this.pathExists(this.storePath),
+            addLib:this.pathExists(this.addLibPath)
         }
     }
 

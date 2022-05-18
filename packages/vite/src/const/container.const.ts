@@ -9,13 +9,15 @@ export const appContainer:
         tsCodeCache:string
         addOrUpdateTezTS(){
             let pathResolver = new CommonPathResolver();
-            let existsFolders = pathResolver.getExistsFolders();
+            let existsFilesorFolders = pathResolver.getExistsFilesOrFolders();
             let refrenceState:ImportState = {imports:'',props:''};
-            ['store','router'].forEach(key=> {if(existsFolders[key]) refrenceState.imports += `import * as ${key} from '#${key}';`});
+            ['store','router'].forEach(key=> {if(existsFilesorFolders[key]) refrenceState.imports += `import * as ${key} from '#${key}';`});
             if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.imports)
                 commonContainer.tezConfig.client.imports.forEach(item=>refrenceState.imports += `import '${item}';`)
-            Object.keys(existsFolders).forEach(key=>{
-                if(existsFolders[key]){
+            if(existsFilesorFolders.addLib)
+                refrenceState.imports +=`\nimport * as func from '#add-lib'; func();`
+            Object.keys(existsFilesorFolders).forEach(key=>{
+                if(existsFilesorFolders[key]){
                     if(key === "components" || key === "layouts")
                         refrenceState.props += `${key}:import.meta.glob('/${key}/**/*.vue'),`
                     else
