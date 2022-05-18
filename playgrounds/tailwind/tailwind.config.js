@@ -1,6 +1,6 @@
 module.exports = {
   content: [
-    "./components/**/*.{vue,js,ts,jsx,tsx}"
+    __dirname + "/components/**/*.{vue,js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {},
