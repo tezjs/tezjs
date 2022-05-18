@@ -61,11 +61,11 @@ export class CommonPathResolver {
     }
 
     get storePath(){
-        return `${commonContainer.buildOptions.rootDir}\\store`
+        return `${commonContainer.buildOptions.rootDir}\\store\\index.ts`
     }
 
     get routerPath(){
-        return `${commonContainer.buildOptions.rootDir}\\router`
+        return `${commonContainer.buildOptions.rootDir}\\router\\index.ts`
     }
 
     get layoutsPath(){
