@@ -14,8 +14,10 @@ export const appContainer:
             ['store','router'].forEach(key=> {if(existsFilesorFolders[key]) refrenceState.imports += `import * as ${key} from '#${key}';`});
             if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.imports)
                 commonContainer.tezConfig.client.imports.forEach(item=>refrenceState.imports += `import '${item}';`)
-            if(existsFilesorFolders.addLib)
-                refrenceState.imports +=`\nimport * as func from '#add-lib'; func();`
+            if(existsFilesorFolders.addLib){
+                refrenceState.imports +=`\nimport * as func from '#add-lib'; func.default();`
+                delete existsFilesorFolders.addLib;
+            }
             Object.keys(existsFilesorFolders).forEach(key=>{
                 if(existsFilesorFolders[key]){
                     if(key === "components" || key === "layouts")

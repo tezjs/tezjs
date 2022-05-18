@@ -45,6 +45,7 @@
     "@tezjs/types": "link:./packages/types",
     "@tezjs/vite": "link:./packages/vite",
     "@tezjs/vue": "link:./packages/vue",
+    "@tezjs/js": "link:./packages/js",
     "tez": "link:./packages/cli",
     "unbuild": "^0.7.4"
   },

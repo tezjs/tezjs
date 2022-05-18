@@ -14,7 +14,8 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
         {find:'#server-env',replacement:"/node_modules/.cache/tez/server-env.ts"},
         { find: '/tez.ts', replacement: "/node_modules/.cache/tez/tez.ts" },
         { find: '#store', replacement: "/store" },
-        { find: '#router', replacement: "/router" }
+        { find: '#router', replacement: "/router" },
+        { find: '#add-lib', replacement: "/add-lib.ts" }
       ]
     },
     optimizeDeps: {

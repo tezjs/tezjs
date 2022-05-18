@@ -1532,6 +1532,10 @@
   version "0.0.0"
   uid ""
 
+"@tezjs/js@link:./packages/js":
+  version "0.0.0"
+  uid ""
+
 "@tezjs/payload@link:./packages/payload":
   version "0.0.0"
   uid ""
@@ -4054,6 +4058,11 @@ fs-extra@^9.1.0:
     jsonfile "^6.0.1"
     universalify "^2.0.0"
 
+fs-memo@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/fs-memo/-/fs-memo-1.2.0.tgz#a2ec3be606b902077adbb37ec529c5ec5fb2e037"
+  integrity sha512-YEexkCpL4j03jn5SxaMHqcO6IuWuqm8JFUYhyCep7Ao89JIYmB8xoKhK7zXXJ9cCaNXpyNH5L3QtAmoxjoHW2w==
+
 fs-minipass@^1.2.7:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/fs-minipass/-/fs-minipass-1.2.7.tgz#ccff8570841e7fe4265693da88936c55aed7f7c7"
@@ -4155,6 +4164,13 @@ get-pkg-repo@^4.0.0:
     hosted-git-info "^4.0.0"
     through2 "^2.0.0"
     yargs "^16.2.0"
+
+get-port-please@2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/get-port-please/-/get-port-please-2.5.0.tgz#1e2d40a6f55c02a1caed99991c64ed84afe50c72"
+  integrity sha512-NblPebBznYARC1R2r1qmusbJAAgBr954gWhEZgwTerzR8r3ud6U5PI1SG4Lue43r87aikPPjObs85VieIDK99A==
+  dependencies:
+    fs-memo "^1.2.0"
 
 get-port@^5.1.1:
   version "5.1.1"
