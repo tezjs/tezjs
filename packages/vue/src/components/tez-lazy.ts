@@ -49,7 +49,7 @@ export default defineComponent({
                     })
                     this.lastItem = source;
             }else if(this.observer)
-                this.observer.unsubscribe(this.$refs.divLazy)
+                this.observer.unobserve(this.$refs.divLazy)
         },
     },
     render() {
