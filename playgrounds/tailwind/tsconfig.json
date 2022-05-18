@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./",
+      "paths": {
+        "#app": [
+          "assets/index.css"
+        ],
+        "#client-env": [
+          "node_modules/.cache/tez/client-env.ts"
+        ],
+        "#server-env": [
+          "node_modules/.cache/tez/server-env.ts"
+        ],
+        "#add-lib": [
+          "add-lib.ts"
+        ]
+      }
+    },
+  }
+  

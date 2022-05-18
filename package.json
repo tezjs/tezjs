@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "private": true,
-  "type": "module",
+  
   "workspaces": [
     "packages/*",
     "playground"
