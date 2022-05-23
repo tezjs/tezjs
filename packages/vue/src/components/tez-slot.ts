@@ -90,9 +90,9 @@ export default defineComponent({
         let vNodes: Array<VNode> = new Array<VNode>();
         if(this.dataState && this.dataState.state){
             for (let component of this.dataState.state.components) {
-                if(componentState.components[component.path]){
+                if(componentState.tezAppOptions.components[component.path]){
                     if (!this.dataState.state.vNodes[component.itemName]){
-                        this.dataState.state.vNodes[component.itemName] = h(defineAsyncComponent(() => componentState.components[component.path]()), { data: component.data });
+                        this.dataState.state.vNodes[component.itemName] = h(defineAsyncComponent(() => componentState.tezAppOptions.components[component.path]()), { data: component.data });
                      }
                     vNodes.push(h(KeepAlive, { key: component.itemName }, this.dataState.state.vNodes[component.itemName]))
                 }

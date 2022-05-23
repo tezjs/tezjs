@@ -25,7 +25,7 @@ export function setSlots(context:any,url:string,type:string,pageName?:string){
                      });
                }
             }
-            context.state[slotPropName][pageName || url] = pageSlot;
+            context.state[slotPropName][pageName || url] = pageSlot || page.slots;
             context.commit(commitEventName,context.state[slotPropName]);
          }
       }

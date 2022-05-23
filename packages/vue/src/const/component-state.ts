@@ -1,28 +1,22 @@
+import { shallowRef,unref } from "vue";
+import { TezAppOptions } from "../models/tez-app-options";
 
 export const componentState:
 {
-    componentPath(components:{[key:string]:any}):void,
-    layoutPath(layouts:{[key:string]:any}),
-    components:Record<string, () => Promise<{
-        [key: string]: any;
-    }>>,
-    layouts:Record<string, () => Promise<{
-        [key: string]: any;
-    }>>
+    tezAppOptions:TezAppOptions;
+    defineGlobalProps(app:any):void;
+    changeRouteValue(routeValue:any);
 } = new (class {
-    components:Record<string, () => Promise<{
-        [key: string]: any;
-    }>> = {};
-
-    layouts:Record<string, () => Promise<{
-        [key: string]: any;
-    }>> = {};
-
-    componentPath(components:{[key:string]:any}){
-        this.components = components;
+    tezAppOptions:TezAppOptions=undefined;
+    currentRoute= shallowRef({params:{}});
+    defineGlobalProps(app:any){
+        Object.defineProperty(app.config.globalProperties, '$tezRoute', {
+            enumerable: true,
+            get: () => unref(this.currentRoute),
+        });
     }
 
-    layoutPath(layouts:{[key:string]:any}){
-        this.layouts = layouts;
+    changeRouteValue(routeValue:any){
+        this.currentRoute.value = routeValue;
     }
 })();

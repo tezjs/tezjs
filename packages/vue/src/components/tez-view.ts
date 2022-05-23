@@ -18,7 +18,7 @@ export default defineComponent({
     },
     render() {
         let layoutName  = this.activeMasterPage ? `/layouts/${this.activeMasterPage.layoutName}.vue` : undefined;
-        let layoutComponent = this.activeMasterPage ? componentState.layouts[layoutName] : undefined;
+        let layoutComponent = this.activeMasterPage ? componentState.tezAppOptions.layouts[layoutName] : undefined;
         if(layoutName && !this.state[layoutName] && layoutComponent)
             this.state[layoutName] = this.vNode = h(defineAsyncComponent(() => layoutComponent()));
         else if(this.state[layoutName])

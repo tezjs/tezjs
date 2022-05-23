@@ -1,3 +1,4 @@
+import { getLayoutPageName } from "../../funcs/get-layout-page-name";
 
 export default {
     getActivePage(state:any) {
@@ -7,7 +8,12 @@ export default {
 
     getActiveMasterPage(state:any){
         let page = state.pages[state.activePageUrl];
-        return page? state.masterPages[page.masterPage] : undefined
+        return page? state.masterPages[getLayoutPageName(page)] : undefined
+    },
+
+    activePageComponent(state:any){
+        let page = state.pages[state.activePageUrl];
+        return page?.pageComponent?.default;
     },
 
     activePageUrl(state:any){
@@ -22,7 +28,7 @@ export default {
     maxComponentsCount:(state:any)=>(slotName:string,slotCategory:string)=>{
         if(slotCategory === "master"){
             let page = state.pages[state.activePageUrl];
-            let masterPage = state.masterPages[page.masterPage];
+            let masterPage = state.masterPages[getLayoutPageName(page)];
             return  masterPage?.slots[slotName]?.length    
         }
         let page = state.pages[state.activePageUrl];
@@ -32,7 +38,7 @@ export default {
     slotComponents:(state:any) => (slotName:string,slotCategory:string) => {
         if(slotCategory === "master"){
             let page = state.pages[state.activePageUrl];
-            let masterPage = state.masterPageSlots[page.masterPage];   
+            let masterPage = state.masterPageSlots[getLayoutPageName(page)];   
             return masterPage && masterPage[slotName] ? masterPage[slotName]  : [];
         }
         let page = state.pageSlots[state.activePageUrl];

@@ -78,6 +78,10 @@ export class CommonPathResolver {
         return `${commonContainer.buildOptions.rootDir}\\plugins\\index.ts`
     }
 
+    get pagesPath(){
+        return `${commonContainer.buildOptions.rootDir}\\pages`
+    }
+
     getExistsFilesOrFolders(){
         return {
             components:this.pathExists(this.componentsPath),
@@ -86,6 +90,7 @@ export class CommonPathResolver {
             store:this.pathExists(this.storePath),
             addLib:this.pathExists(this.addLibPath),
             useVue:this.pathExists(this.pluginsPath),
+            pages:this.pathExists(this.pagesPath)
         }
     }
 

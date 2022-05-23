@@ -1,6 +1,7 @@
 import TezIndex from "../components/tez-index"
 import TezSlot from "../components/tez-slot"
 import TezLazy from "../components/tez-lazy"
+import TezPage from "../components/tez-page"
 import { componentState } from '../const/component-state';
 import TzTickedMixin from '../mixins/tz-ticked.mixin'
 import { createTezStore } from '../store';
@@ -11,22 +12,22 @@ overrideImageSourceProp();
 export const tez:
 {
     register:(tezAppOptions:TezAppOptions)=> any 
-  } = new (class {
+} = new (class {
     register(tezAppOptions:TezAppOptions){
-    componentState.componentPath(tezAppOptions.components)
-    if(tezAppOptions.layouts)
-      componentState.layoutPath(tezAppOptions.layouts)
+      componentState.tezAppOptions = tezAppOptions;
     return {
       install (Vue:any) {
         if(tezAppOptions.useVue)
           tezAppOptions.useVue(Vue);
+        componentState.defineGlobalProps(Vue);
         Vue.component("TezIndex", TezIndex);
         Vue.component("TezSlot", TezSlot);
         Vue.component("TezLazy", TezLazy);
+        Vue.component("TezPage", TezPage);
         Vue.mixin(TzTickedMixin)
         Vue.use(createTezStore(tezAppOptions.store))
         let defaultRouteComponent = TezIndex;
-        Vue.use(tezRouter(defaultRouteComponent,tezAppOptions.routerOptions))
+        Vue.use(tezRouter(defaultRouteComponent,tezAppOptions))
       }
     }
   }

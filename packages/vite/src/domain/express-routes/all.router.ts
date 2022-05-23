@@ -19,7 +19,7 @@ export class AllRouter{
 
     get = async (request:express.Request,response:express.Response)=>{
         try {
-            appContainer.addOrUpdateTezTS();
+           await appContainer.addOrUpdateTezTS();
             if(!this.htmlCache)
                  this.htmlCache = getHtmlTemplate(commonContainer.tezConfig.htmlMeta);
             response.status(200).set({ 'Content-Type': 'text/html' }).end(this.htmlCache)
