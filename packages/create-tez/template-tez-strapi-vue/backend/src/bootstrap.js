@@ -84,6 +84,7 @@ const {
       }
   
       // Actually create the entry in Strapi
+      entry = {...entry,...{publishedAt:new Date().getTime()}}
       const createdEntry = await strapi.entityService.create(
         `api::${model}.${model}`,
         {
@@ -97,6 +98,7 @@ const {
   async function importCategories() {
     return Promise.all(
       categories.map((category) => {
+        
         return createEntry({ model: "category", entry: category });
       })
     );

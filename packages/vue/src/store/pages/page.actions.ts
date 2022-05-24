@@ -14,11 +14,13 @@ export default {
         let masterPage = await getJsonPayload(payload.page.masterPage,"/master-pages");
         masterPages[payload.page.masterPage] = masterPage;
         masterPageName = payload.page.masterPage;
-      }else if(isObject(payload.page.masterPage)){
+        setSlots(context,payload.url,"masterPage",masterPageName)
+      }else if(isObject(payload.page.masterPage) && !masterPages[payload.page.masterPage.layoutName] ){
         masterPages[payload.page.masterPage.layoutName] = payload.page.masterPage;
         masterPageName = payload.page.masterPage.layoutName;
+        setSlots(context,payload.url,"masterPage",masterPageName)
       }
-      setSlots(context,payload.url,"masterPage",masterPageName)
+      
     }
     context.commit("setMasterPages",masterPages);
     context.commit("setPages",pages);

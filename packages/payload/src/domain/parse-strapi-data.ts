@@ -39,7 +39,7 @@ export default async function parseStrapiData(pageContent, url, dynamicData,refe
         let item = genericSection[i];
         item = referenceData && item.referenceCollection === "Data" ? referenceData:item;
         let componentName = removeSpace(readProp(item,VUE_COMPONENT_NAME_PROPS));
-        item = runDataSanitizer(moduleOptions.payload.page.dataSanitizers,item,url,componentName);
+        item = runDataSanitizer(commonContainer.tezConfig.payload?.page?.dataSanitizers,item,url,componentName);
         componentName = removeSpace(readProp(item,VUE_COMPONENT_NAME_PROPS)); /// remove this line in future.
         item.dynamic = dynamicData;
         if (getComponentName(componentName)) {
@@ -54,7 +54,7 @@ export default async function parseStrapiData(pageContent, url, dynamicData,refe
                 }else if(item.queryParams)
                     query.queryString = `${qsStringify(parseObjectValue(item.queryParams,parseObjectItem))}&${getQueryParams(['limit','populate'])}` 
                 const queryResult = item[FIELD_DATA_TYPE_RESULT] === DATA_CONTROL_GET_RECORD ? getDynamicPageRecord(pageContent,Tag, url) : await dataRequest({ entity: collectionType, query: query }, item);
-                queryResult.forEach((dataItem,index) => { queryResult[index] = runDataSanitizer(moduleOptions.payload.page.dataSanitizers,dataItem,url,removeSpace( readProp(dataItem,VUE_COMPONENT_NAME_PROPS)),componentName); })
+                queryResult.forEach((dataItem,index) => { queryResult[index] = runDataSanitizer(commonContainer.tezConfig?.payload?.page?.dataSanitizers,dataItem,url,removeSpace( readProp(dataItem,VUE_COMPONENT_NAME_PROPS)),componentName); })
                 const result = dataFieldSelector(queryResult, moduleOptions.componentDataFieldSelectors[getComponentName(componentName)]);
                 if ((moduleOptions.optimization.sourcePagination && item[FIELD_DATA_TYPE_RESULT] !== DATA_CONTROL_GET_RECORD) 
                     ||

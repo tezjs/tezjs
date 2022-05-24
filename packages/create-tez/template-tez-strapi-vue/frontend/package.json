@@ -1,0 +1,17 @@
+{
+    "name": "tez-frontend",
+    "private": true,
+    "version": "0.0.0",
+    "scripts": {
+      "dev":"tez dev",
+      "build":"tez build",
+      "preview":"vite preview"
+    },
+    "dependencies": {
+        "@tezjs/vue":"0.0.6"
+    },
+    "devDependencies": {
+      "@tezjs/cli":"0.0.6"
+    }
+  }
+  

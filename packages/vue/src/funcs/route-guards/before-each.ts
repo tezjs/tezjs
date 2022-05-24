@@ -12,7 +12,7 @@ export  function beforeEach(routes:any,autoRoutes:{urls:{[key:string]:any},re:{[
       await fetch(`/routes?path=${to.path}`);
     let url = getUrl(to.path);
     let route = await checkAutoRoute(url);
-    let routeItem = componentState.tezAppOptions.dynamicRoutes[url];
+    let routeItem = componentState.tezAppOptions.dynamicRoutes[getUrl(url)];
     if(routeItem !== undefined){
       let isBindMetaTags = Object.keys(PAGE_STATE).length !== 0;
       if(!PAGE_STATE[url]){

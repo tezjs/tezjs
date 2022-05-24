@@ -6,7 +6,7 @@ import { getQueryParams } from "../utils/get-query-params";
 import { commonContainer } from "@tezjs/common"
 
 export default async function dataRequest(queryObject, entity) {
-    const entityQueryParams = commonContainer.getStrapiConfig().payload.entityQueryParams;
+    const entityQueryParams = commonContainer.tezConfig?.payload?.entityQueryParams;
     const strapiEntity = SnakeCase(queryObject.entity);
     const requestService = new RequestService();
     if (entityQueryParams && entityQueryParams[strapiEntity.trim()]) {
