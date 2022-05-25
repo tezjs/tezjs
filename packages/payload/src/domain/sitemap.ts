@@ -28,11 +28,16 @@ export class Sitemap{
     }
 
     xmlElement(sitemap: { [key: string]: any }) {
-        return `<url>\n
-                 <loc>${sitemap.loc}</loc>\n
-                 ${sitemap.lastModified ? `<lastmod>${sitemap.lastModified}</lastmod>\n` : ``}
-                 ${sitemap.changeFrequency ? `<changefreq>${sitemap.changeFrequency}</changefreq>\n` : ``}
-                 ${sitemap.priority ? `<priority>${sitemap.priority}</priority>\n` : ``}
-                </url>\n`;
+        let xElement:Array<String> = new Array<String>();
+        xElement.push(`<url>\n`)
+        xElement.push(`<loc>${sitemap.loc}</loc>\n`);
+        if(sitemap.lastModified)
+            xElement.push(`<lastmod>${sitemap.lastModified}</lastmod>\n`);
+        if(sitemap.changeFrequency)
+            xElement.push(`<changefreq>${sitemap.changeFrequency}</changefreq>\n`);
+        if(sitemap.priority)
+            xElement.push(`<priority>${sitemap.priority}</priority>\n`)
+        xElement.push(`</url>\n`);
+        return xElement.join("")
     }
 }
