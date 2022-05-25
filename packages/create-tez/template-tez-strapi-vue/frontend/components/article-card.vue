@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref } from "vue";
-
 defineProps<{ article: any }>();
 </script>
 <template>
+      <router-link
+    :to="article.slug"
+    class="uk-link-reset"
+  >
     <div class="card px-4 py-10">
-        <img class="bg-cover text-center overflow-hidden" :src="article.image.url" height="300" /> 
+        <img class="bg-cover text-center overflow-hidden" :src="article.image.url" :style="{height:'391px !important'}" /> 
       <div
         class="
           mt-3
@@ -21,10 +23,9 @@ defineProps<{ article: any }>();
           <span v-for="category of article.categories" :key="category.name"
             
             class="
-              text-md text-green-600
+              text-md text-gray-600
+              hover:text-teal-500
               uppercase
-              font-bold
-              hover:text-gray-900
               transition
               duration-500
               ease-in-out
@@ -37,11 +38,11 @@ defineProps<{ article: any }>();
             
             class="
               block
-              text-gray-900
+              text-black
               font-bold
               text-2xl
               mb-2
-              hover:text-green-600
+              hover:text-teal-600
               transition
               duration-500
               ease-in-out
@@ -49,19 +50,17 @@ defineProps<{ article: any }>();
             "
             >{{ article.title }}</span
           >
-          <p class="text-gray-700 text-base mt-2" v-html="article.content">
-          </p>
+          
         </div>
       </div>
       <div class="flex items-center">
-        <a href="#" class="">
-          <img
+        <img
             class="w-16 h-16 border border-teal-500 rounded-full border-solid"
             src="https://my-strapi-app-images-upload.s3.ap-south-1.amazonaws.com/avatar_image_c40b95e3d5.jpg"
             alt="{{ article.author.name }}"
           />
-        </a>
         <p class="mx-4">{{ article.author.name }}</p>
       </div>
     </div>
+    </router-link>
 </template>

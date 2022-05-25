@@ -6,15 +6,16 @@ defineProps<{ data: any }>()
 </script>
 <template>
 <div class="container mx-auto p-5 sm:p-10 md:p-16 relative">
-      <h1>Tez Blog</h1>
-    <div class="flex flex-wrap -mx-4">
-      <div class="w-full lg:w-1/2 px-4">
-    <TezLazy :sourcePath="data.dynamicSourcePath" v-slot="source" >
-  <div v-for="article of source.items">
+      <h1 class="text-5xl font-bold">Tez Blog</h1>
+    <div >
+    <TezLazy class="flex flex-wrap" :sourcePath="data.dynamicSourcePath" v-slot="source" >
+      
+
+  <div class="w-full lg:w-1/2" v-for="article of source.items">
       <article-card :article="article"></article-card>
   </div> 
-  </TezLazy> 
-      </div>
+  
+      </TezLazy> 
     </div>
 </div>
   
