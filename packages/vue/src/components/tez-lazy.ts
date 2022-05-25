@@ -17,7 +17,7 @@ export default defineComponent({
             lastItem:null
         }
     },
-    props:["sourcePath","currentPage"],
+    props:["sourcePath","currentPage","class"],
     watch:{
         currentPage(value){
             if(this.index != value){
@@ -56,7 +56,7 @@ export default defineComponent({
         let vNodes: Array<VNode> = new Array<VNode>();
         if(this.$slots && this.$slots.default)
         vNodes.push(
-                h('div', this.$slots?.default({
+                h('div',{class:this.class}, this.$slots?.default({
                     items: this.items
                   })))
             
