@@ -43,6 +43,7 @@ function clear(jsonObject: { [key: string]: any }, isRoot: boolean):any {
                 content = content ? content.split("\n").map((x:any)=>x.trim()) : content;
                 if(htmlSanitizer)
                     content = htmlSanitizer(content);
+                content = Array.isArray(content) ? content.join(""):content;
             }
             jObject[keyName] = urlReplacer(content,keyName);
         }
