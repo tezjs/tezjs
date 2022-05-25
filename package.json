@@ -25,6 +25,7 @@
     "dev:playground:vuex": "yarn run tez dev playgrounds/vuex",
     "dev:playground:env": "yarn run tez dev playgrounds/env",
     "dev:template:strapi:frontend": "yarn run tez dev packages/create-tez/template-tez-strapi-vue/frontend",
+    "dev:template:strapi:backend": "yarn --cwd ./packages/create-tez/template-tez-strapi-vue/backend develop",
     "stub": "lerna run stub -- --stub && npm run build:vue",
     "build:vue": "lerna run build --stream --no-prefix",
     "build": "lerna run stub --stream --no-prefix",
