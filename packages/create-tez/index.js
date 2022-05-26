@@ -178,8 +178,16 @@ const TEMPLATES = TEZ_SUPPORTED_FRAMEWORKS.map(
         console.log('  yarn dev')
         break
       default:
-        console.log(`  ${pkgManager} install`)
-        console.log(`  ${pkgManager} run dev`)
+        if(template === "tez-strapi-vue"){
+          console.log(`  ${pkgManager} install`)
+          console.log(`  ${pkgManager} run install:packages`)
+          console.log(`  ${pkgManager} run develop`)
+        }
+        else{
+          console.log(`  ${pkgManager} install`)
+          console.log(`  ${pkgManager} run dev`)
+        }
+        
         break
     }
     console.log()
