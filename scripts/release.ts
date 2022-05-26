@@ -18,6 +18,7 @@ import prompts from 'prompts';
 import  path from 'path'
 import  semver from 'semver'
 import  fs from 'fs'
+import {globby} from 'globby';
 
 const packages = ["cli","common","create-tez","payload","types","vite","vue","js"];
 const rootDir = process.cwd();
@@ -75,6 +76,26 @@ async function publishPackage( bin,
     
 }
 
+async function updateTemplateDependenciesPackage(packageState){
+    const filePaths = await globby('packages/create-tez', {
+		expandDirectories: {
+			files: ['package.json']
+		},
+        gitignore:true
+	});
+    const packageNames = Object.keys(packageState);
+    for(const packageJsonPath of filePaths){
+        const templatePackageJson = require(`${rootDir}/${packageJsonPath}`);
+            for(const dependencyPackageName of packageNames){
+                if(templatePackageJson.dependencies && templatePackageJson.dependencies[dependencyPackageName])
+                    templatePackageJson.dependencies[dependencyPackageName] = packageState[dependencyPackageName].packageJson.version
+                if(templatePackageJson.devDependencies && templatePackageJson.devDependencies[dependencyPackageName])
+                    templatePackageJson.devDependencies[dependencyPackageName] = packageState[dependencyPackageName].packageJson.version
+            }
+            fs.writeFileSync(packageJsonPath,JSON.stringify(templatePackageJson, null, 2) + '\n')
+}
+}
+
 async function init(){
     const releaseType = await getReleaseType();    
     const packageState = {};
@@ -85,7 +106,8 @@ async function init(){
         console.log(packageJson.name,packageJson.version)
         packageState[packageJson.name] = {packageJson:packageJson,packagePath:packagePath,packageDirectory:packageDirectory};
     }
-    await updateDependencies(packageState)  
+    await updateDependencies(packageState);
+   await updateTemplateDependenciesPackage(packageState);
 }
 
 init()
