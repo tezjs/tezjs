@@ -69,8 +69,12 @@ async function updateDependencies(packageState){
 
 async function publishPackage( bin,
     args,
-    opts = {}){
-        await execa(bin,args,opts)
+    opts = {},isRelease){
+        if(isRelease)
+            await execa(bin,args,opts)
+        else
+            console.log(bin,args,opts)
+
     
 }
 
@@ -94,16 +98,17 @@ async function updateTemplateDependenciesPackage(packageState){
 }
 }
 
-async function publishPackages(packageDirectories){
+async function publishPackages(packageDirectories,isRelease){
     for(const packageDirectory of packageDirectories){
         await publishPackage('npm',['publish'],{
             stdio: 'pipe',
             cwd: packageDirectory
-          })
+          },isRelease)
     }
 }
 
 async function init(){
+    
     const releaseType = await getReleaseType();    
     const packageState = {};
     let packageDirectories= new Array<string>();
@@ -117,7 +122,7 @@ async function init(){
     }
     await updateDependencies(packageState);
     await updateTemplateDependenciesPackage(packageState);
-    await publishPackages(packageDirectories)
+    await publishPackages(packageDirectories,process.argv.length === 2)
 }
 
 init()
