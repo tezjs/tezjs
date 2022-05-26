@@ -1,5 +1,5 @@
+import { subStringText } from "./sub-string-text";
+
 export function getUrl(url:any) {
-    if(url && url.length > 1 && url.substr(url.length-1,url.length) === '/')
-        url = url.substr(0,url.length-1);
-    return url === "/" ? "/index" : url === "/index" ? "/" : url;
+    return url === "/" ? "/index" : url === "/index" ? "/" : subStringText(url);
 }
