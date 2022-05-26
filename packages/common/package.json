@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/common",
-  "version": "0.0.9",
+  "version": "0.0.14",
   "description": "",
   "module": "./dist/index.mjs",
   "main": "./dist/index.cjs",

@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/vue",
-  "version": "0.0.9",
+  "version": "0.0.14",
   "description": "",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
