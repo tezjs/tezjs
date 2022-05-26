@@ -18,7 +18,7 @@ const path =require("path")
 const semver = require("semver")
 const fs = require("fs")
 
-const packages = ["cli","common","create-tez","payload","types","vite","vue"];
+const packages = ["cli","common","create-tez","payload","types","vite","vue","js"];
 const rootDir = process.cwd();
 const packagesFolderName = 'packages';
 function getPackageInfo(packageName){
