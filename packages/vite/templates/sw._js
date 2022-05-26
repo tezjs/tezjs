@@ -79,12 +79,12 @@ broadcast.onmessage = (event) => {
   return response.blob();
     })
     .then(blob => new Promise((resolve, reject) => {
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onloadend = () => {
         broadcast.postMessage({ index:event.data.index,url:event.data.url,baseString:reader.result  }); 
-        resolve(reader.result)
-      }
-      reader.onerror = reject
-      reader.readAsDataURL(blob)
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
     }))
 };
