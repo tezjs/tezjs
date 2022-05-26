@@ -34,7 +34,8 @@
     "develop:strapi": "yarn --cwd ./tz-app/tez-strapi-app/strapi develop",
     "develop:tez": "wait-on http://localhost:1337/admin && yarn --cwd ./tz-app/tez-strapi-app/tez dev",
     "develop": "cross-env FORCE_COLOR=1 npm-run-all -l -p develop:*",
-    "install:packages": "(cd tz-app/tez-strapi-app/tez && npm install) && (cd..) && (cd strapi && npm install) "
+    "install:packages": "(cd tz-app/tez-strapi-app/tez && npm install) && (cd..) && (cd strapi && npm install) ",
+    "release:ts":"esno scripts/release.ts"
   },
   "repository": {
     "type": "git",
