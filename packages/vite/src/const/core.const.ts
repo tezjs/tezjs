@@ -32,7 +32,7 @@ export const ENCODING_UTF:string = 'utf-8';
 
 export const CLIENT_ENV_SUBSTRING:string  = "client_";
 
-export const SERVICE_WORKER_JS_PATH = ()=> `${commonContainer.buildOptions.rootDir}\\node_modules\\@tezjs\\vite\\templates\\sw._ts`
+export const SERVICE_WORKER_JS_PATH = ()=> `${commonContainer.buildOptions.rootDir}\\node_modules\\@tezjs\\vite\\templates\\sw._js`
 
-export const REGISTER_SERVICE_WORKER_JS_PATH = ()=> `${commonContainer.buildOptions.rootDir}\\node_modules\\@tezjs\\vite\\templates\\registerSW._ts`
+export const REGISTER_SERVICE_WORKER_JS_PATH = ()=> `${commonContainer.buildOptions.rootDir}\\node_modules\\@tezjs\\vite\\templates\\registerSW._js`
 

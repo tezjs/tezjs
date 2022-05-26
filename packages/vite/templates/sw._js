@@ -1,9 +1,4 @@
-declare const BroadcastChannel:any;
-declare const FileReader:any;
-declare const caches:any;
-declare const self:any;
-declare const assets:any;
-declare const fetch:any;
+
 async function deleteCache(request, cacheResponse) {
     const cache = await caches.open(getCacheName(request));
     const keys = await cache.keys();
