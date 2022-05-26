@@ -44,7 +44,6 @@ export const appContainer:
               ], {expandDirectories: {
                 extensions: ['vue']
             },cwd:commonContainer.buildOptions.rootDir, followSymbolicLinks: true});
-            console.log(paths)
             let uris = {urls:{},re:{}};
             paths.forEach(path=>{
                 let transformedPath = path.split('pages/')[1].replace(/_/g,':').replace('/index.vue','').replace('.vue','');
@@ -53,9 +52,7 @@ export const appContainer:
                 else
                     uris.urls[transformedPath === '' ? '/index':`/${transformedPath}`] = `/${path}`;
             })
-            console.log(uris)
             const routes = JSON.stringify(uris);
-            
             let stringifyRoutes =  `const autoRoutes = ${routes};`
             let dynamicRoutes = {};
             commonContainer.getAppRoutes().map(route =>dynamicRoutes[route.path] = '')
