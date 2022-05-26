@@ -19,6 +19,7 @@ import  path from 'path'
 import  semver from 'semver'
 import  fs from 'fs'
 import {globby} from 'globby';
+import { execa } from 'execa';
 
 const packages = ["cli","common","create-tez","payload","types","vite","vue","js"];
 const rootDir = process.cwd();
@@ -54,7 +55,7 @@ async function getReleaseType(){
 async function updateDependencies(packageState){
     const packageNames = Object.keys(packageState);
     for(const packageName of packageNames){
-        const {packageJson,packagePath}  = packageState[packageName];
+        const {packageJson,packagePath,packageDirectory}  = packageState[packageName];
         for(const dependencyPackageName of packageNames){
             if(packageJson.dependencies[dependencyPackageName])
                 packageJson.dependencies[dependencyPackageName] = packageState[dependencyPackageName].packageJson.version
@@ -62,17 +63,14 @@ async function updateDependencies(packageState){
                 packageJson.devDependencies[dependencyPackageName] = packageState[dependencyPackageName].packageJson.version
         }
         fs.writeFileSync(packagePath,JSON.stringify(packageJson, null, 2) + '\n')
-        await publishPackage('npm',['publish', '--access', 'public'],{
-            stdio: 'pipe',
-            cwd: packageJson.packageDirectory
-          })
+
     }
 }
 
 async function publishPackage( bin,
     args,
     opts = {}){
-        console.log(bin,args,opts)
+        await execa(bin,args,opts)
     
 }
 
@@ -96,18 +94,30 @@ async function updateTemplateDependenciesPackage(packageState){
 }
 }
 
+async function publishPackages(packageDirectories){
+    for(const packageDirectory of packageDirectories){
+        await publishPackage('npm',['publish'],{
+            stdio: 'pipe',
+            cwd: packageDirectory
+          })
+    }
+}
+
 async function init(){
     const releaseType = await getReleaseType();    
     const packageState = {};
+    let packageDirectories= new Array<string>();
     for(let packageName of packages){
         const {packageJson,packagePath,packageDirectory} = getPackageInfo(packageName);
         console.log(packageJson.version)
         packageJson.version = getVersion(packageJson.version,releaseType);
         console.log(packageJson.name,packageJson.version)
         packageState[packageJson.name] = {packageJson:packageJson,packagePath:packagePath,packageDirectory:packageDirectory};
+        packageDirectories.push(packageDirectory)
     }
     await updateDependencies(packageState);
-   await updateTemplateDependenciesPackage(packageState);
+    await updateTemplateDependenciesPackage(packageState);
+    await publishPackages(packageDirectories)
 }
 
 init()
