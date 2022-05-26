@@ -8,6 +8,7 @@ import { createTezStore } from '../store';
 import {overrideImageSourceProp} from '../funcs/override-image-source'
 import { tezRouter } from "../funcs/tez-router";
 import { TezAppOptions } from "../models/tez-app-options";
+import { TEZ_SRC_DIRECTIVE } from "../directives/tez-src";
 overrideImageSourceProp();
 export const tez:
 {
@@ -24,6 +25,7 @@ export const tez:
         Vue.component("TezSlot", TezSlot);
         Vue.component("TezLazy", TezLazy);
         Vue.component("TezPage", TezPage);
+        Vue.directive("tez-src",TEZ_SRC_DIRECTIVE);
         Vue.mixin(TzTickedMixin)
         Vue.use(createTezStore(tezAppOptions.store))
         let defaultRouteComponent = TezIndex;
