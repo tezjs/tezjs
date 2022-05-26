@@ -29,7 +29,7 @@
     "dev:template:strapi:backend": "yarn --cwd ./packages/create-tez/template-tez-strapi-vue/backend develop",
     "stub": "lerna run stub -- --stub && npm run build:vue",
     "build:vue": "lerna run build --stream --no-prefix",
-    "build": "lerna run stub --stream --no-prefix",
+    "build": "lerna run stub --stream --no-prefix && npm run build:vue",
     "develop:package": "tsc --watch",
     "develop:strapi": "yarn --cwd ./tz-app/tez-strapi-app/strapi develop",
     "develop:tez": "wait-on http://localhost:1337/admin && yarn --cwd ./tz-app/tez-strapi-app/tez dev",
