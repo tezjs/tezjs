@@ -99,15 +99,14 @@ async function updateTemplateDependenciesPackage(packageState){
 }
 
 async function publishPackages(packages:Array<{name:string,pkgDir:string}>,isRelease,tag){
-    console.log(tag)
     for(const packageInfo of packages){
         await createChangeLog(packageInfo,isRelease)
-        await createTag(tag,isRelease)
         await runCommand('npm',['publish'],{
             stdio: 'pipe',
             cwd: packageInfo.pkgDir
           },isRelease)
     }
+    await createTag(tag,isRelease)
 }
 
 async function createChangeLog(packageInfo:{name:string,pkgDir:string},isRelease:boolean){
