@@ -7,7 +7,7 @@ defineProps<{ article: any }>();
     class="uk-link-reset"
   >
     <div class="card px-4 py-10">
-        <img class="bg-cover text-center overflow-hidden" :src="article.image.url" :style="{height:'391px !important'}" /> 
+        <img class="bg-cover text-center overflow-hidden" v-tez-src="article.image.url" :style="{height:'391px !important'}" /> 
       <div
         class="
           mt-3
