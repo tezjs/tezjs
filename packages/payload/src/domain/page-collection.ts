@@ -10,6 +10,7 @@ import { RedirectRoute } from "./redirect-routes";
 import { commonContainer,CommonPathResolver } from '@tezjs/common'
 import { CustomPagePayload } from "./custom-page-payload";
 import getUrl from "../utils/get-url";
+import { DeploymentDomain } from "./deployment/deployment-domain";
 export class PageCollection {
     private requestService: RequestService;
     private internationalizationService: InternationalizationService;
@@ -21,6 +22,7 @@ export class PageCollection {
     private robotsGenerator:RobotTxtGenerator;
     private redirectRoute:RedirectRoute;
     private customPagePayload:CustomPagePayload;
+    private deployment:DeploymentDomain
     constructor() {
         this.requestService = new RequestService();
         this.internationalizationService = new InternationalizationService(this.requestService);
@@ -43,6 +45,11 @@ export class PageCollection {
         this.sitemap.save()
         await this.robotsGenerator.generate();
         this.redirectRoute.save();
+        if(commonContainer.buildOptions.commandName === "build"){
+            this.deployment = new DeploymentDomain();
+            this.deployment.generate();
+        }
+            
     }
     async generateStrapiPayload(routePath?:string) {
         await this.requestService.login()
