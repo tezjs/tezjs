@@ -155,7 +155,7 @@ async function isFirstRun() {
     });
     const initHasRun = await pluginStore.get({ key: "initHasRun" });
     await pluginStore.set({ key: "initHasRun", value: true });
-    return initHasRun;
+    return !initHasRun;
   }
   async function importSeedData() {
     // Allow read of application content types
