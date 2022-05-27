@@ -67,11 +67,11 @@ async function updateDependencies(packageState){
     }
 }
 
-async function publishPackage( bin,
+async function runCommand( bin,
     args,
     opts = {},isRelease){
         if(isRelease)
-            await execa(bin,args,opts)
+           return await execa(bin,args,opts)
         else
             console.log(bin,args,opts)
 
@@ -98,31 +98,74 @@ async function updateTemplateDependenciesPackage(packageState){
 }
 }
 
-async function publishPackages(packageDirectories,isRelease){
-    for(const packageDirectory of packageDirectories){
-        await publishPackage('npm',['publish'],{
+async function publishPackages(packages:Array<{name:string,pkgDir:string}>,isRelease,tag){
+    console.log(tag)
+    for(const packageInfo of packages){
+        await createChangeLog(packageInfo,isRelease)
+        await createTag(tag,isRelease)
+        await runCommand('npm',['publish'],{
             stdio: 'pipe',
-            cwd: packageDirectory
+            cwd: packageInfo.pkgDir
           },isRelease)
     }
+}
+
+async function createChangeLog(packageInfo:{name:string,pkgDir:string},isRelease:boolean){
+    const args = [
+        'conventional-changelog',
+        '-p',
+        'angular',
+        '-i',
+        'CHANGELOG.md',
+        '-s',
+        '--commit-path',
+        '.'
+      ]
+      args.push('--lerna-package', packageInfo.name)
+      await runCommand('npx', args, { cwd: packageInfo.pkgDir },isRelease)
+}
+
+async function createTag(tag:string,isRelease:boolean){
+    const { stdout } = await execa('git', ['diff'], { stdio: 'pipe' })
+  if (stdout) {
+    console.log('\nCommitting project changes.')
+    await runCommand('git', ['add', '-A'],{},isRelease)
+    await runCommand('git', ['commit', '-m', `release: ${tag}`],{},isRelease)
+    await runCommand('git', ['tag', tag],{},isRelease)
+  } else {
+    console.log('No changes to commit.')
+    return
+  }
+
+  console.log('\nPushing changes to GitHub...')
+  await runCommand('git', ['push', 'origin', `refs/tags/${tag}`],{},isRelease)
+  await runCommand('git', ['push'],{},isRelease)
+
+  if (!isRelease) {
+    console.log(`\n Release Dev Test executed.`)
+  } else
+    console.log("pushed packages")
+
 }
 
 async function init(){
     
     const releaseType = await getReleaseType();    
     const packageState = {};
-    let packageDirectories= new Array<string>();
+    let packageDirectories= new Array<{name:string,pkgDir:string}>();
+    let tag:number = null;
     for(let packageName of packages){
         const {packageJson,packagePath,packageDirectory} = getPackageInfo(packageName);
         console.log(packageJson.version)
+        tag = packageJson.version;
         packageJson.version = getVersion(packageJson.version,releaseType);
         console.log(packageJson.name,packageJson.version)
         packageState[packageJson.name] = {packageJson:packageJson,packagePath:packagePath,packageDirectory:packageDirectory};
-        packageDirectories.push(packageDirectory)
+        packageDirectories.push({pkgDir:packageDirectory,name:packageJson.name})
     }
     await updateDependencies(packageState);
     await updateTemplateDependenciesPackage(packageState);
-    await publishPackages(packageDirectories,process.argv.length === 2)
+    await publishPackages(packageDirectories,process.argv.length === 2,tag)
 }
 
 init()
