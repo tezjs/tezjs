@@ -1,3 +1,3 @@
 export class DeploymentConfig{
-    firebase?:{[key:string]:any}
+    firebase?:{[key:string]:any} | Boolean
 }
