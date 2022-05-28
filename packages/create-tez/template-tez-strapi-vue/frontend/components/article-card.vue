@@ -54,11 +54,7 @@ defineProps<{ article: any }>();
         </div>
       </div>
       <div class="flex items-center">
-        <img
-            class="w-16 h-16 border border-teal-500 rounded-full border-solid"
-            src="https://my-strapi-app-images-upload.s3.ap-south-1.amazonaws.com/avatar_image_c40b95e3d5.jpg"
-            alt="{{ article.author.name }}"
-          />
+        
         <p class="mx-4">{{ article.author.name }}</p>
       </div>
     </div>
