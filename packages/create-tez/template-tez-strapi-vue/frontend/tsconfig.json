@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "skipLibCheck": true,
+    "typeRoots": ["/**/*.ts", "/**/*.d.ts", "/**/*.tsx", "/**/*.vue"],
+    "paths": {
+      "#client-env": [
+        "node_modules/.cache/tez/client-env.ts"
+      ],
+      "#server-env": [
+        "node_modules/.cache/tez/server-env.ts"
+      ],
+      "#add-lib": [
+        "add-lib.ts"
+      ]
+    }
+  },
+  "include": ["/**/*.ts", "/**/*.d.ts", "/**/*.tsx", "/**/*.vue"]
+}
