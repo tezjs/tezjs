@@ -21,9 +21,9 @@ export class MasterPageCollection{
 
     async setMasterPageInfo(uri:string,filterJson:{[key:string]:any},item:{[key:string]:any}) {
         let result = await this.request.get(`/${uri}?${getFilterQueryParams(filterJson,SEO_POPULATE)}`);
-        item.masterPage = result[0].masterPage;
-        item.seo = result[0].seo;
-        if(!this.isGenerated){
+        item.masterPage = result[0].masterPage || {};
+        item.seo = result[0].seo || {};
+        if(!this.isGenerated && item.masterPage && item.masterPage.title){
             let masterPage = await parseStrapiData(item.masterPage, undefined, undefined,undefined);
             const directoryPath = path.join(this.pathResolver.payloadPath, "master-pages");
             createPath(directoryPath)
