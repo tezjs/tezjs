@@ -14,6 +14,7 @@ export const defaultContainer:
         getUniqueId(): string;
         cacheDynamicPageCollection(collectionName: string, data: any[]): void;
         getDynamicPageCollection(collectionName: string, filterExpression: any): { [key: string]: any };
+        clearState():void;
     } = new (class {
         writeImageUris:Array<string>= new Array<string>();
         dynamicPageCollection: { [key: string]: any[] } = {};
@@ -31,5 +32,11 @@ export const defaultContainer:
 
         getDynamicPageCollection(collectionName: string, filterExpression: any) {
             return this.dynamicPageCollection[collectionName] ? this.dynamicPageCollection[collectionName].filter(filterExpression) : [];
+        }
+
+        clearState(){
+            this.filterCollectionState = {};
+            this.collectionState = {};
+            this.dynamicPageCollection = {};
         }
     })();

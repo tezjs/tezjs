@@ -11,6 +11,7 @@ import { commonContainer,CommonPathResolver } from '@tezjs/common'
 import { CustomPagePayload } from "./custom-page-payload";
 import getUrl from "../utils/get-url";
 import { DeploymentDomain } from "./deployment/deployment-domain";
+import { defaultContainer } from "../const/core.const";
 export class PageCollection {
     private requestService: RequestService;
     private internationalizationService: InternationalizationService;
@@ -60,8 +61,10 @@ export class PageCollection {
                 const route = pageRouteResponse.routes[i];
                 if((routePath === route.path) || !routePath){
                     let deleteRouteFolder = routePath === route.path;
-                    if(deleteRouteFolder)
+                    if(deleteRouteFolder){
                         this.deletePayloadItem(`${this.pathResolver.payloadPath}${ getUrl( routePath)}`)
+                        defaultContainer.clearState();
+                    }
                    await this.payloadGenerator.generate(route, pageRouteResponse.dynamicPageRoute)
                     if(deleteRouteFolder)
                     break;
