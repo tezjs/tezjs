@@ -29,7 +29,7 @@ export  function beforeEach(routes:any,autoRoutes:{urls:{[key:string]:any},re:{[
     }else if(route.cPath){
       await store.dispatch("page/addPage",{url:url,page:{slots:{},masterPage:{layoutName:route.layoutName,slots:{}},pageComponent:route.pageComponent}})
       setTimeout(async function(){ await store.dispatch("page/changePageUrl",url)})
-    }else if(routeItem.seo)
+    }else if(routeItem && routeItem.seo)
         setMetaInfo(routeItem.seo)
     return true;
 }
