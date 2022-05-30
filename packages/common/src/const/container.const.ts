@@ -73,6 +73,7 @@ export const commonContainer:
             if(this.tezConfig.strapi){
                 let strapi = <StrapiModuleConfig>this.tezConfig.strapi;
                 strapi = deepMerge(this.strapiModuleConfig,this.tezConfig.strapi);
+                this.tezConfig.strapi = strapi;
                 strapi.ignoreColumns = strapi.ignoreColumns ? strapi.ignoreColumns.concat(...this.ignoreColumns) : this.ignoreColumns;
             }
                 
