@@ -101,6 +101,7 @@ async function updateTemplateDependenciesPackage(packageState){
 async function publishPackages(packages:Array<{name:string,pkgDir:string}>,isRelease,tag){
     for(const packageInfo of packages){
         await createChangeLog(packageInfo,isRelease)
+        if(packageInfo.name !== "tez")
         await runCommand('npm',['publish'],{
             stdio: 'pipe',
             cwd: packageInfo.pkgDir
