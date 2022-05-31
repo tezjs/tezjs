@@ -21,11 +21,11 @@ import  fs from 'fs'
 import {globby} from 'globby';
 import { execa } from 'execa';
 
-const packages = ["cli","common","create-tez","payload","types","vite","vue","js"];
+const packages = ["cli","common","create-tez","payload","types","vite","vue","js","tez"];
 const rootDir = process.cwd();
 const packagesFolderName = 'packages';
 function getPackageInfo(packageName){
-    const packageDirectory = path.resolve(rootDir,packagesFolderName,packageName);
+    const packageDirectory = packageName === "tez" ? rootDir : path.resolve(rootDir,packagesFolderName,packageName);
     const packagePath = path.resolve(packageDirectory,'package.json');
     const packageJson = require(packagePath);
     return {packageJson,packagePath,packageDirectory}; 
@@ -121,7 +121,7 @@ async function createChangeLog(packageInfo:{name:string,pkgDir:string},isRelease
         '.'
       ]
       args.push('--lerna-package', packageInfo.name)
-      await runCommand('npx', args, { cwd: packageInfo.pkgDir },isRelease)
+      await runCommand('npx', args, { cwd: packageInfo.pkgDir },true)
 }
 
 async function createTag(tag:string,isRelease:boolean){
