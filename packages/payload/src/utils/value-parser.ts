@@ -24,7 +24,7 @@ function parseValue(value:string,item){
         let matches = value.match(EXTRACT_CURLY_BRACKETS_STRING);
         matches.forEach(key=>{
             let func = new Function(...["t"],`return t.${key.replace(REMOVE_CURLY_BRACKETS,BLANK)};`);
-            var parsedValue = func(item);
+            var parsedValue = func(item.referencePageData);
             value = value.replace(key,parsedValue);
         })
     }
