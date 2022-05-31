@@ -155,9 +155,8 @@ async function init(){
     let tag:number = null;
     for(let packageName of packages){
         const {packageJson,packagePath,packageDirectory} = getPackageInfo(packageName);
-        console.log(packageJson.version)
-        tag = packageJson.version;
         packageJson.version = getVersion(packageJson.version,releaseType);
+        tag = packageJson.version;
         console.log(packageJson.name,packageJson.version)
         packageState[packageJson.name] = {packageJson:packageJson,packagePath:packagePath,packageDirectory:packageDirectory};
         packageDirectories.push({pkgDir:packageDirectory,name:packageJson.name})
