@@ -153,11 +153,11 @@ async function init(){
     const releaseType = await getReleaseType();    
     const packageState = {};
     let packageDirectories= new Array<{name:string,pkgDir:string}>();
-    let tag:number = null;
+    let tag:string = null;
     for(let packageName of packages){
         const {packageJson,packagePath,packageDirectory} = getPackageInfo(packageName);
         packageJson.version = getVersion(packageJson.version,releaseType);
-        tag = packageJson.version;
+        tag = `v${packageJson.version}`;
         console.log(packageJson.name,packageJson.version)
         packageState[packageJson.name] = {packageJson:packageJson,packagePath:packagePath,packageDirectory:packageDirectory};
         packageDirectories.push({pkgDir:packageDirectory,name:packageJson.name})
