@@ -35,7 +35,7 @@ export default defineComponent({
                 count = this.countMD || this.defaultCount;
             else 
                 count = this.countSM || this.defaultCount
-            return count;
+            return parseInt(count);
           },
           set(v:any) {
           }
@@ -62,15 +62,15 @@ export default defineComponent({
         },
         bindNext(){
             if (this.isInteractive) {
-                if(this.sourceItems.length <= this.items.length){
+                if (this.sourceItems.length <= this.items.length) {
                   let length = this.items.length;
                   let pickCount = this.pickCount;
-                  length = this.items.length > pickCount ? pickCount : this.lastIndex + (this.items.length - this.sourceItems.length);
-                  for(var i=this.lastIndex;i<length;i++){
+                  length = this.items.length > this.lastIndex + pickCount ? this.lastIndex + pickCount : this.lastIndex + (this.items.length - this.sourceItems.length);
+                  for (var i = this.lastIndex; i < length; i++) {
                     let item = this.items[i];
-                    this.sourceItems.push(item)
+                    this.sourceItems.push(item);
                   }
-                  this.lastIndex = (this.lastIndex+length)
+                  this.lastIndex = length;
                 }
               }
         }
@@ -81,7 +81,7 @@ export default defineComponent({
             this.sourceItems.forEach((item:any,index:any)=>{
                 let slot:any = this.$slots && this.$slots.default ? this.$slots.default({...item}) : [];
                 vNodes.push(
-                    h(this.vChildNode || NODE_NAME,{class:this.class,key:index},slot))
+                    h(this.vChildNode || NODE_NAME,{class:this.childClass,key:index},slot))
             })
             if(this.sourceItems.length > 0)
                 idleCallback(this.bindNext, { timeout: 2e3 })
