@@ -54,7 +54,7 @@ export default defineComponent({
     },
     render() {
         let vNodes: Array<VNode> = new Array<VNode>();
-        if(this.$slots && this.$slots.default)
+        if(this.$slots && this.$slots.default && this.items && this.items.length > 0)
         vNodes.push(
                 h('div',{class:this.class}, this.$slots?.default({
                     items: this.items
