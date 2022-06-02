@@ -11,9 +11,11 @@ defineProps<{ data: any }>()
     <TezLazy class="flex flex-wrap" :sourcePath="data.dynamicSourcePath" v-slot="source" >
       
 
-  <div class="w-full lg:w-1/2" v-for="article of source.items">
+  <tez-iterator class="w-full lg:w-1/2" countSM="1" countLG="2" countXL="2" :items="source.items">
+      <template v-slot="article">
       <article-card :article="article"></article-card>
-  </div> 
+      </template>
+  </tez-iterator> 
   
       </TezLazy> 
     </div>
