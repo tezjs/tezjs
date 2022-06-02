@@ -125,6 +125,6 @@ export default async function parseStrapiData(pageContent, url, dynamicData,refe
         delete Tag.MetaNameTags;
     }
     return {masterPageName:pageContent && pageContent.masterPage && pageContent.masterPage.title ? pageContent.masterPage.title:'',
-        components: components,url:getUrl(url), seo: parseObjectValue(Tag,parseObjectItem),redirectRoutes:seo ?seo.redirectRoutes:[], sitemap: getSitemapObject(seo.sitemap || pageContent, Tag.canonical,readProp(pageContent,UPDATED_AT)), sections:getPagePrePostComponents(readProp(pageContent,PRE_SECTION_PROPS)),footerSections:getPagePrePostComponents(readProp(pageContent,POST_SECTION_PROPS))
+        components: components,url:getUrl(url), seo: parseObjectValue(Tag,parseObjectItem.referencePageData),redirectRoutes:seo ?seo.redirectRoutes:[], sitemap: getSitemapObject(seo.sitemap || pageContent, Tag.canonical,readProp(pageContent,UPDATED_AT)), sections:getPagePrePostComponents(readProp(pageContent,PRE_SECTION_PROPS)),footerSections:getPagePrePostComponents(readProp(pageContent,POST_SECTION_PROPS))
     };
 }
