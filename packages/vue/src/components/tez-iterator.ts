@@ -41,6 +41,11 @@ export default defineComponent({
           }
         }
       },
+      watch:{
+        items:function(value){
+          this.bindNext();
+        }
+      },
     mounted(){
         this.subscribeLazy();
     },
@@ -56,13 +61,18 @@ export default defineComponent({
             }
         },
         bindNext(){
-            if(this.isInteractive){
-                let length = this.items.length;
-                let pickCount = this.pickCount;
-                length = this.items.length > pickCount ? pickCount : this.items.length;
-                let items = this.items.splice(0,length)
-                items.forEach((item:any)=>this.sourceItems.push(item));
-            }
+            if (this.isInteractive) {
+                if(this.sourceItems.length <= this.items.length){
+                  let length = this.items.length;
+                  let pickCount = this.pickCount;
+                  length = this.items.length > pickCount ? pickCount : this.lastIndex + (this.items.length - this.sourceItems.length);
+                  for(var i=this.lastIndex;i<length;i++){
+                    let item = this.items[i];
+                    this.sourceItems.push(item)
+                  }
+                  this.lastIndex = (this.lastIndex+length)
+                }
+              }
         }
     },
     render() {
