@@ -4,7 +4,7 @@ import { VITE_SERVER_CONFIG } from "../const/vite-server-config.const";
 import { readConfig } from "../functions/read-config";
 import { getHtmlTemplate } from "./html/get-html-template";
 export  async function build(){
-    readConfig();
+    await readConfig();
     let tezConfig = commonContainer.tezConfig;
     const pathResolver = new CommonPathResolver();
     let template = getHtmlTemplate(tezConfig.htmlMeta);
