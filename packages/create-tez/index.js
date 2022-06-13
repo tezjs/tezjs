@@ -1,16 +1,102 @@
 #!/usr/bin/env node
-const fs = require('fs')
-const path = require('path')
-const argv = require('minimist')(process.argv.slice(2), { string: ['_'] })
-const prompts = require('prompts')
-const {
-  yellow,
-  green,
-  blue,
-  red,
-  reset
-} = require('kolorist')
+import fs from 'fs'
+import path from 'path'
+import minimist from 'minimist'
+const argv = minimist(process.argv.slice(2), { string: ['_'] });
+import prompts from 'prompts'
+import {execa} from 'execa'
 
+
+import {
+    yellow,
+    green,
+    blue,
+    red,
+    reset
+  } from 'kolorist';
+  import { bold } from 'kleur/colors';
+
+import chalk from 'chalk';
+import ora from 'ora';
+
+const gradients = [
+	`#00FF97`,
+	`#29FF8F`,
+	`#58FF38`,
+	`#3BFF24`,
+	`#93FF05`,
+	`#4EFF00`,
+	`#6FF500`,
+	`#14E684`,
+	`#36D629`,
+	`#38C266`,
+];
+
+export const arrow = '■■▶';
+
+const gradientRefrences = [
+	...gradients,
+	...[...gradients].reverse(),
+	...gradients,
+];
+
+
+const sleepProcess = (time) =>
+	new Promise((resolve) => {
+		setTimeout(resolve, time);
+	});
+
+function getInstallAnimationFrames() {
+	const animationFrames = [];
+	for (let i = 0; i < gradients.length * 2; i++) {
+		const end = i + gradients.length - 1;
+		animationFrames.push(
+			gradientRefrences
+				.slice(i, end)
+				.map((g) => chalk.bgHex(g)(' '))
+				.join('')
+		);
+	}
+	return animationFrames;
+}
+
+function getAnimationFrames() {
+	const animationFrames = [];
+	for (let i = 1; i <= gradients.length; i++) {
+		const spaces = Array.from(
+			new Array(Math.abs(gradients.length - i - 1)),
+			() => ' '
+		);
+		const gradientColors = gradients.slice(0, i).map((item) => chalk.bgHex(item)(' '));
+		animationFrames.push([...spaces, ...gradientColors].join(''));
+	}
+	return animationFrames;
+}
+
+
+async function showSpinner(text) {
+	const animationFrames = getAnimationFrames();
+	const startSpinner = ora({
+		spinner: {
+			interval: 30,
+			frames:animationFrames,
+		},
+		text: `${arrow} ${text}`,
+	});
+	startSpinner.start();
+	await sleepProcess((animationFrames.length - 1) * startSpinner.interval);
+	startSpinner.stop();
+	const spinner = ora({
+		spinner: {
+			interval: 80,
+			frames: getInstallAnimationFrames(),
+		},
+		text: `${arrow} ${text}`,
+	}).start();
+
+	return spinner;
+}
+  
 const cwd = process.cwd()
 
 const TEZ_SUPPORTED_FRAMEWORKS = [
@@ -37,6 +123,14 @@ const TEMPLATES = TEZ_SUPPORTED_FRAMEWORKS.map(
   const renameFiles = {
     _gitignore: '.gitignore'
   }
+
+function readFileSync(path,isString=false) {
+    if(fs.existsSync(path)){
+        var content = fs.readFileSync(path, "utf-8");
+        content = isString ? content: JSON.parse(content);
+        return content;
+    }
+}
 
   async function initTez() {
     let targetDir = argv._[0]
@@ -142,8 +236,7 @@ const TEMPLATES = TEZ_SUPPORTED_FRAMEWORKS.map(
   
     console.log(`\nScaffolding project in ${root}...`)
   
-    const templateDir = path.join(__dirname, `template-${template}`)
-  
+    const templateDir = path.join(path.resolve(path.dirname('')), `template-${template}`)
     const write = (file, content) => {
       const targetPath = renameFiles[file]
         ? path.join(root, renameFiles[file])
@@ -159,7 +252,7 @@ const TEMPLATES = TEZ_SUPPORTED_FRAMEWORKS.map(
     for (const file of files.filter((f) => f !== 'package.json')) {
       write(file)
     }
-    const pkg = require(path.join(templateDir, `package.json`))
+    const pkg = readFileSync(path.join(templateDir, `package.json`))
   
     pkg.name = packageName || targetDir
   
@@ -167,7 +260,7 @@ const TEMPLATES = TEZ_SUPPORTED_FRAMEWORKS.map(
   
     const pkgInfo = pkgFromUserAgent(process.env.npm_config_user_agent)
     const pkgManager = pkgInfo ? pkgInfo.name : 'npm'
-  
+    await runInstall(`${template}`,pkgManager,root);
     console.log(`\nDone. Now run:\n`)
     if (root !== cwd) {
       console.log(`  cd ${path.relative(cwd, root)}`)
@@ -179,15 +272,12 @@ const TEMPLATES = TEZ_SUPPORTED_FRAMEWORKS.map(
         break
       default:
         if(template === "tez-strapi-vue"){
-          console.log(`  ${pkgManager} install`)
-          console.log(`  ${pkgManager} run install:packages`)
           console.log(`  ${pkgManager} run develop`)
         }
         else{
           console.log(`  ${pkgManager} install`)
           console.log(`  ${pkgManager} run dev`)
         }
-        
         break
     }
     console.log()
@@ -254,6 +344,36 @@ const TEMPLATES = TEZ_SUPPORTED_FRAMEWORKS.map(
       name: pkgSpecArr[0],
       version: pkgSpecArr[1]
     }
+  }
+  function emojiWithFallback(char, fallback) {
+    return process.platform !== 'win32' ? char : fallback;
+  }
+
+  async function runInstall(templateName,pkgManager,root) {
+    if (templateName === "tez-strapi-vue") {
+      const installProjects = ["","backend","frontend"];
+      for(var projectName of installProjects)
+       await installPacakages(pkgManager,projectName,root)
+    }
+  }
+
+  async function installPacakages(pkgManager,projectName,root){
+    const iPath = projectName ? path.resolve(cwd, root,projectName) : path.resolve(cwd, root);
+      const installExec = execa(pkgManager, ['install'], { cwd:iPath });
+      const installingPackagesMsg = `Installing '${projectName || 'root'}' folder packages${emojiWithFallback(' 📦', '...')}`;
+      const installSpinner = await showSpinner(installingPackagesMsg);
+      await new Promise((resolve, reject) => {
+        installExec.stdout?.on('data', function (data) {
+          installSpinner.text = `${arrow} ${installingPackagesMsg}\n${bold(
+            `[${pkgManager}]`
+          )} ${data}`;
+        });
+        installExec.on('error', (error) => reject(error));
+        installExec.on('close', () => resolve());
+      });
+    
+		 installSpinner.text = green(`'${projectName || 'root'}' folder Packages installed!`);
+		 installSpinner.succeed();
   }
   
   initTez().catch((e) => {
