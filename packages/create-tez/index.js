@@ -5,7 +5,7 @@ import minimist from 'minimist'
 const argv = minimist(process.argv.slice(2), { string: ['_'] });
 import prompts from 'prompts'
 import {execa} from 'execa'
-
+import {fileURLToPath} from 'url';
 
 import {
     yellow,
@@ -235,8 +235,9 @@ function readFileSync(path,isString=false) {
     template = variant || framework || template
   
     console.log(`\nScaffolding project in ${root}...`)
-  
-    const templateDir = path.join(path.resolve(path.dirname('')), `template-${template}`)
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const templateDir = path.join(__dirname, `template-${template}`)
     const write = (file, content) => {
       const targetPath = renameFiles[file]
         ? path.join(root, renameFiles[file])
