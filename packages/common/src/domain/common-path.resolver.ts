@@ -54,7 +54,7 @@ export class CommonPathResolver {
     }
 
     get imageFolderPath(){
-        getPath([this.publicFolder,'\\uploads'],true)
+        getPath([this.publicFolder,'uploads'],true)
         return this.publicFolder;
     }
 
