@@ -1,5 +1,6 @@
 import { commonContainer, CommonPathResolver, writeFileSync } from "@tezjs/common";
 import {globby} from 'globby';
+import getUrl from "../functions/get-url";
 import { ImportState } from "../interface/import-state";
 import { tezTemplate } from "./tez.template";
 
@@ -38,7 +39,6 @@ export const appContainer:
         }
 
         async setupClientRoutes(){
-            console.log(commonContainer.buildOptions.rootDir)
             let paths = await globby([
                 'pages'
               ], {expandDirectories: {
@@ -54,9 +54,9 @@ export const appContainer:
             })
             const routes = JSON.stringify(uris);
             let stringifyRoutes =  `const autoRoutes = ${routes};`
-            let dynamicRoutes = {};
-            commonContainer.getAppRoutes().map(route =>dynamicRoutes[route.path] = '')
-            stringifyRoutes+=`const dynamicRoutes = ${JSON.stringify(dynamicRoutes)};`
+            stringifyRoutes+=`const dynamicRoutes = {`
+            commonContainer.getAppRoutes().map(route =>stringifyRoutes+= `"${route.path}": ()=> import("tez${getUrl(route.path)}"),`)
+            stringifyRoutes+=`};`
             return stringifyRoutes;
         }
     })();
