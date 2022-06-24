@@ -1,27 +1,31 @@
-import { defineComponent, h, VNode, defineAsyncComponent, KeepAlive } from 'vue'
-import { mapGetters } from 'vuex';
+import { defineComponent, h, VNode, KeepAlive } from 'vue'
 import { getJsonPayload } from '../funcs/payload/get-json-payload';
-import { componentState } from '../const/component-state';
-import { TezDataState } from '../domain/tez-data-state';
 import { isBot } from '@tezjs/js';
+import { activePageState } from '../const/active-page-state';
+import { tezPages } from '../const/tez-pages';
+import { cacheState } from '../const/cache-state';
 
 interface DataPoint {
-    dataState:TezDataState;
-    url:string;
     lazyRef: VNode | null;
     isInView: Boolean;
     previousState: Boolean | null;
-    observer: any | null
+    observer: any | null;
+    slots:{[key:string]:any};
+    masterPageSlots:{[key:string]:any};
+    components:Array<{name:string,data:{[key:string]:any},id:string}>;
+    nextIndex:number;
 }
 export default defineComponent({
     data(): DataPoint {
         return {
-            dataState:undefined,
-            url:'',
             previousState: null,
             isInView: false,
             lazyRef: null,
             observer: null,
+            slots:{},
+            masterPageSlots:{},
+            components:new Array<{name:string,data:{[key:string]:any},id:string}>(),
+            nextIndex:0
         }
     },
     props: {
@@ -29,19 +33,25 @@ export default defineComponent({
         slotCategory:{ type: String,default:'page' } ,
         preserveComponentState: { type: Boolean }
     },
-    computed: {
-        ...mapGetters({
-            activePage: "page/getActivePage",
-            activePageUrl: "page/activePageUrl",
-            slotComponents: "page/slotComponents",
-            maxComponentsCount:'page/maxComponentsCount'
-        }),
-    },
     mounted(){
-        this.dataState = new TezDataState(this.slotCategory)
+        this.slots = activePageState.page.slots;
+        this.masterPageSlots = activePageState.page.masterPageSlots;
+        if(this.slotCategory !== "master")
+        activePageState.hooks.hook("tez:slotsChanged",(newSlots:{slots:{[key:string]:any},masterPageSlots:{[key:string]:any}})=>{
+            this.slots = newSlots.slots;
+            this.masterPageSlots = newSlots.masterPageSlots;
+            this.components = new Array<{name:string,data:{[key:string]:any},id:string}>();
+            this.nextIndex = 0;
+        })
         this.goToNextComponent(false)
     },
     methods: {
+        getSlotComponents(slotName, slotCategory) {
+            if (slotCategory === "master") {
+              return this.masterPageSlots[slotName] ? this.masterPageSlots[slotName] : [];
+            }
+            return this.slots[slotName] ? this.slots[slotName] : [];
+          },
         splice(name: string) {
             let splitText: string[] = name.split("-");
             splitText = splitText.splice(1, splitText.length);
@@ -73,14 +83,14 @@ export default defineComponent({
                 return;
             }
             
-            let components = this.slotComponents(this.slotName,this.slotCategory);
-            if(components.length > this.dataState.state.nextIndex && !this.dataState.state.components[this.dataState.state.nextIndex]){
-                let componentItem = components[this.dataState.state.nextIndex]
+            let components = this.getSlotComponents(this.slotName,this.slotCategory);
+            if(components.length > this.nextIndex && !this.components[this.nextIndex]){
+                let componentItem = components[this.nextIndex]
                 if(componentItem && !componentItem.data){
                     componentItem.data = await getJsonPayload(componentItem.itemName);
                 }
-                this.dataState.state.components.push(componentItem);
-                this.dataState.state.nextIndex++;
+                this.components.push(componentItem);
+                this.nextIndex++;
             if (isInfinite || isBot())
                this.goToNextComponent(isInfinite);
             }
@@ -88,16 +98,14 @@ export default defineComponent({
     },
     render() {
         let vNodes: Array<VNode> = new Array<VNode>();
-        if(this.dataState && this.dataState.state){
-            for (let component of this.dataState.state.components) {
-                if(componentState.tezAppOptions.components[component.path]){
-                    if (!this.dataState.state.vNodes[component.itemName]){
-                        this.dataState.state.vNodes[component.itemName] = h(defineAsyncComponent(() => componentState.tezAppOptions.components[component.path]()), { data: component.data });
-                     }
-                    vNodes.push(h(KeepAlive, { key: component.itemName }, this.dataState.state.vNodes[component.itemName]))
+            for (let component of this.components) {
+                if(tezPages.components[component.name]){
+                    let vNode = cacheState.getVNode(component.id);
+                    if (!vNode)
+                        vNode = cacheState.cacheVNode(component.id,h(tezPages.components[component.name], { data: component.data }));
+                    vNodes.push(h(KeepAlive, { key: component.itemName }, vNode))
                 }
             }
-        }
         if (!this.lazyRef)
             this.lazyRef = h('div', { ref: 'divLazy',style:{'height':'2px'} }, "");
         vNodes.push(this.lazyRef)

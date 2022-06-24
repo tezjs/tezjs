@@ -9,10 +9,10 @@ export const TEZ_SRC_DIRECTIVE: Directive<any, any> =  {
               if (entry.isIntersecting) {
                 setTimeout(function () {
                     el.src = binding.value;
-                  }, 500);
+                  }, 50);
                 observer.unobserve(el);
               }
-          });
+          }); 
       }, { threshold: [0.25] });
       observer.observe(el);
       el.observer = observer;

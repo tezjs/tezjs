@@ -19,21 +19,21 @@ export function preCodeTemplate(page:any){
     }
     componentRefs+= '}';
         
-    if(page.masterPage){
-        masterPage +=getImportStatement(page.masterPage,'layouts');
-        masterPageRefs+=`${page.masterPage}:${page.masterPage},`
+    if(page.layoutName){
+        masterPage +=getImportStatement(page.layoutName,'layouts');
+        masterPageRefs+=`${page.layoutName}:${page.layoutName},`
     }
     masterPageRefs+='}';
-    
     return `
         import { registerTezPage } from '@tezjs/vue';
         ${components}
         ${masterPage}
 
+        export default function(){
         registerTezPage(
             {components:${componentRefs},masterPage:${masterPageRefs},payload:${JSON.stringify(page)}}
             );
 
-            `
+        }    `
     
 }

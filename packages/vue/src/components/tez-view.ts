@@ -1,35 +1,43 @@
-import { defineAsyncComponent, defineComponent ,h, KeepAlive } from "vue"
-import { mapGetters } from "vuex"
-import { componentState } from "../const/component-state";
+import { DefineComponent, defineComponent ,h, KeepAlive, VNode } from "vue"
+import { activePageState } from "../const/active-page-state";
+import { cacheState } from "../const/cache-state";
+import { tezPages } from "../const/tez-pages";
 import TezIndex from './tez-index'
 import TezPage from "./tez-page"
+const CACHE_KEY_LAYOUT_TEZ_PAGE:string = "layout_tezpage";
 export default defineComponent({
     data(){
         return {
             state:{},
             tezNode:h(TezIndex), 
-            vNode:undefined
+            vNode:undefined,
+            layoutName:undefined,
+            layoutComponent:undefined
         }
     },
-    computed: {
-        ...mapGetters({
-            activeMasterPage: "page/getActiveMasterPage",
-            activePageUrl: "page/activePageUrl"
-        })
+    mounted(){
+      this.layoutName = activePageState.page.layoutName;
+      this.layoutComponent = activePageState.page.layoutComponent;  
+      this.subscribeHooks();
+    },
+    methods:{
+        subscribeHooks(){
+            activePageState.hooks.hook("tez:layoutNameChanged",(layoutName:string)=>{
+                this.layoutName = layoutName;
+            })
+    
+            activePageState.hooks.hook("tez:layoutComponentChanged",(component:DefineComponent)=>{
+                this.layoutComponent = component;
+            })
+        }
     },
     render() {
-        let layoutName  = this.activeMasterPage ? `/layouts/${this.activeMasterPage.layoutName}.vue` : undefined;
-        let layoutComponent = this.activeMasterPage && componentState.tezAppOptions.layouts ? componentState.tezAppOptions.layouts[layoutName] : undefined;
-        if(layoutName && !layoutComponent)
-            layoutComponent = ()=>new Promise((resolve:any)=>resolve({render(){return h(TezPage)}}))
-        if(layoutName && !this.state[layoutName] && layoutComponent)
-            this.state[layoutName] = this.vNode = h(defineAsyncComponent(() => layoutComponent()));
-        else if(this.state[layoutName])
-            this.vNode = this.state[layoutName];
-        else if(this.activePageUrl)
-            this.vNode = this.tezNode;
-        else
-            this.vNode = h('div');
-        return h(h(KeepAlive,null,this.vNode));
+        let vNode:VNode = undefined
+        let layoutComponent = tezPages.masterPages[this.layoutName];
+        if(!layoutComponent)
+            cacheState.layoutVNode[CACHE_KEY_LAYOUT_TEZ_PAGE] = vNode = cacheState.layoutVNode[CACHE_KEY_LAYOUT_TEZ_PAGE]|| h(TezPage);
+        else if(layoutComponent)
+            cacheState.layoutVNode[this.layoutName] = vNode = cacheState.layoutVNode[this.layoutName] || h(layoutComponent);
+        return h(h(KeepAlive,null,vNode));
     }
   })

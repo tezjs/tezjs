@@ -5,20 +5,20 @@ import { PageCollection } from "@tezjs/payload";
 import { generateSW } from "./service-worker/generate-sw";
 import { readConfig } from "../functions/read-config";
 import { DynamicCodeGen } from "./dynamic-code-gen";
-const virtualModuleId = /^[tez][a-zA-Z0-9]+/
-const dynamicCodeGen = new DynamicCodeGen();
+// const virtualModuleId = /^[tez][a-zA-Z0-9]+/
+
 export function tez(): Plugin {
 	return {
 		name: "vite:tez",
-		resolveId(id) {
-			if (virtualModuleId.test(id)) 
-			  return `${id}`
-		  },
-		  load(id) {
-			if (virtualModuleId.test(id)) {
-				return dynamicCodeGen.getCode(id);
-			}
-		  },
+		// resolveId(id) {
+		// 	if (virtualModuleId.test(id)) 
+		// 	  return `${id}`
+		//   },
+		//   load(id) {
+		// 	if (virtualModuleId.test(id)) {
+		// 		return dynamicCodeGen.getCode(id);
+		// 	}
+		//   },
 		transformIndexHtml: {
 			enforce: "post",
 			transform(html: string, ctx?: IndexHtmlTransformContext): IndexHtmlTransformResult {
@@ -46,6 +46,8 @@ export function tez(): Plugin {
 			await readConfig();
 			const pageCollection = new PageCollection();
       		await pageCollection.generate();
+			const dynamicCodeGen = new DynamicCodeGen();
+			dynamicCodeGen.genDeps();
           }
 	}
 }

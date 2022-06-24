@@ -55,7 +55,7 @@ export const appContainer:
             const routes = JSON.stringify(uris);
             let stringifyRoutes =  `const autoRoutes = ${routes};`
             stringifyRoutes+=`const dynamicRoutes = {`
-            commonContainer.getAppRoutes().map(route =>stringifyRoutes+= `"${route.path}": ()=> import("tez${getUrl(route.path)}"),`)
+            commonContainer.getAppRoutes().map(route =>stringifyRoutes+= `"${route.path}": ()=> import("./deps${getUrl(route.path)}/pre"),`)
             stringifyRoutes+=`};`
             return stringifyRoutes;
         }

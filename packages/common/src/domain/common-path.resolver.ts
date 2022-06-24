@@ -23,6 +23,10 @@ export class CommonPathResolver {
         return getPath([commonContainer.buildOptions.rootDir, CACHE_PATH],true)
     }
 
+    get depsPath() {
+        return getPath([this.cachePath, "deps"],true)
+    }
+
     
 
     get clientEnvPath() {
@@ -100,6 +104,10 @@ export class CommonPathResolver {
 
     removeDirSync(path:string){
         removePath(path);
+    }
+
+    getPath(path:Array<string>){
+        return getPath(path,true)
     }
     
 }

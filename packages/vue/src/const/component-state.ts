@@ -1,4 +1,5 @@
 import { shallowRef,unref } from "vue";
+import { Router } from "../domain/router/router";
 import { TezAppOptions } from "../models/tez-app-options";
 
 export const componentState:
@@ -10,6 +11,7 @@ export const componentState:
     tezAppOptions:TezAppOptions=undefined;
     currentRoute= shallowRef({params:{}});
     defineGlobalProps(app:any){
+        app.config.globalProperties.$tezRouter = new Router();
         Object.defineProperty(app.config.globalProperties, '$tezRoute', {
             enumerable: true,
             get: () => unref(this.currentRoute),
