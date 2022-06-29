@@ -1,6 +1,6 @@
 import * as express from 'express'
-import { PageCollection } from "@tezjs/payload"
 import { commonContainer } from '@tezjs/common';
+import { refreshData } from '../../functions/refresh-data';
 
 export class RoutesRouter{
     public path = '/routes';
@@ -16,8 +16,7 @@ export class RoutesRouter{
     }
 
     get = async (request:express.Request,response:express.Response) => {
-      const pageCollection = new PageCollection();
-      await pageCollection.generate(request.query?.path);
+      await refreshData(request.query?.path)
       response.status(200).end();
     }
 

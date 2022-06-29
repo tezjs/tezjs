@@ -16,7 +16,7 @@ import { commonContainer } from "@tezjs/common";
 export class PageRoute {
     private pageCollectionConfig: PageCollectionConfig;
     private pathResolver: PathResolver;
-    private routes:Array<{name:string,path:string}> = new Array<{name:string,path:string}>();
+    private routes:Array<{name:string,path:string,fPath:string}> = new Array<{name:string,path:string,fPath:string}>();
     constructor(private requestService: RequestService) {
         const { pageCollectionConfig } = commonContainer.getStrapiConfig();
         this.pageCollectionConfig = pageCollectionConfig;
@@ -83,7 +83,8 @@ export class PageRoute {
         if(this.routes.filter(t=>t.path === routeItem.path).length === 0)
         this.routes.push({
             name: (routeItem.name || routeItem.path).replace(REMOVE_SPECIAL_CHARACTERS, UNDERSCORE),
-            path: routeItem.path
+            path: routeItem.path,
+            fPath:getUrl(routeItem.path).split('/').join('\\')
         })
     }
 

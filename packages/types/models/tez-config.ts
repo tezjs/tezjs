@@ -8,6 +8,7 @@ import { ClientEntry } from "./client-entry";
 import { PayloadConfig } from "./strapi/payload-config";
 import { DeploymentConfig } from "./deployment-config";
 export interface TezConfig {
+    spa?:boolean;
     viteOptions?:any;
     payloadPath?:string;
     strapi?:boolean | StrapiModuleConfig;

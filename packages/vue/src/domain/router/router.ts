@@ -1,13 +1,13 @@
 import { tezPages } from "../../const/tez-pages";
 import { getCurrentScrollPosition } from "../../funcs/current-scroll-position";
-import { getUrl } from "../../funcs/payload/get-url";
+import { getCurrentUrl } from "../../funcs/payload/get-current-url";
 import { resolveRoute } from "../../funcs/resolve-pre-code";
 import { HistoryState } from "../../models/history-state";
 const assign = Object.assign;
 export class Router{
     
     historyState:{value:HistoryState } = {value:history.state};
-    url:string  = getUrl();
+    url:string  = getCurrentUrl();
     currentUrl:string=this.url;
     constructor(){
         if(!this.historyState.value)

@@ -1,16 +1,16 @@
-import { HtmlPage } from "@tezjs/types"
+import { commonContainer } from "@tezjs/common";
 import { Seo } from "../domain/seo"
 
-export const indexTemplate = (html:HtmlPage)=>{
-    let seoObject = new Seo(html.head);
+export const indexTemplate = (seo:Seo)=>{
     return `<!DOCTYPE html>
-    <html lang="${html.lang || 'en'}">
-      <head>
-        ${seoObject.getElements()}
-      </head>
+<html lang="${seo.htmlMeta.lang || 'en'}">
+<head>
+        ${seo.headChildElements}
+</head>
       <body>
         <div id="tez_app"></div>
-        <script type="module" src="/tez.ts"></script>
+        ${commonContainer.buildOptions.commandName === "dev"? '<script type="module" src="/tez.ts"></script>' : ""}
+        ${seo.bodyChildElements}
       </body>
     </html>`
 }

@@ -3,6 +3,7 @@ import { CACHE_PATH } from "../const/app.const";
 import { commonContainer } from "../const/container.const";
 import { getPath } from "../functions/get-path";
 import { removePath } from "../functions/remove-path";
+import * as path from "path";
 export class CommonPathResolver {
     constructor(){
     }
@@ -108,6 +109,9 @@ export class CommonPathResolver {
 
     getPath(path:Array<string>){
         return getPath(path,true)
+    }
+    getFilePath(directories:Array<string>,fileName:string){
+        return path.join(getPath(directories),fileName)
     }
     
 }

@@ -10,7 +10,7 @@ export async function resolvePreCode(tezAppOptions:TezAppOptions,to?:string){
         let url = getUrl(to);
         if(!tezPages.isExits(url)){
             if(tezAppOptions?.dynamicRoutes && tezAppOptions?.dynamicRoutes[url])
-                tezAppOptions?.dynamicRoutes[url]().then(t=>{t.default();resolve(true)});
+                tezAppOptions?.dynamicRoutes[url]().then(t=>{t();resolve(true)});
             else
                 resolve(true)
         }else{

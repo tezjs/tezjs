@@ -1,16 +1,18 @@
 import { commonContainer} from '@tezjs/common';
 import * as express from 'express'
 import { appContainer } from '../../const/container.const';
-import { getHtmlTemplate } from '../html/get-html-template';
+import { refreshData } from '../../functions/refresh-data';
+import { HtmlPage } from '../html-page';
 
 
 export class AllRouter{
     public path = '*';
     public router = express.Router();
     public htmlCache:string = undefined;
+    public routes:Array<{name:string,path:string,fPath:string}>;
     constructor(private vite:any){
       this.initializeRoutes();
-      
+      this.routes = commonContainer.getAppRoutes();
     }
 
     initializeRoutes(){
@@ -19,10 +21,13 @@ export class AllRouter{
 
     get = async (request:express.Request,response:express.Response)=>{
         try {
-           await appContainer.addOrUpdateTezTS();
-            if(!this.htmlCache)
-                 this.htmlCache = getHtmlTemplate(commonContainer.tezConfig.htmlMeta);
-            response.status(200).set({ 'Content-Type': 'text/html' }).end(this.htmlCache)
+          let htmlCache = undefined;
+          await refreshData(request.url)
+          const route=this.routes.filter(route=>route.path === request.url)[0]
+          await appContainer.addOrUpdateTezTS(route);
+          var htmlPage = new HtmlPage(route)
+          htmlCache = htmlPage.createPage();
+          response.status(200).set({ 'Content-Type': 'text/html' }).end(htmlCache)
         } catch (e) {
           this.vite && this.vite.ssrFixStacktrace(e)
           console.log(e.stack)

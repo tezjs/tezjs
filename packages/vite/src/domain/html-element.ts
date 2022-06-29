@@ -1,21 +1,24 @@
 import { CommonPathResolver } from "@tezjs/common";
 
 export class HtmlElement  {
-    preElements:string[]
-    postElements:string[]
+    preHeadElements:string[]
+    postHeadElements:string[]
+    bodyElements:string[]
+    inlineElment:string;
     commonPath:CommonPathResolver;    
     constructor(){
         this.commonPath = new CommonPathResolver();
-        this.preElements = new Array<string>();
-        this.postElements = new Array<string>();
+        this.preHeadElements = new Array<string>();
+        this.postHeadElements = new Array<string>();
+        this.bodyElements = new Array<string>();
     }
 
     get preElementString(){
-        return this.getElementString(this.preElements)
+        return this.getElementString(this.preHeadElements)
     }
 
     get postElementString(){
-        return this.getElementString(this.postElements)
+        return this.getElementString(this.postHeadElements)
     }
 
     private getElementString(elements:string[]){
@@ -25,10 +28,18 @@ export class HtmlElement  {
 
     }
 
-    addElement(element:string,isPre:boolean){
+    addHeadChildElement(element:string,isPre:boolean){
         if(isPre)
-            this.preElements.push(`${element}\n`);
+            this.preHeadElements.push(`${element}\n`);
         else 
-            this.postElements.push(`${element}\n`)
+            this.postHeadElements.push(`${element}\n`)
+    }
+
+    addBodyChildElement(element:string){
+        this.bodyElements.push(`${element}\n`)
+    }
+
+    addInline(element:string){
+        this.inlineElment+= element;
     }
 }

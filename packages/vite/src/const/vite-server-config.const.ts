@@ -1,12 +1,13 @@
 import { commonContainer, CommonPathResolver } from '@tezjs/common';
 import vue from '@vitejs/plugin-vue'
 import { UserConfig } from 'vite'
+import { tezGenBundle } from '../domain/plugins/tez-gen-bundle';
 import { tez } from "../domain/tez";
 export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
   const pathResolver = new CommonPathResolver();
   return {
     root:commonContainer.buildOptions.rootDir,
-    logLevel: 'info',
+    logLevel: 'silent',
     envDir:'environments',
     resolve:{
       alias:[
@@ -41,6 +42,6 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
         }
       }
       },
-      plugins: [vue(),tez()]
+      plugins: [vue(),tez(),tezGenBundle()]
   }
 }

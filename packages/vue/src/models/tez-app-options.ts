@@ -3,7 +3,7 @@ import { ModuleTree } from "vuex";
 
 export interface TezAppOptions {
     
-    components:Record<string, () => Promise<{
+    components?:Record<string, () => Promise<{
         [key: string]: any;
       }>>;
 
@@ -21,7 +21,9 @@ export interface TezAppOptions {
 
     useVue?:(vue:any)=>void;
 
-    autoRoutes:{urls:{[key:string]:any},re:{[key:string]:any}};
+    autoRoutes?:{urls:{[key:string]:any},re:{[key:string]:any}};
 
-    dynamicRoutes:{[key:string]:any}
+    dynamicRoutes?:{[key:string]:any};
+
+    
 }
