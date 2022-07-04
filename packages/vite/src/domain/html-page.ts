@@ -3,16 +3,26 @@ import { minify } from 'html-minifier';
 import { indexTemplate } from "../const/index.template";
 import getUrl from "../functions/get-url";
 import { Seo } from "./seo";
-
+import { HtmlPage as iHtmlPage } from '@tezjs/types'
+import { mergeConfig } from "vite";
 export class HtmlPage extends Seo {
     constructor(route: {name:string,path:string,fPath:string}){
         super(route);
         route.path = getUrl(route.path)
+        
     }
 
-    createPage(inlineCode?:{js:{[key:string]:string},css:{[key:string]:string}}) {
+    createPage(htmlMeta?:iHtmlPage) {
+        this.mergeHtmlMeta(htmlMeta)
         return this.buildHtml();
     }
+
+    mergeHtmlMeta(htmlMeta:iHtmlPage){
+        if(htmlMeta)
+        this.htmlMeta = mergeConfig(this.htmlMeta,htmlMeta)
+    }
+
+    
 
     buildHtml(){
         this.buildElements();

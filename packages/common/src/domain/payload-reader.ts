@@ -15,9 +15,8 @@ export class PayloadReader {
     private lastUrlPath:string;
     constructor(public route:{name:string,path:string,fPath:string}){
         this.commonPath = new CommonPathResolver();
-        this.lastUrlPath = getUrlLastPath(route.fPath,"\\");
+        this.lastUrlPath =route && route.fPath? getUrlLastPath(route.fPath,"\\") : "";
         this.isComponentExists = this.commonPath.pathExists(this.componentPath);
-        //this.isMasterPageExists = this.commonPath.pathExists(this.masterPagePath);
         this.isTagsExists = this.commonPath.pathExists(this.tagsPath)
     }
 

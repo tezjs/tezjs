@@ -43,7 +43,11 @@ export const tezPages:
                 if(!this.pages[url].slots[slotName])
                     this.pages[url].slots[slotName]=[];
                 if(this.pages[url].slots && this.pages[url].slots[slotName])
-                    page.payload.slots[slotName].forEach(item=>this.pages[url].slots[slotName].push(item))
+                    page.payload.slots[slotName].forEach(item=>{
+                        let component = this.pages[url].slots[slotName].filter(t=>t.id === item.id)[0];
+                        if(component)
+                            component.data  = item.data;
+                    })
             })
         }
         if(page.payload && page.payload.tags)

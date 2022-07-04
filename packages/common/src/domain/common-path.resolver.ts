@@ -5,8 +5,6 @@ import { getPath } from "../functions/get-path";
 import { removePath } from "../functions/remove-path";
 import * as path from "path";
 export class CommonPathResolver {
-    constructor(){
-    }
 
     get indexHtmlPath(){
         return `${commonContainer.buildOptions.rootDir}\\index.html`
@@ -28,7 +26,9 @@ export class CommonPathResolver {
         return getPath([this.cachePath, "deps"],true)
     }
 
-    
+    get distPath(){
+        return getPath([this.rootPath,"dist"],false)
+    }
 
     get clientEnvPath() {
         return getPath([this.cachePath, "client-env.ts"]);
@@ -43,7 +43,7 @@ export class CommonPathResolver {
     }
 
     get addLibPath() {
-        return `${commonContainer.buildOptions.rootDir}\\add-lib.ts`;
+        return getPath([commonContainer.buildOptions.rootDir,"add-lib.ts"],false)
     }
 
     get routesJsonPath() {
@@ -64,27 +64,27 @@ export class CommonPathResolver {
     }
 
     get storePath(){
-        return `${commonContainer.buildOptions.rootDir}\\store\\index.ts`
+        return getPath([commonContainer.buildOptions.rootDir,"store","index.ts"],false)
     }
 
     get routerPath(){
-        return `${commonContainer.buildOptions.rootDir}\\router\\index.ts`
+        return getPath([commonContainer.buildOptions.rootDir,"router","index.ts"],false)
     }
 
     get layoutsPath(){
-        return `${commonContainer.buildOptions.rootDir}\\layouts`
+        return getPath([commonContainer.buildOptions.rootDir,"layouts"],false)
     }
 
     get componentsPath(){
-        return `${commonContainer.buildOptions.rootDir}\\components`
+        return getPath([commonContainer.buildOptions.rootDir,"components"],false)
     }
 
     get pluginsPath(){
-        return `${commonContainer.buildOptions.rootDir}\\plugins\\index.ts`
+        return getPath([commonContainer.buildOptions.rootDir,"plugins","index.ts"],false)
     }
 
     get pagesPath(){
-        return `${commonContainer.buildOptions.rootDir}\\pages`
+        return getPath([commonContainer.buildOptions.rootDir,"pages"],false)
     }
 
     getExistsFilesOrFolders(){

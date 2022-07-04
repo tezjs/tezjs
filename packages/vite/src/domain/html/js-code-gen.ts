@@ -2,6 +2,7 @@ import { commonContainer, getPath, PayloadReader, writeFileSync } from "@tezjs/c
 import { depsCodeTemplate } from "../../const/deps-code";
 import { getComponentName } from "../../functions/get-component-name";
 import getUrl from "../../functions/get-url";
+import { getPreloadCodeTemplate } from "../../functions/preload-code-template";
 export class JsCodeGen extends PayloadReader{
     postSlots:{slots:any,masterPageSlots:any} = {slots:{},masterPageSlots:{}};
         
@@ -13,9 +14,12 @@ export class JsCodeGen extends PayloadReader{
         return (Object.keys(this.postSlots.masterPageSlots).length > 0 || Object.keys(this.postSlots.slots).length > 0);
     }
     gen() {
+        let preloadCode = getPreloadCodeTemplate();
         let preCode = this.preCode();
         let postCode = this.postCode();
         const preFile = getPath([this.commonPath.getPath([this.commonPath.depsPath, this.route.fPath]),"pre.ts"]);
+        const preloadFile = getPath([this.commonPath.getPath([this.commonPath.depsPath, this.route.fPath]),"preload.ts"]);
+        writeFileSync(preloadFile,preloadCode,true)
         writeFileSync(preFile,preCode,true)
         if(this.isPostCode){
             const postFile = getPath([this.commonPath.getPath([this.commonPath.depsPath, this.route.fPath]),"post.ts"]);
@@ -23,6 +27,7 @@ export class JsCodeGen extends PayloadReader{
         }
             
     }
+
 
     preCode() {
         return depsCodeTemplate(
@@ -32,7 +37,7 @@ export class JsCodeGen extends PayloadReader{
                 masterPageSlots:this.getSlots(this.masterPage,false),
                 tags:this.tags,
                 layoutName:this.masterPage.layoutName,
-                postScript: this.isPostCode ? [`"./deps${getUrl(this.route.path)}/post"`] : []
+                postScript: this.isPostCode ? commonContainer.buildOptions.commandName === "dev"? `/tez/deps${getUrl(this.route.path)}/post` :'./post' : ''
             }
         );
     }
@@ -70,7 +75,7 @@ export class JsCodeGen extends PayloadReader{
                         if(!this.postSlots.slots[slotName])
                             this.postSlots.slots[slotName] = []
                         this.postSlots.slots[slotName].push({
-                            name:componentName,data:this.getData(componentName), id:itemName
+                            name:componentName,data:this.getData(itemName), id:itemName
                         });
                     }else if(slotName === "footer" && !isPageSlot){
                         if(!this.postSlots.masterPageSlots[slotName])
@@ -79,6 +84,7 @@ export class JsCodeGen extends PayloadReader{
                         name:componentName,data:data, id:itemName
                     });
                     }
+                    itemCount++;
                   }
                }
          }

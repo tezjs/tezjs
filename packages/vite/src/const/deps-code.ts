@@ -35,24 +35,23 @@ export function depsCodeTemplate(page:any,isPre:boolean = true){
         masterPageRefs+=`"${page.layoutName}":${snakeToCamel(page.layoutName)},`
     }
     masterPageRefs+='}';
-    let afterInteraction = '';
-    if(isPre)
-        afterInteraction = `afterInteraction:{
-            scripts:${JSON.stringify(page.postScript)},
-            preLoads:/*PRELOAD PATH*/
-        }`
+    let postScript = '';
+    if(page.postScript){
+        postScript = `postScript: "${page.postScript}"`;
+    }
+        
     return `
         import { registerTezPage } from '@tezjs/vue';
         ${components}
         ${masterPage}
-
-        export default function(){
+        export default (function(){
         registerTezPage(
             {components:${componentRefs},
             masterPage:${masterPageRefs},
-            payload:${JSON.stringify(page)}},
-            
+            payload:${JSON.stringify(page)},
+            ${postScript}
+        }
             );
-        }    `
+        })()    `
     
 }

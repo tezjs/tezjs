@@ -23,11 +23,11 @@ export class AllRouter{
         try {
           let htmlCache = undefined;
           await refreshData(request.url)
-          const route=this.routes.filter(route=>route.path === request.url)[0]
-          await appContainer.addOrUpdateTezTS(route);
-          var htmlPage = new HtmlPage(route)
-          htmlCache = htmlPage.createPage();
-          response.status(200).set({ 'Content-Type': 'text/html' }).end(htmlCache)
+          const route=this.routes.filter(route=>route.path === request.url)[0] || {"name":"","path":"/","fPath":"\\index"}
+            await appContainer.addOrUpdateTezTS(route);
+            var htmlPage = new HtmlPage(route)
+            htmlCache = htmlPage.createPage();
+            response.status(200).set({ 'Content-Type': 'text/html' }).end(htmlCache)
         } catch (e) {
           this.vite && this.vite.ssrFixStacktrace(e)
           console.log(e.stack)

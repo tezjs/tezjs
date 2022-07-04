@@ -1,3 +1,4 @@
+import{ idleCallback } from "@tezjs/js"
 declare const Image:any;
 const IMAGE_DATA_STRING:{[key:string]:any} = {};
 const IMAGE_STATE:{[key:string]:any} = {};
@@ -18,18 +19,18 @@ function setImageSource(this:HTMLImageElement, source:string){
   export function overrideImageSourceProp(){
     Object.defineProperty(Image.prototype, "src", {
       set(src) {
-        if(window.location.hostname.indexOf("localhost") !== -1){
-          this.setAttribute("src",src);
-        }
-        else if(!IMAGE_DATA_STRING[src]){
-          REQUEST_COUNT = REQUEST_COUNT+1;
-          IMAGE_STATE[REQUEST_COUNT] = {instance:this,url:src}
-          imageRequestBroadcaster.postMessage({
-              index: REQUEST_COUNT,
-              url:src
-            });
-        }else
-          setImageSource.bind(this).call(this,IMAGE_DATA_STRING[src])
+        //if(window.location.hostname.indexOf("localhost") !== -1){
+          idleCallback(()=>this.setAttribute("src",src),{timeout:0});
+        // }
+        // else if(!IMAGE_DATA_STRING[src]){
+        //   REQUEST_COUNT = REQUEST_COUNT+1;
+        //   IMAGE_STATE[REQUEST_COUNT] = {instance:this,url:src}
+        //   imageRequestBroadcaster.postMessage({
+        //       index: REQUEST_COUNT,
+        //       url:src
+        //     });
+        // }else
+        //   setImageSource.bind(this).call(this,IMAGE_DATA_STRING[src])
       },
       enumerable: true,
       configurable: true,

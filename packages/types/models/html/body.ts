@@ -1,3 +1,3 @@
 export interface BodyTag {
-    inlineScript?:{[key:string]:string}
+    inlineScript?:Array<{name:string,code:string}>
 }

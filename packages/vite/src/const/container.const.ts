@@ -1,5 +1,4 @@
 import { commonContainer, CommonPathResolver, writeFileSync } from "@tezjs/common";
-import {globby} from 'globby';
 import getUrl from "../functions/get-url";
 import { ImportState } from "../interface/import-state";
 import { RouteBuild } from "../interface/route-build";
@@ -28,15 +27,7 @@ export const appContainer:
                     refrenceState.imports +=`\nimport * as func from '#add-lib'; func.default();`
                     delete existsFilesorFolders.addLib;
                 }
-            //     Object.keys(existsFilesorFolders).forEach(key=>{
-            //         if(existsFilesorFolders[key]){
-            //             if(key === "components" || key === "layouts"|| key === "pages")
-            //                 refrenceState.props += `${key}:import.meta.glob('/${key}/**/*.vue'),`
-            //             else
-            //                 refrenceState.props += `${key}:${key}.default,`
-            //     } 
-            // })
-            //refrenceState.props += `autoRoutes:autoRoutes,`
+            
             refrenceState.props += `dynamicRoutes:dynamicRoutes`
             }else
             refrenceState = this.importState;
@@ -51,21 +42,6 @@ export const appContainer:
         }
 
         async setupClientRoutes(route?:{[key:string]:any}){
-            // let paths = await globby([
-            //     'pages'
-            //   ], {expandDirectories: {
-            //     extensions: ['vue']
-            // },cwd:commonContainer.buildOptions.rootDir, followSymbolicLinks: true});
-            // let uris = {urls:{},re:{}};
-            // paths.forEach(path=>{
-            //     let transformedPath = path.split('pages/')[1].replace(/_/g,':').replace('/index.vue','').replace('.vue','');
-            //     if(/:/.test(transformedPath))
-            //         uris.re[`/${transformedPath}`] =`/${path}`;
-            //     else
-            //         uris.urls[transformedPath === '' ? '/index':`/${transformedPath}`] = `/${path}`;
-            // })
-            // const routes = JSON.stringify(uris);
-            // let stringifyRoutes =  `const autoRoutes = ${routes};`
             let stringifyRoutes =`${this.getRoutes(route)}`
             return stringifyRoutes;
         }
@@ -74,7 +50,6 @@ export const appContainer:
             if(commonContainer.buildOptions.commandName == "dev")
             {
                 routes = `const dynamicRoutes = {`
-                commonContainer.getAppRoutes().map(route =>routes+= `"${route.path}": ()=> import("./deps${getUrl(route.path)}/pre").then(t=>t.default),`)
                 routes += `}`;
             }else{
             routes= `import pre from "./deps${getUrl(route.path)}/pre";

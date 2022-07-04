@@ -7,7 +7,7 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
   const pathResolver = new CommonPathResolver();
   return {
     root:commonContainer.buildOptions.rootDir,
-    logLevel: 'silent',
+    logLevel: 'info',
     envDir:'environments',
     resolve:{
       alias:[
@@ -17,7 +17,8 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
         { find: '#store', replacement: "/store" },
         { find: '#router', replacement: "/router" },
         { find: '#add-lib', replacement: "/add-lib.ts" },
-        { find: '/@', replacement: commonContainer.buildOptions.rootDir }
+        { find: '/@', replacement: commonContainer.buildOptions.rootDir },
+        { find: '/tez', replacement: pathResolver.cachePath }
       ]
     },
     optimizeDeps: {

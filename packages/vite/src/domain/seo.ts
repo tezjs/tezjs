@@ -126,14 +126,14 @@ export class Seo extends JsCodeGen  {
         {
             let body = this.htmlMeta.body;
             if(body.inlineScript)
-                Object.keys(body.inlineScript).forEach((key)=>{this.addInlineScript(key,body.inlineScript[key])})
+                body.inlineScript.forEach((item)=>{this.addInlineScript(item.name,item.code)})
         }
     }
 
     addInlineStyle(){
         if(this.htmlMeta.head?.inlineStyle)
-        Object.keys(this.htmlMeta.head?.inlineStyle).forEach((key)=>{
-            this.addHeadChildElement(`<style data-head="tezjs" >${this.htmlMeta.head?.inlineStyle[key]}</style>`,true)
+        this.htmlMeta.head?.inlineStyle.forEach((item)=>{
+            this.addHeadChildElement(`<style data-href="${item.name}" data-head="tezjs" >${item.code}</style>`,true)
         })
     }
 
