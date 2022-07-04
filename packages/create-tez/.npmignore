@@ -108,3 +108,5 @@ template-tez-strapi-vue/backend/node_modules/
 template-tez-strapi-vue/backend/package-lock.json
 template-tez-strapi-vue/frontend/public/
 template-tez-strapi-vue/frontend/dist/
+template-tez-strapi-vue/frontend/node_modules/
+template-tez-strapi-vue/frontend/.firebase
