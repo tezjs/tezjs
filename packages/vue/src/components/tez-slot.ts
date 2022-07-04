@@ -42,6 +42,7 @@ export default defineComponent({
             this.masterPageSlots = newSlots.masterPageSlots;
             this.components = new Array<{name:string,data:{[key:string]:any},id:string}>();
             this.nextIndex = 0;
+            this.goToNextComponent(false)
         })
         this.goToNextComponent(false)
     },
