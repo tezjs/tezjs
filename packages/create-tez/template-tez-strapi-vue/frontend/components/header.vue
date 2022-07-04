@@ -17,7 +17,7 @@ defineProps<{ data: any }>();
             >
               <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                  <router-link
+                  <tez-link
                     class="
                       text-2xl
                       font-bold
@@ -32,14 +32,14 @@ defineProps<{ data: any }>();
                       no-underline
                     "
                     to="/"
-                    >Tez JS</router-link
+                    >Tez JS</tez-link
                   >
                 </div>
               </div>
               <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
               <div class="items-center md:flex">
                 <div class="flex flex-col mt-2 md:flex-row md:mt-0 md:mx-1">
-                  <router-link
+                  <tez-link
                     v-bind:key="category.slug"
                     :to="category.slug"
                     v-for="category in source.items"
@@ -58,7 +58,7 @@ defineProps<{ data: any }>();
                       no-underline
                     "
                   >
-                    {{ category.name }}</router-link
+                    {{ category.name }}</tez-link
                   >
                 </div>
               </div>

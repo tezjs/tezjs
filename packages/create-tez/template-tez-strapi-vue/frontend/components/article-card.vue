@@ -2,7 +2,7 @@
 defineProps<{ article: any }>();
 </script>
 <template>
-      <router-link
+      <tez-link
     :to="article.slug"
     class="uk-link-reset"
   >
@@ -58,5 +58,5 @@ defineProps<{ article: any }>();
         <p class="mx-4">{{ article.author.name }}</p>
       </div>
     </div>
-    </router-link>
+    </tez-link>
 </template>
