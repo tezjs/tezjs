@@ -1,4 +1,4 @@
-import { IndexHtmlTransformContext, IndexHtmlTransformResult, Plugin } from "vite"
+import { Plugin } from "vite"
 import { commonContainer } from "@tezjs/common"
 import { generateSW } from "./service-worker/generate-sw";
 import { readConfig } from "../functions/read-config";
