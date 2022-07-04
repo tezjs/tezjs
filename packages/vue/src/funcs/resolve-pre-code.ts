@@ -9,8 +9,10 @@ export async function resolveRoute(url){
 export async function resolvePreCode(tezAppOptions:TezAppOptions,to?:string){
     return new Promise<Boolean>((resolve,reject)=>{
         let url = getUrl(to);
-        if(!tezPages.isExits(url))
+        if(!tezPages.isExits(url)){
+            /* @vite-ignore */
             import(getPreloadScriptUrl(url)).then(t=>{t.default().then(x=>resolve(true))});
+        }
         else
             resolve(true)
     })
