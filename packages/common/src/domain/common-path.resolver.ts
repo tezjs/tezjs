@@ -7,7 +7,7 @@ import * as path from "path";
 export class CommonPathResolver {
 
     get indexHtmlPath(){
-        return `${commonContainer.buildOptions.rootDir}\\index.html`
+        return getPath([commonContainer.buildOptions.rootDir,"index.html"],false);
     }
 
     get rootPath() {

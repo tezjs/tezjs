@@ -1,8 +1,9 @@
-export function getUrlLastPath(url:string, splitCharacter:string = "/"){
+import * as path from 'path';
+export function getUrlLastPath(url:string){
     let lastUrlNode = url;
     if(url){
-        let splitUrl = url.split(splitCharacter);
-        lastUrlNode = splitCharacter + splitUrl[splitUrl.length - 1];
+        let splitUrl = url.split(/\/|\\/);
+        lastUrlNode = path.sep + splitUrl[splitUrl.length - 1];
     }
     return lastUrlNode
 }

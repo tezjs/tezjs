@@ -1,4 +1,5 @@
 import {  CONTENT_PROP_NAMES, DYNAMIC_PROP_NAMES, META_TAG_PROP_NAMES, SEO_PROP_NAMES, TITLE_PROPS, UNDERSCORE, URL_PROPS } from "../const/app.const";
+import * as path from 'path'
 import { REMOVE_SPECIAL_CHARACTERS } from "../const/app.regex";
 import { defaultContainer } from "../const/core.const";
 import { PageCollectionConfig } from "@tezjs/types";
@@ -84,7 +85,7 @@ export class PageRoute {
         this.routes.push({
             name: (routeItem.name || routeItem.path).replace(REMOVE_SPECIAL_CHARACTERS, UNDERSCORE),
             path: routeItem.path,
-            fPath:getUrl(routeItem.path).split('/').join('\\')
+            fPath:getUrl(routeItem.path).split('/').join(path.sep)
         })
     }
 

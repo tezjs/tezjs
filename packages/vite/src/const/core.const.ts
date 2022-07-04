@@ -1,4 +1,4 @@
-import { commonContainer } from "@tezjs/common";
+import { commonContainer, getPath } from "@tezjs/common";
 
 export const NAME:string = "name";
 export const PROPERTY:string = "property"
@@ -32,8 +32,8 @@ export const ENCODING_UTF:string = 'utf-8';
 
 export const CLIENT_ENV_SUBSTRING:string  = "client_";
 
-export const SERVICE_WORKER_JS_PATH = ()=> `${commonContainer.buildOptions.rootDir}\\node_modules\\@tezjs\\vite\\templates\\sw._js`
+export const SERVICE_WORKER_JS_PATH = ()=> getPath([commonContainer.buildOptions.rootDir,"node_modules","@tezjs","vite","templates","sw._js"],false)
 
-export const REGISTER_SERVICE_WORKER_JS_PATH = ()=> `${commonContainer.buildOptions.rootDir}\\node_modules\\@tezjs\\vite\\templates\\registerSW._js`
+export const REGISTER_SERVICE_WORKER_JS_PATH = ()=> getPath([commonContainer.buildOptions.rootDir,"node_modules","@tezjs","vite","templates","registerSW._js"],false)
 
 export const TEZJS_PATH="assets/tez.js";

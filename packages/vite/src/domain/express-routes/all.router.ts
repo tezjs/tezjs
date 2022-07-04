@@ -1,5 +1,6 @@
 import { commonContainer} from '@tezjs/common';
 import * as express from 'express'
+import * as path from 'path'
 import { appContainer } from '../../const/container.const';
 import { refreshData } from '../../functions/refresh-data';
 import { HtmlPage } from '../html-page';
@@ -23,7 +24,7 @@ export class AllRouter{
         try {
           let htmlCache = undefined;
           await refreshData(request.url)
-          const route=this.routes.filter(route=>route.path === request.url)[0] || {"name":"","path":"/","fPath":"\\index"}
+          const route=this.routes.filter(route=>route.path === request.url)[0] || {"name":"","path":"/","fPath":`${path.sep}index`}
             await appContainer.addOrUpdateTezTS(route);
             var htmlPage = new HtmlPage(route)
             htmlCache = htmlPage.createPage();
