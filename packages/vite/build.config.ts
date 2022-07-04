@@ -11,6 +11,7 @@ export default defineBuildConfig({
   ],
 externals:[
   "html-minifier",
-  "vite"
+  "vite",
+  "esbuild"
 ]
 })
