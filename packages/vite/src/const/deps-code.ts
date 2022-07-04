@@ -25,7 +25,8 @@ export function depsCodeTemplate(page:any,isPre:boolean = true){
     let componentRefs=`{`;
     let masterPageRefs=`{`;
     for(let name of getPreComponents(page.slots,page.masterPageSlots)){
-        componentRefs+=`"${name}":${snakeToCamel(name)},`
+        const propName:string = snakeToCamel(name);
+        componentRefs+=`"${name}":${propName},`
         components+=getImportStatement(name,'components');
     }
     componentRefs+= '}';
