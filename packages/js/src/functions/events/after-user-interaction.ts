@@ -2,8 +2,8 @@ import { isBot } from "../is-bot";
 import { idleCallback } from "../request-idle-callback";
 import { subscribe } from "../subscribe";
 
-export function afterUserInteraction(funcs:Function[]){
+export function afterUserInteraction(){
     if(!isBot())
-        idleCallback(subscribe(funcs),{ timeout: 2e3 })
+        idleCallback(subscribe(),{ timeout: 2e3 })
 }
 
