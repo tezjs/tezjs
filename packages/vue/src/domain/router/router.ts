@@ -19,25 +19,34 @@ export class Router{
                 replaced: true,
                 scroll: null,
             }, true);  
-        window.addEventListener("popstate",({ state })=>{console.log("popstate")})
+        window.addEventListener("popstate",({ state })=>{
+            this.historyState.value = state;
+            this.changeRouteState(state && state.current ?  state.current : getCurrentUrl(),true)
+        })
     }
     
     push(to:string){
+      this.changeRouteState(to);
+    }
+
+    changeRouteState(to,isPopState=false){
         this.resolve(to).then(t=>{
-            const currentState = assign(
-                {}, 
-                this.historyState.value, history.state, {
-                    forward: to,
-                    scroll: getCurrentScrollPosition(),
-                });
-                
-                this.changeRoute(currentState.current, currentState, true);
-                const state = assign({}, this.createState({back:this.currentUrl,current: to, forward:null}), { position: currentState.position + 1 });
-                this.changeRoute(to, state, false);
+            if(!isPopState){
+                const currentState = assign(
+                    {}, 
+                    this.historyState.value, history.state, {
+                        forward: to,
+                        scroll: getCurrentScrollPosition(),
+                    });
+                    
+                    this.changeRoute(currentState.current, currentState, true);
+                    const state = assign({}, this.createState({back:this.currentUrl,current: to, forward:null}), { position: currentState.position + 1 });
+                    this.changeRoute(to, state, false);
+            }
                 this.currentUrl = to;
                 tezPages.refreshRoute(to)
         })
-    }
+      }
 
     resolve(url:string){
         return resolveRoute(url)
