@@ -4,6 +4,7 @@ import { isBot } from '@tezjs/js';
 import { activePageState } from '../const/active-page-state';
 import { tezPages } from '../const/tez-pages';
 import { cacheState } from '../const/cache-state';
+import { getCurrentUrl } from '../funcs/payload/get-current-url';
 
 interface DataPoint {
     lazyRef: VNode | null;
@@ -104,7 +105,7 @@ export default defineComponent({
                     let vNode = cacheState.getVNode(component.id);
                     if (!vNode)
                         vNode = cacheState.cacheVNode(component.id,h(tezPages.components[component.name], { data: component.data }));
-                    vNodes.push(h(KeepAlive, { key: component.itemName }, vNode))
+                    vNodes.push(h(KeepAlive, { key:`${getCurrentUrl()}${component.itemName}`  }, vNode))
                 }
             }
         if (!this.lazyRef)
