@@ -44,7 +44,8 @@ export class Router{
                     this.changeRoute(to, state, false);
             }
                 this.currentUrl = to;
-                tezPages.refreshRoute(to)
+                tezPages.refreshRoute(to);
+                this.changeScrollPosition();
         })
       }
 
@@ -57,6 +58,16 @@ export class Router{
             this.historyState.value = state;
     }
 
+    changeScrollPosition(){
+        if ('scrollBehavior' in document.documentElement.style)
+        window.scrollTo({
+            behavior:'smooth',
+            top:0
+        });
+        else {
+        window.scrollTo(window.pageXOffset,0);
+    }
+    }
     createState(state:HistoryState) {
         return {
             back:state.back,
