@@ -97,18 +97,6 @@ export const CHANGE_FREQUENCY:string[]= ["changefrequency"]
 
 export const PRIORITY:string[]= ["priority"]
 
-export const SEO_POPULATE:string[] = [
-    "Seo",
-    "Seo.MetaTags",
-    "Seo.Sitemap",
-    "Seo.RedirectRoutes",
-    "MasterPage",
-    "MasterPage.GenericCollections",
-    "MasterPage.Seo",
-    "MasterPage.Seo.MetaTags",
-    "MasterPage.Seo.Sitemap",
-    "MasterPage.Seo.RedirectRoutes"
-];
 export const DEFAULT_STRAPI_URL = 'http://localhost:1337'
 
 export const IMAGE_EXTENSION_REGEX = (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i);

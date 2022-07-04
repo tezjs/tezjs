@@ -1,4 +1,3 @@
-import { SEO_POPULATE } from "../const/app.const";
 import { getFilterQueryParams } from "../utils/get-filter-query-params";
 import parseStrapiData from "./parse-strapi-data";
 import { RequestService } from "./request.server";
@@ -20,7 +19,7 @@ export class MasterPageCollection{
     }
 
     async setMasterPageInfo(uri:string,filterJson:{[key:string]:any},item:{[key:string]:any}) {
-        let result = await this.request.get(`/${uri}?${getFilterQueryParams(filterJson,SEO_POPULATE)}`);
+        let result = await this.request.get(`/${uri}?${getFilterQueryParams(filterJson,"deep")}`);
         item.masterPage = result[0].masterPage || {};
         item.seo = result[0].seo || {};
         if(!this.isGenerated && item.masterPage && item.masterPage.title){

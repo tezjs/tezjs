@@ -1,4 +1,3 @@
-import { SEO_POPULATE } from "./app.const";
 import { commonContainer } from '@tezjs/common'
 export const QUERY_PARAMS : { [key:string] :any} = {
     3:{
@@ -18,7 +17,7 @@ export const QUERY_PARAMS : { [key:string] :any} = {
         locale: {
           "locale": (value) => value
         },
-        populate:{ populate: '*'},
-        seoPopulate:{populate:SEO_POPULATE}
+        populate:{ populate: 'deep'},
+        seoPopulate:{populate:'deep'}
     }
 }
