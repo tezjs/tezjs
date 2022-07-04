@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/vue",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
@@ -33,11 +33,11 @@
     "unbuild": "^0.7.4"
   },
   "dependencies": {
-    "@tezjs/js": "0.0.26",
+    "@tezjs/js": "0.0.27",
     "tslib": "^2.3.1",
     "vue": "^3.2.25",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2",
-    "hookable":"5.1.1"
+    "hookable": "5.1.1"
   }
 }
