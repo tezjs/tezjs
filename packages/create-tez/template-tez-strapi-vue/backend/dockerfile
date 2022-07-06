@@ -1,0 +1,4 @@
+FROM node:16.15.1
+WORKDIR /app
+CMD npm install && npm install --ignore-scripts=false --verbose sharp && npm install --platform=linux --arch=x64 sharp && npm run develop
+EXPOSE 1337
