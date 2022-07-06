@@ -23,6 +23,8 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    environment:
+      - HOST=strapi
     ports:
       - 3000:3000
       - 24678:24678
