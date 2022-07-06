@@ -4,6 +4,7 @@ export const depsContainer:
     {
         setDeps(deps:DepsContainerConfig);
         getDeps();
+        deps:DepsContainerConfig;
     } = new (class {
         deps:DepsContainerConfig
         setDeps(deps:DepsContainerConfig){

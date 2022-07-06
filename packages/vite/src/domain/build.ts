@@ -7,8 +7,10 @@ import { PageCollection } from "@tezjs/payload";
 import { JsCodeGen } from "./html/js-code-gen";
 import { writeDepsAndGlob } from "../functions/write-deps";
 import { addUpdateInputs } from "../functions/add-update-inputs";
+import { appContainer } from "../const/container.const";
 export  async function build(){
     await readConfig();
+    appContainer.addOrUpdateTezTS()
 			const pageCollection = new PageCollection();
       		await pageCollection.generate();
     let tezConfig = commonContainer.tezConfig;

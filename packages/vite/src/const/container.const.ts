@@ -17,7 +17,7 @@ export const appContainer:
         build:RouteBuild = {route:{path:'',fPath:''}};
         async addOrUpdateTezTS(route?:{name:string,fPath:string,path:string}){
             this.build.route = route;
-            let routes = await this.setupClientRoutes(route);
+            
             let refrenceState:ImportState = {imports:'',props:'',runtimeImports:''};
             if(!this.importState){
                 let existsFilesorFolders = this.pathResolver.getExistsFilesOrFolders();
@@ -29,11 +29,8 @@ export const appContainer:
                     refrenceState.imports +=`\nimport * as func from '#add-lib'; func.default();`
                     delete existsFilesorFolders.addLib;
                 }
-            
-            refrenceState.props += `dynamicRoutes:dynamicRoutes`
             }else
-            refrenceState = this.importState;
-        refrenceState.runtimeImports = routes; 
+                refrenceState = this.importState;
         
         let tsCode = tezTemplate(refrenceState);
         if(this.tsCodeCache !== tsCode)
@@ -41,25 +38,5 @@ export const appContainer:
         this.tsCodeCache = tsCode;
         this.importState = refrenceState;
         return refrenceState;
-        }
-
-        async setupClientRoutes(route?:{[key:string]:any}){
-            let stringifyRoutes =`${this.getRoutes(route)}`
-            return stringifyRoutes;
-        }
-        getRoutes(route?:{[key:string]:any}){
-            let routes:string = '';
-            if(commonContainer.buildOptions.commandName == "dev")
-            {
-                routes = `const dynamicRoutes = {`
-                routes += `}`;
-            }else{
-            routes= `import pre from "./deps${getUrl(route.path)}/pre";
-                const dynamicRoutes = {
-                    "${route.path}": ()=> new Promise((re,rej)=>re(pre))
-                }
-                `
-            }
-            return routes
         }
     })();
