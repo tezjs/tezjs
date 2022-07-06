@@ -1,6 +1,6 @@
 import { getQueryString } from "./get-query-string";
 import { commonContainer } from "@tezjs/common"
-export function getFilterQueryParams(filterJson:{[key:string]:any},populate:any="*"){
+export function getFilterQueryParams(filterJson:{[key:string]:any},populate:any="deep"){
     const version = commonContainer.getStrapiConfig().version;
     if(version === 4)
     {
