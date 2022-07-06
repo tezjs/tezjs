@@ -42,7 +42,7 @@ export class Seo extends JsCodeGen  {
     }
 
     addViewport(){
-        this.addHeadChildElement(`<meta name="viewport"/>`,true)
+        this.addHeadChildElement(`<meta name="viewport" content="width=device-width" />`,true)
     }
     addTitle() {
         if (this.htmlMeta.head.title)
