@@ -8,9 +8,11 @@ export const appContainer:
     {
         addOrUpdateTezTS(route?:{name:string,fPath:string,path:string}):void
         build:RouteBuild;
+        versionId:number;
     } = new (class {
         tsCodeCache:string
         importState:ImportState;
+        versionId:number = 1;
         pathResolver = new CommonPathResolver();
         build:RouteBuild = {route:{path:'',fPath:''}};
         async addOrUpdateTezTS(route?:{name:string,fPath:string,path:string}){

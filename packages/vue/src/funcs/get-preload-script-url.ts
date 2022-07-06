@@ -6,6 +6,9 @@ export function isLocalNetwork(hostname = window.location.hostname) {
       || (hostname.endsWith('.local'))
     )
   }
+export function getVersion(){
+  return window.localStorage.getItem("tzV");
+}
 export function getPreloadScriptUrl(url:string){
-    return isLocalNetwork() ? `/tez/deps${url}/preload` : `/assets${url}/preload.js`
+    return isLocalNetwork() ? `/tez/deps${url}/preload?v=${getVersion()}` : `/assets${url}/preload.js`
 }

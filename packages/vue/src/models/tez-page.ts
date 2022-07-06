@@ -7,4 +7,5 @@ export interface TezPage{
     masterPage:{[key:string]:DefineComponent}
     payload:PayloadConfig
     afterInteraction?:AfterInteractionConfig
+    postScript:()=>Promise<any>
 }

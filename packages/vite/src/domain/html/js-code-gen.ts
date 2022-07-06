@@ -37,7 +37,7 @@ export class JsCodeGen extends PayloadReader{
                 masterPageSlots:this.getSlots(this.masterPage,false),
                 tags:this.tags,
                 layoutName:this.masterPage.layoutName,
-                postScript: this.isPostCode ? commonContainer.buildOptions.commandName === "dev"? `/tez/deps${getUrl(this.route.path)}/post` :'./post' : ''
+                postScript: this.isPostCode ? commonContainer.buildOptions.commandName === "dev"? `/tez/deps${getUrl(this.route.path)}/post` :'./post.js' : ''
             }
         );
     }

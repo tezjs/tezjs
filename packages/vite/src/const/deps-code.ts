@@ -38,7 +38,8 @@ export function depsCodeTemplate(page:any,isPre:boolean = true){
     masterPageRefs+='}';
     let postScript = '';
     if(page.postScript){
-        postScript = `postScript: "${page.postScript}"`;
+        postScript = `postScript: ()=>import("${page.postScript}")`;
+        delete page.postScript
     }
         
     return `

@@ -4,6 +4,7 @@ import { PROPERTY } from "../../../payload/src/const/app.const";
 import { NAME } from "../const/core.const";
 import { Head,HtmlPage } from "@tezjs/types";
 import { JsCodeGen } from "./html/js-code-gen";
+import { appContainer } from "../const/container.const";
 
 export class Seo extends JsCodeGen  {
     seo: TezSeo;
@@ -122,11 +123,13 @@ export class Seo extends JsCodeGen  {
     }
 
     addBody(){
+        this.addDevScript();
         if(this.htmlMeta.body)
         {
             let body = this.htmlMeta.body;
             if(body.inlineScript)
                 body.inlineScript.forEach((item)=>{this.addInlineScript(item.name,item.code)})
+            
         }
     }
 
@@ -171,5 +174,13 @@ export class Seo extends JsCodeGen  {
     addPreConnects(){
         if(this.htmlMeta.head?.preConnects)
             this.htmlMeta.head?.preConnects.forEach(domain=>this.preHeadElements.push(domain));
+    }
+
+    addDevScript(){
+        if(commonContainer.buildOptions.commandName === "dev"){
+            if(!this.htmlMeta.body)
+                this.htmlMeta.body = {inlineScript:[]}
+            this.htmlMeta.body.inlineScript.push({name:"deps",code:`window.localStorage.setItem("tzV",${appContainer.versionId});`})
+        }
     }
 }

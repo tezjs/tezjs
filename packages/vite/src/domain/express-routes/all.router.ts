@@ -26,6 +26,7 @@ export class AllRouter{
           await refreshData(request.url)
           const route=this.routes.filter(route=>route.path === request.url)[0] || {"name":"","path":"/","fPath":`${path.sep}index`}
             await appContainer.addOrUpdateTezTS(route);
+            ++appContainer.versionId;
             var htmlPage = new HtmlPage(route)
             htmlCache = htmlPage.createPage();
             response.status(200).set({ 'Content-Type': 'text/html' }).end(htmlCache)

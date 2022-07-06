@@ -6,4 +6,5 @@ export interface PageState{
     masterPageSlots:{[key:string]:any}
     layoutName:string;
     layoutComponent?:DefineComponent;
+    postScript?:()=>Promise<any>;
 }

@@ -37,7 +37,7 @@ export const tezPages:
         if(page.payload){
             let url = page.payload.url;
             if(!this.pages[url])
-                this.pages[url] = page.payload;
+                this.pages[url] = {...page.payload,...{postScript:page.postScript}};
         else{
             Object.keys(page.payload.slots).forEach(slotName=>{
                 if(!this.pages[url].slots[slotName])
@@ -66,7 +66,8 @@ export const tezPages:
                     layoutName:currentPage.layoutName,
                     slots:currentPage.slots,
                     masterPageSlots:currentPage.masterPageSlots,
-                    url:currentPage.url
+                    url:currentPage.url,
+                    postScript:currentPage.postScript
                 })
     }
     getPayload(){
