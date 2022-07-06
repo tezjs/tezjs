@@ -362,7 +362,7 @@ function readFileSync(path,isString=false) {
     const message = {backend:'Strapi Dependencies',frontend:'Tezjs Dependencies'}
     const iPath = projectName ? path.resolve(cwd, root,projectName) : path.resolve(cwd, root);
       const installExec = execa(pkgManager, ['install'], { cwd:iPath });
-      const installingPackagesMsg = `Installing ${mesage[projectName] || "Dependencies"} ${emojiWithFallback(' 📦', '...')}`;
+      const installingPackagesMsg = `Installing ${message[projectName] || "Dependencies"} ${emojiWithFallback(' 📦', '...')}`;
       const installSpinner = await showSpinner(installingPackagesMsg);
       await new Promise((resolve, reject) => {
         installExec.stdout?.on('data', function (data) {
@@ -374,7 +374,7 @@ function readFileSync(path,isString=false) {
         installExec.on('close', () => resolve());
       });
     
-		 installSpinner.text = green(`${mesage[projectName] || 'Dependencies'}' installed!`);
+		 installSpinner.text = green(`${message[projectName] || 'Dependencies'}' installed!`);
 		 installSpinner.succeed();
   }
   
