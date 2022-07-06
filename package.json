@@ -1,6 +1,6 @@
 {
   "name": "tez",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "",
   "main": "index.js",
   "private": true,
