@@ -352,16 +352,17 @@ function readFileSync(path,isString=false) {
 
   async function runInstall(templateName,pkgManager,root) {
     if (templateName === "tez-strapi-vue") {
-      const installProjects = ["","Strapi Dependencies","Tez Dependencies"];
+      const installProjects = ["","backend","frontend"];
       for(var projectName of installProjects)
        await installPacakages(pkgManager,projectName,root)
     }
   }
 
   async function installPacakages(pkgManager,projectName,root){
+    const message = {backend:'Strapi Dependencies',frontend:'Tezjs Dependencies'}
     const iPath = projectName ? path.resolve(cwd, root,projectName) : path.resolve(cwd, root);
       const installExec = execa(pkgManager, ['install'], { cwd:iPath });
-      const installingPackagesMsg = `Installing '${projectName || 'Dependencies'}' ${emojiWithFallback(' 📦', '...')}`;
+      const installingPackagesMsg = `Installing ${mesage[projectName] || "Dependencies"} ${emojiWithFallback(' 📦', '...')}`;
       const installSpinner = await showSpinner(installingPackagesMsg);
       await new Promise((resolve, reject) => {
         installExec.stdout?.on('data', function (data) {
@@ -373,7 +374,7 @@ function readFileSync(path,isString=false) {
         installExec.on('close', () => resolve());
       });
     
-		 installSpinner.text = green(`'${projectName || 'Dependencies'}' installed!`);
+		 installSpinner.text = green(`${mesage[projectName] || 'Dependencies'}' installed!`);
 		 installSpinner.succeed();
   }
   
