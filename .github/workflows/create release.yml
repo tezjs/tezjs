@@ -26,6 +26,6 @@ jobs:
           tag_name: ${{ env.tag }}
           release_name: ${{ env.tag }}
           body: |
-            Please refer to CHANGELOG.md for details.
+            Please refer to [CHANGELOG.md](https://github.com/tezjs/tez.js/blob/main/CHANGELOG.md) for details.
           draft: false
           prerelease: false
