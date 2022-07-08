@@ -30,8 +30,6 @@ export class BundleModifier{
             deps:this.deps,
             highestPathDepth:this.highestPathDepth
         });
-        console.log(this.deps)
-        console.log(this.excludes)
     }
 
     private setDependency(){
