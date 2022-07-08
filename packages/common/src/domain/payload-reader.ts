@@ -51,7 +51,7 @@ export class PayloadReader {
     }
 
     getData(componentName:string){
-        let componentDataPath = getPath([this.commonPath.payloadPath,this.route.path,`${componentName}.json`]);
+        let componentDataPath = getPath([this.commonPath.payloadPath,this.route.fPath,`${componentName}.json`]);
         let data = {};
         if(this.commonPath.pathExists(componentDataPath))
             data = readFileSync(componentDataPath)
