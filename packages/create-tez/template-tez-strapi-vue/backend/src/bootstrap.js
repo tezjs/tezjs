@@ -63,7 +63,7 @@ const {
           // Get file name without the extension
           const [fileName] = file.name.split('.');
           // Upload each individual file
-          console.log(file)
+          
           const uploadedFile = await strapi
             .plugin("upload")
             .service("upload")
@@ -115,7 +115,7 @@ const {
        
       authors.map((author) => {
         const files = {"Picture":getFileData(`${author.Name.replace(' ',"").toLowerCase()}.jpg`)}
-        console.log(files)
+        
         return createEntry({ model: "author", entry: author,files });
       })
     );
