@@ -36,6 +36,8 @@ export class HtmlPage extends Seo {
             let filePath = getPath([this.commonPath.rootPath,'dist',this.route.path],true);
             filePath = getPath([filePath,"index.html"]);
             writeFileSync(filePath,html,true)
+            if(this.route.path === "/index")
+                writeFileSync(getPath([this.commonPath.rootPath,'dist',"index.html"],false),html,true)
         }
         return html
     }
