@@ -5,7 +5,7 @@ import { activePageState } from '../const/active-page-state';
 import { tezPages } from '../const/tez-pages';
 import { cacheState } from '../const/cache-state';
 import { getCurrentUrl } from '../funcs/payload/get-current-url';
-import { idleCallback } from '@tezjs/js';
+import { idleCallback,isMobile } from '@tezjs/js';
 import { getPostLoadScriptUrl } from '../funcs/get-preload-script-url';
 import { PageState } from '../models/page-state';
 
@@ -102,10 +102,11 @@ export default defineComponent({
     render() {
         let vNodes: Array<VNode> = new Array<VNode>();
         for (let component of this.components) {
-            if (tezPages.components[component.name]) {
+            let componentName = isMobile() && component.mobileComponentName ? component.mobileComponentName : component.name;
+            if (tezPages.components[componentName]) {
                 let vNode = cacheState.getVNode(component.id);
                 if (!vNode)
-                    vNode = cacheState.cacheVNode(component.id, h(tezPages.components[component.name], { data: component.data }));
+                    vNode = cacheState.cacheVNode(component.id, h(tezPages.components[componentName], { data: component.data }));
                 vNodes.push(h(KeepAlive, { key: `${getCurrentUrl()}${component.itemName}` }, vNode))
             }
         }

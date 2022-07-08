@@ -68,15 +68,21 @@ export class JsCodeGen extends PayloadReader{
                         pageSlot = {};
                      if(!pageSlot[slotName])
                         pageSlot[slotName] = []
-                      pageSlot[slotName].push({
-                           name:componentName,data:data,id:itemName
-                        });
+                        let jObject = {
+                            name:componentName,data:data,id:itemName
+                         }
+                         if(data && data.mobileComponentName)
+                            jObject["mobileComponentName"] = data.mobileComponentName;
+                      pageSlot[slotName].push(jObject);
                     if(slotName === "default" && isPageSlot &&  itemCount >= (commonContainer.tezConfig.payload.page.maxPreLoadComponent)){
                         if(!this.postSlots.slots[slotName])
                             this.postSlots.slots[slotName] = []
-                        this.postSlots.slots[slotName].push({
-                            name:componentName,data:this.getData(itemName), id:itemName
-                        });
+                            jObject = {
+                                name:componentName,data:this.getData(itemName), id:itemName
+                            };
+                            if(jObject.data && jObject.data.mobileComponentName)
+                            jObject["mobileComponentName"] = jObject.data.mobileComponentName;
+                        this.postSlots.slots[slotName].push(jObject);
                     }else if(slotName === "footer" && !isPageSlot){
                         if(!this.postSlots.masterPageSlots[slotName])
                         this.postSlots.masterPageSlots[slotName] = []
