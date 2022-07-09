@@ -31,7 +31,7 @@ export const appContainer:
                 }
             }else
                 refrenceState = this.importState;
-        
+        refrenceState.props=`isDevMode:${commonContainer.buildOptions.commandName === "dev"}`
         let tsCode = tezTemplate(refrenceState);
         if(this.tsCodeCache !== tsCode)
             writeFileSync(this.pathResolver.tezTsPath,tsCode,true);

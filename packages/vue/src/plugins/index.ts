@@ -6,9 +6,7 @@ import TezLink from "../components/tez-link"
 import TezIterator from "../components/tez-iterator"
 import { componentState } from '../const/component-state';
 import TzTickedMixin from '../mixins/tz-ticked.mixin'
-import { createTezStore } from '../store';
 import {overrideImageSourceProp} from '../funcs/override-image-source'
-import { tezRouter } from "../funcs/tez-router";
 import { TezAppOptions } from "../models/tez-app-options";
 import { TEZ_SRC_DIRECTIVE } from "../directives/tez-src";
 overrideImageSourceProp();
@@ -17,7 +15,7 @@ export const tez:
     register:(tezAppOptions:TezAppOptions)=> any 
 } = new (class {
     register(tezAppOptions:TezAppOptions){
-      componentState.tezAppOptions = tezAppOptions;
+      
     return {
       install (Vue:any) {
         if(tezAppOptions.useVue)

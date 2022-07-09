@@ -24,6 +24,7 @@ export interface TezAppOptions {
     autoRoutes?:{urls:{[key:string]:any},re:{[key:string]:any}};
 
     dynamicRoutes?:{[key:string]:any};
-
+    
+    isDevMode?:boolean;
     
 }
