@@ -110,10 +110,24 @@ export class Seo extends JsCodeGen  {
         this.addHeadChildElement(`<link data-head="tezjs-preload"  rel="modulepreload" href="${forAll? path : `/${path}`}">`,true)
     }
 
-    addScript(path:string){
-        this.addHeadChildElement(`<script crossorigin="" src="/${path}"></script>`,false)
+    addScript(path:string,isAppendToBody:boolean= false){
+        const elementString = `<script crossorigin="" src="/${path}"></script>`;
+        if(!isAppendToBody)
+            this.addHeadChildElement(elementString,false)
+        else
+            this.addBodyChildElement(elementString)
+        
     }
 
+    addStyle(path:string,isAppendToBody:boolean= false){
+        const elementString = `<link rel="stylesheet" href="/${path}"></link>`;
+        if(!isAppendToBody)
+            this.addHeadChildElement(elementString,false)
+        else
+            this.addBodyChildElement(elementString)
+    }
+
+    
     addManifestJson(){
         this.addHeadChildElement(`<link data-head="tezjs" rel="manifest" href="/manifest.json" crossorigin="use-credentials">`,true)
     }
@@ -129,7 +143,8 @@ export class Seo extends JsCodeGen  {
             let body = this.htmlMeta.body;
             if(body.inlineScript)
                 body.inlineScript.forEach((item)=>{this.addInlineScript(item.name,item.code)})
-            
+            body.script.forEach(script=>this.addScript(script.src,true))
+            body.style.forEach(style=>this.addStyle(style.href,true))
         }
     }
 

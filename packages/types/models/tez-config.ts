@@ -7,6 +7,7 @@ import {  HtmlPage } from './html/html'
 import { ClientEntry } from "./client-entry";
 import { PayloadConfig } from "./strapi/payload-config";
 import { DeploymentConfig } from "./deployment-config";
+import { BuildConfig } from "./build-config";
 export interface TezConfig {
     spa?:boolean;
     viteOptions?:any;
@@ -21,5 +22,6 @@ export interface TezConfig {
     htmlMeta?:HtmlPage;
     client?:ClientEntry;
     payload?:PayloadConfig;
-    deployment?:DeploymentConfig
+    deployment?:DeploymentConfig;
+    build?:BuildConfig
 }

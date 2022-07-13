@@ -23,6 +23,9 @@ export const commonContainer:
         defaultTezConfig:TezConfig = {
             payload:{
                 page:{maxPreLoadComponent:3 }
+            },build:{
+                inLinCss:true,
+                inLineJs:true
             }
         }
         strapiModuleConfig:StrapiModuleConfig = {

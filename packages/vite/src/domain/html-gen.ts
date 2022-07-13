@@ -1,6 +1,6 @@
 import { commonContainer, CommonPathResolver, getPath } from "@tezjs/common";
 import { HtmlPage as iHtmlPage } from "@tezjs/types";
-import { TEZJS_PATH } from "../const/core.const";
+import { TEZCSS_PATH, TEZJS_PATH } from "../const/core.const";
 import { depsContainer } from "../const/deps-container.const";
 import getUrl from "../functions/get-url";
 import { DependencyConfig } from "../interface/dependency-config";
@@ -25,11 +25,13 @@ export class HtmlGen{
             const path = getUrl(route.path);
             let page:iHtmlPage = {
                 head:{
-                    inlineStyle:this.getInlineCss(path),
+                    inlineStyle: commonContainer.tezConfig.build.inLinCss ? this.getInlineCss(path) : new Array<{name:string,code:string}>(),
                     preloads:this.getPreloads()
                 },
                 body:{
-                    inlineScript:this.getInlineJs(path)
+                    inlineScript:commonContainer.tezConfig.build.inLineJs ? this.getInlineJs(path) : new Array<{name:string,code:string}>(),
+                    script:!commonContainer.tezConfig.build.inLineJs ? this.getJsRef(path):[],
+                    style:!commonContainer.tezConfig.build.inLinCss ? this.getCssRef(path):[],
                 }
             }
             const htmlPage = new HtmlPage(route);
@@ -54,6 +56,22 @@ export class HtmlGen{
     setInlineCss(css:string[],inlineCss:Array<{name:string,code:string}>){
         for(const cssPath of css)
             inlineCss.push({name:cssPath,code:this.depsConfig.css[cssPath]});
+    }
+
+    getJsRef(path:string){
+        return [{src:`assets${path}/pre.js`},{src:TEZJS_PATH}]
+    }
+    getCssRef(path:string){
+        const preCssPath =`assets${path}/pre.css` 
+        let cssRefs = new Array<{href:string}>();
+        if(this.commonPathResolver.pathExists(getPath([this.commonPathResolver.distPath,preCssPath])))
+            cssRefs.push({href:preCssPath})
+        cssRefs.push({href:TEZCSS_PATH})
+        const depPath = `assets${path}/pre.js`
+        if(this.depsConfig.deps[depPath])
+        for(const cssPath of this.depsConfig.deps[depPath].css)
+            cssRefs.push({href:cssPath});
+        return cssRefs;
     }
 
     getInlineJs(path:string){

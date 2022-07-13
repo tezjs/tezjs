@@ -37,3 +37,4 @@ export const SERVICE_WORKER_JS_PATH = ()=> getPath([commonContainer.buildOptions
 export const REGISTER_SERVICE_WORKER_JS_PATH = ()=> getPath([commonContainer.buildOptions.rootDir,"node_modules","@tezjs","vite","templates","registerSW._js"],false)
 
 export const TEZJS_PATH="assets/tez.js";
+export const TEZCSS_PATH="assets/tez.css";

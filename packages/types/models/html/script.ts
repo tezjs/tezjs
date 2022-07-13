@@ -1,3 +1,3 @@
-export interface Script{
-    src:string
+export interface ScriptTag{
+    src:string;
 }
