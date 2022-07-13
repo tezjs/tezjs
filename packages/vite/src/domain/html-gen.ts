@@ -41,17 +41,20 @@ export class HtmlGen{
     }
 
     writeTzWebWorker(){
-        const result = buildSync({
-            entryPoints:[TZ_JS_PATH()],
-            minify:true,
-            write: false,
-            sourcemap:false,
-            format: 'esm',
-            outdir:'/bundle',
-            logLevel: 'silent'
-        })
-        for(const output of result.outputFiles)
-            writeFileSync(this.commonPathResolver.tzJsPath,output.text,true);
+        let jsPath = TZ_JS_PATH();
+        if(this.commonPathResolver.pathExists(jsPath)){
+            const result = buildSync({
+                entryPoints:[],
+                minify:true,
+                write: false,
+                sourcemap:false,
+                format: 'esm',
+                outdir:'/bundle',
+                logLevel: 'silent'
+            })
+            for(const output of result.outputFiles)
+                writeFileSync(this.commonPathResolver.tzJsPath,output.text,true);
+        }
     }
 
     getPreloads():Array<{path:string,type?:"module"}>{
