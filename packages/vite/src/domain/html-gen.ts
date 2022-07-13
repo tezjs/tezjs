@@ -26,7 +26,7 @@ export class HtmlGen{
             let page:iHtmlPage = {
                 head:{
                     inlineStyle: commonContainer.tezConfig.build.inLinCss ? this.getInlineCss(path) : new Array<{name:string,code:string}>(),
-                    preloads:this.getPreloads()
+                    preloads:this.getPreloads(path)
                 },
                 body:{
                     inlineScript:commonContainer.tezConfig.build.inLineJs ? this.getInlineJs(path) : new Array<{name:string,code:string}>(),
@@ -57,8 +57,19 @@ export class HtmlGen{
         }
     }
 
-    getPreloads():Array<{path:string,type?:"module"}>{
-        return this.mainDependency.js.map(item=> {return {path:`/${item}`,type:"module"}})
+    getPreloads(path:string):Array<{path:string,type?:"module"}>{
+        const depPath = `assets${path}/pre.js`
+        return this.getPreloadTags(depPath);
+    }
+
+    getPreloadTags(path:string):Array<{path:string,type:"module"}>{
+        let preloads = new Array<{path:string,type:"module"}>()
+        if(this.depsConfig.deps[path])
+            this.depsConfig.deps[path].js.forEach(item=> {
+                preloads.concat(this.getPreloadTags(item))
+                .push({path:`/${item}`,type:"module"})
+            })
+        return preloads;
     }
 
     getInlineCss(path:string){
