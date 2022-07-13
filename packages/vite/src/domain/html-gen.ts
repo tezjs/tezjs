@@ -1,6 +1,6 @@
-import { commonContainer, CommonPathResolver, getPath } from "@tezjs/common";
+import { commonContainer, CommonPathResolver, getPath, readFileSync, writeFileSync } from "@tezjs/common";
 import { HtmlPage as iHtmlPage } from "@tezjs/types";
-import { TEZCSS_PATH, TEZJS_PATH } from "../const/core.const";
+import { TEZCSS_PATH, TEZJS_PATH, TZ_JS_PATH } from "../const/core.const";
 import { depsContainer } from "../const/deps-container.const";
 import getUrl from "../functions/get-url";
 import { DependencyConfig } from "../interface/dependency-config";
@@ -37,7 +37,21 @@ export class HtmlGen{
             const htmlPage = new HtmlPage(route);
             htmlPage.createPage(page)
         }
-        
+        this.writeTzWebWorker();
+    }
+
+    writeTzWebWorker(){
+        const result = buildSync({
+            entryPoints:[TZ_JS_PATH()],
+            minify:true,
+            write: false,
+            sourcemap:false,
+            format: 'esm',
+            outdir:'/bundle',
+            logLevel: 'silent'
+        })
+        for(const output of result.outputFiles)
+            writeFileSync(this.commonPathResolver.tzJsPath,output.text,true);
     }
 
     getPreloads():Array<{path:string,type?:"module"}>{

@@ -87,6 +87,10 @@ export class CommonPathResolver {
         return getPath([commonContainer.buildOptions.rootDir,"pages"],false)
     }
 
+    get tzJsPath(){
+        return getPath([this.distPath,"tz.js"],false);
+    }
+
     getExistsFilesOrFolders(){
         return {
             components:this.pathExists(this.componentsPath),
