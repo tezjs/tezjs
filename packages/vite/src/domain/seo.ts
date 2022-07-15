@@ -143,8 +143,10 @@ export class Seo extends JsCodeGen  {
             let body = this.htmlMeta.body;
             if(body.inlineScript)
                 body.inlineScript.forEach((item)=>{this.addInlineScript(item.name,item.code)})
-            body.script.forEach(script=>this.addScript(script.src,true))
-            body.style.forEach(style=>this.addStyle(style.href,true))
+            if(body.script)
+                body.script.forEach(script=>this.addScript(script.src,true))
+            if(body.style)
+                body.style.forEach(style=>this.addStyle(style.href,true))
         }
     }
 
