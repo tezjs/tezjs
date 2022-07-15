@@ -28,17 +28,7 @@ function clear(jsonObject: { [key: string]: any }, isRoot: boolean):any {
         } else if (jsonObject[t] !== null && jsonObject[t] !== "" && !ignoreColumns(t, isRoot)) {
             var content = jsonObject[t];
             if (t === "LongText" || t === "Content") {
-                var pattern = /!\[(.*?)\]\((.*?)\)/mg;
-                var matcher;
                 var masterContent = content
-                while ((matcher = pattern.exec(content)) !== null) {
-                    if (matcher.length > 2) {
-                        var urlText = matcher[2];
-                        var altText = matcher[1];
-                        var newUrlText = urlText.slice(0, urlText.length - 1) + "||" + altText + '"';
-                        masterContent = masterContent.replace(urlText, newUrlText);
-                    }
-                }
                 content = MarkdownIt.render(masterContent);
                 content = content ? content.split("\n").map((x:any)=>x.trim()) : content;
                 if(htmlSanitizer)
