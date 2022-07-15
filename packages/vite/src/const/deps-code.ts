@@ -4,7 +4,7 @@ import { snakeToCamel } from "../functions/snake-to-camel-case";
 
 function getPreComponents(pageSlots:{[key:string]:any},masterPageSlots:{[key:string]:any},isPre:boolean){
     let preComponents = new Array<string>();
-    let maxPreLoadComponent = commonContainer.tezConfig.payload.page.maxPreLoadComponent;
+    let maxPreLoadComponent =isPre? commonContainer.tezConfig.payload.page.maxPreLoadComponent : pageSlots && pageSlots.default ? pageSlots.default.length : 0;
     let propName = isPre?'header':'footer'
     if(masterPageSlots && masterPageSlots[propName])
         masterPageSlots[propName].forEach(item=>{
