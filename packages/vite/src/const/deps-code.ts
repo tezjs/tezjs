@@ -2,11 +2,12 @@ import { commonContainer } from "@tezjs/common";
 import { getImportStatement } from "../functions/get-import-statement";
 import { snakeToCamel } from "../functions/snake-to-camel-case";
 
-function getPreComponents(pageSlots:{[key:string]:any},masterPageSlots:{[key:string]:any}){
+function getPreComponents(pageSlots:{[key:string]:any},masterPageSlots:{[key:string]:any},isPre:boolean){
     let preComponents = new Array<string>();
     let maxPreLoadComponent = commonContainer.tezConfig.payload.page.maxPreLoadComponent;
-    if(masterPageSlots && masterPageSlots.header)
-        masterPageSlots.header.forEach(item=>{
+    let propName = isPre?'header':'footer'
+    if(masterPageSlots && masterPageSlots[propName])
+        masterPageSlots[propName].forEach(item=>{
         if(preComponents.filter(x=>x!==pageSlots.default[i].name).length === 0){
             preComponents.push(item.name);maxPreLoadComponent--;
         } });
@@ -24,7 +25,7 @@ export function depsCodeTemplate(page:any,isPre:boolean = true){
     let masterPage='';
     let componentRefs=`{`;
     let masterPageRefs=`{`;
-    for(let name of getPreComponents(page.slots,page.masterPageSlots)){
+    for(let name of getPreComponents(page.slots,page.masterPageSlots,isPre)){
         const propName:string = snakeToCamel(name);
         componentRefs+=`"${name}":${propName},`
         components+=getImportStatement(name,'components');

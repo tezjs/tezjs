@@ -48,7 +48,9 @@ export class JsCodeGen extends PayloadReader{
                 url:this.route.path,
                 slots:this.postSlots.slots,
                 masterPageSlots:this.postSlots.masterPageSlots,
-            }
+
+            },
+            false
         );
     }
 
