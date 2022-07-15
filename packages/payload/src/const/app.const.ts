@@ -99,4 +99,4 @@ export const PRIORITY:string[]= ["priority"]
 
 export const DEFAULT_STRAPI_URL = 'http://localhost:1337'
 
-export const IMAGE_EXTENSION_REGEX = (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i);
+export const IMAGE_EXTENSION_REGEX = (/\.(gif|jpe?g|tiff?|png|webp|bmp|svg)$/i);
