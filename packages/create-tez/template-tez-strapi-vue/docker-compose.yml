@@ -9,6 +9,7 @@ services:
       - /app/node_modules
     ports:
       - 1337:1337
+      - 2000:22
 
     healthcheck:
       test: curl --fail http://localhost:1337 || exit 1

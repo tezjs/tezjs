@@ -1,4 +1,5 @@
 FROM node:16.15.1
 WORKDIR /app
-CMD npm install && npm install --ignore-scripts=false --verbose sharp && npm install --platform=linux --arch=x64 sharp && npm run develop
-EXPOSE 1337
+RUN apt update && apt install openssh-server -y && echo "root:root" | chpasswd && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+CMD service ssh restart && npm install && npm install --ignore-scripts=false --verbose sharp && npm install --platform=linux --arch=x64 sharp && npm run develop
+EXPOSE 1337 22
