@@ -44,7 +44,7 @@ export class HtmlGen{
         let jsPath = TZ_JS_PATH();
         if(this.commonPathResolver.pathExists(jsPath)){
             const result = buildSync({
-                entryPoints:[],
+                entryPoints:[jsPath],
                 minify:true,
                 write: false,
                 sourcemap:false,
