@@ -51,7 +51,7 @@ export abstract class BaseGenerator{
             pageJson["masterPage"] = replaceSpace(page.masterPageName)
         await writeFileSync(filePath, pageJson);
 
-        this.sitemap.add({sitemap:{...page.sitemap,...{loc:page.url}}});
+        this.sitemap.add({sitemap:{...page.sitemap,...{loc:`${commonContainer.getStrapiConfig().siteUrl}${page.url}`}}});
         this.redirectRoute.add(page);
         
     }
