@@ -82,33 +82,38 @@ export default defineComponent({
                 let components = this.getSlotComponents(this.slotName, this.slotCategory);
                 if (components.length > this.nextIndex && !this.components[this.nextIndex]) {
                     let componentItem = components[this.nextIndex]
-                    this.components.push(componentItem);
-                    this.nextIndex++;
-                    if (components[this.nextIndex] && !components[this.nextIndex].data && this.postScript)
+                    let componentName = this.getComponentName(componentItem);
+                    if(tezPages.components[componentName]){
+                        this.components.push(componentItem);
+                        this.nextIndex++;
+                        if (components[this.nextIndex] && !components[this.nextIndex].data && this.postScript)
                         this.loadPostScript();
-                    if (isBot())
-                        this.goToNextComponent();
-                    else
-                        idleCallback(() => this.goToNextComponent(), { timeout: 0 })
+                        if (isBot())
+                            this.goToNextComponent();
+                        else
+                            idleCallback(() => this.goToNextComponent(), { timeout: 0 })
+                    }
                 }
             }
 
         },
         loadPostScript() {
             return this.postScript().then((t) => this.postScript = null);
+        },
+        getComponentName(component:any){
+            return isMobile() && component.mobileComponentName ? component.mobileComponentName : component.name;
         }
+        
     },
 
     render() {
         let vNodes: Array<VNode> = new Array<VNode>();
         for (let component of this.components) {
-            let componentName = isMobile() && component.mobileComponentName ? component.mobileComponentName : component.name;
-            if (tezPages.components[componentName]) {
+            let componentName = this.getComponentName(component) 
                 let vNode = cacheState.getVNode(component.id);
                 if (!vNode)
                     vNode = cacheState.cacheVNode(component.id, h(tezPages.components[componentName], { data: component.data }));
                 vNodes.push(h(KeepAlive, { key: `${getCurrentUrl()}${component.itemName}` }, vNode))
-            }
         }
         if (!this.lazyRef)
             this.lazyRef = h('div', { ref: 'divLazy', style: { 'height': '2px' } }, "");
