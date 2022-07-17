@@ -36,7 +36,7 @@
                 "Image": null,
                 "Seo": {
                     "id": 1,
-                    "Title": "{{referencePageData.title}} changed",
+                    "Title": "{{title}} changed",
                     "Description": "A bug is becoming a meme on the internet",
                     "Canonical": "/articles/a-bug-is-becoming-a-meme-on-the-internet",
                     "LinkingData": null
@@ -238,7 +238,7 @@
                             "filters": {
                                 "categories": {
                                     "name": {
-                                        "$eq": "{{referencePageData.name}}"
+                                        "$eq": "{{name}}"
                                     }
                                 }
                             }
@@ -250,8 +250,8 @@
                 ],
                 "Seo": {
                     "id": 9,
-                    "Title": "{{referencePageData.name}} Category Articles",
-                    "Description": "{{referencePageData.name}} Articles",
+                    "Title": "{{name}} Category Articles",
+                    "Description": "{{name}} Articles",
                     "Canonical": null,
                     "LinkingData": null
                 },
