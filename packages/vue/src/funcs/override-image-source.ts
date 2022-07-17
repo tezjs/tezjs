@@ -3,6 +3,7 @@ declare const Image:any;
 const IMAGE_DATA_STRING:{[key:string]:any} = {};
 const IMAGE_STATE:{[key:string]:any} = {};
 let REQUEST_COUNT:number = 0;
+if(window.location.hostname.indexOf("localhost") === -1){
 const imageRequestBroadcaster = new Worker('/tz.js');
 imageRequestBroadcaster.onmessage = (event) => {
         if(IMAGE_STATE[event.data.index] && IMAGE_STATE[event.data.index].url === event.data.url){
@@ -11,6 +12,7 @@ imageRequestBroadcaster.onmessage = (event) => {
           delete IMAGE_STATE[event.data.index];
         }
 };
+}
 function setImageSource(this:HTMLImageElement, source:string){
       this.setAttribute("src", source); 
 }
