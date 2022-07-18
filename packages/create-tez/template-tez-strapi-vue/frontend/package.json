@@ -9,10 +9,10 @@
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.2",
-    "@tezjs/vue": "0.0.41"
+    "@tezjs/vue": "0.0.42"
   },
   "devDependencies": {
-    "@tezjs/cli": "0.0.41",
+    "@tezjs/cli": "0.0.42",
     "autoprefixer": "^10.4.7",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.0.24"
