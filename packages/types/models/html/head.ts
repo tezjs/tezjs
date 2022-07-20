@@ -7,7 +7,7 @@ export interface Head extends TezSeo{
     inlineStyle?:Array<{name:string,code:string}>;
     inlineScript?:Array<{name:string,code:string}>;
     favicon?:string;
-    preloads?:Array<{path:string,type?:"module"}>;
+    preloads?:Array<{path:string,type?:string}>;
     script?:Array<ScriptTag>;
     style?:Array<StyleTag>;
 }

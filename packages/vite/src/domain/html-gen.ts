@@ -57,13 +57,14 @@ export class HtmlGen{
         }
     }
 
-    getPreloads(path:string):Array<{path:string,type?:"module"}>{
+    getPreloads(path:string):Array<{path:string,type?:string}>{
         const depPath = `assets${path}/pre.js`
         return this.getPreloadTags(depPath);
     }
 
-    getPreloadTags(path:string):Array<{path:string,type:"module"}>{
-        let preloads = new Array<{path:string,type:"module"}>()
+    getPreloadTags(path:string):Array<{path:string,type?:string}>{
+        let preloads = new Array<{path:string,type?:string}>()
+        preloads.push({path:'/tz.js'})
         if(this.depsConfig.deps[path])
             this.depsConfig.deps[path].js.forEach(item=> {
                 preloads.concat(this.getPreloadTags(item))
