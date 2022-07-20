@@ -17,12 +17,12 @@ export class JsCodeGen extends PayloadReader{
         let preloadCode = getPreloadCodeTemplate();
         let preCode = this.preCode();
         let postCode = this.postCode();
-        const preFile = getPath([this.commonPath.getPath([this.commonPath.depsPath, this.route.fPath]),"pre.ts"]);
-        const preloadFile = getPath([this.commonPath.getPath([this.commonPath.depsPath, this.route.fPath]),"preload.ts"]);
+        const preFile = getPath([this.commonPath.getPath([this.commonPath.depsPath, this.route.fPath]),"pre.js"]);
+        const preloadFile = getPath([this.commonPath.getPath([this.commonPath.depsPath, this.route.fPath]),"preload.js"]);
         writeFileSync(preloadFile,preloadCode,true)
         writeFileSync(preFile,preCode,true)
         if(this.isPostCode){
-            const postFile = getPath([this.commonPath.getPath([this.commonPath.depsPath, this.route.fPath]),"post.ts"]);
+            const postFile = getPath([this.commonPath.getPath([this.commonPath.depsPath, this.route.fPath]),"post.js"]);
             writeFileSync(postFile,postCode,true)
         }
             

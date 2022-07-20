@@ -44,17 +44,16 @@ export function depsCodeTemplate(page:any,isPre:boolean = true){
     }
         
     return `
-        import { registerTezPage } from '@tezjs/vue';
         ${components}
         ${masterPage}
-        export default (function(){
-        registerTezPage(
-            {components:${componentRefs},
-            masterPage:${masterPageRefs},
-            payload:${JSON.stringify(page)},
-            ${postScript}
-        }
-            );
-        })()    `
+        export default function(registerTezPage){
+
+            registerTezPage({
+                components:${componentRefs},
+                masterPage:${masterPageRefs},
+                payload:${JSON.stringify(page)},
+                ${postScript}
+            })
+        }    `
     
 }
