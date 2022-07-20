@@ -30,7 +30,7 @@ export default async function parseStrapiData(pageContent, url, dynamicData,refe
     pageContent = await DataResolver(pageContent,url);
     if (pageContent)
     genericSection = getGenericSections(pageContent.masterPage,readProp(pageContent,COMPONENT_DATA_PROPS))
-    let parseObjectItem = {referencePageData:referenceData,genericCollections:genericSection};
+    let parseObjectItem = {...pageContent ,...{referencePageData:referenceData,genericCollections:genericSection}};
     const Tag:any = {
         title: '', canonical: '', MetaPropertyTags: [], MetaNameTags: [], PageSchema: ''
     };
