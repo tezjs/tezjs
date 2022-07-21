@@ -13,14 +13,15 @@ import { BaseGenerator } from "./base-generator";
 import { RedirectRoute } from "./redirect-routes";
 import { Sitemap } from "./sitemap";
 import { commonContainer } from "@tezjs/common"
+import { GlobWriter } from "./glob-writer";
 export class PayloadGenerator extends BaseGenerator{
     private pageCollectionConfig: PageCollectionConfig;
     private masterPageCollection:MasterPageCollection;
-    constructor(private requestService: RequestService,redirectRoute:RedirectRoute,sitemap:Sitemap) {
-        super(redirectRoute,sitemap);
+    constructor(private requestService: RequestService,redirectRoute:RedirectRoute,sitemap:Sitemap,globWriter:GlobWriter) {
+        super(redirectRoute,sitemap,globWriter);
         const { pageCollectionConfig } = commonContainer.getStrapiConfig();
         this.pageCollectionConfig = pageCollectionConfig;
-        this.masterPageCollection = new MasterPageCollection();
+        this.masterPageCollection = new MasterPageCollection(globWriter);
     }
 
     async generate(route: Route, dynamicPageRoute: { [key: string]: any }): Promise<{ [key: string]: any } | null> {

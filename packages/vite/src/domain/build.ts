@@ -18,23 +18,8 @@ export  async function build(){
     const userConfig = tezConfig.viteOptions || {};
     const routes = commonContainer.getAppRoutes();
     var clearDist = true;
-    for(const route of routes){
-        let jsGenCode = new JsCodeGen(route);
-        jsGenCode.gen();
-    }
-    let paths = await globby([
-            'deps'
-          ], {expandDirectories: {
-            extensions: ['ts']
-        },cwd:pathResolver.cachePath, followSymbolicLinks: true});
-        let inputs:{[key:string]:string} = {};
-        let deps={};
-        for(const fPath of paths){
-            const key = fPath.split('deps/')[1].replace(".ts","");
-            inputs[key]= `${getPath( [pathResolver.cachePath,fPath],false)}`
-            deps[key]=`./deps/${key}`;
-        }
-        writeDepsAndGlob(deps);
+   
+        let inputs = writeDepsAndGlob(pathResolver);
         const buildInput = {
             build:{
                 emptyOutDir: clearDist,

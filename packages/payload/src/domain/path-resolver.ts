@@ -1,7 +1,7 @@
 import { CommonPathResolver,getPath } from "@tezjs/common"
 
 export class PathResolver {
-    private commonPath:CommonPathResolver;
+    public commonPath:CommonPathResolver;
      
     constructor(){
         this.commonPath = new CommonPathResolver();
@@ -32,6 +32,14 @@ export class PathResolver {
 
     get sitemapJsonPath() {
         return getPath([this.rootPath, "sitemap.json"]);
+    }
+
+    get globJsonPath() {
+        return getPath([this.rootPath, "glob.json"]);
+    }
+
+    get routeComponentsPath() {
+        return getPath([this.rootPath, "route-components.json"]);
     }
 
     get sitemapXmlPath() {

@@ -111,7 +111,7 @@ export class Seo extends JsCodeGen  {
     }
 
     addScript(path:string,isAppendToBody:boolean= false){
-        const elementString = `<script crossorigin="" src="/${path}"></script>`;
+        const elementString = `<script crossorigin="" type="module" src="/${path}"></script>`;
         if(!isAppendToBody)
             this.addHeadChildElement(elementString,false)
         else

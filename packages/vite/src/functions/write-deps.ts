@@ -1,23 +1,31 @@
-import { CommonPathResolver, writeFileSync } from "@tezjs/common";
+import { CommonPathResolver, getPath, writeFileSync } from "@tezjs/common";
+import { GlobWriter } from "@tezjs/payload";
 
-function depsTemplate(deps:{[key:string]:string}){
-    let jString = ``
-    Object.keys(deps).forEach(key=>{
-        jString+=`"${key}":()=>import("${deps[key]}"),`
+function globTemplate(pathResolver:CommonPathResolver){
+    const globWriter = new GlobWriter();
+    let inputOptions = {};
+    let componentsString = ''
+    let layoutsString = ''
+    console.log(globWriter.components)
+    globWriter.components.forEach(name=>{
+        componentsString+=`"${name}": import("/components/${name}.vue"),`
+        inputOptions[`${name}.component`] = getPath([pathResolver.componentsPath,`${name}.vue`],false);
     })
-    return `export const deps:{[key:string]:Function}= {${jString}};console.log(deps);`
-}
-
-function globTemplate(){
-    return `export const glob={
-        components :import.meta.glob("/components/**/*.vue"),
-        layouts :import.meta.glob("/layouts/**/*.vue"),
+    globWriter.layouts.forEach(name=>{
+        layoutsString+=`"${name}.layout": import("/layouts/${name}.vue"),`
+        inputOptions[`${name}.layout`] = getPath([pathResolver.layoutsPath,`${name}.vue`],false);
+    })
+    return {template: `export const glob={
+        components :{${componentsString}},
+        layouts :{${layoutsString}},
         pages :import.meta.glob("/pages/**/*.vue")
     };console.log(glob);`
+    ,inputOptions:inputOptions
+}
 }
 
-export function writeDepsAndGlob(deps:{[key:string]:string}){
-    const pathResolver = new CommonPathResolver();
-    writeFileSync(pathResolver.getFilePath([pathResolver.cachePath],"deps.ts"),depsTemplate(deps),true) 
-    writeFileSync(pathResolver.getFilePath([pathResolver.cachePath],"glob.ts"),globTemplate(),true) 
+export function writeDepsAndGlob(pathResolver:CommonPathResolver){
+    const {template,inputOptions} = globTemplate(pathResolver) ;
+    writeFileSync(pathResolver.getFilePath([pathResolver.cachePath],"glob.ts"),template,true) 
+    return inputOptions;
 }

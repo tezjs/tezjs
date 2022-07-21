@@ -1,8 +1,10 @@
 import { commonContainer, getPath, PayloadReader, writeFileSync } from "@tezjs/common";
+import { POST_SCRIPT_COMMENT } from "../../const/core.const";
 import { depsCodeTemplate } from "../../const/deps-code";
+import { routeComponentWriter } from "../../const/route-component-writer";
 import { getComponentName } from "../../functions/get-component-name";
 import getUrl from "../../functions/get-url";
-import { getPreloadCodeTemplate } from "../../functions/preload-code-template";
+import { getPreloadCodeTemplate, postScriptPreloadCodeTemplate } from "../../functions/preload-code-template";
 export class JsCodeGen extends PayloadReader{
     postSlots:{slots:any,masterPageSlots:any} = {slots:{},masterPageSlots:{}};
         
@@ -14,15 +16,17 @@ export class JsCodeGen extends PayloadReader{
         return (Object.keys(this.postSlots.masterPageSlots).length > 0 || Object.keys(this.postSlots.slots).length > 0);
     }
     gen() {
-        let preloadCode = getPreloadCodeTemplate();
+        let writePath = commonContainer.buildOptions.commandName === "build" ? this.commonPath.distPath:this.commonPath.depsPath;
         let preCode = this.preCode();
         let postCode = this.postCode();
-        const preFile = getPath([this.commonPath.getPath([this.commonPath.depsPath, this.route.fPath]),"pre.js"]);
-        const preloadFile = getPath([this.commonPath.getPath([this.commonPath.depsPath, this.route.fPath]),"preload.js"]);
+        let preloadCode = getPreloadCodeTemplate(routeComponentWriter.getPreDeps(this.route.path));
+        let postScriptPreload = postScriptPreloadCodeTemplate(routeComponentWriter.getPostDeps(this.route.path))
+        const preFile = getPath([this.commonPath.getPath([writePath, this.route.fPath]),"pre.js"]);
+        const preloadFile = getPath([this.commonPath.getPath([writePath, this.route.fPath]),"preload.js"]);
         writeFileSync(preloadFile,preloadCode,true)
-        writeFileSync(preFile,preCode,true)
+        writeFileSync(preFile,preCode.replace(POST_SCRIPT_COMMENT,postScriptPreload),true)
         if(this.isPostCode){
-            const postFile = getPath([this.commonPath.getPath([this.commonPath.depsPath, this.route.fPath]),"post.js"]);
+            const postFile = getPath([this.commonPath.getPath([writePath, this.route.fPath]),"post.js"]);
             writeFileSync(postFile,postCode,true)
         }
             
@@ -37,8 +41,8 @@ export class JsCodeGen extends PayloadReader{
                 masterPageSlots:this.getSlots(this.masterPage,false),
                 tags:this.tags,
                 layoutName:this.masterPage.layoutName,
-                postScript: this.isPostCode ? commonContainer.buildOptions.commandName === "dev"? `/tez/deps${getUrl(this.route.path)}/post` :'./post.js' : ''
-            }
+                postScript: this.isPostCode ? commonContainer.buildOptions.commandName === "dev" ? `/tez/deps${getUrl(this.route.path)}/post` :'./post.js' : ''
+            },this.route
         );
     }
 
@@ -49,7 +53,7 @@ export class JsCodeGen extends PayloadReader{
                 slots:this.postSlots.slots,
                 masterPageSlots:this.postSlots.masterPageSlots,
 
-            },
+            },this.route,
             false
         );
     }

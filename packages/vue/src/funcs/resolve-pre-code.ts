@@ -3,10 +3,11 @@ import { tezPages } from '../const/tez-pages';
 import { TezAppOptions } from '../models/tez-app-options';
 import { getPreloadScriptUrl, getPreScriptUrl } from './get-preload-script-url';
 import {getUrl } from './payload/get-url'
+import { preloadDependencies } from './preload';
 import { registerTezPage } from './register-tez-page';
 function registerData(resolve){
     return func=>{
-        func(registerTezPage);
+        func(registerTezPage,preloadDependencies);
         resolve(true);
     }
 }
@@ -18,7 +19,7 @@ export async function resolvePreloadCode(tezAppOptions:TezAppOptions,to?:string)
         let url = getUrl(to);
         if(!tezPages.isExits(url)){
             /*! @vite-ignore */
-            import(getPreloadScriptUrl(url)).then(t=>t.default).then(t=>{t().then(t=>t.default).then(registerData(resolve))});
+            import(getPreloadScriptUrl(url)).then(t=>t.default).then(t=>{t(preloadDependencies).then(t=>t.default).then(registerData(resolve))});
         }
         else
             resolve(true)

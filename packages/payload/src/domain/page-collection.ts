@@ -12,6 +12,7 @@ import { CustomPagePayload } from "./custom-page-payload";
 import getUrl from "../utils/get-url";
 import { DeploymentDomain } from "./deployment/deployment-domain";
 import { defaultContainer } from "../const/core.const";
+import { GlobWriter } from "./glob-writer";
 export class PageCollection {
     private requestService: RequestService;
     private internationalizationService: InternationalizationService;
@@ -24,6 +25,7 @@ export class PageCollection {
     private redirectRoute:RedirectRoute;
     private customPagePayload:CustomPagePayload;
     private deployment:DeploymentDomain
+    private globWriter:GlobWriter
     constructor() {
         this.requestService = new RequestService();
         this.internationalizationService = new InternationalizationService(this.requestService);
@@ -31,7 +33,8 @@ export class PageCollection {
         this.sitemap = new Sitemap();
         this.robotsGenerator = new RobotTxtGenerator();
         this.redirectRoute = new RedirectRoute();
-        this.payloadGenerator = new PayloadGenerator(this.requestService,this.redirectRoute,this.sitemap);
+        this.globWriter = new GlobWriter();
+        this.payloadGenerator = new PayloadGenerator(this.requestService,this.redirectRoute,this.sitemap,this.globWriter);
         this.pathResolver = new PathResolver();
         
         this.commonPathResolver = new CommonPathResolver();
@@ -46,6 +49,7 @@ export class PageCollection {
         this.sitemap.save()
         await this.robotsGenerator.generate();
         this.redirectRoute.save();
+        this.globWriter.write();
         if(commonContainer.buildOptions.commandName === "build"){
             this.deployment = new DeploymentDomain();
             this.deployment.generate();

@@ -10,22 +10,25 @@ import { depsContainer } from "../const/deps-container.const";
 export function tez(): Plugin {
 	return {
 		name: "vite:tez",
-		closeBundle(){
+		async closeBundle(){
 			if(depsContainer.deps){
 				const htmlGen = new HtmlGen();
-				htmlGen.build();
+				await htmlGen.build();
 					generateSW();
 			}
 			
 		},
         async buildStart() {
 			await readConfig();
-			const pageCollection = new PageCollection();
-      		await pageCollection.generate();
-			  commonContainer.getAppRoutes().forEach(route=>{
-				const jsCodeGen = new JsCodeGen(route);
-				jsCodeGen.gen();
-			  })
+			console.log("build start called")
+			if(commonContainer.buildOptions.commandName === "dev"){
+				const pageCollection = new PageCollection();
+				await pageCollection.generate();
+				commonContainer.getAppRoutes().forEach(route=>{
+				  const jsCodeGen = new JsCodeGen(route);
+				  jsCodeGen.gen();
+				})	
+			}
           }
 	}
 }

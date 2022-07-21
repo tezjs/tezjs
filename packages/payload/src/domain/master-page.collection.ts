@@ -6,13 +6,14 @@ import { createPath, writeFileSync } from "@tezjs/common";
 import * as path from "path";
 import { PageSlot } from "./page-slot";
 import { replaceSpace } from "../utils/replace-space";
+import { GlobWriter } from "./glob-writer";
 
 export class MasterPageCollection{
     private request:RequestService;
     private pathResolver: PathResolver;
     private pageSlot:PageSlot;
     private isGenerated:boolean = false;
-    constructor(){
+    constructor(private globWriter:GlobWriter){
         this.request = new RequestService();
         this.pathResolver = new PathResolver();
         this.pageSlot = new PageSlot();
@@ -34,6 +35,7 @@ export class MasterPageCollection{
                     delete component.data.slotName;
                     slot.push([component.data,componentId])
                     index++;
+                    this.globWriter.addComponent(component.name)
                 }
                 
             }
@@ -41,6 +43,7 @@ export class MasterPageCollection{
                 directoryPath,
                 `${replaceSpace(item.masterPage.title)}.json`
             );
+            this.globWriter.addLayout(item.masterPage.layoutName)
             await writeFileSync(filePath, {layoutName:item.masterPage.layoutName,slots:this.pageSlot.slots});
             this.isGenerated  = true;
         }

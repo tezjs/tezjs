@@ -5,8 +5,18 @@ import { depsContainer } from "../const/deps-container.const";
 import getUrl from "../functions/get-url";
 import { DependencyConfig } from "../interface/dependency-config";
 import { DepsContainerConfig } from "../interface/deps-container-config";
-import { buildSync } from 'esbuild'
+import { build } from 'esbuild'
 import { HtmlPage } from "./html-page";
+import { JsCodeGen } from "./html/js-code-gen";
+import { routeComponentWriter } from "../const/route-component-writer";
+let exampleOnResolvePlugin = {
+    name: 'example',
+    setup(build) {
+      build.onResolve({ filter: /component|layout/ }, args => {
+        return { path: getPath([commonContainer.buildOptions.rootDir, 'dist',args.path.indexOf("assets/") ===-1 ? "assets":"", args.path],false) }
+      })
+    },
+  }
 export class HtmlGen{
     routes:Array<{path:string,name:string,fPath:string}>;
     depsConfig:DepsContainerConfig;
@@ -16,12 +26,15 @@ export class HtmlGen{
     constructor(){
         this.routes = commonContainer.getAppRoutes();
         this.depsConfig = depsContainer.getDeps();
+        console.log(this.depsConfig.excludes)
         this.mainDependency = this.depsConfig.deps[TEZJS_PATH];
         this.setExternals();
         this.commonPathResolver = new CommonPathResolver();
     }
-    build(){
+    async build(){
         for(var route of this.routes){
+                let jsGenCode = new JsCodeGen(route);
+                jsGenCode.gen();
             const path = getUrl(route.path);
             let page:iHtmlPage = {
                 head:{
@@ -29,21 +42,22 @@ export class HtmlGen{
                     preloads:this.getPreloads(path)
                 },
                 body:{
-                    inlineScript:commonContainer.tezConfig.build.inLineJs ? this.getInlineJs(path) : new Array<{name:string,code:string}>(),
-                    script:!commonContainer.tezConfig.build.inLineJs ? this.getJsRef(path):[],
+                    //inlineScript:commonContainer.tezConfig.build.inLineJs ? this.getInlineJs(path) : new Array<{name:string,code:string}>(),
+                    script:[{src:TEZJS_PATH}],
                     style:!commonContainer.tezConfig.build.inLinCss ? this.getCssRef(path):[],
                 }
             }
+            await this.bundleJs(path)
             const htmlPage = new HtmlPage(route);
             htmlPage.createPage(page)
         }
-        this.writeTzWebWorker();
+        await this.writeTzWebWorker();
     }
 
-    writeTzWebWorker(){
+    async writeTzWebWorker(){
         let jsPath = TZ_JS_PATH();
         if(this.commonPathResolver.pathExists(jsPath)){
-            const result = buildSync({
+            const result = await build({
                 entryPoints:[jsPath],
                 minify:true,
                 write: false,
@@ -58,33 +72,50 @@ export class HtmlGen{
     }
 
     getPreloads(path:string):Array<{path:string,type?:string}>{
-        const depPath = `assets${path}/pre.js`
-        return this.getPreloadTags(depPath);
+        const depPath = `assets/tez.js`
+        const prePath = `${path}/pre.js`;
+        let preloads  = this.getPreloadTags(depPath);
+        preloads.unshift({path:'/tz.js'});
+        preloads.push({path:`${prePath}`,type:"module"});
+        preloads.push({path:`/${depPath}`,type:"module"});
+        return preloads;
     }
 
     getPreloadTags(path:string):Array<{path:string,type?:string}>{
         let preloads = new Array<{path:string,type?:string}>()
-        preloads.push({path:'/tz.js'})
-        if(this.depsConfig.deps[path])
+        if(this.depsConfig.deps[path]){
             this.depsConfig.deps[path].js.forEach(item=> {
-                preloads.concat(this.getPreloadTags(item))
-                .push({path:`/${item}`,type:"module"})
+                let items = this.getPreloadTags(item);
+                items.forEach(t=>preloads.push({path:`/${t}`,type:"module"}))
+                preloads.push({path:`/${item}`,type:"module"})
             })
+        }
         return preloads;
     }
 
     getInlineCss(path:string){
         let inlineCss = new Array<{name:string,code:string}>();
         this.setInlineCss(this.mainDependency.css,inlineCss)
-        const depPath = `assets${path}/pre.js`
-        if(this.depsConfig.deps[depPath])
-            this.setInlineCss(this.depsConfig.deps[depPath].css,inlineCss);
+        const preComponents = routeComponentWriter.getRouteComponent(getUrl(path)).pre;
+        for(const preComponent of preComponents){
+            const depPath = `assets/${preComponent}.js`
+            if(this.depsConfig.deps[depPath]){
+                // console.log(depPath)
+                // console.log(this.depsConfig.deps[depPath])
+                // console.log(this.depsConfig.deps[depPath].css)
+                this.setInlineCss(this.depsConfig.deps[depPath].css,inlineCss);
+            }
+            
+        }
+        
         return inlineCss
     }
 
     setInlineCss(css:string[],inlineCss:Array<{name:string,code:string}>){
-        for(const cssPath of css)
+        for(const cssPath of css){
             inlineCss.push({name:cssPath,code:this.depsConfig.css[cssPath]});
+        }
+            
     }
 
     getJsRef(path:string){
@@ -103,31 +134,37 @@ export class HtmlGen{
         return cssRefs;
     }
 
-    getInlineJs(path:string){
-        let inlineJs = new Array<{name:string,code:string}>();
-        const jsPath = `assets${path}/pre.js`;
-        const result = buildSync({
-            entryPoints:[`${getPath([ this.commonPathResolver.distPath,jsPath])}`,`${getPath([ this.commonPathResolver.distPath,TEZJS_PATH])}`],
-            bundle:true,
-            minify:true,
-            write: false,
-            sourcemap:false,
-            external:this.externals,
-            format: 'esm',
-            outdir:'/bundle',
-            logLevel: 'silent'
-        })
-        for(const output of result.outputFiles){
-            let text  = output.text;
-            for(let i=this.externals.length-1;i>=0;i--)
-            {
-                let externalJs = this.externals[i]
-                if(text.indexOf(externalJs) > -1)
-                    text = text.replace(new RegExp(externalJs,"g"),`/assets/${externalJs.split('/').pop()}`)
+    async bundleJs(path:string){
+        const js = [`${path}/pre.js`,`${path}/post.js`];
+        for(const jsPath of js){
+            let fullPath = getPath([ this.commonPathResolver.distPath,jsPath]);
+            if(this.commonPathResolver.pathExists(fullPath)){
+               const result = await build({
+                    entryPoints:[fullPath],
+                    plugins:[exampleOnResolvePlugin],
+                    bundle:true,
+                    allowOverwrite:true,
+                    minify:false,
+                    write: false,
+                    sourcemap:false,
+                    external:this.externals,
+                    format: 'esm',
+                    outfile:fullPath,
+                    logLevel: 'silent'
+                })
+
+                for(const output of result.outputFiles){
+                    let text  = output.text;
+                    for(let i=this.externals.length-1;i>=0;i--)
+                    {
+                        let externalJs = this.externals[i]
+                        if(text.indexOf(externalJs) > -1)
+                            text = text.replace(new RegExp(externalJs,"g"),`/assets/${externalJs.split('/').pop()}`)
+                    }
+                    writeFileSync(fullPath,text,true)
+                }
             }
-            inlineJs.push({name:jsPath,code:text});
         }
-        return inlineJs
     }
 
     setInlineJs(dependencyConfig:DependencyConfig,inlineJs:{[key:string]:string}){

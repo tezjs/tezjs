@@ -9,11 +9,12 @@ import cleanObject from "../sanitizers/clean-object.sanitizer";
 import getUrl from "../utils/get-url";
 import { Sitemap } from "./sitemap";
 import { RedirectRoute } from "./redirect-routes";
+import { GlobWriter } from "./glob-writer";
 
 export abstract class BaseGenerator{
     pathResolver:PathResolver;
     payload:PayloadConfig;
-    constructor(private redirectRoute:RedirectRoute,private sitemap:Sitemap){
+    constructor(private redirectRoute:RedirectRoute,private sitemap:Sitemap,private globWriter:GlobWriter){
         const { payload } = commonContainer.tezConfig;
         this.pathResolver = new PathResolver();
         this.payload = payload;
@@ -34,7 +35,7 @@ export abstract class BaseGenerator{
             slot.push((this.payload.page.maxPreLoadComponent) > j  ? [component.data || {},componentId] : [componentId])
             if((this.payload.page.maxPreLoadComponent) <= j)
                 await writeFileSync(filePath, component.data);
-            
+            this.globWriter.addComponent(component.name)
         }
         let filePath = path.join(
             directoryPath,

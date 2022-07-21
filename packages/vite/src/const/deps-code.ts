@@ -1,6 +1,8 @@
 import { commonContainer } from "@tezjs/common";
+import { routeComponentWriter } from "./route-component-writer";
 import { getImportStatement } from "../functions/get-import-statement";
 import { snakeToCamel } from "../functions/snake-to-camel-case";
+import { POST_SCRIPT_COMMENT } from "./core.const";
 
 function getPreComponents(pageSlots:{[key:string]:any},masterPageSlots:{[key:string]:any},isPre:boolean){
     let preComponents = new Array<string>();
@@ -20,7 +22,7 @@ function getPreComponents(pageSlots:{[key:string]:any},masterPageSlots:{[key:str
     }
     return preComponents;
 }
-export function depsCodeTemplate(page:any,isPre:boolean = true){
+export function depsCodeTemplate(page:any,route:any,isPre:boolean = true){
     let components = ``;
     let masterPage='';
     let componentRefs=`{`;
@@ -29,24 +31,28 @@ export function depsCodeTemplate(page:any,isPre:boolean = true){
         const propName:string = snakeToCamel(name);
         componentRefs+=`"${name}":${propName},`
         components+=getImportStatement(name,'components');
+        routeComponentWriter.addComponent(route.path,name,isPre,false)
     }
     componentRefs+= '}';
         
     if(page.layoutName){
         masterPage +=getImportStatement(page.layoutName,'layouts');
         masterPageRefs+=`"${page.layoutName}":${snakeToCamel(page.layoutName)},`
+        routeComponentWriter.addComponent(route.path,page.layoutName,isPre,true)
     }
     masterPageRefs+='}';
     let postScript = '';
     if(page.postScript){
-        postScript = `postScript: ()=>import("${page.postScript}")`;
-        delete page.postScript
+        if(commonContainer.buildOptions.commandName=== "dev")
+            postScript = `postScript: ()=>import("${page.postScript}")`;
+        else
+            postScript = `postScript: ${POST_SCRIPT_COMMENT}`
     }
-        
+    delete page.postScript
     return `
         ${components}
         ${masterPage}
-        export default function(registerTezPage){
+        export default function(registerTezPage,preload){
 
             registerTezPage({
                 components:${componentRefs},
