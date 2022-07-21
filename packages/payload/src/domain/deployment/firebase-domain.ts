@@ -14,14 +14,13 @@ export class FirebaseDomain extends BaseDeployment{
             firebaseConfig = firebase;
         }else
             firebaseConfig = FIRE_BASE_CONFIG;
-        this.addRedirects(<{[key:string]:any}>firebase,redirectRoutes)
+        this.addRedirects(<{[key:string]:any}>firebaseConfig,redirectRoutes)
         writeFileSync(this.pathResolver.firebaseConfigPath,firebaseConfig);
     }
 
     addRedirects(firebase:{[key:string]:any},redirectRoutes:Array<{from:string,to:string;statusCode:number}>){
         if(firebase.hosting && !firebase.hosting.redirects)
             firebase.hosting.redirects = [];
-    
         if(redirectRoutes.length > 0 && Array.isArray( firebase.hosting.redirects)){
             redirectRoutes.forEach(route =>{
                 firebase.hosting.redirects.push( {
