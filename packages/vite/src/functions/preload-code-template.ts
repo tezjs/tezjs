@@ -1,7 +1,7 @@
 import { commonContainer } from '@tezjs/common';
 
 export function getPreloadCodeTemplate(preloads:Array<string>){
-    let code = `return ()=> import('./pre');`
+    let code = `return import('./pre');`
     if(commonContainer.buildOptions.commandName === "build"){
         code = `    return preload(()=> import('./pre.js'),${JSON.stringify(preloads)});`        
     }
