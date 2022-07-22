@@ -85,7 +85,7 @@ export class HtmlGen{
         if(this.depsConfig.deps[path]){
             this.depsConfig.deps[path].js.forEach(item=> {
                 let items = this.getPreloadTags(item);
-                items.forEach(t=>preloads.push({path:`/${t.path}`,type:"module"}))
+                items.forEach(t=>preloads.push({path:`${t.path}`,type:"module"}))
                 preloads.push({path:`/${item}`,type:"module"})
             })
         }
