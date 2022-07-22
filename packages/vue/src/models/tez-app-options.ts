@@ -26,5 +26,7 @@ export interface TezAppOptions {
     dynamicRoutes?:{[key:string]:any};
     
     isDevMode?:boolean;
+
+    loaderImagePath?:string;
     
 }

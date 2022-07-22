@@ -96,7 +96,7 @@ export class Seo extends JsCodeGen  {
                 if(item.type === "module")
                     this.addModulePreload(item.path,true)
                 else
-                    this.addPreload(item.path,item.path.indexOf(".js") !== -1 ? "script":"style",true)
+                    this.addPreload(item.path,item.path.indexOf(".js") !== -1 ? "script": item.path.indexOf(".css") !== -1 ? "style":"image",true)
             })
         }
     }

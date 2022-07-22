@@ -25,18 +25,28 @@ export const appContainer:
                 if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.imports)
                     commonContainer.tezConfig.client.imports.forEach(item=>refrenceState.imports += `import '${item}';`)
                 
+                
                 if(existsFilesorFolders.addLib){
                     refrenceState.imports +=`\nimport * as func from '#add-lib'; func.default();`
                     delete existsFilesorFolders.addLib;
                 }
             }else
                 refrenceState = this.importState;
-        refrenceState.props=`isDevMode:${commonContainer.buildOptions.commandName === "dev"}`
+        refrenceState.props=this.getProps()
         let tsCode = tezTemplate(refrenceState);
         if(this.tsCodeCache !== tsCode)
             writeFileSync(this.pathResolver.tezTsPath,tsCode,true);
         this.tsCodeCache = tsCode;
         this.importState = refrenceState;
         return refrenceState;
+        }
+
+        getProps(){
+            let props = '';
+            console.log(commonContainer.tezConfig.client)
+            if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.loaderImage)
+                props += `loaderImagePath:"${commonContainer.tezConfig.client.loaderImage}",`
+            props+=`isDevMode:${commonContainer.buildOptions.commandName === "dev"}`
+            return props;
         }
     })();

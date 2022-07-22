@@ -75,6 +75,9 @@ export class HtmlGen{
         const prePath = `${path}/pre.js`;
         let preloads  = this.getPreloadTags(depPath);
         preloads.unshift({path:'/tz.js'});
+        if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.loaderImage)
+        preloads.push({path:`${commonContainer.tezConfig.client.loaderImage}`,type:"image"});
+        preloads.push({path:`${prePath}`,type:"module"});
         preloads.push({path:`${prePath}`,type:"module"});
         preloads.push({path:`/${depPath}`,type:"module"});
         return preloads;

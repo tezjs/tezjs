@@ -1,9 +1,12 @@
 import { isBot } from "@tezjs/js";
 import { Directive, DirectiveBinding, VNode } from "vue";
+import { componentState } from "../const/component-state";
 
 export const TEZ_SRC_DIRECTIVE: Directive<any, any> =  {
     beforeMount: function (el:any, binding:DirectiveBinding<any>, vnode:VNode<any, any, { [key: string]: any; }>, prevVnode:any) {
       if (!isBot()) {
+        if(componentState.tezAppOptions.loaderImagePath)
+          el.src = componentState.tezAppOptions.loaderImagePath;
       let observer = new IntersectionObserver(function (entries) {
           entries.forEach(entry => {
               if (entry.isIntersecting) {
@@ -14,7 +17,7 @@ export const TEZ_SRC_DIRECTIVE: Directive<any, any> =  {
               }
           }); 
       }, { threshold: [0.25] });
-      observer.observe(el);
+      observer.observe(el); 
       el.observer = observer;
     }else
         el.src= binding.value

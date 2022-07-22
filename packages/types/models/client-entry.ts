@@ -1,3 +1,4 @@
 export interface ClientEntry{
-    imports:string[]
+    imports?:string[];
+    loaderImage?:string;
 }
