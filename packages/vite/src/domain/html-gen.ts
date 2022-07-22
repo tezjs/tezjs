@@ -85,11 +85,17 @@ export class HtmlGen{
         if(this.depsConfig.deps[path]){
             this.depsConfig.deps[path].js.forEach(item=> {
                 let items = this.getPreloadTags(item);
-                items.forEach(t=>preloads.push({path:`${t.path}`,type:"module"}))
-                preloads.push({path:`/${item}`,type:"module"})
+                items.forEach(t=>this.pushPreload(preloads,t.path))
+                this.pushPreload(preloads,`/${item}`)
             })
         }
         return preloads;
+    }
+
+    pushPreload(preloads:Array<{path:string,type?:string}>,path:string){
+        if(preloads.filter(t=>t.path === path).length === 0){
+            preloads.push({path:path,type:"module"})
+        }
     }
 
     getInlineCss(path:string){
