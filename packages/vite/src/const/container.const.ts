@@ -43,7 +43,6 @@ export const appContainer:
 
         getProps(){
             let props = '';
-            console.log(commonContainer.tezConfig.client)
             if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.loaderImage)
                 props += `loaderImagePath:"${commonContainer.tezConfig.client.loaderImage}",`
             props+=`isDevMode:${commonContainer.buildOptions.commandName === "dev"}`
