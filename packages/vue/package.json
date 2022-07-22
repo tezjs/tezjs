@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/vue",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "description": "",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
@@ -33,7 +33,7 @@
     "unbuild": "^0.7.4"
   },
   "dependencies": {
-    "@tezjs/js": "0.0.45",
+    "@tezjs/js": "0.0.46",
     "tslib": "^2.3.1",
     "vue": "^3.2.25",
     "vue-router": "^4.0.12",
