@@ -8,7 +8,7 @@ export class RedirectRoute{
     constructor(){
         this.routes = [];
         this.pathResolver = new PathResolver();
-        this.routes = readFileSync(this.pathResolver.redirectRoutesJsonPath) as any[];
+        this.routes = readFileSync(this.pathResolver.redirectRoutesJsonPath) as any[] || [];
     }
 
     add(page:any){
