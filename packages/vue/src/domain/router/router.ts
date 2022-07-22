@@ -2,6 +2,7 @@ import { tezPages } from "../../const/tez-pages";
 import { getCurrentScrollPosition } from "../../funcs/current-scroll-position";
 import { getCurrentUrl } from "../../funcs/payload/get-current-url";
 import { resolveRoute } from "../../funcs/resolve-pre-code";
+import { setMetaInfo } from "../../funcs/set-meta-tags";
 import { HistoryState } from "../../models/history-state";
 const assign = Object.assign;
 export class Router{
@@ -31,6 +32,7 @@ export class Router{
 
     changeRouteState(to,isPopState=false){
         this.resolve(to).then(t=>{
+            this.refreshPageMetaTags(to)
             if(!isPopState){
                 const currentState = assign(
                     {}, 
@@ -51,6 +53,12 @@ export class Router{
 
     resolve(url:string){
         return resolveRoute(url)
+    }
+
+    refreshPageMetaTags(to:string){
+        let payload = tezPages.getPayload(to)
+        if (payload && payload.tags)
+              setMetaInfo(payload.tags);
     }
 
     changeRoute(url:string,state:HistoryState,replace:boolean){

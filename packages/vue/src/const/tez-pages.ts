@@ -10,7 +10,7 @@ export const tezPages:
     registerPage(page:TezPage):void;
     components:{[key:string]:DefineComponent};
     masterPages:{[key:string]:DefineComponent};
-    getPayload():any;
+    getPayload(to?:string):any;
     refreshRoute(url:string);
     isExits(url:string):boolean;
 } = new (class {
@@ -50,8 +50,6 @@ export const tezPages:
                     })
             })
         }
-        if(page.payload && page.payload.tags)
-            setMetaInfo(page.payload.tags)
         
         if(this.isInitializationMode){
                 this.isInitializationMode = false;
@@ -70,8 +68,8 @@ export const tezPages:
                     postScript:currentPage.postScript
                 })
     }
-    getPayload(){
-        let url = getUrl()
+    getPayload(to?:string){
+        let url = to || getUrl()
         return this.pages[url]
     }
 
