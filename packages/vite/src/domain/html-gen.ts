@@ -149,7 +149,7 @@ export class HtmlGen{
                     plugins:[exampleOnResolvePlugin],
                     bundle:true,
                     allowOverwrite:true,
-                    minify:false,
+                    minify:true,
                     write: false,
                     sourcemap:false,
                     external:this.externals,
