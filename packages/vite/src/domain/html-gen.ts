@@ -26,7 +26,6 @@ export class HtmlGen{
     constructor(){
         this.routes = commonContainer.getAppRoutes();
         this.depsConfig = depsContainer.getDeps();
-        console.log(this.depsConfig.excludes)
         this.mainDependency = this.depsConfig.deps[TEZJS_PATH];
         this.setExternals();
         this.commonPathResolver = new CommonPathResolver();
@@ -100,9 +99,6 @@ export class HtmlGen{
         for(const preComponent of preComponents){
             const depPath = `assets/${preComponent}.js`
             if(this.depsConfig.deps[depPath]){
-                // console.log(depPath)
-                // console.log(this.depsConfig.deps[depPath])
-                // console.log(this.depsConfig.deps[depPath].css)
                 this.setInlineCss(this.depsConfig.deps[depPath].css,inlineCss);
             }
             

@@ -20,7 +20,6 @@ export function tez(): Plugin {
 		},
         async buildStart() {
 			await readConfig();
-			console.log("build start called")
 			if(commonContainer.buildOptions.commandName === "dev"){
 				const pageCollection = new PageCollection();
 				await pageCollection.generate();

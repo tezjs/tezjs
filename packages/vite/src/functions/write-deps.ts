@@ -6,7 +6,6 @@ function globTemplate(pathResolver:CommonPathResolver){
     let inputOptions = {};
     let componentsString = ''
     let layoutsString = ''
-    console.log(globWriter.components)
     globWriter.components.forEach(name=>{
         componentsString+=`"${name}": import("/components/${name}.vue"),`
         inputOptions[`${name}.component`] = getPath([pathResolver.componentsPath,`${name}.vue`],false);
