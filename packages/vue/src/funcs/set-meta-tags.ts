@@ -5,6 +5,9 @@ export function setMetaInfo(metaInfo: { [key: string]: any }) {
       metas.forEach((x:any) => x.remove())
       var title = document.getElementsByTagName("title")[0];
       var canonical: HTMLLinkElement = document.querySelector('link[rel="canonical"') as HTMLLinkElement;
+      var ldJson: HTMLScriptElement = document.querySelector('script[type="application/ld+json"') as HTMLScriptElement;
+      if(ldJson)
+        ldJson.remove()
       if (title) title.innerText = metaInfo.title;
       else {
         title = document.createElement("title");
