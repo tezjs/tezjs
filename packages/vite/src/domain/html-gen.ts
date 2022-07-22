@@ -35,18 +35,19 @@ export class HtmlGen{
                 let jsGenCode = new JsCodeGen(route);
                 jsGenCode.gen();
             const path = getUrl(route.path);
+            
             let page:iHtmlPage = {
                 head:{
                     inlineStyle: commonContainer.tezConfig.build.inLinCss ? this.getInlineCss(path) : new Array<{name:string,code:string}>(),
                     preloads:this.getPreloads(path)
                 },
                 body:{
-                    //inlineScript:commonContainer.tezConfig.build.inLineJs ? this.getInlineJs(path) : new Array<{name:string,code:string}>(),
-                    script:[{src:TEZJS_PATH}],
+                    inlineScript:commonContainer.tezConfig.build.inLineJs ? await this.getInlineJs(path) : new Array<{name:string,code:string}>(),
+                    script:!commonContainer.tezConfig.build.inLineJs ?[{src:TEZJS_PATH}] :[],
                     style:!commonContainer.tezConfig.build.inLinCss ? this.getCssRef(path):[],
                 }
             }
-            await this.bundleJs(path)
+            await this.minifyJs([`${path}/pre.js`,`${path}/post.js`])
             const htmlPage = new HtmlPage(route);
             htmlPage.createPage(page)
         }
@@ -76,10 +77,11 @@ export class HtmlGen{
         let preloads  = this.getPreloadTags(depPath);
         preloads.unshift({path:'/tz.js'});
         if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.loaderImage)
-        preloads.push({path:`${commonContainer.tezConfig.client.loaderImage}`,type:"image"});
-        preloads.push({path:`${prePath}`,type:"module"});
-        preloads.push({path:`${prePath}`,type:"module"});
-        preloads.push({path:`/${depPath}`,type:"module"});
+            preloads.push({path:`${commonContainer.tezConfig.client.loaderImage}`,type:"image"});
+        if(!commonContainer.tezConfig.build.inLineJs) {
+            preloads.push({path:`${prePath}`,type:"module"});
+            preloads.push({path:`/${depPath}`,type:"module"});
+        }
         return preloads;
     }
 
@@ -139,37 +141,58 @@ export class HtmlGen{
         return cssRefs;
     }
 
-    async bundleJs(path:string){
-        const js = [`${path}/pre.js`,`${path}/post.js`];
-        for(const jsPath of js){
+    async getInlineJs(path:string){
+        let preInlinePath = `${path}/pre.inline.js`;
+        let inlineJsCode = await this.minifyJs([preInlinePath],true);
+        let tezjsCode = readFileSync(getPath([this.commonPathResolver.distPath,TEZJS_PATH]),true) as string;
+        inlineJsCode.push({name:TEZJS_PATH,code: this.resetImports(tezjsCode)});
+        this.commonPathResolver.deleteFile(getPath([ this.commonPathResolver.distPath,preInlinePath]));
+        return inlineJsCode;
+    }
+    
+
+    async minifyJs(jsPaths:Array<string>,isInline:boolean = false){
+        let inlineJs = new Array<{name:string,code:string}>();
+        for(const jsPath of jsPaths){
+            
             let fullPath = getPath([ this.commonPathResolver.distPath,jsPath]);
             if(this.commonPathResolver.pathExists(fullPath)){
                const result = await build({
                     entryPoints:[fullPath],
                     plugins:[exampleOnResolvePlugin],
-                    bundle:true,
+                    bundle:isInline,
                     allowOverwrite:true,
                     minify:true,
                     write: false,
                     sourcemap:false,
-                    external:this.externals,
+                    external:isInline? this.externals : [],
                     format: 'esm',
                     outfile:fullPath,
                     logLevel: 'silent'
                 })
-
+                
                 for(const output of result.outputFiles){
                     let text  = output.text;
-                    for(let i=this.externals.length-1;i>=0;i--)
+                    text = this.resetImports(text);
+                    if(isInline){
+                        inlineJs.push({name:jsPath,code:text});
+                    }else
+                        writeFileSync(fullPath,text,true)
+                }
+            }
+        }
+
+        return inlineJs;
+    }
+
+    private resetImports(text){
+        for(let i=this.externals.length-1;i>=0;i--)
                     {
                         let externalJs = this.externals[i]
                         if(text.indexOf(externalJs) > -1)
                             text = text.replace(new RegExp(externalJs,"g"),`/assets/${externalJs.split('/').pop()}`)
                     }
-                    writeFileSync(fullPath,text,true)
-                }
-            }
-        }
+                    return text;
     }
 
     setInlineJs(dependencyConfig:DependencyConfig,inlineJs:{[key:string]:string}){

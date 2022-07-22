@@ -41,3 +41,7 @@ export const TEZJS_PATH="assets/tez.js";
 export const TEZCSS_PATH="assets/tez.css";
 
 export const POST_SCRIPT_COMMENT = "/*POST_SCRIPT*/"
+
+export const EXPORT_DEFAULT = "export default";
+
+export const WINDOW_TEZ_DATA = "window.TEZ_DATA = ";

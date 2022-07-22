@@ -1,5 +1,5 @@
 import { commonContainer, getPath, PayloadReader, writeFileSync } from "@tezjs/common";
-import { POST_SCRIPT_COMMENT } from "../../const/core.const";
+import { EXPORT_DEFAULT, POST_SCRIPT_COMMENT, WINDOW_TEZ_DATA } from "../../const/core.const";
 import { depsCodeTemplate } from "../../const/deps-code";
 import { routeComponentWriter } from "../../const/route-component-writer";
 import { getComponentName } from "../../functions/get-component-name";
@@ -23,8 +23,14 @@ export class JsCodeGen extends PayloadReader{
         let postScriptPreload = postScriptPreloadCodeTemplate(routeComponentWriter.getPostDeps(this.route.path))
         const preFile = getPath([this.commonPath.getPath([writePath, this.route.fPath]),"pre.js"]);
         const preloadFile = getPath([this.commonPath.getPath([writePath, this.route.fPath]),"preload.js"]);
+        preCode = preCode.replace(POST_SCRIPT_COMMENT,postScriptPreload)
         writeFileSync(preloadFile,preloadCode,true)
-        writeFileSync(preFile,preCode.replace(POST_SCRIPT_COMMENT,postScriptPreload),true)
+        if(commonContainer.buildOptions.commandName === "build"){
+            const preInlineFile = getPath([this.commonPath.getPath([writePath, this.route.fPath]),"pre.inline.js"]);
+            const preInlineCode = preCode.replace(EXPORT_DEFAULT,WINDOW_TEZ_DATA);
+            writeFileSync(preInlineFile,preInlineCode,true)
+        }
+        writeFileSync(preFile,preCode,true)
         if(this.isPostCode){
             const postFile = getPath([this.commonPath.getPath([writePath, this.route.fPath]),"post.js"]);
             writeFileSync(postFile,postCode,true)

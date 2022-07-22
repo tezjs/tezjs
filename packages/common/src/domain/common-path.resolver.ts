@@ -4,6 +4,7 @@ import { commonContainer } from "../const/container.const";
 import { getPath } from "../functions/get-path";
 import { removePath } from "../functions/remove-path";
 import * as path from "path";
+import { deleteFile } from "../functions/delete-file";
 export class CommonPathResolver {
 
     get indexHtmlPath(){
@@ -109,6 +110,10 @@ export class CommonPathResolver {
 
     removeDirSync(path:string){
         removePath(path);
+    }
+
+    deleteFile(path:string){
+        deleteFile(path);
     }
 
     getPath(path:Array<string>){
