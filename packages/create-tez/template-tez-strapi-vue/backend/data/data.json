@@ -238,7 +238,7 @@
                             "filters": {
                                 "categories": {
                                     "name": {
-                                        "$eq": "{{name}}"
+                                        "$eq": "{{referencePageData.name}}"
                                     }
                                 }
                             }
