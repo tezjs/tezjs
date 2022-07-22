@@ -250,8 +250,8 @@
                 ],
                 "Seo": {
                     "id": 9,
-                    "Title": "{{name}} Category Articles",
-                    "Description": "{{name}} Articles",
+                    "Title": "{{referencePageData.name}} Category Articles",
+                    "Description": "{{referencePageData.name}} Articles",
                     "Canonical": null,
                     "LinkingData": null
                 },
