@@ -54,7 +54,7 @@ function addPageSchema(linkingData:{[key:string]:any},insertBeforeElement:HTMLEl
       let scriptElement = document.createElement("script");
       scriptElement.setAttribute("data-head", "tezjs");
       scriptElement.type = "application/ld+json";
-      scriptElement.innerText = JSON.stringify(data.trim());
+      scriptElement.textContent = data.trim();
       document.head.insertBefore(scriptElement, insertBeforeElement);
     })
 }
