@@ -18,8 +18,8 @@ export async function resolvePreloadCode(tezAppOptions:TezAppOptions,to?:string)
     return new Promise<Boolean>((resolve,reject)=>{
         let url = getUrl(to);
         if(!tezPages.isExits(url)){
-            /*! @vite-ignore */
-            import(getPreloadScriptUrl(url)).then(t=>t.default).then(t=>{t(preloadDependencies).then(t=>t.default).then(registerData(resolve))});
+            
+            import(/* @vite-ignore */ getPreloadScriptUrl(url)).then(t=>t.default).then(t=>{t(preloadDependencies).then(t=>t.default).then(registerData(resolve))});
         }
         else
             resolve(true)
@@ -30,8 +30,8 @@ export async function resolvePreCode(tezAppOptions:TezAppOptions,to?:string){
     return new Promise<Boolean>((resolve,reject)=>{
         let url = getUrl(to);
         if(!tezPages.isExits(url)){
-            /* @vite-ignore */
-            import(getPreScriptUrl(url)).then(t=>t.default).then(registerData(resolve));
+            
+            import(/* @vite-ignore */getPreScriptUrl(url)).then(t=>t.default).then(registerData(resolve));
         }
         else
             resolve(true)
