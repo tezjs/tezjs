@@ -1,10 +1,8 @@
-import { commonContainer, CommonPathResolver, getPath } from "@tezjs/common";
-import {globby} from 'globby';
+import { commonContainer, CommonPathResolver } from "@tezjs/common";
 import {build as viteBuild,mergeConfig, UserConfig} from 'vite'
 import { VITE_SERVER_CONFIG } from "../const/vite-server-config.const";
 import { readConfig } from "../functions/read-config";
 import { PageCollection } from "@tezjs/payload";
-import { JsCodeGen } from "./html/js-code-gen";
 import { writeDepsAndGlob } from "../functions/write-deps";
 import { addUpdateInputs } from "../functions/add-update-inputs";
 import { appContainer } from "../const/container.const";
@@ -16,7 +14,7 @@ export  async function build(){
     let tezConfig = commonContainer.tezConfig;
     const pathResolver = new CommonPathResolver();
     const userConfig = tezConfig.viteOptions || {};
-    const routes = commonContainer.getAppRoutes();
+    
     var clearDist = true;
    
         let inputs = writeDepsAndGlob(pathResolver);

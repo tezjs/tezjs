@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/cli",
-  "version": "0.0.43",
+  "version": "0.0.44",
   "description": "Create Tez Application Project",
   "main": "index.js",
   "author": "ajayojha",
@@ -31,9 +31,9 @@
     "mri": "^1.2.0",
     "prompts": "^2.4.2",
     "unbuild": "^0.7.4",
-    "@tezjs/vite": "0.0.43",
-    "@tezjs/types": "0.0.43",
-    "@tezjs/common": "0.0.43"
+    "@tezjs/vite": "0.0.44",
+    "@tezjs/types": "0.0.44",
+    "@tezjs/common": "0.0.44"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.2",
