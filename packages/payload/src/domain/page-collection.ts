@@ -13,6 +13,7 @@ import getUrl from "../utils/get-url";
 import { DeploymentDomain } from "./deployment/deployment-domain";
 import { defaultContainer } from "../const/core.const";
 import { GlobWriter } from "./glob-writer";
+import { StrapiModuleConfig } from "@tezjs/types";
 export class PageCollection {
     private requestService: RequestService;
     private internationalizationService: InternationalizationService;
@@ -41,8 +42,13 @@ export class PageCollection {
         this.customPagePayload = new CustomPagePayload(this.redirectRoute,this.sitemap,this.pageRoute);
     }
     async generate(routePath?:string){
-        if(commonContainer.tezConfig.strapi)
-            await this.generateStrapiPayload(routePath)
+        if(commonContainer.tezConfig.strapi){
+            if((<StrapiModuleConfig>commonContainer.tezConfig.strapi).customPayloadGenerator)
+                await (<StrapiModuleConfig>commonContainer.tezConfig.strapi).customPayloadGenerator({routePath:routePath})
+            else
+                await this.generateStrapiPayload(routePath)
+        }
+            
         if(commonContainer.tezConfig.pages)
             await this.customPagePayload.generate(routePath)
         this.pageRoute.save();
