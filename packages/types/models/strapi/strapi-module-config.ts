@@ -9,7 +9,7 @@ import { SerializeJsonConfig } from "./serialize-json-config";
 import { UserCredential } from "./user-credential-config";
 
 export interface StrapiModuleConfig {
-    customPayloadGenerator:(config:CustomPayloadGenratorConfig)=>Promise<void>;
+    customPayloadGenerator?:(config:CustomPayloadGenratorConfig)=>Promise<void>;
     version?:number;
     apiUri?: string;
     isDev?: boolean;
