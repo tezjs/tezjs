@@ -1,6 +1,6 @@
 {
   "name": "create-tez",
-  "version": "0.0.51",
+  "version": "0.0.52",
   "description": "Create Tez Application Project",
   "main": "./index.js",
   "types": "./dist/index.d.ts",
