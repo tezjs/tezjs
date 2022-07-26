@@ -17,14 +17,17 @@ export class Sitemap{
 
     save(){
         const notMapped = [];
-            let sitemapUris = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-            Object.keys(this.sitemap).forEach(urlNode => {
+            let keys = Object.keys(this.sitemap);
+            if(keys.length > 0){
+                let sitemapUris = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+                Object.keys(this.sitemap).forEach(urlNode => {
                     sitemapUris += this.xmlElement(this.sitemap[urlNode]);
             })
             sitemapUris +=`</urlset>`
             writeFileSync(this.pathResolver.sitemapXmlPath,sitemapUris,true)
             writeFileSync(this.pathResolver.sitemapNotMappedJsonPath,notMapped)
             writeFileSync(this.pathResolver.sitemapJsonPath,this.sitemap)
+            }
     }
 
     xmlElement(sitemap: { [key: string]: any }) {
