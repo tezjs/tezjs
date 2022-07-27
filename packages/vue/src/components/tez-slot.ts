@@ -40,7 +40,9 @@ export default defineComponent({
         slotCategory: { type: String, default: 'page' },
         preserveComponentState: { type: Boolean }
     },
-    mounted() {
+    async mounted() {
+        if(isBot() && this.postScript)
+            await this.postScript();
         this.slots = activePageState.page.slots;
         this.masterPageSlots = activePageState.page.masterPageSlots;
         this.postScript = activePageState.page.postScript
@@ -88,7 +90,7 @@ export default defineComponent({
                         this.components.push(componentItem);
                         this.nextIndex++;
                         if (components[this.nextIndex] && !components[this.nextIndex].data && this.postScript)
-                        this.loadPostScript();
+                            this.loadPostScript();
                         if (isBot())
                             this.goToNextComponent();
                         else
