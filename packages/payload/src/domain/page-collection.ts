@@ -44,7 +44,15 @@ export class PageCollection {
     async generate(routePath?:string){
         if(commonContainer.tezConfig.strapi){
             if((<StrapiModuleConfig>commonContainer.tezConfig.strapi).customPayloadGenerator)
-                await (<StrapiModuleConfig>commonContainer.tezConfig.strapi).customPayloadGenerator({routePath:routePath})
+                await (<StrapiModuleConfig>commonContainer.tezConfig.strapi).customPayloadGenerator({
+                    routePath:routePath,
+                    redirectRoute:this.redirectRoute,
+                    sitemap:this.sitemap,
+                    globWriter:this.globWriter,
+                    pathResolver:this.pathResolver,
+                    pageRoute:this.pageRoute
+
+                })
             else
                 await this.generateStrapiPayload(routePath)
         }
