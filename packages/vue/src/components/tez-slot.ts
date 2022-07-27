@@ -1,12 +1,10 @@
 import { defineComponent, h, VNode, KeepAlive } from 'vue'
-import { getJsonPayload } from '../funcs/payload/get-json-payload';
 import { isBot } from '@tezjs/js';
 import { activePageState } from '../const/active-page-state';
 import { tezPages } from '../const/tez-pages';
 import { cacheState } from '../const/cache-state';
 import { getCurrentUrl } from '../funcs/payload/get-current-url';
 import { idleCallback,isMobile } from '@tezjs/js';
-import { getPostLoadScriptUrl } from '../funcs/get-preload-script-url';
 import { PageState } from '../models/page-state';
 import { registerTezPage } from '../funcs/register-tez-page';
 
