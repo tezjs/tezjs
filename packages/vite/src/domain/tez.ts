@@ -23,10 +23,10 @@ export function tez(): Plugin {
 			if(commonContainer.buildOptions.commandName === "dev"){
 				const pageCollection = new PageCollection();
 				await pageCollection.generate();
-				// commonContainer.getAppRoutes().forEach(route=>{
-				//   const jsCodeGen = new JsCodeGen(route);
-				//   jsCodeGen.gen();
-				// })	
+				commonContainer.getAppRoutes().forEach(route=>{
+				  const jsCodeGen = new JsCodeGen(route);
+				  jsCodeGen.gen();
+				})	
 			}
           }
 	}
