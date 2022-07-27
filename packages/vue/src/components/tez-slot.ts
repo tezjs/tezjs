@@ -8,6 +8,7 @@ import { getCurrentUrl } from '../funcs/payload/get-current-url';
 import { idleCallback,isMobile } from '@tezjs/js';
 import { getPostLoadScriptUrl } from '../funcs/get-preload-script-url';
 import { PageState } from '../models/page-state';
+import { registerTezPage } from '../funcs/register-tez-page';
 
 interface DataPoint {
     lazyRef: VNode | null;
@@ -98,7 +99,7 @@ export default defineComponent({
 
         },
         loadPostScript() {
-            return this.postScript().then((t) => this.postScript = null);
+            return this.postScript().then((postScript) => {postScript(registerTezPage);this.postScript = null});
         },
         getComponentName(component:any){
             return isMobile() && component.mobileComponentName ? component.mobileComponentName : component.name;
