@@ -8,8 +8,6 @@ export default defineBuildConfig({
   },
   entries: ["./index"],
   dependencies: [
-    'vue-router',
-    "vuex",
     "@tezjs/js"
   ]
 })
