@@ -25,7 +25,7 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
       entries: [
         pathResolver.tezTsPath
       ],
-      include: ['vue','vuex','vue-router']
+      include: ['vue']
     },
     server: {
       middlewareMode: 'ssr',
