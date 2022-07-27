@@ -19,9 +19,12 @@ export const appContainer:
             this.build.route = route;
             
             let refrenceState:ImportState = {imports:'',props:'',runtimeImports:''};
+            let existsFilesorFolders = this.pathResolver.getExistsFilesOrFolders();
             if(!this.importState){
-                let existsFilesorFolders = this.pathResolver.getExistsFilesOrFolders();
-                ['store'].forEach(key=> {if(existsFilesorFolders[key]) refrenceState.imports += `import * as ${key} from '#${key}';`});
+                ["useVue"].forEach((key) => {
+                    if (existsFilesorFolders[key])
+                      refrenceState.imports += `import ${key} from '/@/${key === "useVue" ? "plugins":key}';`;
+                  });
                 if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.imports)
                     commonContainer.tezConfig.client.imports.forEach(item=>refrenceState.imports += `import '${item}';`)
                 
@@ -32,7 +35,7 @@ export const appContainer:
                 }
             }else
                 refrenceState = this.importState;
-        refrenceState.props=this.getProps()
+        refrenceState.props=this.getProps(existsFilesorFolders)
         let tsCode = tezTemplate(refrenceState);
         if(this.tsCodeCache !== tsCode)
             writeFileSync(this.pathResolver.tezTsPath,tsCode,true);
@@ -41,11 +44,21 @@ export const appContainer:
         return refrenceState;
         }
 
-        getProps(){
+        getProps(existsFilesorFolders:{
+            components: boolean;
+            layouts: boolean;
+            router: boolean;
+            store: boolean;
+            addLib: boolean;
+            useVue: boolean;
+            pages: boolean;
+        }){
             let props = '';
             if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.loaderImage)
                 props += `loaderImagePath:"${commonContainer.tezConfig.client.loaderImage}",`
-            props+=`isDevMode:${commonContainer.buildOptions.commandName === "dev"}`
+            props+=`isDevMode:${commonContainer.buildOptions.commandName === "dev"},`
+            if(existsFilesorFolders.useVue)
+                props += `useVue:useVue,`;
             return props;
         }
     })();
