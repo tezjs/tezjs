@@ -16,7 +16,7 @@ export class RobotTxtGenerator{
     }
 
     async generate(){
-        if(this.robotsConfig){
+        if(this.robotsConfig && !commonContainer.getStrapiConfig().customPayloadGenerator){
             const result = await this.request.get(`/robots?${getFilterQueryParams({Environment:this.robotsConfig.environmentName})}`);
             const item = result &&  result[0] ? result[0] : undefined;
             if(item)
@@ -29,6 +29,7 @@ export class RobotTxtGenerator{
     }
 
     save(text:string){
-        writeFileSync(this.pathResolver.robotsTxtPath,text,true);
+        if(this.robotsConfig && !commonContainer.getStrapiConfig().customPayloadGenerator){
+         writeFileSync(this.pathResolver.robotsTxtPath,text,true);
     }
 }
