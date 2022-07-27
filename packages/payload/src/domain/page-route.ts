@@ -88,6 +88,11 @@ export class PageRoute {
             fPath:getUrl(routeItem.path).split('/').join(path.sep)
         })
     }
+    
+    addRoutes(routes){
+        this.routes = routes;
+    }
+
 
     async save(){
         await writeFileSync(this.pathResolver.routesJsonPath, this.routes)
