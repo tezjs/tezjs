@@ -99,7 +99,7 @@ export default defineComponent({
 
         },
         loadPostScript() {
-            return this.postScript().then((postScript) => {postScript(registerTezPage);this.postScript = null});
+            return this.postScript().then((postScript) => {postScript.default(registerTezPage);this.postScript = null});
         },
         getComponentName(component:any){
             return isMobile() && component.mobileComponentName ? component.mobileComponentName : component.name;
