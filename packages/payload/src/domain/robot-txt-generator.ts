@@ -29,7 +29,7 @@ export class RobotTxtGenerator{
     }
 
     save(text:string){
-        if(this.robotsConfig && !commonContainer.getStrapiConfig().customPayloadGenerator){
+        if(this.robotsConfig && !commonContainer.getStrapiConfig().customPayloadGenerator)
          writeFileSync(this.pathResolver.robotsTxtPath,text,true);
     }
 }
