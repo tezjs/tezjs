@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs'
+import { existsSync } from 'fs'
 import dotenv  from 'dotenv'
 import dotenvExpand from 'dotenv-expand'
 import { loadConfig } from 'c12'
