@@ -16,8 +16,7 @@ function globTemplate(pathResolver:CommonPathResolver){
     })
     return {template: `export const glob={
         components :{${componentsString}},
-        layouts :{${layoutsString}},
-        pages :import.meta.glob("/pages/**/*.vue")
+        layouts :{${layoutsString}}
     };console.log(glob);`
     ,inputOptions:inputOptions
 }
