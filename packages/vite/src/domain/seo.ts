@@ -85,9 +85,13 @@ export class Seo extends JsCodeGen  {
         if(this.htmlMeta.head.linkingData){
             const splitLinkingData = this.htmlMeta.head.linkingData.split("--");
             splitLinkingData.forEach(data=>{
-                this.addHeadChildElement(`<script data-head="tezjs"  type="application/ld+json">${JSON.stringify(JSON.parse(data.trim().replace(/'/g,'"')))}</script>`,false)
+                this.addHeadChildElement(`<script data-head="tezjs"  type="application/ld+json">${JSON.stringify(JSON.parse(this.replaceText(data.trim())))}</script>`,false)
             })
         }
+    }
+
+    private replaceText(text:string){
+        return text.replace(/\\n/g, '').replace(/\n/g, '')
     }
 
     addPreloads(){
