@@ -91,7 +91,7 @@ export class Seo extends JsCodeGen  {
     }
 
     private replaceText(text:string){
-        return text.replace(/\\n/g, '').replace(/\n/g, '')
+        return text.replace(/\\n/g, '').replace(/\n/g, '').replace(/'/g,'"')
     }
 
     addPreloads(){

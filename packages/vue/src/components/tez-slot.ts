@@ -53,7 +53,7 @@ export default defineComponent({
                 this.nextIndex = 0;
                 this.goToNextComponent(false)
             })
-        this.goToNextComponent(false)
+        this.goToNextComponent(true)
     },
     methods: {
         getSlotComponents(slotName, slotCategory) {
@@ -74,9 +74,11 @@ export default defineComponent({
                 this.observer.observe(this.$refs.divLazy as Element);
             }
         },
-        async goToNextComponent() {
+        async goToNextComponent(isContinue:boolean) {
             if (!this.observer) {
                 this.subscribeLazy();
+                this.isInView = isContinue;
+                if(!this.isInView)
                 return;
             }
             if (this.isInView) {
