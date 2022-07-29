@@ -1,4 +1,4 @@
-import { subText } from "@tezjs/common"
+import { commonContainer, subText } from "@tezjs/common"
 import { CLIENT_ENV_SUBSTRING } from '../const/core.const';
 import { tsDefinition } from './get-ts-definition';
 export function getParsedEnv(parsed:{[key:string]:any}){
@@ -29,6 +29,8 @@ export function getParsedEnv(parsed:{[key:string]:any}){
                 
             });
         }
+        if(commonContainer.buildOptions.commandName === "build")
+            parsed.VITE_USER_NODE_ENV = "production";
     }
     return {parsed:parsed, client:{env:clientEnv,typedDefinition:clientTypedDefinition},server:{env:serverEnv || parsed,typedDefinition:serverTypedDefinition}};
 }
