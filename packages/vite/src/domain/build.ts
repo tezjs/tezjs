@@ -6,7 +6,10 @@ import { PageCollection } from "@tezjs/payload";
 import { writeDepsAndGlob } from "../functions/write-deps";
 import { addUpdateInputs } from "../functions/add-update-inputs";
 import { appContainer } from "../const/container.const";
-export  async function build(){
+import { BuildConfig } from "../interface/build-config";
+export  async function build(config?:BuildConfig){
+    if(config)
+        commonContainer.buildOptions = { mode: config.mode, rootDir: config.rootDir || process.cwd(), port: 3000, commandName:"build" };
     await readConfig();
     appContainer.addOrUpdateTezTS()
 			const pageCollection = new PageCollection();
@@ -14,13 +17,9 @@ export  async function build(){
     let tezConfig = commonContainer.tezConfig;
     const pathResolver = new CommonPathResolver();
     const userConfig = tezConfig.viteOptions || {};
-    
-    var clearDist = true;
-   
-        let inputs = writeDepsAndGlob(pathResolver);
-        const buildInput = {
+    let inputs = writeDepsAndGlob(pathResolver);
+    const buildInput = {
             build:{
-                emptyOutDir: clearDist,
                 rollupOptions:{
                     input:addUpdateInputs(inputs,pathResolver)
                 }
@@ -30,7 +29,8 @@ export  async function build(){
         VITE_SERVER_CONFIG(),{...userConfig,...{mode:'production'}}
     )
             viteConfig= mergeConfig(viteConfig,buildInput)
-    await viteBuild(viteConfig);
-    clearDist = false;
-    
+    if(!config || !config.configOnly)
+        await viteBuild(viteConfig);
+    else
+        return viteConfig;
 }
