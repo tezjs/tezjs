@@ -7,11 +7,11 @@ function globTemplate(pathResolver:CommonPathResolver){
     let componentsString = ''
     let layoutsString = ''
     globWriter.components.forEach(name=>{
-        componentsString+=`"${name}": import("/components/${name}.vue"),`
+        componentsString+=`"${name}": import("/@/components/${name}.vue"),`
         inputOptions[`${name}.component`] = getPath([pathResolver.componentsPath,`${name}.vue`],false);
     })
     globWriter.layouts.forEach(name=>{
-        layoutsString+=`"${name}.layout": import("/layouts/${name}.vue"),`
+        layoutsString+=`"${name}.layout": import("/@/layouts/${name}.vue"),`
         inputOptions[`${name}.layout`] = getPath([pathResolver.layoutsPath,`${name}.vue`],false);
     })
     return {template: `export const glob={
