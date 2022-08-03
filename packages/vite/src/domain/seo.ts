@@ -126,7 +126,8 @@ export class Seo extends JsCodeGen  {
     }
 
     addStyle(path:string,isAppendToBody:boolean= false){
-        const elementString = `<link rel="stylesheet" href="/${path}"></link>`;
+        path = path.charAt(0) === '/'? path: `/${path}`;
+        const elementString = `<link rel="stylesheet" href="${path}"></link>`;
         if(!isAppendToBody)
             this.addHeadChildElement(elementString,false)
         else
