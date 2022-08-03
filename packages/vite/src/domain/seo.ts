@@ -32,6 +32,7 @@ export class Seo extends JsCodeGen  {
         this.addTitle();
         this.addInlineStyle();
         this.addPreConnects();
+        this.addPreFetchDns();
         this.addPreloads();
         this.addCanonical();
         this.setMetaTags();
@@ -195,6 +196,11 @@ export class Seo extends JsCodeGen  {
     addPreConnects(){
         if(this.htmlMeta.head?.preConnect)
             this.htmlMeta.head?.preConnect.forEach(domain=>this.addHeadChildElement(`<link rel="preconnect" href="${domain}"/>`,true));
+    }
+
+    addPreFetchDns(){
+        if(this.htmlMeta.head?.preFetchDns)
+            this.htmlMeta.head?.preFetchDns.forEach(domain=>this.addHeadChildElement(`<link rel="dns-prefetch" href="${domain}"/>`,true));
     }
 
     addDevScript(){
