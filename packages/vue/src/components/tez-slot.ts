@@ -9,6 +9,8 @@ import { PageState } from '../models/page-state';
 import { registerTezPage } from '../funcs/register-tez-page';
 
 interface DataPoint {
+    scrollFunction:Function;
+    isScrolled:boolean;
     lazyRef: VNode | null;
     isInView: Boolean;
     previousState: Boolean | null;
@@ -22,6 +24,8 @@ interface DataPoint {
 export default defineComponent({
     data(): DataPoint {
         return {
+            scrollFunction:null,
+            isScrolled:false,
             postScript: null,
             previousState: null,
             isInView: false,
@@ -41,6 +45,8 @@ export default defineComponent({
     async mounted() {
         if(isBot() && this.postScript)
             await this.postScript();
+        else
+            this.subscribeScroll();
         this.slots = activePageState.page.slots;
         this.masterPageSlots = activePageState.page.masterPageSlots;
         this.postScript = activePageState.page.postScript
@@ -52,10 +58,24 @@ export default defineComponent({
                 this.components = new Array<{ name: string, data: { [key: string]: any }, id: string }>();
                 this.nextIndex = 0;
                 this.goToNextComponent(false)
+                this.subscribeScroll();
             })
         this.goToNextComponent(true)
     },
     methods: {
+        subscribeScroll(){
+            this.scrollFunction = this.onScroll.bind(this);
+            window.addEventListener("scroll",this.scrollFunction)
+        },
+        async onScroll(){
+            if(!this.isScrolled){
+                this.isScroll = true;
+                window.removeEventListener("scroll",this.scrollFunction)
+                await this.loadPostScript();
+                this.isInView = true;
+                this.goToNextComponent();
+            }
+        },
         getSlotComponents(slotName, slotCategory) {
             if (slotCategory === "master") {
                 return this.masterPageSlots[slotName] ? this.masterPageSlots[slotName] : [];
@@ -101,6 +121,7 @@ export default defineComponent({
 
         },
         loadPostScript() {
+            if(this.postScript)
             return this.postScript().then((postScript) => {postScript.default(registerTezPage);this.postScript = null});
         },
         getComponentName(component:any){
