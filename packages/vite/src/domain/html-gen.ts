@@ -39,7 +39,8 @@ export class HtmlGen{
             let page:iHtmlPage = {
                 head:{
                     inlineStyle: commonContainer.tezConfig.build.inLinCss ? this.getInlineCss(path) : new Array<{name:string,code:string}>(),
-                    preloads:this.getPreloads(path)
+                    preloads:this.getPreloads(path),
+                    preFetch:this.getPreFetch(path)
                 },
                 body:{
                     inlineScript:commonContainer.tezConfig.build.inLineJs ? await this.getInlineJs(path) : new Array<{name:string,code:string}>(),
@@ -69,6 +70,10 @@ export class HtmlGen{
             for(const output of result.outputFiles)
                 writeFileSync(this.commonPathResolver.tzJsPath,output.text,true);
         }
+    }
+
+    getPreFetch(path:string){
+        return [`${path}/post.js`]
     }
 
     getPreloads(path:string):Array<{path:string,type?:string}>{
