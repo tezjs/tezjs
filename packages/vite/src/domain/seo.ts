@@ -193,8 +193,8 @@ export class Seo extends JsCodeGen  {
     }
 
     addPreConnects(){
-        if(this.htmlMeta.head?.preConnects)
-            this.htmlMeta.head?.preConnects.forEach(domain=>this.preHeadElements.push(domain));
+        if(this.htmlMeta.head?.preConnect)
+            this.htmlMeta.head?.preConnect.forEach(domain=>this.addHeadChildElement(`<link rel="preconnect" href="${domain}"/>`,true));
     }
 
     addDevScript(){
