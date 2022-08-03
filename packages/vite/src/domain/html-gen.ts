@@ -44,7 +44,7 @@ export class HtmlGen{
                 body:{
                     inlineScript:commonContainer.tezConfig.build.inLineJs ? await this.getInlineJs(path) : new Array<{name:string,code:string}>(),
                     script:!commonContainer.tezConfig.build.inLineJs ?[{src:TEZJS_PATH}] :[],
-                    style:!commonContainer.tezConfig.build.inLinCss ? this.getCssRef(path):[],
+                    style:!commonContainer.tezConfig.build.bundleCss ? this.getCssRef(path):[],
                 }
             }
             await this.minifyJs([`${path}/pre.js`,`${path}/post.js`])
@@ -101,6 +101,21 @@ export class HtmlGen{
         if(preloads.filter(t=>t.path === path).length === 0){
             preloads.push({path:path,type:"module"})
         }
+    }
+
+    bundleCss(path:string){
+        let bundleCssPath = `${path}/bundle.css`;
+        const cssReferences = this.getInlineCss(path);
+        let code:string[] = [];
+        if(cssReferences.length > 0){
+            cssReferences.forEach(cssItem=>code.push(cssItem.code));
+            writeFileSync(getPath([this.commonPathResolver.distPath,bundleCssPath],false),code.join('\n'),true)
+        }
+        let cssRefs = new Array<{href:string}>();
+        cssRefs.push({href:bundleCssPath});
+        if(commonContainer.tezConfig.client.imports)
+            cssRefs.push({href:TEZCSS_PATH});
+        return cssRefs;            
     }
 
     getInlineCss(path:string){
