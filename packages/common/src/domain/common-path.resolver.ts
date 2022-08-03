@@ -73,19 +73,19 @@ export class CommonPathResolver {
     }
 
     get layoutsPath(){
-        return getPath([commonContainer.buildOptions.rootDir,"layouts"],false)
+        return getPath([commonContainer.buildOptions.rootDir,commonContainer.tezConfig.sourceCodePath,"layouts"],false)
     }
 
     get componentsPath(){
-        return getPath([commonContainer.buildOptions.rootDir,"components"],false)
+        return getPath([commonContainer.buildOptions.rootDir,commonContainer.tezConfig.sourceCodePath,"components"],false)
     }
 
     get pluginsPath(){
-        return getPath([commonContainer.buildOptions.rootDir,"plugins","index.ts"],false)
+        return getPath([commonContainer.buildOptions.rootDir,commonContainer.tezConfig.sourceCodePath,"plugins","index.ts"],false)
     }
 
     get pagesPath(){
-        return getPath([commonContainer.buildOptions.rootDir,"pages"],false)
+        return getPath([commonContainer.buildOptions.rootDir,commonContainer.tezConfig.sourceCodePath,"pages"],false)
     }
 
     get tzJsPath(){

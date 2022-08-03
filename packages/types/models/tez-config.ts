@@ -9,6 +9,7 @@ import { PayloadConfig } from "./strapi/payload-config";
 import { DeploymentConfig } from "./deployment-config";
 import { BuildConfig } from "./build-config";
 export interface TezConfig {
+    sourceCodePath?:string
     spa?:boolean;
     viteOptions?:any;
     payloadPath?:string;

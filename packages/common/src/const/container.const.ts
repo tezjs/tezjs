@@ -21,6 +21,7 @@ export const commonContainer:
         expressConfig = {};
         ignoreColumns: Array<string> = ["createdAt","publishedAt","id","published_at", "created_at", "ParentPage", "__component", "provider"]
         defaultTezConfig:TezConfig = {
+            sourceCodePath:'',
             payload:{
                 page:{maxPreLoadComponent:3 }
             },build:{
