@@ -15,8 +15,12 @@ function getPreComponents(pageSlots:{[key:string]:any},masterPageSlots:{[key:str
         } });
         if(pageSlots && pageSlots.default){
             for(var i=0;i<maxPreLoadComponent;i++){
-                if(pageSlots.default.length > i && preComponents.filter(x=>x===pageSlots.default[i].name).length === 0)
+                if(pageSlots.default.length > i && preComponents.filter(x=>x===pageSlots.default[i].name).length === 0){
+                    if(pageSlots.default[i].mobileComponentName)
+                        preComponents.push(pageSlots.default[i].mobileComponentName);
                     preComponents.push(pageSlots.default[i].name)
+                }
+                
             }
                 
     }
