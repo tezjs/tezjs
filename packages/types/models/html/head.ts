@@ -11,4 +11,5 @@ export interface Head extends TezSeo{
     style?:Array<StyleTag>;
     preConnect?:Array<string>;
     preFetchDns?:Array<string>;
+    preFetch:Array<string>;
 }

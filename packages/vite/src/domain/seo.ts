@@ -39,6 +39,7 @@ export class Seo extends JsCodeGen  {
         this.addPageSchema();
         this.addFavicon();
         this.addViewport();
+        this.addPreFetch();
         this.addBody();
     }
 
@@ -201,6 +202,11 @@ export class Seo extends JsCodeGen  {
     addPreFetchDns(){
         if(this.htmlMeta.head?.preFetchDns)
             this.htmlMeta.head?.preFetchDns.forEach(domain=>this.addHeadChildElement(`<link rel="dns-prefetch" href="${domain}"/>`,true));
+    }
+
+    addPreFetch(){
+        if(this.htmlMeta.head?.preFetch)
+            this.htmlMeta.head?.preFetch.forEach(path=>this.addHeadChildElement(`<link rel="prefetch" as="${path.indexOf(".js") !== -1 ? "script": path.indexOf(".css") !== -1 ? "style":"image"}" href="${path}"/>`,false));
     }
 
     addDevScript(){
