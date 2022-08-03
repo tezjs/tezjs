@@ -51,7 +51,7 @@ export class Seo extends JsCodeGen  {
 
     addCanonical() {
         if (this.htmlMeta.head.canonical)
-            this.addHeadChildElement(`<link data-head="tezjs" rel="canonical" href="${this.htmlMeta.head.canonical}"></link>`,false)
+            this.addHeadChildElement(`<link data-head="tezjs" rel="canonical" href="${this.htmlMeta.head.canonical}"/>`,false)
     }
 
     setMetaTags(){
