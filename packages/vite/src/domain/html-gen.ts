@@ -45,7 +45,7 @@ export class HtmlGen{
                 body:{
                     inlineScript:commonContainer.tezConfig.build.inLineJs ? await this.getInlineJs(path) : new Array<{name:string,code:string}>(),
                     script:!commonContainer.tezConfig.build.inLineJs ?[{src:TEZJS_PATH}] :[],
-                    style:!commonContainer.tezConfig.build.bundleCss ? this.getCssRef(path):[],
+                    style:commonContainer.tezConfig.build.bundleCss ? this.bundleCss(path):[],
                 }
             }
             await this.minifyJs([`${path}/pre.js`,`${path}/post.js`])
