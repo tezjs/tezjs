@@ -110,7 +110,7 @@ export class HtmlGen{
 
     bundleCss(path:string){
         let bundleCssPath = `${path}/bundle.css`;
-        const cssReferences = this.getInlineCss(path);
+        const cssReferences = this.getInlineCss(path,true);
         let code:string[] = [];
         if(cssReferences.length > 0){
             cssReferences.forEach(cssItem=>code.push(cssItem.code));
@@ -123,9 +123,10 @@ export class HtmlGen{
         return cssRefs;            
     }
 
-    getInlineCss(path:string){
+    getInlineCss(path:string,isBundleCss:boolean = false){
         let inlineCss = new Array<{name:string,code:string}>();
-        this.setInlineCss(this.mainDependency.css,inlineCss)
+        if(!isBundleCss)
+            this.setInlineCss(this.mainDependency.css,inlineCss)
         const preComponents = routeComponentWriter.getRouteComponent(getUrl(path)).pre;
         for(const preComponent of preComponents){
             const depPath = `assets/${preComponent}.js`
