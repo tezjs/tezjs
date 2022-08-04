@@ -6,6 +6,14 @@ export class PathResolver {
     constructor(){
         this.commonPath = new CommonPathResolver();
     }
+    get componentsPath() {
+        return this.commonPath.componentsPath;
+    }
+
+    get sourceCodePath() {
+        return this.commonPath.sourceCodePath;
+    }
+
     get publicFolder() {
         return this.commonPath.publicFolder;
     }

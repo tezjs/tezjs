@@ -11,6 +11,10 @@ export class CommonPathResolver {
         return getPath([commonContainer.buildOptions.rootDir,"index.html"],false);
     }
 
+    get sourceCodePath() {
+        return getPath([this.rootPath,commonContainer.tezConfig.sourceCodePath],true)
+    }
+
     get rootPath() {
         return getPath([commonContainer.buildOptions.rootDir],true)
     }

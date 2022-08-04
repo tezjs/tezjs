@@ -24,18 +24,24 @@ export abstract class BaseGenerator{
         const url = getUrl(page.url);
         const directoryPath = path.join(this.pathResolver.payloadPath, url);
         let pageSlot = new PageSlot();
+        let index = 0;
         for (let j = 0; j < page.components.length; j++) {
             let component = page.components[j];
             let componentId = `${j}-${component.name}`
             let slot = pageSlot.getSlot(component.slotName);
-            const filePath = path.join(
-                directoryPath,
-                componentId + ".json"
-            );
-            slot.push((this.payload.page.maxPreLoadComponent) > j  ? [component.data || {},componentId] : [componentId])
-            if((this.payload.page.maxPreLoadComponent) <= j)
-                await writeFileSync(filePath, component.data);
-            this.globWriter.addComponent(component.name)
+            let isExits = this.globWriter.addComponent(component.name)
+            if(isExits){
+                const filePath = path.join(
+                    directoryPath,
+                    componentId + ".json"
+                );
+                slot.push((this.payload.page.maxPreLoadComponent) > index  ? [component.data || {},componentId] : [componentId])
+                if((this.payload.page.maxPreLoadComponent) <= j)
+                    await writeFileSync(filePath, component.data);
+                index++;
+            }
+            
+            
         }
         let filePath = path.join(
             directoryPath,

@@ -1,4 +1,4 @@
-import { readFileSync,writeFileSync } from "@tezjs/common";
+import { commonContainer, getPath, readFileSync,writeFileSync } from "@tezjs/common";
 import { PathResolver } from "./path-resolver";
 
 export class GlobWriter{
@@ -14,8 +14,10 @@ export class GlobWriter{
     }
 
     addComponent(name:string){
-        if(this.components.filter(t=>t === name).length === 0)
+        const isPathExits = this.pathResolver.pathExists(getPath([this.pathResolver.componentsPath,`${name}.vue`],false));
+        if(this.components.filter(t=>t === name).length === 0 && isPathExits)
             this.components.push(name)
+        return isPathExits;
     }
 
     addLayout(name:string){
