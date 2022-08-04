@@ -5,6 +5,7 @@ import { NAME } from "../const/core.const";
 import { Head,HtmlPage } from "@tezjs/types";
 import { JsCodeGen } from "./html/js-code-gen";
 import { appContainer } from "../const/container.const";
+import { mergeConfig } from "vite";
 
 export class Seo extends JsCodeGen  {
     seo: TezSeo;
@@ -14,7 +15,7 @@ export class Seo extends JsCodeGen  {
     bodyElements:string[]
     constructor(route: {name:string,path:string,fPath:string}) {
         super(route);
-        this.htmlMeta = {...commonContainer.tezConfig.htmlMeta,...{head:this.tags}};
+        this.htmlMeta = mergeConfig(commonContainer.tezConfig.htmlMeta,{head:this.tags});
         this.preHeadElements = new Array<string>();
         this.postHeadElements = new Array<string>();
         this.bodyElements = new Array<string>();
