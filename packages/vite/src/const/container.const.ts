@@ -30,7 +30,7 @@ export const appContainer:
                 
                 
                 if(existsFilesorFolders.addLib){
-                    refrenceState.imports +=`\nimport * as func from '#add-lib'; func.default();`
+                    refrenceState.imports +=`\nimport addLib from '/@/add-lib'; addLib();`
                     delete existsFilesorFolders.addLib;
                 }
             }else
