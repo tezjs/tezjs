@@ -84,6 +84,8 @@ export class HtmlGen{
         if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.loaderImage)
             preloads.push({path:`${commonContainer.tezConfig.client.loaderImage}`,type:"image"});
         if(!commonContainer.tezConfig.build.inLineJs) {
+            let preloadDeps = routeComponentWriter.getPreDeps(getUrl(path)).filter(path => path.indexOf(".js") !== -1);
+            preloadDeps.forEach(path=>this.pushPreload(preloads,path))
             preloads.push({path:`${prePath}`,type:"module"});
             preloads.push({path:`/${depPath}`,type:"module"});
         }
