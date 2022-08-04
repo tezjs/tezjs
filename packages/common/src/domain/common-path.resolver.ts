@@ -44,7 +44,7 @@ export class CommonPathResolver {
     }
 
     get addLibPath() {
-        return getPath([commonContainer.buildOptions.rootDir,"add-lib.ts"],false)
+        return getPath([commonContainer.buildOptions.rootDir,commonContainer.tezConfig.sourceCodePath,"add-lib.ts"],false)
     }
 
     get routesJsonPath() {
