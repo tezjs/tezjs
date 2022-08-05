@@ -1,4 +1,4 @@
-import { commonContainer, getPath, readFileSync,writeFileSync } from "@tezjs/common";
+import {  getPath, readFileSync,writeFileSync } from "@tezjs/common";
 import { PathResolver } from "./path-resolver";
 
 export class GlobWriter{
