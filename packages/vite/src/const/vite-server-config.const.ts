@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { UserConfig } from 'vite'
 import { tezGenBundle } from '../domain/plugins/tez-gen-bundle';
 import { tez } from "../domain/tez";
+import { BLANK } from './core.const';
 export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
   const pathResolver = new CommonPathResolver();
   return {
@@ -15,7 +16,7 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
         {find:'#server-env',replacement:"/node_modules/.cache/tez/server-env.ts"},
         { find: '/tez.ts', replacement: "/node_modules/.cache/tez/tez.ts" },
         { find: '#add-lib', replacement: "/add-lib.ts" },
-        { find: '/@', replacement:pathResolver.getPath([commonContainer.buildOptions.rootDir,commonContainer.tezConfig.sourceCodePath]) },
+        { find: '/@', replacement:pathResolver.getPath([commonContainer.buildOptions.rootDir,commonContainer.tezConfig.sourceCodePath || BLANK]) },
         { find: '/tez', replacement: pathResolver.cachePath }
       ]
     },
