@@ -14,7 +14,9 @@ import { DeploymentDomain } from "./deployment/deployment-domain";
 import { defaultContainer } from "../const/core.const";
 import { GlobWriter } from "./glob-writer";
 import { StrapiModuleConfig } from "@tezjs/types";
+import { PayloadModuleRunner } from "./payload-module-runner";
 export class PageCollection {
+    private moduleRunner:PayloadModuleRunner;
     private requestService: RequestService;
     private internationalizationService: InternationalizationService;
     private pageRoute: PageRoute;
@@ -40,6 +42,7 @@ export class PageCollection {
         
         this.commonPathResolver = new CommonPathResolver();
         this.customPagePayload = new CustomPagePayload(this.redirectRoute,this.sitemap,this.pageRoute);
+        this.moduleRunner = new PayloadModuleRunner(this.redirectRoute,this.sitemap,this.pageRoute,this.globWriter)
     }
     async generate(routePath?:string){
         if(commonContainer.tezConfig.strapi){

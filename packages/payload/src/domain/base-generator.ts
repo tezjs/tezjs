@@ -1,5 +1,5 @@
 import { PayloadConfig,Page } from "@tezjs/types";
-import { commonContainer } from '@tezjs/common'
+import { commonContainer, createPath } from '@tezjs/common'
 import { PageSlot } from "./page-slot";
 import * as path from "path";
 import { PathResolver } from "./path-resolver";
@@ -10,11 +10,12 @@ import getUrl from "../utils/get-url";
 import { Sitemap } from "./sitemap";
 import { RedirectRoute } from "./redirect-routes";
 import { GlobWriter } from "./glob-writer";
+import { PageRoute } from "./page-route";
 
 export abstract class BaseGenerator{
     pathResolver:PathResolver;
     payload:PayloadConfig;
-    constructor(private redirectRoute:RedirectRoute,private sitemap:Sitemap,private globWriter:GlobWriter){
+    constructor(private redirectRoute:RedirectRoute,private sitemap:Sitemap,private globWriter:GlobWriter,private pageRoute?:PageRoute){
         const { payload } = commonContainer.tezConfig;
         this.pathResolver = new PathResolver();
         this.payload = payload;
@@ -61,5 +62,14 @@ export abstract class BaseGenerator{
             this.sitemap.add({sitemap:{...page.sitemap,...{loc:`${commonContainer.getStrapiConfig().siteUrl}${page.url}`}}});
         this.redirectRoute.add(page);
         
+    }
+
+    async generateRoute(page:any){
+        let url = getUrl(page.url);
+        console.log(url)
+        this.pageRoute.addRoute({path:page.url});
+        const directoryPath = path.join(this.pathResolver.payloadPath, url);
+        createPath(directoryPath);
+        await this.generatePage(page)
     }
 }
