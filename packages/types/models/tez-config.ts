@@ -8,6 +8,7 @@ import { ClientEntry } from "./client-entry";
 import { PayloadConfig } from "./strapi/payload-config";
 import { DeploymentConfig } from "./deployment-config";
 import { BuildConfig } from "./build-config";
+import { TezModuleConfig } from "./tez-module-config";
 export interface TezConfig {
     sourceCodePath?:string
     spa?:boolean;
@@ -24,5 +25,6 @@ export interface TezConfig {
     client?:ClientEntry;
     payload?:PayloadConfig;
     deployment?:DeploymentConfig;
-    build?:BuildConfig
+    build?:BuildConfig;
+    modules?:TezModuleConfig[];
 }

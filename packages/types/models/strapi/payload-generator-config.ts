@@ -1,4 +1,4 @@
-export interface CustomPayloadGenratorConfig{
+export interface PayloadGenratorConfig{
     routePath:string;
     redirectRoute:any,
     sitemap:any,
