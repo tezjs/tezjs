@@ -1,4 +1,4 @@
-import { DefineComponent, defineComponent ,h, KeepAlive, VNode } from "vue"
+import { defineAsyncComponent, DefineComponent, defineComponent ,h, KeepAlive, VNode } from "vue"
 import { activePageState } from "../const/active-page-state";
 import { cacheState } from "../const/cache-state";
 import { tezPages } from "../const/tez-pages";
