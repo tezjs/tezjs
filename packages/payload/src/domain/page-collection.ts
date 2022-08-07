@@ -63,7 +63,7 @@ export class PageCollection {
             
         if(commonContainer.tezConfig.pages)
             await this.customPagePayload.generate(routePath)
-        this.moduleRunner.runPayload(config);
+        await this.moduleRunner.runPayload(config);
         this.pageRoute.save();
         this.sitemap.save()
         await this.robotsGenerator.generate();

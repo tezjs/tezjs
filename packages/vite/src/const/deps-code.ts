@@ -34,7 +34,7 @@ export function depsCodeTemplate(page:any,route:any,isPre:boolean = true){
     for(let name of getPreComponents(page.slots,page.masterPageSlots,isPre)){
         const propName:string = snakeToCamel(name);
         componentRefs+=`"${name}":${propName},`
-        components+=getImportStatement(name,'components');
+        components+=getImportStatement(name,name.indexOf("pages/") === -1 ?'components' : "pages");
         routeComponentWriter.addComponent(route.path,name,isPre,false)
     }
     componentRefs+= '}';

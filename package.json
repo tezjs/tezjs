@@ -19,6 +19,7 @@
     "dev:strapi": "yarn run tez dev playgrounds/strapi",
     "build:playground:tailwind": "yarn run tez build playground/tailwind",
     "dev:playground:auto-routes": "yarn run tez dev playground/auto-routes",
+    "build:playground:auto-routes": "yarn run tez build playground/auto-routes",
     "dev:playground:tailwind": "yarn run tez dev playground/tailwind",
     "dev:playground:vuex": "yarn run tez dev playground/vuex",
     "dev:playground:env": "yarn run tez dev playground/env",
@@ -53,6 +54,7 @@
     "@tezjs/vite": "link:./packages/vite",
     "@tezjs/vue": "link:./packages/vue",
     "@tezjs/js": "link:./packages/js",
+    "@tezjs/route": "link:./packages/route",
     "tez": "link:./packages/cli",
     "unbuild": "^0.7.4"
   },

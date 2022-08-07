@@ -1,7 +1,7 @@
+import { getFriendlyComponentName } from "@tezjs/payload";
+
 export function snakeToCamel(value) {
-    if (!(/[_-]/).test(value)) return value
-  
-    return value.split("-").map((t,i)=>  
+    return getFriendlyComponentName(value.split("-").map((t,i)=>  
     {
       var textCode = '';
       for(var i=0;i<t.length;i++){
@@ -12,5 +12,5 @@ export function snakeToCamel(value) {
         }
       }
       return String(textCode)
-    }).join('')
+    }).join(''))
   }

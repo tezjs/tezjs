@@ -1,0 +1,1 @@
+export {routeModule} from './src/module/route-module'

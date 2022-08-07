@@ -12,7 +12,7 @@ import { routeComponentWriter } from "../const/route-component-writer";
 let exampleOnResolvePlugin = {
     name: 'example',
     setup(build) {
-      build.onResolve({ filter: /component|layout/ }, args => {
+      build.onResolve({ filter: /component|layout|page/ }, args => {
         return { path: getPath([commonContainer.buildOptions.rootDir, 'dist',args.path.indexOf("assets/") ===-1 ? "assets":"", args.path],false) }
       })
     },

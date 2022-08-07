@@ -1,3 +1,5 @@
+import { getFriendlyComponentName } from "@tezjs/payload";
+import { isPageComponent } from "../../../payload/src/utils/is-page-component";
 import { DepsContainerConfig } from "../interface/deps-container-config";
 import { RouteComponent } from "../interface/route-component";
 import { depsContainer } from "./deps-container.const";
@@ -21,10 +23,11 @@ export const routeComponentWriter:
         addComponent(path:string,component:string,isPre:boolean,isLayout:boolean = false){
             this.depsConfig = depsContainer.getDeps();
             let componentSuffix = isLayout?"layout":"component";
+            componentSuffix = isPageComponent(component) ? "page":componentSuffix;
             let key = isPre?"pre":"post";
             if(!this.routeComponents[path])
                 this.routeComponents[path] = {pre:new Array<string>(),post:new Array<string>()};
-            let componentFileName = `${component}.${componentSuffix}`;
+            let componentFileName = `${getFriendlyComponentName(component)}.${componentSuffix}`;
             this.routeComponents[path][key].push(componentFileName);
             if(!this.routeComponents[path].deps)
                 this.routeComponents[path].deps = {pre:new Array<string>(),post:new Array<string>()}

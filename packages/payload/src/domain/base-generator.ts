@@ -11,6 +11,7 @@ import { Sitemap } from "./sitemap";
 import { RedirectRoute } from "./redirect-routes";
 import { GlobWriter } from "./glob-writer";
 import { PageRoute } from "./page-route";
+import { isPageComponent } from "../utils/is-page-component";
 
 export abstract class BaseGenerator{
     pathResolver:PathResolver;
@@ -30,7 +31,11 @@ export abstract class BaseGenerator{
             let component = page.components[j];
             let componentId = `${j}-${component.name}`
             let slot = pageSlot.getSlot(component.slotName);
-            let isExits = this.globWriter.addComponent(component.name)
+            let isExits =isPageComponent(component.name);
+            if(!isExits)
+                isExits = this.globWriter.addComponent(component.name)
+            else
+                this.globWriter.addPage(component.name)
             if(isExits){
                 const filePath = path.join(
                     directoryPath,

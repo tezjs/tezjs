@@ -14,4 +14,5 @@ export * from './models/seo/sitemap'
 export * from './models/html/head'
 export * from './models/html/html'
 export * from './models/build-options'
-export * from './models/strapi/payload-generator-config'
+export * from './models/strapi/payload-generator-config';
+export * from "./models/tez-module-config";
