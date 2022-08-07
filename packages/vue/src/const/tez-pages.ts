@@ -4,6 +4,7 @@ import { DefineComponent } from "vue";
 import { PayloadConfig } from '../models/payload-config';
 import { getUrl } from '../funcs/payload/get-url';
 import { activePageState } from './active-page-state';
+import { isTitleElementExist } from '../funcs/is-title-element-exist';
 
 export const tezPages:
 {
@@ -56,7 +57,9 @@ export const tezPages:
                 this.refreshRoute(url)
             }
         }
-        
+
+        if(!isTitleElementExist() && page.payload && page.payload.isPage && page.payload.tags)
+            setMetaInfo(page.payload.tags)
     }
     refreshRoute(url:string){
         let currentPage = this.pages[url];

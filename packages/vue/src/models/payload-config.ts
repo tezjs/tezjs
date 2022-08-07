@@ -5,4 +5,5 @@ export interface PayloadConfig{
     layoutName:string;
     tags:{[key:string]:any};
     postScript?:()=>Promise<any>;
+    isPage?:boolean;
 }
