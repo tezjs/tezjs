@@ -66,7 +66,7 @@ export function depsCodeTemplate(page:any,route:any,isPre:boolean = true, isPage
             const payload = ${JSON.stringify(page)}; 
             registerTezPage({
                 components:${componentRefs},
-                masterPage:${isPage ?`${componentPropName}.layoutName ? {[${componentPropName}.layoutName]:()=>import(${`"/@/layouts/"+${componentPropName}.layoutName+".vue"`}).then(t=>t.default)}:{}` :masterPageRefs},
+                masterPage:${isPage ?`${componentPropName}.layoutName ? {[${componentPropName}.layoutName]:()=>import(${`/* @vite-ignore */"/@/layouts/"+${componentPropName}.layoutName+".vue"`}).then(t=>t.default)}:{}` :masterPageRefs},
                 payload:${isPage?`{...payload,...{isPage:${isPage},layoutName:${componentPropName}.layoutName,tags:${componentPropName}.head}}`:`payload`},
                 ${postScript}
             })
