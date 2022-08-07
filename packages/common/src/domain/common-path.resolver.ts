@@ -5,6 +5,7 @@ import { getPath } from "../functions/get-path";
 import { removePath } from "../functions/remove-path";
 import * as path from "path";
 import { deleteFile } from "../functions/delete-file";
+import { globby } from "globby";
 export class CommonPathResolver {
 
     get indexHtmlPath(){
@@ -129,6 +130,17 @@ export class CommonPathResolver {
     }
     getFilePath(directories:Array<string>,fileName:string){
         return path.join(getPath(directories),fileName)
+    }
+
+    async getFiles(folderName:string,extension:string){
+        let paths = await globby([
+            folderName
+          ], {expandDirectories: {
+            extensions: [extension]
+        },cwd:this.sourceCodePath, followSymbolicLinks: true});
+        return paths.map(path=>{
+            return path.split(`${folderName}/`)[1].replace(`.${extension}`,"");
+        })
     }
     
 }

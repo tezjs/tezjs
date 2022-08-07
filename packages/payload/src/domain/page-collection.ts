@@ -45,6 +45,7 @@ export class PageCollection {
         this.moduleRunner = new PayloadModuleRunner(this.redirectRoute,this.sitemap,this.pageRoute,this.globWriter)
     }
     async generate(routePath?:string){
+        await this.globWriter.setLayoutComponents();
         let config = {
             routePath:routePath,
             redirectRoute:this.redirectRoute,

@@ -13,6 +13,12 @@ export class GlobWriter{
         this.components = globJson.components;
         this.layouts = globJson.layouts;
         this.pages = globJson.pages || [];
+        
+    }
+
+    async setLayoutComponents(){
+        let components = await this.pathResolver.commonPath.getFiles("layouts","vue");
+        components.forEach(component=>this.addLayout(component)) 
     }
 
     addComponent(name:string){
