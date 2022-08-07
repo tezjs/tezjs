@@ -21,21 +21,17 @@ const urlMatch =(urlPatten:string,url:string)=> {
     
     return isMatched ? {params:params} : isMatched; 
 };
-export async function checkAutoRoute(path:string){
-    let route:{cPath?:string,params?:{[key:string]:any},layoutName?:string,pageComponent?:any} = {}
-    if(componentState.tezAppOptions.autoRoutes){
-        let componentPath = componentState.tezAppOptions.autoRoutes.urls[path.toLowerCase()];
-        route.cPath = componentPath;
-        let params ={};
-        if(!route.cPath && componentState.tezAppOptions.autoRoutes.re)
+export function checkAutoRoute(path:string){
+    let route:{resolvePath?:string,params?:{[key:string]:any},layoutName?:string} = {}
+    if(componentState.tezAppOptions.dynamicRoutes){
         {
-                const urlPattern = Object.keys(componentState.tezAppOptions.autoRoutes.re);
+                const urlPattern = Object.keys(componentState.tezAppOptions.dynamicRoutes);
                 for(const url of urlPattern){
                     const match = urlMatch(url,path);
                     if(match)
                     {
-                        route.cPath = componentState.tezAppOptions.autoRoutes.re[url];
-                        params = (<{
+                        route.resolvePath = componentState.tezAppOptions.dynamicRoutes[url];
+                        route.params = (<{
                             params: {
                                 [key: string]: any;
                             };
@@ -44,13 +40,7 @@ export async function checkAutoRoute(path:string){
                     }
                 }
         }
-        componentState.changeRouteValue({params:params})
-        if(route.cPath){
-            const { layoutName, pageComponent } = await getLayoutName(route.cPath);
-            route.layoutName = layoutName;
-            route.pageComponent = pageComponent;
-        }
-             
+        
     }
     return route;
 }

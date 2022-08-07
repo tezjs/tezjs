@@ -10,3 +10,7 @@ export function getPreloadScriptUrl(url:string){
 export function getPreScriptUrl(url:string){
   return componentState.tezAppOptions.isDevMode ? `/tez/deps${url}/pre.js?v=${getVersion()}` : `${url}/pre.js`
 }
+
+export function getDynamicRouteScriptUrl(){
+  return componentState.tezAppOptions.isDevMode ? `/tez/deps/dynamic-routes.js?v=${getVersion()}` : `/assets/dynamic-routes.js`
+}

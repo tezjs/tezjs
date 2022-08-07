@@ -16,7 +16,7 @@ import { isPageComponent } from "../utils/is-page-component";
 export abstract class BaseGenerator{
     pathResolver:PathResolver;
     payload:PayloadConfig;
-    constructor(private redirectRoute:RedirectRoute,private sitemap:Sitemap,private globWriter:GlobWriter,private pageRoute?:PageRoute){
+    constructor(private redirectRoute:RedirectRoute,private sitemap:Sitemap,private globWriter:GlobWriter,protected pageRoute?:PageRoute){
         const { payload } = commonContainer.tezConfig;
         this.pathResolver = new PathResolver();
         this.payload = payload;

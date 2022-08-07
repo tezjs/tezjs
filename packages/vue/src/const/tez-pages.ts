@@ -35,7 +35,7 @@ export const tezPages:
 
     setPage(page:TezPage){
         if(page.payload){
-            let url = page.payload.url;
+            let url = page.payload.url || getUrl();
             if(!this.pages[url])
                 this.pages[url] = {...page.payload,...{postScript:page.postScript}};
         else{

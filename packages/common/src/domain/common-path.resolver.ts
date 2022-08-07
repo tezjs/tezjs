@@ -27,6 +27,10 @@ export class CommonPathResolver {
         return getPath([commonContainer.buildOptions.rootDir, CACHE_PATH],true)
     }
 
+    get dynamicRoutesPath() {
+        return getPath([this.depsPath, "dynamic-routes.js"],false)
+    }
+
     get depsPath() {
         return getPath([this.cachePath, "deps"],true)
     }

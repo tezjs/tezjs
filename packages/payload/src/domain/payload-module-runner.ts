@@ -18,8 +18,9 @@ export class PayloadModuleRunner  extends BaseGenerator {
                     const payloadRoutes = await tezModule.payload(config);
                     if(payloadRoutes){
                         for (const [routePath, payload] of Object.entries(payloadRoutes)) {
-                            if(routePath.indexOf(":") === -1)
-                                this.generateRoute({...payload,...{url:routePath}})
+                            let url = routePath.replaceAll(":","_");
+                                this.generateRoute({...payload,...{url:url}})
+                                this.pageRoute.addDynamicRoute(routePath,url)
                         }
                     } 
                 }

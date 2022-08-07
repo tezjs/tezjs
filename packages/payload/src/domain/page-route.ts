@@ -13,16 +13,19 @@ import { writeFileSync } from "../utils/write-file";
 import { PathResolver } from "./path-resolver";
 import { RequestService } from "./request.server";
 import { commonContainer } from "@tezjs/common";
+import { dynamicRouteCodeTemplate } from "../utils/dynamic-route-code-template";
 
 export class PageRoute {
     private pageCollectionConfig: PageCollectionConfig;
     private pathResolver: PathResolver;
     private routes:Array<{name:string,path:string,fPath:string}> = new Array<{name:string,path:string,fPath:string}>();
+    private dynamicRoutes:{[key:string]:string}
     constructor(private requestService: RequestService) {
         const { pageCollectionConfig } = commonContainer.getStrapiConfig();
         this.pageCollectionConfig = pageCollectionConfig;
         this.pathResolver = new PathResolver();
         this.routes = commonContainer.getAppRoutes();
+        this.dynamicRoutes = {};
     }
 
     async getRoutes(locale:string): Promise<PageRouteResponse> {
@@ -93,8 +96,14 @@ export class PageRoute {
         this.routes = routes;
     }
 
+    addDynamicRoute(dynamicPath:string,staticPath:string){
+        if(dynamicPath.indexOf(":") !== -1)
+            this.dynamicRoutes[dynamicPath] = staticPath;
+    }
+
 
     async save(){
+        await writeFileSync(this.pathResolver.commonPath.dynamicRoutesPath,dynamicRouteCodeTemplate(this.dynamicRoutes),true)
         await writeFileSync(this.pathResolver.routesJsonPath, this.routes)
     }
 }
