@@ -18,7 +18,7 @@ import { dynamicRouteCodeTemplate } from "../utils/dynamic-route-code-template";
 export class PageRoute {
     private pageCollectionConfig: PageCollectionConfig;
     private pathResolver: PathResolver;
-    private routes:Array<{name:string,path:string,fPath:string}> = new Array<{name:string,path:string,fPath:string}>();
+    private routes:Array<{name:string,path:string,fPath:string,isPage:boolean}> = new Array<{name:string,path:string,fPath:string,isPage:boolean}>();
     private dynamicRoutes:{[key:string]:string}
     constructor(private requestService: RequestService) {
         const { pageCollectionConfig } = commonContainer.getStrapiConfig();
@@ -83,12 +83,13 @@ export class PageRoute {
         return { routes: routes, dynamicPageRoute: dynamicPageRoute };
     }
 
-    addRoute(routeItem:{name?:string,path:string}){
+    addRoute(routeItem:{name?:string,path:string,isPage?:boolean},isPage:boolean=false){
         if(this.routes.filter(t=>t.path === routeItem.path).length === 0)
         this.routes.push({
             name: (routeItem.name || routeItem.path).replace(REMOVE_SPECIAL_CHARACTERS, UNDERSCORE),
             path: routeItem.path,
-            fPath:getUrl(routeItem.path).split('/').join(path.sep)
+            fPath:getUrl(routeItem.path).split('/').join(path.sep),
+            isPage:isPage
         })
     }
     

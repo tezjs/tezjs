@@ -1,6 +1,6 @@
-<script setup lang="ts">
+<script >
 export default{
-  layoutName:'',
+  layoutName:'main',
   head:{
     title:'Auto Index Page'
   }

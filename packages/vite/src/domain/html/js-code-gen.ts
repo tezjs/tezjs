@@ -8,7 +8,7 @@ import { getPreloadCodeTemplate, postScriptPreloadCodeTemplate } from "../../fun
 export class JsCodeGen extends PayloadReader{
     postSlots:{slots:any,masterPageSlots:any} = {slots:{},masterPageSlots:{}};
         
-    constructor(public route:{name:string,path:string,fPath:string}){
+    constructor(public route:{name:string,path:string,fPath:string,isPage:boolean}){
         super(route);
     }
 
@@ -48,7 +48,7 @@ export class JsCodeGen extends PayloadReader{
                 tags:this.tags,
                 layoutName:this.masterPage.layoutName,
                 postScript: this.isPostCode ? commonContainer.buildOptions.commandName === "dev" ? `/tez/deps${getUrl(this.route.path)}/post` :'./post.js' : ''
-            },this.route
+            },this.route,true,this.route.isPage
         );
     }
 

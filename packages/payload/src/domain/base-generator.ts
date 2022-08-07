@@ -72,7 +72,7 @@ export abstract class BaseGenerator{
     async generateRoute(page:any){
         let url = getUrl(page.url);
         console.log(url)
-        this.pageRoute.addRoute({path:page.url});
+        this.pageRoute.addRoute({path:page.url},true);
         const directoryPath = path.join(this.pathResolver.payloadPath, url);
         createPath(directoryPath);
         await this.generatePage(page)

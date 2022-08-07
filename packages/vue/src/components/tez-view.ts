@@ -33,7 +33,11 @@ export default defineComponent({
     },
     render() {
         let vNode:VNode = undefined
-        let layoutComponent = tezPages.masterPages[this.layoutName];
+        let layoutComponent:any = tezPages.masterPages[this.layoutName];
+    
+        if (typeof layoutComponent === "function") 
+            tezPages.masterPages[this.layoutName] = layoutComponent = defineAsyncComponent(layoutComponent);
+            
         if(!layoutComponent)
             cacheState.layoutVNode[CACHE_KEY_LAYOUT_TEZ_PAGE] = vNode = cacheState.layoutVNode[CACHE_KEY_LAYOUT_TEZ_PAGE]|| h(TezPage);
         else if(layoutComponent)

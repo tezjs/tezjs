@@ -26,13 +26,15 @@ function getPreComponents(pageSlots:{[key:string]:any},masterPageSlots:{[key:str
     }
     return preComponents;
 }
-export function depsCodeTemplate(page:any,route:any,isPre:boolean = true){
+export function depsCodeTemplate(page:any,route:any,isPre:boolean = true, isPage:boolean=false){
     let components = ``;
     let masterPage='';
     let componentRefs=`{`;
     let masterPageRefs=`{`;
+    let componentPropName:string = ''
     for(let name of getPreComponents(page.slots,page.masterPageSlots,isPre)){
         const propName:string = snakeToCamel(name);
+        componentPropName = propName;
         componentRefs+=`"${name}":${propName},`
         components+=getImportStatement(name,name.indexOf("pages/") === -1 ?'components' : "pages");
         routeComponentWriter.addComponent(route.path,name,isPre,false)
@@ -52,16 +54,20 @@ export function depsCodeTemplate(page:any,route:any,isPre:boolean = true){
         else
             postScript = `postScript: ${POST_SCRIPT_COMMENT}`
     }
+
+    if(isPage){
+        page.layoutName = `${componentPropName}.layout ? {[${componentPropName}.layout]:import("/@/layouts/${componentPropName}.layout")}:{}`
+    }
     delete page.postScript
     return `
         ${components}
         ${masterPage}
         export default function(registerTezPage,preload){
-
+            const payload = ${JSON.stringify(page)}; 
             registerTezPage({
                 components:${componentRefs},
-                masterPage:${masterPageRefs},
-                payload:${JSON.stringify(page)},
+                masterPage:${isPage ?`${componentPropName}.layoutName ? {[${componentPropName}.layoutName]:()=>import(${`"/@/layouts/"+${componentPropName}.layoutName+".vue"`}).then(t=>t.default)}:{}` :masterPageRefs},
+                payload:${isPage?`{...payload,...{isPage:${isPage},layoutName:${componentPropName}.layoutName,tags:${componentPropName}.head}}`:`payload`},
                 ${postScript}
             })
         }    `
