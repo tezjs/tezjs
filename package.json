@@ -26,6 +26,8 @@
     "build:template:strapi:frontend": "yarn run tez build packages/create-tez/template-tez-strapi-vue/frontend",
     "dev:template:strapi:frontend": "yarn run tez dev packages/create-tez/template-tez-strapi-vue/frontend",
     "dev:template:strapi:backend": "yarn --cwd ./packages/create-tez/template-tez-strapi-vue/backend develop",
+    "dev:template:vue": "yarn run tez dev packages/create-tez/template-tez-vue",
+    "build:template:vue": "yarn run tez build packages/create-tez/template-tez-vue",
     "stub": "lerna run stub -- --stub && npm run build:vue",
     "build:vue": "lerna run build --stream --no-prefix",
     "build": "lerna run stub --stream --no-prefix && npm run build:vue",
