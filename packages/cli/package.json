@@ -13,7 +13,7 @@
     "dist"
   ],
   "bin": {
-    "tez": "./bin/tez.cjs"
+    "tez": "./bin/tez.js"
   },
   "scripts": {
     "stub": "unbuild"
