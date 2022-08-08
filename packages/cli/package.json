@@ -5,16 +5,15 @@
   "main": "index.js",
   "author": "ajayojha",
   "license": "MIT",
-  "type": "module",
   "exports": {
-    "./cli": "./bin/tez.mjs"
+    "./cli": "./bin/tez.js"
   },
   "files": [
     "bin",
     "dist"
   ],
   "bin": {
-    "tez": "./bin/tez.mjs"
+    "tez": "./bin/tez.cjs"
   },
   "scripts": {
     "stub": "unbuild"
