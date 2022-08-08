@@ -34,7 +34,7 @@
     },
     "dependencies": {
       "globby": "13.1.1",
-      "@tezjs/common": "0.0.58"
+      "@tezjs/common": "0.0.59"
     }
   }
   
