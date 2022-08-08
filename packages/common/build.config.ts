@@ -10,5 +10,5 @@ export default defineBuildConfig({
     './index'
   ],
   
-  externals:['@tezjs/types',"globby"]
+  externals:['@tezjs/types']
 })
