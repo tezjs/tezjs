@@ -21,7 +21,7 @@ import  fs from 'fs'
 import {globby} from 'globby';
 import { execa } from 'execa';
 
-const packages = ["cli","common","create-tez","payload","types","vite","vue","js","tez"];
+const packages = ["cli","common","create-tez","payload","types","vite","vue","js","route","tez"];
 const rootDir = process.cwd();
 const packagesFolderName = 'packages';
 function getPackageInfo(packageName){
