@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/payload",
-  "version": "0.0.61",
+  "version": "0.0.62",
   "description": "",
   "module": "./dist/index.mjs",
   "main": "./dist/index.cjs",
