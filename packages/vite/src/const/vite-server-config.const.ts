@@ -14,7 +14,7 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
       alias:[
         {find:'#client-env',replacement:`/node_modules/.cache/tez/client-env.ts`},
         {find:'#server-env',replacement:"/node_modules/.cache/tez/server-env.ts"},
-        { find: '/tez.ts', replacement: "/node_modules/.cache/tez/tez.ts" },
+        { find: '/tez.ts', replacement: pathResolver.tezTsPath },
         { find: '#add-lib', replacement: "/add-lib.ts" },
         { find: '/@', replacement:pathResolver.getPath([commonContainer.buildOptions.rootDir,commonContainer.tezConfig.sourceCodePath || BLANK]) },
         { find: '/tez', replacement: pathResolver.cachePath }
