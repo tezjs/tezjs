@@ -26,7 +26,8 @@ export const commonContainer:
                 page:{maxPreLoadComponent:3 }
             },build:{
                 inLinCss:true,
-                inLineJs:true
+                inLineJs:true,
+                minifyHtml:true
             }
         }
         strapiModuleConfig:StrapiModuleConfig = {

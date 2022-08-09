@@ -26,7 +26,7 @@ export class HtmlPage extends Seo {
 
     buildHtml(){
         this.buildElements();
-        var html = commonContainer.buildOptions.commandName === "dev"? indexTemplate(<Seo>this) :  minify(indexTemplate(<Seo>this),{minifyJS:true,collapseWhitespace: true,
+        var html = commonContainer.buildOptions.commandName === "dev" || !commonContainer.tezConfig.build.minifyHtml ? indexTemplate(<Seo>this) :  minify(indexTemplate(<Seo>this),{minifyJS:true,collapseWhitespace: true,
             removeComments: true,
             removeEmptyAttributes: true,
             removeRedundantAttributes: true,
