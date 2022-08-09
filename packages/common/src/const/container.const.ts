@@ -28,6 +28,10 @@ export const commonContainer:
                 inLinCss:true,
                 inLineJs:true,
                 minifyHtml:true
+            },
+            generate:{
+                sitemap:true,
+                robots:true
             }
         }
         strapiModuleConfig:StrapiModuleConfig = {

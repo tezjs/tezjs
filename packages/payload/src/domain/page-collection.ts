@@ -66,8 +66,10 @@ export class PageCollection {
             await this.customPagePayload.generate(routePath)
         await this.moduleRunner.runPayload(config);
         this.pageRoute.save();
-        this.sitemap.save()
-        await this.robotsGenerator.generate();
+        if(commonContainer.tezConfig.generate.sitemap)
+            this.sitemap.save()
+        if(commonContainer.tezConfig.generate.robots)
+          await this.robotsGenerator.generate();
         this.redirectRoute.save();
         this.globWriter.write();
         if(commonContainer.buildOptions.commandName === "build"){
