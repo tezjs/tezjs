@@ -10,6 +10,7 @@ export class Router{
     historyState:{value:HistoryState } = {value:history.state};
     url:string  = getCurrentUrl();
     currentUrl:string=this.url;
+    routeOptions:{path:string;query?:{[key:string]:string}}
     constructor(){
         if(!this.historyState.value)
             this.changeRoute(this.url, {
@@ -26,8 +27,13 @@ export class Router{
         })
     }
     
-    push(to:string){
-      this.changeRouteState(to);
+    push(to:string | {path:string;query?:{[key:string]:string}}){
+        if(typeof to === "string")
+            this.changeRouteState(to);
+        else if(to.path){
+            this.routeOptions= to;
+            this.changeRouteState(to.path)
+        }
     }
 
     changeRouteState(to,isPopState=false){
@@ -44,6 +50,7 @@ export class Router{
                     this.changeRoute(currentState.current, currentState, true);
                     const state = assign({}, this.createState({back:this.currentUrl,current: to, forward:null}), { position: currentState.position + 1 });
                     this.changeRoute(to, state, false);
+                    this.routeOptions= undefined;
             }
                 this.currentUrl = to;
                 tezPages.refreshRoute(to);
@@ -62,8 +69,19 @@ export class Router{
     }
 
     changeRoute(url:string,state:HistoryState,replace:boolean){
-            history[replace ? 'replaceState' : 'pushState'](state, '', url);
+            history[replace ? 'replaceState' : 'pushState'](state, '',!replace?this.getFullUrl(url):url);
             this.historyState.value = state;
+    }
+
+    getFullUrl(url:string){
+        let queryParams = '';
+        if(this.routeOptions && this.routeOptions.query){
+            queryParams="?"
+            Object.keys(this.routeOptions.query).forEach(key=>{
+                queryParams+=`${key}=${this.routeOptions.query[key]}`
+            })
+        }
+        return `${url}${queryParams}`
     }
 
     changeScrollPosition(){
