@@ -2,24 +2,17 @@
   "name": "@tezjs/cli",
   "version": "0.0.65",
   "description": "Create Tez Application Project",
-  "main": "index.js",
   "author": "ajayojha",
   "license": "MIT",
-  "exports": {
-    "./cli": "./bin/tez.js"
-  },
   "files": [
-    "bin",
-    "dist"
+    "dist",
+    "tez.mjs"
   ],
   "bin": {
-    "tez": "./bin/tez.js"
+    "tez": "./tez.mjs"
   },
   "scripts": {
     "stub": "unbuild"
-  },
-  "engines": {
-    "node": ">=12.0.0"
   },
   "dependencies": {
     "c12": "^0.2.7",
@@ -37,5 +30,9 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.2",
     "vite": "^2.9.13"
+  },
+  "engines": {
+    "node": "^14.15.0 || >=16.0.0",
+    "npm": ">=6.14.0"
   }
 }
