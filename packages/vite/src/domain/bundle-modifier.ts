@@ -59,7 +59,7 @@ export class BundleModifier{
                 let outputOption = this.bundle[path];
                 if(outputOption.importedBindings){
                     Object.keys(outputOption.importedBindings).forEach(key=>{
-                        if(outputOption.importedBindings[key].length > 0){
+                        if(outputOption.importedBindings[key].length >= 0){
                             deps.js.push(key);
                             if(path===TEZJS_PATH){
                                 deps.preload.push(key)
