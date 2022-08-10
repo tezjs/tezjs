@@ -8,5 +8,5 @@ export function getImportStatement(name:string,path:string){
         pages:'page',
         layouts:'layout'
     }
-    return  `import ${snakeToCamel(name)} from ${commonContainer.buildOptions.commandName === "build" ? `"/assets/${getFriendlyComponentName(name)}.${buildComponentSuffix[path]}.js"` : `"/@/${path}/${name.replace("pages/","")}.vue"`};`
+    return  `import ${snakeToCamel(name)} from ${commonContainer.buildOptions.commandName === "build" ? `"/assets/${getFriendlyComponentName(name).toLowerCase()}.${buildComponentSuffix[path]}.js"` : `"/@/${path}/${name.replace("pages/","")}.vue"`};`
 }

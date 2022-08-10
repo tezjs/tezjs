@@ -35,7 +35,7 @@ export const routeComponentWriter:
         }
 
         addDeps(routePath:string,name:string,keyName:string){
-            const filePath  = `assets/${name}.js`;
+            const filePath  = `assets/${name.toLowerCase()}.js`;
             
             if(this.depsConfig && this.depsConfig.deps && this.depsConfig.deps[filePath]){
                 this.addJsRefs(routePath,filePath,keyName)
