@@ -60,14 +60,16 @@ export class BundleModifier{
                 if(outputOption.importedBindings){
                     Object.keys(outputOption.importedBindings).forEach(key=>{
                         if(outputOption.importedBindings[key].length >= 0){
-                            deps.js.push(key);
+                            if(outputOption.importedBindings[key].length > 0)
+                                deps.js.push(key);
                             if(path===TEZJS_PATH){
                                 deps.preload.push(key)
                             }
                                 
                             let dependency = this.setDependencies(key);
                             dependency.css.forEach(item=>{if(deps.css.filter(x=>x=== item).length === 0) deps.css.push(item)})
-                            dependency.js.forEach(item=> {if(deps.js.filter(x=>x=== item).length === 0 && this.excludes.filter(x=>x===item).length === 0) path === TEZJS_PATH ? this.excludes.push(item): deps.js.push(item)})
+                            if(outputOption.importedBindings[key].length > 0)
+                                dependency.js.forEach(item=> {if(deps.js.filter(x=>x=== item).length === 0 && this.excludes.filter(x=>x===item).length === 0) path === TEZJS_PATH ? this.excludes.push(item): deps.js.push(item)})
                         }else
                             deps.unUsedImports.push(this.getImportString(path.split('/').length-2,key))
                         })
