@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/common",
-  "version": "0.0.70",
+  "version": "0.0.71",
   "description": "",
   "module": "./dist/index.mjs",
   "main": "./dist/index.cjs",
@@ -24,7 +24,7 @@
   "devDependencies": {
     "globby": "13.1.1",
     "@types/node": "^17.0.21",
-    "@tezjs/types": "0.0.70",
+    "@tezjs/types": "0.0.71",
     "ts-node": "^10.5.0",
     "tslint": "^6.1.3",
     "typescript": "^4.5.5",

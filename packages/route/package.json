@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/route",
-  "version": "0.0.70",
+  "version": "0.0.71",
   "description": "",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
@@ -34,6 +34,6 @@
   },
   "dependencies": {
     "globby": "13.1.1",
-    "@tezjs/common": "0.0.70"
+    "@tezjs/common": "0.0.71"
   }
 }
