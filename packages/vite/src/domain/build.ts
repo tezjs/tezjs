@@ -1,4 +1,4 @@
-import { commonContainer, CommonPathResolver } from "@tezjs/common";
+import { commonContainer, CommonPathResolver, convertDateToTicks } from "@tezjs/common";
 import {build as viteBuild,mergeConfig, UserConfig} from 'vite'
 import { VITE_SERVER_CONFIG } from "../const/vite-server-config.const";
 import { readConfig } from "../functions/read-config";
@@ -9,7 +9,7 @@ import { appContainer } from "../const/container.const";
 import { BuildConfig } from "../interface/build-config";
 export  async function build(config?:BuildConfig){
     if(config)
-        commonContainer.buildOptions = { mode: config.mode, rootDir: config.rootDir || process.cwd(), port: 3000, commandName:"build" };
+        commonContainer.buildOptions = {buildVersion:convertDateToTicks(new Date()), mode: config.mode, rootDir: config.rootDir || process.cwd(), port: 3000, commandName:"build" };
     await readConfig();
     appContainer.addOrUpdateTezTS()
 			const pageCollection = new PageCollection();

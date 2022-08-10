@@ -109,16 +109,16 @@ export class Seo extends JsCodeGen  {
     }
 
     addPreload(path:string,as:string,forAll:boolean=false){
-        this.addHeadChildElement(`<link data-head="tezjs-preload" rel="preload" as="${as}" ${as === "script" ? "crossorigin":''}  href="${forAll? path : `/${path.replace(/\/\//g, "/")}`}">`,true)
+        this.addHeadChildElement(`<link data-head="tezjs-preload" rel="preload" as="${as}" ${as === "script" ? "crossorigin":''}  href="${forAll? path : `/${path.replace(/\/\//g, "/")}?v=${commonContainer.buildOptions.buildVersion}`}">`,true)
     }
 
 
     addModulePreload(path:string,forAll:boolean=false){
-        this.addHeadChildElement(`<link data-head="tezjs-preload"  rel="modulepreload" href="${forAll? path : `/${path}`}">`,true)
+        this.addHeadChildElement(`<link data-head="tezjs-preload"  rel="modulepreload" href="${forAll? path : `/${path}`}?v=${commonContainer.buildOptions.buildVersion}">`,true)
     }
 
     addScript(path:string,isAppendToBody:boolean= false){
-        const elementString = `<script crossorigin="" type="module" src="/${path}"></script>`;
+        const elementString = `<script crossorigin="" type="module" src="/${path}?v=${commonContainer.buildOptions.buildVersion}"></script>`;
         if(!isAppendToBody)
             this.addHeadChildElement(elementString,false)
         else
@@ -128,7 +128,7 @@ export class Seo extends JsCodeGen  {
 
     addStyle(path:string,isAppendToBody:boolean= false){
         path = path.charAt(0) === '/'? path: `/${path}`;
-        const elementString = `<link rel="stylesheet" href="${path}"></link>`;
+        const elementString = `<link rel="stylesheet" href="${path}?v=${commonContainer.buildOptions.buildVersion}"></link>`;
         if(!isAppendToBody)
             this.addHeadChildElement(elementString,false)
         else
