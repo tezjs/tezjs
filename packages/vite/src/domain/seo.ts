@@ -88,7 +88,7 @@ export class Seo extends JsCodeGen  {
         if(this.htmlMeta.head.linkingData){
             const splitLinkingData = this.htmlMeta.head.linkingData.split("--");
             splitLinkingData.forEach(data=>{
-                this.addHeadChildElement(`<script data-head="tezjs"  type="application/ld+json">${JSON.stringify(JSON.parse(this.replaceText(data.trim())))}</script>`,false)
+                this.addHeadChildElement(`<script data-head="tezjs"  type="application/ld+json">${JSON.stringify(this.replaceText(data.trim()))}</script>`,false)
             })
         }
     }
