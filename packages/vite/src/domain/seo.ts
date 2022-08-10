@@ -114,7 +114,8 @@ export class Seo extends JsCodeGen  {
 
 
     addModulePreload(path:string,forAll:boolean=false){
-        this.addHeadChildElement(`<link data-head="tezjs-preload"  rel="modulepreload" href="${forAll? path : `/${path}`}">`,true)
+        path = path.charAt(0) === '/'? path: `/${path}`;
+        this.addHeadChildElement(`<link data-head="tezjs-preload"  rel="modulepreload" href="${forAll? path : `${path}`}">`,true)
     }
 
     addScript(path:string,isAppendToBody:boolean= false){
