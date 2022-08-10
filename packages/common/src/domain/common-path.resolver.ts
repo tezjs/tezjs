@@ -41,7 +41,7 @@ export class CommonPathResolver {
     }
 
     get clientEnvPath() {
-        return getPath([this.cachePath, "client-env.ts"]);
+        return getPath([this.envPath, "client.ts"]);
     }
 
     get tezTsPath() {
@@ -49,7 +49,7 @@ export class CommonPathResolver {
     }
 
     get serverEnvPath() {
-        return getPath([this.cachePath, "server-env.ts"]);
+        return getPath([this.envPath, "server.ts"]);
     }
 
     get addLibPath() {
@@ -111,6 +111,10 @@ export class CommonPathResolver {
             useVue:this.pathExists(this.pluginsPath),
             pages:this.pathExists(this.pagesPath)
         }
+    }
+
+    get envPath(){
+        return getPath([this.sourceCodePath,"env"],true);
     }
 
     pathExists(filePath:string){
