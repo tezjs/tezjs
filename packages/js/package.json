@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/js",
-  "version": "0.0.71",
+  "version": "0.0.72",
   "description": "",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
