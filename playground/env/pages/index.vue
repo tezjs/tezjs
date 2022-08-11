@@ -1,5 +1,5 @@
 <script setup lang="ts">
- import {env } from '#client-env'
+ import { env } from '/@/env/client'
 </script>
 <template>
 - Must print 'API_URL' value - <b>{{env.API_URL}}</b><br/>
