@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import axios from 'axios';
-import * as sharp from 'sharp';
+// import * as sharp from 'sharp';
 import {CommonPathResolver, commonContainer } from "@tezjs/common";
 
 
@@ -23,10 +23,10 @@ export async function writeImage(imagePath:string){
                     writer.on("close", () => {
                         if (!error) {
                             if(commonContainer.tezConfig.image?.enableWebPConversion){
-                                sharp(filePath).webp().toBuffer().then(t=>{
-                                    sharp(t).toFile(filePath.replace(`.${fileExtension}`,'.webp'));
-                                    resolve(true);
-                                })
+                                // sharp(filePath).webp().toBuffer().then(t=>{
+                                //     sharp(t).toFile(filePath.replace(`.${fileExtension}`,'.webp'));
+                                //     resolve(true);
+                                // })
                             }else
                                 resolve(true);
                             
