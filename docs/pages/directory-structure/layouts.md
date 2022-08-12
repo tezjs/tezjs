@@ -1,8 +1,7 @@
 ## layout directory   
 
-Tezjs can provide a cutsomizable layouts framework which can be used through your application.Layout are for making common ui and or code patterns in to resuable layout components.  
+If you wish to change the base layout of page is different then create a layout components in the layouts directory.
 
-Layouts are placed in the  directory and will be automatically loaded via an asynchronous import when used.    Layouts are used by adding layout poperty as part of your page component.  
 
 **Enabling the default layout**  
 
@@ -12,7 +11,7 @@ Add ~/layouts/default.vue
             <tez-slot></tez-slot>
     </template>  
 ```
-By creating a default.vue file in the layouts folder. This gives an opportunity to apply on all the page level components which is not using the `layoutName` property in the page component. You don't have to worry about the load the layout component first and reference page level component, TezJS efficiently manage this cumbersome task without any configuration. 
+By creating a `default.vue` file in the layouts folder. This gives an opportunity to apply on all the page level components which are not using the `layoutName` property in the page component. You don't have to worry about to load the layout component first and reference page level component, TezJS efficiently manage this cumbersome task without any configuration. 
 As every application have a different scenarios for loading the layouts. We have covered most of the scenarios as below:
 
 ### How to set the specific layout on specific page and rest of the pages would referenced with default layout?
