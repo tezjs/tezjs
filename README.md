@@ -29,7 +29,7 @@ npm create tez@latest
 ```
 Then follow the prompts!
 
-Run the application:
+### Run the application:
 
 ***Work with VUE boilerplate template.***
 ```terminal
@@ -41,7 +41,7 @@ npm run dev
 npm run develop
 ```
 
-## 💻 Work on TezJs Project
+### 💻 Work on TezJs Project
 
 - Clone repository
 - Ensure you have the latest LTS version of Node.js installed
