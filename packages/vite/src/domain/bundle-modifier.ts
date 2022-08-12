@@ -1,5 +1,4 @@
-import { CommonPathResolver } from "../../../common/dist";
-import { TEZJS_PATH } from "../const/core.const";
+import { CommonPathResolver } from "@tezjs/common";
 import { depsContainer } from "../const/deps-container.const";
 import { DependencyConfig } from "../interface/dependency-config";
 const DEPS_PATH="assets/deps.js";
