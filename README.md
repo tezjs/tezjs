@@ -12,7 +12,7 @@
 - [Getting Help](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/getting-help.md)
 - [Delineate the Bugs](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/delineate-the-bugs.md)
 - [Contributing](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/contribution.md)
-- [Questions](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/getting-help.md)
+- [Questions](https://github.com/tezjs/tezjs/discussions/categories/q-a)
 - [...More](https://github.com/tezjs/tezjs/blob/main/docs/pages/index.md)
 
 ## Development Setup
