@@ -10,17 +10,17 @@ function globTemplate(pathResolver:CommonPathResolver){
     globWriter.components.forEach(name=>{
         let fileName = `${getFriendlyComponentName(name)}.component`
         componentsString+=`"${fileName}": import("/@/components/${name}.vue"),`
-        inputOptions[`${fileName}`] = getPath([pathResolver.componentsPath,`${name}.vue`],false);
+        inputOptions[`${fileName.toLowerCase()}`] = getPath([pathResolver.componentsPath,`${name}.vue`],false);
     })
     globWriter.layouts.forEach(name=>{
         let fileName = `${getFriendlyComponentName(name)}.layout`
         layoutsString+=`"${fileName}": import("/@/layouts/${name}.vue"),`
-        inputOptions[`${fileName}`] = getPath([pathResolver.layoutsPath,`${name}.vue`],false);
+        inputOptions[`${fileName.toLowerCase()}`] = getPath([pathResolver.layoutsPath,`${name}.vue`],false);
     })
     globWriter.pages.forEach(name=>{
         let fileName = `${getFriendlyComponentName(name)}.page`
         pagesString+=`"${fileName}": import("/@/${name}.vue"),`
-        inputOptions[`${fileName}`] = getPath([pathResolver.sourceCodePath,`${name}.vue`],false);
+        inputOptions[`${fileName.toLowerCase()}`] = getPath([pathResolver.sourceCodePath,`${name}.vue`],false);
     })
     return {template: `export const glob={
         components :{${componentsString}},
