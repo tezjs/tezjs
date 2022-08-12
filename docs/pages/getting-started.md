@@ -8,7 +8,7 @@ Getting started with TezJs is simple.
 
 
 ## New Project
-Oepn a terminal and use the following command to create a new starter project. TezJs cli provides two templates `vue` and `tezjs with strapi` template. You can choose anyone of them.
+Open a terminal and use the following command to create a new starter project. TezJs cli provides two templates `vue` and `tezjs with strapi` template. You can choose anyone of them.
 
 With NPM:
 
