@@ -1,4 +1,4 @@
-import { CommonPathResolver } from "@tezjs/common";
+import { commonContainer, CommonPathResolver } from "@tezjs/common";
 import { depsContainer } from "../const/deps-container.const";
 import { DependencyConfig } from "../interface/dependency-config";
 const DEPS_PATH="assets/deps.js";
@@ -10,8 +10,12 @@ export class BundleModifier{
     css:{[key:string]:string}={};
     highestPathDepth:number=0;
     commonPath:CommonPathResolver;
+    globPath:string;
+    depsPath:string;
     constructor(private bundle:any){
         this.commonPath = new CommonPathResolver();
+        this.globPath = `assets/glob.${commonContainer.buildOptions.buildVersion}.js`
+        this.depsPath = `assets/deps.${commonContainer.buildOptions.buildVersion}.js`
         this.run();
             
     }
@@ -43,8 +47,8 @@ export class BundleModifier{
 
 
     private removeBundleItem(){
-        delete this.bundle[DEPS_PATH]
-        delete this.bundle[GLOB_PATH]
+        delete this.bundle[this.depsPath]
+        delete this.bundle[this.globPath]
     }
 
 
