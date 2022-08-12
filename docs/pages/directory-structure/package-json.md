@@ -27,5 +27,7 @@ Here is the low level `package.json` which you will get in every boilerplate tem
 Let's understand the use of `dependencies` and `devDependencies` referenced packages.
 
 `@tezjs/vue` : This package is used on client side for preparing the UI based upon the created component.
+
 `@tezjs/cli` : This package is used to run the project in development mode as well as build the project. This package code won't be bundled in the client side code.
+
 `@tezjs/route` : This package is used to auto generate the routes based upon the created components in the pages folder. This package code won't be bundled in the client side code.
