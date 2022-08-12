@@ -54,3 +54,5 @@ npm run develop
 ## License
 
 [MIT](./LICENSE)
+
+Love TezJS? Give our repo a star ⭐ ⬆️.
