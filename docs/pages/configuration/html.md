@@ -1,11 +1,11 @@
 # Html Head Options
 
-This is to be used set some html meta on every generate page or favicon, etc.
+This provide Html Head management. you can set the global configuration which is to be apply on every page.
 
 ## htmlMeta.head.preConnect
 Before loading the actual website it will connect the site url which you have mentioned in the `preconnect` field.
 
-- Type: `String` | `Number` | `string[]`
+- Type: `string[]`
 
 ```
 htmlMeta:{
@@ -18,7 +18,7 @@ htmlMeta:{
 ## htmlMeta.head.preFetch
 Before loading the actual website it will prefetch the data which you have mentioned in the `preFetch` field.
 
-- Type: `String` | `Number` | `string[]`
+- Type: `string[]`
 
 ```
 htmlMeta:{
