@@ -8,7 +8,7 @@
   - [Html Options](https://github.com/tezjs/tezjs/blob/main/docs/pages/configuration/html.md)
   - [Client Options](https://github.com/tezjs/tezjs/blob/main/docs/pages/configuration/client.md)
   - Image Options
-- **Directory Structure**
+- **Project Folder Structure**
   - [assets](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/assets.md)
   - [components](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/components.md)
   - [dist](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/dist.md)
@@ -32,10 +32,24 @@
   - [StormKit](https://github.com/tezjs/tezjs/blob/main/docs/pages/deployment/storm-kit.md)
   - [Surge](https://github.com/tezjs/tezjs/blob/main/docs/pages/deployment/surge.md)
   - [Vercel](https://github.com/tezjs/tezjs/blob/main/docs/pages/deployment/vercel.md)
+- **TezJs Labs**
+  - [Starter **Template VUE with TezJs**](https://github.com/tezjs-labs/tezjs-starter-vue#vue-3--typescript--vite)
+  - [Deploy to **AWS Amplify**](https://github.com/tezjs-labs/tezjs-deploy-amplify#deploy-to-aws-amplify)
+  - [Deploy to **AWS S3 with CloudFront**](https://github.com/tezjs-labs/tezjs-deploy-aws3-cloudfront#deploy-to-s3cloudfront)
+  - [Deploy to **Azure Blob with CDN**](https://github.com/tezjs-labs/tezjs-deploy-azureblob-cdn#deploy-to-azure-blob-and-cdn)
+  - [Deploy to **Azure Static Web App**](https://github.com/tezjs-labs/tezjs-deploy-azure-static-webapp#deploy-to-azure-static-web-app)
+  - [Deploy to **Firebase**](https://github.com/tezjs-labs/tezjs-deploy-firebase#deploy-to-firebase-hosting)
+  - [Deploy to **Netlify**](https://github.com/tezjs-labs/tezjs-deploy-netlify#deploy-to-netlify)
+  - [Deploy to **Render**](https://github.com/tezjs-labs/tezjs-deploy-render#deploy-to-render)
+  - [Deploy to **StormKit**](https://github.com/tezjs-labs/tezjs-deploy-stormkit)
+  - [Deploy to **Surge**](https://github.com/tezjs-labs/tezjs-deploy-surge#deploy-to-surge)
+  - [Deploy to **Vercel**](https://github.com/tezjs-labs/tezjs-deploy-vercel#deploy-to-vercel)  - 
 - **Community**
   - [Getting Help](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/getting-help.md)
   - [Delineate the Bugs](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/delineate-the-bugs.md)
   - [Contribute](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/contribution.md)
   - [Code of Conduct](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/code-of-conduct.md)
+- **License**
+  - [MIT](https://github.com/tezjs/tezjs/blob/main/LICENSE)
   
   
