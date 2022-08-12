@@ -36,9 +36,9 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
     build: {
       rollupOptions: {
         output: {
-        entryFileNames: `assets/[name].js`,
-        chunkFileNames: `assets/[name].js`,
-        assetFileNames: `assets/[name].[ext]`
+        entryFileNames: `assets/[name].${commonContainer.buildOptions.buildVersion}.js`,
+        chunkFileNames: `assets/[name].${commonContainer.buildOptions.buildVersion}.js`,
+        assetFileNames: `assets/[name].${commonContainer.buildOptions.buildVersion}.[ext]`
         }
       }
       },

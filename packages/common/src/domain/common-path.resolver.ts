@@ -101,6 +101,26 @@ export class CommonPathResolver {
         return getPath([this.distPath,"tz.js"],false);
     }
 
+    get preScriptName(){
+        return `pre.${commonContainer.buildOptions.buildVersion}.js`
+    }
+
+    get postScriptName(){
+        return `post.${commonContainer.buildOptions.buildVersion}.js`
+    }
+
+    get tezJsPath(){
+        return `assets/tez.${commonContainer.buildOptions.buildVersion}.js`
+    }
+
+    get tezCSSPath(){
+        return `assets/tez.${commonContainer.buildOptions.buildVersion}.css`
+    }
+
+    get preloadScriptName(){
+        return `preload.${commonContainer.buildOptions.buildVersion}.js`
+    }
+
     getExistsFilesOrFolders(){
         return {
             components:this.pathExists(this.componentsPath),
@@ -135,6 +155,8 @@ export class CommonPathResolver {
     getFilePath(directories:Array<string>,fileName:string){
         return path.join(getPath(directories),fileName)
     }
+
+   
 
     async getFiles(folderName:string,extension:string){
         let paths = await globby([

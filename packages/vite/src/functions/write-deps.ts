@@ -10,7 +10,7 @@ function globTemplate(pathResolver:CommonPathResolver){
     globWriter.components.forEach(name=>{
         let fileName = `${getFriendlyComponentName(name)}.component`
         componentsString+=`"${fileName}": import("/@/components/${name}.vue"),`
-        inputOptions[`${fileName}`.toLowerCase()] = getPath([pathResolver.componentsPath,`${name}.vue`],false);
+        inputOptions[`${fileName}`] = getPath([pathResolver.componentsPath,`${name}.vue`],false);
     })
     globWriter.layouts.forEach(name=>{
         let fileName = `${getFriendlyComponentName(name)}.layout`

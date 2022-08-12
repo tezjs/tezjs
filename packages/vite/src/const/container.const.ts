@@ -59,6 +59,7 @@ export const appContainer:
             props+=`isDevMode:${commonContainer.buildOptions.commandName === "dev"},`
             if(existsFilesorFolders.useVue)
                 props += `useVue:useVue,`;
+            props+=`buildVersion:${commonContainer.buildOptions.buildVersion}`
             return props;
         }
     })();

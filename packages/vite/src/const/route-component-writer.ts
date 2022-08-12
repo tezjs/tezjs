@@ -1,3 +1,4 @@
+import { commonContainer } from "@tezjs/common";
 import { getFriendlyComponentName } from "@tezjs/payload";
 import { isPageComponent } from "../../../payload/src/utils/is-page-component";
 import { DepsContainerConfig } from "../interface/deps-container-config";
@@ -35,7 +36,7 @@ export const routeComponentWriter:
         }
 
         addDeps(routePath:string,name:string,keyName:string){
-            const filePath  = `assets/${name.toLowerCase()}.js`;
+            const filePath  = `assets/${name.toLowerCase()}.${commonContainer.buildOptions.buildVersion}.js`;
             
             if(this.depsConfig && this.depsConfig.deps && this.depsConfig.deps[filePath]){
                 this.addJsRefs(routePath,filePath,keyName)

@@ -88,12 +88,14 @@ export class Seo extends JsCodeGen  {
         if(this.htmlMeta.head.linkingData){
             const splitLinkingData = this.htmlMeta.head.linkingData.split("--");
             splitLinkingData.forEach(data=>{
-                this.addHeadChildElement(`<script data-head="tezjs"  type="application/ld+json">${JSON.stringify(this.replaceText(data.trim()))}</script>`,false)
+                this.addHeadChildElement(`<script data-head="tezjs"  type="application/ld+json">${JSON.stringify(JSON.parse(this.replaceText(data.trim())))}</script>`,false)
             })
         }
     }
 
     private replaceText(text:string){
+        if(text.charAt(0) === '{' && text.charAt(1) === "'")
+            text = text.replace(/'/g,'"')
         return text.replace(/\\n/g, '').replace(/\n/g, '').replace(/\t/g, '')
     }
 

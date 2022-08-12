@@ -22,4 +22,5 @@ export interface TezAppOptions {
 
     loaderImagePath?:string;
     
+    buildVersion?:number
 }

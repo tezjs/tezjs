@@ -1,3 +1,4 @@
+import { CommonPathResolver } from "../../../common/dist";
 import { TEZJS_PATH } from "../const/core.const";
 import { depsContainer } from "../const/deps-container.const";
 import { DependencyConfig } from "../interface/dependency-config";
@@ -9,8 +10,11 @@ export class BundleModifier{
     excludes:Array<string> = new Array<string>();
     css:{[key:string]:string}={};
     highestPathDepth:number=0;
+    commonPath:CommonPathResolver;
     constructor(private bundle:any){
-            this.run();
+        this.commonPath = new CommonPathResolver();
+        this.run();
+            
     }
 
     overwrite(){
@@ -46,9 +50,9 @@ export class BundleModifier{
 
 
    private addExcludeJsPaths(){
-        this.setDependencies(TEZJS_PATH);
-        if(this.deps[TEZJS_PATH])
-            this.deps[TEZJS_PATH].js.forEach(x=>this.excludes.push(x));
+        this.setDependencies(this.commonPath.tezJsPath);
+        if(this.deps[this.commonPath.tezJsPath])
+            this.deps[this.commonPath.tezJsPath].js.forEach(x=>this.excludes.push(x));
     }
 
 
@@ -62,14 +66,14 @@ export class BundleModifier{
                         if(outputOption.importedBindings[key].length >= 0){
                             if(outputOption.importedBindings[key].length > 0)
                                 deps.js.push(key);
-                            if(path===TEZJS_PATH){
+                            if(path===this.commonPath.tezJsPath){
                                 deps.preload.push(key)
                             }
                                 
                             let dependency = this.setDependencies(key);
                             dependency.css.forEach(item=>{if(deps.css.filter(x=>x=== item).length === 0) deps.css.push(item)})
                             if(outputOption.importedBindings[key].length > 0)
-                                dependency.js.forEach(item=> {if(deps.js.filter(x=>x=== item).length === 0 && this.excludes.filter(x=>x===item).length === 0) path === TEZJS_PATH ? this.excludes.push(item): deps.js.push(item)})
+                                dependency.js.forEach(item=> {if(deps.js.filter(x=>x=== item).length === 0 && this.excludes.filter(x=>x===item).length === 0) path === this.commonPath.tezJsPath ? this.excludes.push(item): deps.js.push(item)})
                         }else
                             deps.unUsedImports.push(this.getImportString(path.split('/').length-2,key))
                         })

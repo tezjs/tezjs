@@ -19,10 +19,10 @@ export class JsCodeGen extends PayloadReader{
         let writePath = commonContainer.buildOptions.commandName === "build" ? this.commonPath.distPath:this.commonPath.depsPath;
         let preCode = this.preCode();
         let postCode = this.postCode();
-        let preloadCode = getPreloadCodeTemplate(routeComponentWriter.getPreDeps(this.route.path));
-        let postScriptPreload = postScriptPreloadCodeTemplate(routeComponentWriter.getPostDeps(this.route.path))
-        const preFile = getPath([this.commonPath.getPath([writePath, this.route.fPath]),"pre.js"]);
-        const preloadFile = getPath([this.commonPath.getPath([writePath, this.route.fPath]),"preload.js"]);
+        let preloadCode = getPreloadCodeTemplate(routeComponentWriter.getPreDeps(this.route.path),this.commonPath);
+        let postScriptPreload = postScriptPreloadCodeTemplate(routeComponentWriter.getPostDeps(this.route.path),this.commonPath)
+        const preFile = getPath([this.commonPath.getPath([writePath, this.route.fPath]),this.commonPath.preScriptName]);
+        const preloadFile = getPath([this.commonPath.getPath([writePath, this.route.fPath]),this.commonPath.preloadScriptName]);
         preCode = preCode.replace(POST_SCRIPT_COMMENT,postScriptPreload)
         writeFileSync(preloadFile,preloadCode,true)
         if(commonContainer.buildOptions.commandName === "build"){
@@ -32,7 +32,7 @@ export class JsCodeGen extends PayloadReader{
         }
         writeFileSync(preFile,preCode,true)
         if(this.isPostCode){
-            const postFile = getPath([this.commonPath.getPath([writePath, this.route.fPath]),"post.js"]);
+            const postFile = getPath([this.commonPath.getPath([writePath, this.route.fPath]),this.commonPath.postScriptName]);
             writeFileSync(postFile,postCode,true)
         }
             
@@ -47,7 +47,7 @@ export class JsCodeGen extends PayloadReader{
                 masterPageSlots:this.getSlots(this.masterPage,false),
                 tags:this.tags,
                 layoutName:this.masterPage.layoutName,
-                postScript: this.isPostCode ? commonContainer.buildOptions.commandName === "dev" ? `/tez/deps${getUrl(this.route.path)}/post` :'./post.js' : ''
+                postScript: this.isPostCode ? commonContainer.buildOptions.commandName === "dev" ? `/tez/deps${getUrl(this.route.path)}/post.js` : `./${this.commonPath.postScriptName}` : ''
             },this.route,true,this.route.isPage
         );
     }

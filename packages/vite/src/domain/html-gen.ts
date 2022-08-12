@@ -12,7 +12,7 @@ import { routeComponentWriter } from "../const/route-component-writer";
 let exampleOnResolvePlugin = {
     name: 'example',
     setup(build) {
-      build.onResolve({ filter: /.component.js|.layout.js|.page.js/ }, args => {
+      build.onResolve({ filter: /.component.|.layout.|.page./ }, args => {
         return { path: getPath([commonContainer.buildOptions.rootDir, 'dist',args.path.indexOf("assets/") ===-1 ? "assets":"", args.path],false) }
       })
     },
@@ -24,11 +24,12 @@ export class HtmlGen{
     externals:Array<string>;
     commonPathResolver:CommonPathResolver
     constructor(){
+        this.commonPathResolver = new CommonPathResolver();
         this.routes = commonContainer.getAppRoutes();
         this.depsConfig = depsContainer.getDeps();
-        this.mainDependency = this.depsConfig.deps[TEZJS_PATH];
+        this.mainDependency = this.depsConfig.deps[this.commonPathResolver.tezJsPath];
         this.setExternals();
-        this.commonPathResolver = new CommonPathResolver();
+        
     }
     async build(){
         for(var route of this.routes){
@@ -44,11 +45,11 @@ export class HtmlGen{
                 },
                 body:{
                     inlineScript:commonContainer.tezConfig.build.inLineJs ? await this.getInlineJs(path) : new Array<{name:string,code:string}>(),
-                    script:!commonContainer.tezConfig.build.inLineJs ?[{src:TEZJS_PATH}] :[],
+                    script:!commonContainer.tezConfig.build.inLineJs ?[{src:this.commonPathResolver.tezJsPath}] :[],
                     style:commonContainer.tezConfig.build.bundleCss ? this.bundleCss(path):[],
                 }
             }
-            await this.minifyJs([`${path}/pre.js`,`${path}/post.js`])
+            await this.minifyJs([`${path}/${this.commonPathResolver.preScriptName}`,`${path}/${this.commonPathResolver.postScriptName}`])
             const htmlPage = new HtmlPage(route);
             htmlPage.createPage(page)
         }
@@ -73,12 +74,12 @@ export class HtmlGen{
     }
 
     getPreFetch(path:string){
-        return [`${path}/post.js`]
+        return [`${path}/${this.commonPathResolver.postScriptName}`]
     }
 
     getPreloads(path:string):Array<{path:string,type?:string}>{
         const depPath = `assets/tez.js`
-        const prePath = `${path}/pre.js`;
+        const prePath = `${path}/${this.commonPathResolver.preScriptName}`;
         let preloads  = this.getPreloadTags(depPath);
         preloads.unshift({path:'/tz.js'});
         if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.loaderImage)
@@ -121,7 +122,7 @@ export class HtmlGen{
         let cssRefs = new Array<{href:string}>();
         cssRefs.push({href:bundleCssPath});
         if(commonContainer.tezConfig.client.imports)
-            cssRefs.push({href:TEZCSS_PATH});
+            cssRefs.push({href:this.commonPathResolver.tezCSSPath});
         return cssRefs;            
     }
 
@@ -149,15 +150,15 @@ export class HtmlGen{
     }
 
     getJsRef(path:string){
-        return [{src:`assets${path}/pre.js`},{src:TEZJS_PATH}]
+        return [{src:`assets${path}/${this.commonPathResolver.preScriptName}`},{src:this.commonPathResolver.tezJsPath}]
     }
     getCssRef(path:string){
         const preCssPath =`assets${path}/pre.css` 
         let cssRefs = new Array<{href:string}>();
         if(this.commonPathResolver.pathExists(getPath([this.commonPathResolver.distPath,preCssPath])))
             cssRefs.push({href:preCssPath})
-        cssRefs.push({href:TEZCSS_PATH})
-        const depPath = `assets${path}/pre.js`
+        cssRefs.push({href:this.commonPathResolver.tezCSSPath})
+        const depPath = `assets${path}/${this.commonPathResolver.preScriptName}`
         if(this.depsConfig.deps[depPath])
         for(const cssPath of this.depsConfig.deps[depPath].css)
             cssRefs.push({href:cssPath});
@@ -167,8 +168,8 @@ export class HtmlGen{
     async getInlineJs(path:string){
         let preInlinePath = `${path}/pre.inline.js`;
         let inlineJsCode = await this.minifyJs([preInlinePath],true);
-        let tezjsCode = readFileSync(getPath([this.commonPathResolver.distPath,TEZJS_PATH]),true) as string;
-        inlineJsCode.push({name:TEZJS_PATH,code: this.resetImports(tezjsCode)});
+        let tezjsCode = readFileSync(getPath([this.commonPathResolver.distPath,this.commonPathResolver.tezJsPath]),true) as string;
+        inlineJsCode.push({name:this.commonPathResolver.tezJsPath,code: this.resetImports(tezjsCode)});
         this.commonPathResolver.deleteFile(getPath([ this.commonPathResolver.distPath,preInlinePath]));
         return inlineJsCode;
     }
