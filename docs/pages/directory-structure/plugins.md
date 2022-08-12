@@ -1,9 +1,10 @@
-## Plugin Direcotry  
+## plugins directory 
 
-this is to be used to register the custom directives, components or third party plugins. To make it working you have to create index.ts file and export the function.
-here is the code example:
+This provides register the third party library, custom mixin, directives or components while initializing the app. 
 
-```js
+> create plugins/index.ts file and export the function
+
+```js 
 export default function(vue:any){
     vue.use(markdown, {});
     vue
