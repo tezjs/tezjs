@@ -1,0 +1,41 @@
+# Documentation
+- [Getting Started](https://github.com/tezjs/tezjs/blob/main/docs/pages/getting-started.md)
+- **Config**
+  - [Configuring Tez](https://github.com/tezjs/tezjs/blob/main/docs/pages/configuration/index.md)
+  - Strapi Options
+  - [Build Options](https://github.com/tezjs/tezjs/blob/main/docs/pages/configuration/build.md)
+  - [Deployment Options](https://github.com/tezjs/tezjs/blob/main/docs/pages/configuration/deployment.md)
+  - [Html Options](https://github.com/tezjs/tezjs/blob/main/docs/pages/configuration/html.md)
+  - [Client Options](https://github.com/tezjs/tezjs/blob/main/docs/pages/configuration/client.md)
+  - Image Options
+- **Directory Structure**
+  - [assets](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/assets.md)
+  - [components](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/components.md)
+  - [dist](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/dist.md)
+  - [environments](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/environments.md)
+  - [.gitignore](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/gitignore.md)
+  - [layouts](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/layouts.md)
+  - [package.json](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/package-json.md)
+  - [pages](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/pages.md)
+  - [plugins](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/plugins.md)
+  - [public](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/public.md)
+  - [tez.config.ts](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/tez-config-ts.md)
+  - [.tez](https://github.com/tezjs/tezjs/blob/main/docs/pages/directory-structure/tez.md)
+- **Deployment**
+  - [AWS Amplify](https://github.com/tezjs/tezjs/blob/main/docs/pages/deployment/aws-amplify.md)
+  - [AWS S3 with CloudFront](https://github.com/tezjs/tezjs/blob/main/docs/pages/deployment/aws-s3-cloudfront.md)
+  - [Azure Blob with CDN](https://github.com/tezjs/tezjs/blob/main/docs/pages/deployment/azure-blob-cdn.md)
+  - [Azure Static Web App](https://github.com/tezjs/tezjs/blob/main/docs/pages/deployment/azure-static-web-app.md)
+  - [Firebase](https://github.com/tezjs/tezjs/blob/main/docs/pages/deployment/firebase.md)
+  - [Netlify](https://github.com/tezjs/tezjs/blob/main/docs/pages/deployment/netlify.md)
+  - [Render](https://github.com/tezjs/tezjs/blob/main/docs/pages/deployment/render.md)
+  - [StormKit](https://github.com/tezjs/tezjs/blob/main/docs/pages/deployment/storm-kit.md)
+  - [Surge](https://github.com/tezjs/tezjs/blob/main/docs/pages/deployment/surge.md)
+  - [Vercel](https://github.com/tezjs/tezjs/blob/main/docs/pages/deployment/vercel.md)
+- **Community**
+  - [Getting Help](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/getting-help.md)
+  - [Delineate the Bugs](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/delineate-the-bugs.md)
+  - [Contribute](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/contribution.md)
+  - [Code of Conduct](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/code-of-conduct.md)
+  
+  
