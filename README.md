@@ -1,3 +1,4 @@
+<h2 align="center">TezJs - Next Generation Atonishingly Fast Frontend App With VUE ⚡</h2>
 <p align="center">
   <a href="#">
     <img width="180" src="https://user-images.githubusercontent.com/20392302/166857418-b5f88b27-bc0a-4afa-bda1-4f4006b000e4.png" alt="Tez logo">
@@ -6,18 +7,52 @@
 <br/>
 <br/>
 
-# Tez ⚡
+## Documentation 
+- [Getting Started](https://github.com/tezjs/tezjs/blob/main/docs/pages/getting-started.md)
+- [Getting Help](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/getting-help.md)
+- [Delineate the Bugs](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/delineate-the-bugs.md)
+- [Contributing](https://github.com/tezjs/tezjs/blob/main/docs/pages/community/contribution.md)
+- [Questions](https://github.com/tezjs/tezjs/discussions/categories/q-a)
+- [...More](https://github.com/tezjs/tezjs/blob/main/docs/pages/index.md)
 
-> Next Generation Atonishingly Fast Frontend App
+## Development Setup
 
-- 💡 Core Web Vital Friendly
-- ⚡️ Progressive Content Loading and Visually Intuitive User Experience
-- 🛠️ In-built Robust SEO features
-- 📦 Progressive Web Application Friendly
-- 🔩 Progressive Image Loading and conversion
-- 🔑 Fully Typed APIs
+### Prerequisites
+
+- Install [Node.js](https://nodejs.org/en/) version 14.18+, 16+ which includes Node Package Manager[npm]
+
+### Setting Up a Project
+
+Fire below command in the terminal:
+
+```
+npm create tez@latest
+```
+Then follow the prompts!
+
+### Run the application:
+
+***Work with VUE boilerplate template.***
+```terminal
+npm run dev
+```
+
+***If you have selected a strapi template then fire the below command in the root project directory***
+```terminal
+npm run develop
+```
+
+### 💻 Work on TezJs Project
+
+- Clone repository
+- Ensure you have the latest LTS version of Node.js installed
+- Install dependencies with `npx yarn install`
+- Run `npx yarn stub` to activate passive development
+- Run the respective project available in the playground folder `(npm run dev:playground:env)`
 
 
+## License
 
-Tez means "Fast". Tez provides smarter way to develop the frontend app with highly extensible features.
+[MIT](./LICENSE)
 
+Love TezJS? Give our repo a star ⭐ ⬆️.
