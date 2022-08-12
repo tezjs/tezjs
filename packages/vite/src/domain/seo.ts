@@ -95,7 +95,7 @@ export class Seo extends JsCodeGen  {
 
     private replaceText(text:string){
         if(text.charAt(0) === '{' && text.charAt(1) === "'")
-            text = text.replace(/'/g,'"')
+            text = text.replace(/('(?=(,\s*')))|('(?=:))|((?<=([:,]\s*))')|((?<={)')|('(?=}))/g, '"');
         return text.replace(/\\n/g, '').replace(/\n/g, '').replace(/\t/g, '')
     }
 
