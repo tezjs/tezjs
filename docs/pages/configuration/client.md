@@ -14,7 +14,6 @@ export default defineTezConfig({
 })  
 ```
 
-**Note:** You can also add multiple things inside array after adding ( , ) end of one path  
 
 **loaderImage Options**  
 
