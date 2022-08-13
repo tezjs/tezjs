@@ -11,7 +11,7 @@ function getPreComponents(pageSlots:{[key:string]:any},masterPageSlots:{[key:str
     if(masterPageSlots && masterPageSlots[propName])
         masterPageSlots[propName].forEach(item=>{
         if(preComponents.filter(x=>x!==pageSlots.default[i].name).length === 0){
-            preComponents.push(item.name);maxPreLoadComponent--;
+            preComponents.push(item.name);
         } });
         if(pageSlots && pageSlots.default){
             for(var i=0;i<maxPreLoadComponent;i++){
