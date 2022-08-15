@@ -102,15 +102,22 @@ export class CommonPathResolver {
     }
 
     get preScriptName(){
+        if(commonContainer.buildOptions.commandName === "build")
         return `pre.${commonContainer.buildOptions.buildVersion}.js`
+        return 'pre.js';
     }
 
     get postScriptName(){
+        if(commonContainer.buildOptions.commandName === "build")
         return `post.${commonContainer.buildOptions.buildVersion}.js`
+        return 'post.js'
     }
 
+
     get tezJsPath(){
+        if(commonContainer.buildOptions.commandName === "build")
         return `assets/tez.${commonContainer.buildOptions.buildVersion}.js`
+        return 'tez.js';
     }
 
     get tezCSSPath(){
@@ -118,7 +125,9 @@ export class CommonPathResolver {
     }
 
     get preloadScriptName(){
-        return `preload.${commonContainer.buildOptions.buildVersion}.js`
+        if(commonContainer.buildOptions.commandName === "build")
+            return `preload.${commonContainer.buildOptions.buildVersion}.js`
+        return 'preload.js'
     }
 
     getExistsFilesOrFolders(){
