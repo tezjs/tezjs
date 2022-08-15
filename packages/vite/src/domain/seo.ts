@@ -1,6 +1,6 @@
 import { commonContainer } from "@tezjs/common"
 import { TezSeo } from "@tezjs/types";
-import { PROPERTY } from "../../../payload/src/const/app.const";
+import { KEYWORDS, PROPERTY } from "../../../payload/src/const/app.const";
 import { NAME } from "../const/core.const";
 import { Head,HtmlPage } from "@tezjs/types";
 import { JsCodeGen } from "./html/js-code-gen";
@@ -94,8 +94,22 @@ export class Seo extends JsCodeGen  {
     }
 
     private replaceText(text:string){
-        if(text.charAt(0) === '{' && text.charAt(1) === "'")
+        if(text.charAt(0) === '{' && text.charAt(1) === "'"){
+            const keys = [
+                new RegExp(/"/,"g"),
+                new RegExp("\\['","g"),
+                new RegExp("\\']","g")
+            ];
+            const replacer = [
+                '\\"',
+                '["',
+                '"]'
+            ];
+            keys.forEach((key:RegExp,index:number)=>{
+                text = text.replace(key,replacer[index])
+            })
             text = text.replace(/('(?=(,\s*')))|('(?=:))|((?<=([:,]\s*))')|((?<={)')|('(?=}))/g, '"');
+        }
         return text.replace(/\\n/g, '').replace(/\n/g, '').replace(/\t/g, '')
     }
 
