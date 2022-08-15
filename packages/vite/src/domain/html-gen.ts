@@ -80,7 +80,7 @@ export class HtmlGen{
     }
 
     getPreloads(path:string):Array<{path:string,type?:string}>{
-        const depPath = `assets/tez.js`
+        const depPath = this.commonPathResolver.tezJsPath;
         const prePath = `${path}/${this.commonPathResolver.preScriptName}`;
         let preloads  = this.getPreloadTags(depPath);
         preloads.unshift({path:'/tz.js'});
@@ -134,7 +134,7 @@ export class HtmlGen{
             this.setInlineCss(this.mainDependency.css,inlineCss)
         const preComponents = routeComponentWriter.getRouteComponent(getUrl(path)).pre;
         for(const preComponent of preComponents){
-            const depPath = `assets/${preComponent}.js`
+            const depPath = `assets/${preComponent}.${commonContainer.buildOptions.buildVersion}.js`
             if(this.depsConfig.deps[depPath]){
                 this.setInlineCss(this.depsConfig.deps[depPath].css,inlineCss);
             }
