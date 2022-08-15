@@ -13,7 +13,9 @@ let exampleOnResolvePlugin = {
     name: 'example',
     setup(build) {
       build.onResolve({ filter: /.component.|.layout.|.page./ }, args => {
-        return { path: getPath([commonContainer.buildOptions.rootDir, 'dist',args.path.indexOf("assets/") ===-1 ? "assets":"", args.path],false) }
+        if([".component.",".layout.",".page."].filter(t=>args.path.indexOf(t) !== -1).length > 0)
+            return { path: getPath([commonContainer.buildOptions.rootDir, 'dist',args.path.indexOf("assets/") ===-1 ? "assets":"", args.path],false) }
+        return {path:args.path}
       })
     },
   }
