@@ -68,7 +68,7 @@ export default defineComponent({
         },
         async onScroll(){
             if(!this.isScrolled){
-                this.isScroll = true;
+                this.isScrolled = true;
                 window.removeEventListener("scroll",this.scrollFunction)
                 await this.loadPostScript();
                 this.isInView = true;
