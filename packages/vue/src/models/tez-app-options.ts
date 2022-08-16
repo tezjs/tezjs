@@ -22,5 +22,7 @@ export interface TezAppOptions {
 
     loaderImagePath?:string;
     
-    buildVersion?:number
+    buildVersion?:number;
+
+    maxPreComponentCount?:number
 }

@@ -59,7 +59,12 @@ export const appContainer:
             props+=`isDevMode:${commonContainer.buildOptions.commandName === "dev"},`
             if(existsFilesorFolders.useVue)
                 props += `useVue:useVue,`;
-            props+=`buildVersion:${commonContainer.buildOptions.buildVersion}`
+            props+=`buildVersion:${commonContainer.buildOptions.buildVersion},`
+            props+=`maxPreComponentCount:${this.getPreComponentCount()},`
             return props;
+        }
+
+        getPreComponentCount(){
+            return commonContainer.tezConfig.payload?.page?.maxPreLoadComponent || 3;
         }
     })();

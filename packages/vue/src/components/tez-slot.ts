@@ -7,6 +7,7 @@ import { getCurrentUrl } from '../funcs/payload/get-current-url';
 import { idleCallback,isMobile } from '@tezjs/js';
 import { PageState } from '../models/page-state';
 import { registerTezPage } from '../funcs/register-tez-page';
+import { componentState } from '../const/component-state';
 
 interface DataPoint {
     scrollFunction:Function;
@@ -94,28 +95,36 @@ export default defineComponent({
                 this.observer.observe(this.$refs.divLazy as Element);
             }
         },
+        getMaxPreComponentCount(){
+            return componentState.tezAppOptions.maxPreComponentCount;
+        },
         async goToNextComponent(isContinue:boolean) {
-            if (!this.observer) {
+            if (!this.observer && !isBot()) {
                 this.subscribeLazy();
                 this.isInView = isContinue;
                 if(!this.isInView)
                 return;
             }
+            this.isInView = isBot() || this.isInView;
             if (this.isInView) {
                 let components = this.getSlotComponents(this.slotName, this.slotCategory);
+                let _components=[];
+                if((this.nextIndex > this.getMaxPreComponentCount() && this.postScript) || (this.postScript && isBot()))
+                        (await this.loadPostScript())
                 if (components.length > this.nextIndex && !this.components[this.nextIndex]) {
-                    let componentItem = components[this.nextIndex]
-                    let componentName = this.getComponentName(componentItem);
-                    if(tezPages.components[componentName]){
-                        this.components.push(componentItem);
-                        this.nextIndex++;
-                        if (components[this.nextIndex] && !components[this.nextIndex].data && this.postScript)
-                            this.loadPostScript();
-                        if (isBot())
-                            this.goToNextComponent();
-                        else
-                            idleCallback(() => this.goToNextComponent(), { timeout: 0 })
+                    let increCount = isBot()? components.length : this.nextIndex == (this.getMaxPreComponentCount() + 1)?components.length:this.nextIndex+1;
+                    let startIndex = this.nextIndex;
+                    for(var i=startIndex;i<increCount;i++){
+                        let componentItem = components[this.nextIndex]
+                        let componentName = this.getComponentName(componentItem);
+                        if(tezPages.components[componentName]){
+                            _components.push(componentItem);
+                            this.nextIndex++;
+                            if(increCount !== components.length)
+                                idleCallback(() => this.goToNextComponent(), { timeout: 0 })
+                        }
                     }
+                    _components.forEach(component=>this.components.push(component))
                 }
             }
 
