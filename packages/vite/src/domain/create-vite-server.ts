@@ -1,8 +1,7 @@
-import { VITE_SERVER_CONFIG } from "../const/vite-server-config.const"
-import { createServer,mergeConfig } from 'vite'
-import { commonContainer } from "@tezjs/common";
+import { createServer } from 'vite'
+import { dev } from "./dev";
 
 export async function createViteServer(){
-  let config = mergeConfig(VITE_SERVER_CONFIG(),{root:commonContainer.buildOptions.rootDir});
+  let config = dev();
   return await createServer(config);
 }
