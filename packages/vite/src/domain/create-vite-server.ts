@@ -2,6 +2,6 @@ import { createServer } from 'vite'
 import { dev } from "./dev";
 
 export async function createViteServer(){
-  let config = dev();
+  let config = await dev({isSsr:true});
   return await createServer(config);
 }
