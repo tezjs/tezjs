@@ -14,6 +14,7 @@ export function tez(): Plugin {
 			if(depsContainer.deps){
 				const htmlGen = new HtmlGen();
 				await htmlGen.build();
+				if(commonContainer.tezConfig.generate?.serviceWorker)
 					generateSW();
 			}
 			
