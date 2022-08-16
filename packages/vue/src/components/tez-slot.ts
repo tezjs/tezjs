@@ -44,14 +44,12 @@ export default defineComponent({
         preserveComponentState: { type: Boolean }
     },
     async mounted() {
-        if(isBot() && this.postScript)
-            await this.postScript();
-        else
-            this.subscribeScroll();
         this.slots = activePageState.page.slots;
         this.masterPageSlots = activePageState.page.masterPageSlots;
         this.postScript = activePageState.page.postScript
-        if (this.slotCategory !== "master")
+        if (this.slotCategory !== "master"){
+            if(!isBot())
+                this.subscribeScroll()
             activePageState.hooks.hook("tez:activePageChanged", (pageState: PageState) => {
                 this.slots = pageState.slots;
                 this.masterPageSlots = pageState.masterPageSlots;
@@ -59,8 +57,8 @@ export default defineComponent({
                 this.components = new Array<{ name: string, data: { [key: string]: any }, id: string }>();
                 this.nextIndex = 0;
                 this.goToNextComponent(false)
-                this.subscribeScroll();
             })
+        }
         this.goToNextComponent(true)
     },
     methods: {
