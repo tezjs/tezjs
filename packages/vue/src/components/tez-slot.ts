@@ -86,8 +86,12 @@ export default defineComponent({
             if (this.$refs.divLazy) {
                 this.observer = new IntersectionObserver(async ([{ isIntersecting }]) => {
                     this.isInView = isIntersecting;
-                    if (isIntersecting && this.previousState !== isIntersecting)
+                    if (isIntersecting && this.previousState !== isIntersecting){
+                        if(this.nextIndex == this.getMaxPreComponentCount() && this.postScript)
+                            await this.loadPostScript();
                         this.goToNextComponent();
+                    }
+                        
                     this.previousState = isIntersecting
                 });
                 this.observer.observe(this.$refs.divLazy as Element);
