@@ -23,7 +23,14 @@ export class Router{
             }, true);  
         window.addEventListener("popstate",({ state })=>{
             this.historyState.value = state;
-            this.changeRouteState(state && state.current ?  state.current : getCurrentUrl(),true)
+            this.changeRouteState(state && state.current ?  state.current : getCurrentUrl(),true).then(t=>{
+                const hash:string = location.hash;
+                if(hash){
+                    let element = document.getElementById(hash.replace("#","")) ;
+                    if(element)
+                        element.scrollIntoView();
+                }
+            })
         })
     }
     
@@ -37,7 +44,7 @@ export class Router{
     }
 
     changeRouteState(to,isPopState=false){
-        this.resolve(to).then(t=>{
+        return this.resolve(to).then(t=>{
             this.refreshPageMetaTags(to)
             if(!isPopState){
                 const currentState = assign(
