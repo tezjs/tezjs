@@ -12,6 +12,8 @@ export class Router{
     currentUrl:string=this.url;
     routeOptions:{path:string;query?:{[key:string]:string}}
     constructor(){
+        const { pathname, search, hash } = location;
+        this.url= pathname+search+hash;
         if(!this.historyState.value)
             this.changeRoute(this.url, {
                 back: null,
