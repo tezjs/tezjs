@@ -8,11 +8,20 @@ export const FIRE_BASE_CONFIG:{[key:string]:any} = {
       "trailingSlash": false,
       "headers": [
         {
+          "source": "/**",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, must-revalidate"
+            }
+          ]
+        },
+        {
           "source": "**/*.@(js|eot|otf|ttf|ttc|woff|font|css)",
           "headers": [
             {
               "key": "cache-control",
-              "value": "max-age=31536000"
+              "value": "max-age=8600"
             }
           ]
         },
