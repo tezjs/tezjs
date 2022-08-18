@@ -21,7 +21,7 @@ export const FIRE_BASE_CONFIG:{[key:string]:any} = {
           "headers": [
             {
               "key": "cache-control",
-              "value": "max-age=8600"
+              "value": "max-age=86400"
             }
           ]
         },
