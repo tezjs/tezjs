@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/cli",
-  "version": "0.0.82",
+  "version": "0.0.83",
   "description": "Create Tez Application Project",
   "author": "ajayojha",
   "license": "MIT",
@@ -17,9 +17,9 @@
     "mri": "^1.2.0",
     "prompts": "^2.4.2",
     "unbuild": "^0.7.4",
-    "@tezjs/vite": "0.0.82",
-    "@tezjs/types": "0.0.82",
-    "@tezjs/common": "0.0.82",
+    "@tezjs/vite": "0.0.83",
+    "@tezjs/types": "0.0.83",
+    "@tezjs/common": "0.0.83",
     "@vitejs/plugin-vue": "^2.3.2",
     "vite": "^2.9.13"
   },
@@ -27,7 +27,6 @@
   "bin": {
     "tez": "./tez.mjs"
   },
-
   "scripts": {
     "stub": "unbuild"
   },
