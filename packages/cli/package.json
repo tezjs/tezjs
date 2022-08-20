@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/cli",
-  "version": "0.0.83",
+  "version": "0.0.89",
   "description": "Create Tez Application Project",
   "author": "ajayojha",
   "license": "MIT",
