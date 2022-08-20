@@ -8,12 +8,6 @@
     "dist",
     "tez.mjs"
   ],
-  "bin": {
-    "tez": "./tez.mjs"
-  },
-  "scripts": {
-    "stub": "unbuild"
-  },
   "dependencies": {
     "c12": "^0.2.7",
     "dotenv": "^16.0.0",
@@ -25,12 +19,26 @@
     "unbuild": "^0.7.4",
     "@tezjs/vite": "0.0.82",
     "@tezjs/types": "0.0.82",
-    "@tezjs/common": "0.0.82"
-  },
-  "devDependencies": {
+    "@tezjs/common": "0.0.82",
     "@vitejs/plugin-vue": "^2.3.2",
     "vite": "^2.9.13"
   },
+  "devDependencies": {},
+  "bin": {
+    "tez": "./tez.mjs"
+  },
+
+  "scripts": {
+    "stub": "unbuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tezjs/tez.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tezjs/tez.js/issues"
+  },
+  "homepage": "https://github.com/tezjs/tez.js#readme",
   "engines": {
     "node": "^14.15.0 || >=16.0.0",
     "npm": ">=6.14.0"
