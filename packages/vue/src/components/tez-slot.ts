@@ -114,7 +114,7 @@ export default defineComponent({
             if (this.isInView) {
                 let components = this.getSlotComponents(this.slotName, this.slotCategory);
                 let _components=[];
-                if((this.nextIndex > this.getMaxPreComponentCount() && this.postScript) || (this.postScript && isBot()))
+                if((this.nextIndex == this.getMaxPreComponentCount() && this.postScript) || (this.postScript && isBot()))
                         (await this.loadPostScript())
                 if (components.length > this.nextIndex && !this.components[this.nextIndex]) {
                     let increCount = isBot()? components.length : this.nextIndex == (this.getMaxPreComponentCount() + 1)?components.length:this.nextIndex+1;
