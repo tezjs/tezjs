@@ -84,15 +84,16 @@ export default defineComponent({
 
         subscribeLazy() {
             if (this.$refs.divLazy) {
+                let isContinue = false;
                 this.observer = new IntersectionObserver(async ([{ isIntersecting }]) => {
                     this.isInView = isIntersecting;
                     if (isIntersecting && this.previousState !== isIntersecting){
                         if(this.nextIndex == this.getMaxPreComponentCount() && this.postScript)
                             await this.loadPostScript();
-                        this.goToNextComponent();
+                        this.goToNextComponent(isContinue);
                     }
-                        
-                    this.previousState = isIntersecting
+                    this.previousState = isIntersecting;
+                    isContinue = true;
                 });
                 this.observer.observe(this.$refs.divLazy as Element);
             }
@@ -101,6 +102,8 @@ export default defineComponent({
             return componentState.tezAppOptions.maxPreComponentCount;
         },
         async goToNextComponent(isContinue:boolean) {
+            if(isContinue === false)
+                return;
             if (!this.observer && !isBot()) {
                 this.subscribeLazy();
                 this.isInView = isContinue;
