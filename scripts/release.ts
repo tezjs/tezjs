@@ -24,6 +24,10 @@ import { execa } from 'execa';
 const packages = ["cli","common","create-tez","payload","types","vite","vue","js","route","tez"];
 const rootDir = process.cwd();
 const packagesFolderName = 'packages';
+const semverParamConfig = {
+    premajorbeta :{ first:'premajor', second:'beta' },
+    beta :{ first:'prerelease', second:'beta' },
+}
 function getPackageInfo(packageName){
     const packageDirectory = packageName === "tez" ? rootDir : path.resolve(rootDir,packagesFolderName,packageName);
     const packagePath = path.resolve(packageDirectory,'package.json');
@@ -32,7 +36,14 @@ function getPackageInfo(packageName){
 }
 
 function getVersion(currentVersion,releaseType){
-    return semver.inc(currentVersion,releaseType);
+    let firstParam=releaseType;
+    let secondParam = '';
+    if(semverParamConfig[releaseType])
+    {
+        firstParam = semverParamConfig[releaseType].first;
+        secondParam = semverParamConfig[releaseType].second;
+    }
+    return semver.inc(currentVersion,firstParam,secondParam);
 }
 
 async function getReleaseType(){
@@ -45,6 +56,7 @@ async function getReleaseType(){
             { title: 'PreMinor', value: 'preminor' },
             { title: 'Minor', value: 'minor' },
             { title: 'PreMajor', value: 'premajor' },
+            { title: 'PreMajor Beta', value: 'premajorbeta' },
             { title: 'Major', value: 'major' },
             { title: 'Stable', value: 'patch' }
           ]
