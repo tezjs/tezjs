@@ -56,7 +56,7 @@ export default defineComponent({
                 this.postScript = pageState.postScript;
                 this.components = new Array<{ name: string, data: { [key: string]: any }, id: string }>();
                 this.nextIndex = 0;
-                this.goToNextComponent(false)
+                this.goToNextComponent(true)
             })
         }
         this.goToNextComponent(true)
@@ -110,7 +110,7 @@ export default defineComponent({
                 if(!this.isInView)
                 return;
             }
-            this.isInView = isBot() || this.isInView;
+            this.isInView = isContinue || isBot() || this.isInView;
             if (this.isInView) {
                 let components = this.getSlotComponents(this.slotName, this.slotCategory);
                 let _components=[];
