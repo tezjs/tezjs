@@ -33,7 +33,7 @@ export const ENCODING_UTF:string = 'utf-8';
 export const CLIENT_ENV_SUBSTRING:string  = "client_";
 
 export const SERVICE_WORKER_JS_PATH = ()=> <any>(process.env).TEZ_DEVELOPMENT == 1 ?  getPath([process.cwd(),"packages","vite", "templates","service-worker.ts"],false) : getPath([commonContainer.buildOptions.rootDir,"node_modules","@tezjs","vite", "templates","service-worker.ts"],false)
-export const TZ_JS_PATH = ()=> getPath([commonContainer.buildOptions.rootDir,"node_modules","@tezjs","vite","templates","tz-web-worker.js"],false)
+export const TZ_JS_PATH = ()=> <any>(process.env).TEZ_DEVELOPMENT == 1 ?  getPath([process.cwd(),"packages","vite","templates","tz-web-worker.js"],false) :  getPath([commonContainer.buildOptions.rootDir,"node_modules","@tezjs","vite","templates","tz-web-worker.js"],false)
 
 export const REGISTER_SERVICE_WORKER_JS_PATH = ()=> getPath([commonContainer.buildOptions.rootDir,"node_modules","@tezjs","vite","templates","registerSW._js"],false)
 
