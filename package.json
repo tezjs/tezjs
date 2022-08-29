@@ -14,7 +14,7 @@
   "scripts": {
     "lint": "eslint",
     "test": "jest",
-    "tez": "node ./packages/cli/tez.mjs",
+    "tez": "set TEZ_DEVELOPMENT=1 && node ./packages/cli/tez.mjs",
     "build:strapi": "yarn run tez build playgrounds/strapi",
     "dev:strapi": "yarn run tez dev playgrounds/strapi",
     "build:playground:tailwind": "yarn run tez build playground/tailwind",

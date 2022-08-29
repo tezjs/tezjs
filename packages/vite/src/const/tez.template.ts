@@ -1,4 +1,19 @@
+import { commonContainer } from "@tezjs/common"
 import { ImportState } from "../interface/import-state"
+
+function registerServiceWorker(){
+    let code:string = '';
+    if(commonContainer.buildOptions.commandName === "build" && commonContainer.tezConfig.pwa){
+        code  = `
+        if (('serviceWorker' in navigator)) {
+            window.addEventListener('load', () => {  
+                navigator.serviceWorker.register('/service-worker.js');
+            })
+        }
+        `;
+    }
+    return code;
+}
 
 export const tezTemplate = (importState:ImportState)=>{
     return `
@@ -7,5 +22,6 @@ export const tezTemplate = (importState:ImportState)=>{
     createTezApp({
         ${importState.props}
     });
+    ${registerServiceWorker()}
     `
 }

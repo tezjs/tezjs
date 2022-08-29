@@ -2,6 +2,7 @@ import { commonContainer, CommonPathResolver } from '@tezjs/common';
 import vue from '@vitejs/plugin-vue'
 import { UserConfig } from 'vite'
 import { tezGenBundle } from '../domain/plugins/tez-gen-bundle';
+import { tezPWA } from '../domain/plugins/tez-pwa';
 import { tez } from "../domain/tez";
 import { BLANK } from './core.const';
 export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
@@ -45,6 +46,6 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
         }
       }
       },
-      plugins: [vue(),tez(),tezGenBundle()]
+      plugins: [vue(),tez(),tezGenBundle(),tezPWA()]
   }
 }
