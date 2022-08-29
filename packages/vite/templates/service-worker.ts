@@ -37,9 +37,14 @@ const cacheStrategy:
                     strategy = this.networkFirstStrategy(request)
                     break;
                 default:
-                    strategy = this.fetchRequestAndCache(request);
+                    strategy = this.cacheFirstStrategy(request);
             }
             return strategy;
+        }
+
+        async cacheFirstStrategy(request) {
+            var cacheResponse = await this.getCache(request);
+            return cacheResponse || this.fetchRequestAndCache(request);
         }
 
         async fetchRequestAndCache(request) {
