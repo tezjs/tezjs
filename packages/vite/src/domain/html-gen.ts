@@ -9,6 +9,7 @@ import { build } from 'esbuild'
 import { HtmlPage } from "./html-page";
 import { JsCodeGen } from "./html/js-code-gen";
 import { routeComponentWriter } from "../const/route-component-writer";
+import { preCacheAssets } from "../const/pre-cache-asset.template";
 let exampleOnResolvePlugin = {
     name: 'example',
     setup(build) {
@@ -51,11 +52,18 @@ export class HtmlGen{
                     style:commonContainer.tezConfig.build.bundleCss ? this.bundleCss(path):[],
                 }
             }
+            this.addPreCacheAsset(page,jsGenCode)
             await this.minifyJs([`${path}/${this.commonPathResolver.preScriptName}`,`${path}/${this.commonPathResolver.postScriptName}`])
             const htmlPage = new HtmlPage(route);
             htmlPage.createPage(page)
         }
         await this.writeTzWebWorker();
+    }
+
+    addPreCacheAsset(page:iHtmlPage,jsCodeGen:JsCodeGen){
+        if(commonContainer.tezConfig.pwa){
+           page.body.inlineScript.push({name:'tezjs-precache-assets',code:preCacheAssets(jsCodeGen.preCacheAssets)})
+        }
     }
 
     async writeTzWebWorker(){

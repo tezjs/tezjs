@@ -1,6 +1,7 @@
 import { commonContainer, getPath, PayloadReader, writeFileSync } from "@tezjs/common";
 import { EXPORT_DEFAULT, POST_SCRIPT_COMMENT, WINDOW_TEZ_DATA } from "../../const/core.const";
 import { depsCodeTemplate } from "../../const/deps-code";
+import { depsContainer } from "../../const/deps-container.const";
 import { routeComponentWriter } from "../../const/route-component-writer";
 import { getComponentName } from "../../functions/get-component-name";
 import getUrl from "../../functions/get-url";
@@ -11,7 +12,36 @@ export class JsCodeGen extends PayloadReader{
     constructor(public route:{name:string,path:string,fPath:string,isPage:boolean}){
         super(route);
     }
+    private getAssetUrl(path:string,name:string){
+        return `${path}/${name}`
+    }
+    get preCacheAssets(){
+        let url = getUrl(this.route.path)
+        let preAssets = routeComponentWriter.getPreDeps(this.route.path);
+        preAssets.push(this.getAssetUrl(url,this.commonPath.preScriptName))
+        let postAssets = routeComponentWriter.getPostDeps(this.route.path);
+        if(postAssets && postAssets.length > 0)
+            postAssets.push(this.getAssetUrl(url,this.commonPath.postScriptName))
+        let tezAssets = routeComponentWriter.getTezjsDeps(this.commonPath)
+        let assets = new Array<string>();
+        this.addAssets(postAssets,assets);
+        this.addAssets(preAssets,assets);
+        this.addAssets(tezAssets,assets);
+        this.addAssets([this.route.path,'tz.js'],assets);
+        return assets;
+    }
 
+    private addAssets(items:Array<string>,assets:Array<string>){
+        const depsConfig = depsContainer.getDeps();
+        
+        items.forEach(path=>{
+            if(depsConfig.deps[path] && depsConfig.deps[path].css)
+                this.addAssets(depsConfig.deps[path].css,assets)
+            path =path.charAt(0) === "/" ? path :`/${path}`
+        if(assets.filter(t=>t===path).length === 0)
+                assets.push(path)
+            })
+    }
     isPostCode(){
         return (Object.keys(this.postSlots.masterPageSlots).length > 0 || Object.keys(this.postSlots.slots).length > 0);
     }

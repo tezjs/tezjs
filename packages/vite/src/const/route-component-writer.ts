@@ -1,4 +1,4 @@
-import { commonContainer } from "@tezjs/common";
+import { commonContainer, CommonPathResolver } from "@tezjs/common";
 import { getFriendlyComponentName } from "@tezjs/payload";
 import { isPageComponent } from "../../../payload/src/utils/is-page-component";
 import { DepsContainerConfig } from "../interface/deps-container-config";
@@ -13,6 +13,7 @@ export const routeComponentWriter:
         getRouteComponent(path:string):RouteComponent;
         getPreDeps(path:string):Array<string>;
         getPostDeps(path:string):Array<string>;
+        getTezjsDeps(commonPathResolver:CommonPathResolver):Array<string>;
     } = new (class {
         routeComponents:{[key:string]:RouteComponent};
         depsConfig:DepsContainerConfig;
@@ -82,6 +83,29 @@ export const routeComponentWriter:
             if(this.routeComponents[path])
                return this.routeComponents[path].deps.post;
             return [];
+        }
+
+        getTezjsDeps(commonPathResolver:CommonPathResolver){
+            return this.getSubTree(commonPathResolver.tezJsPath)
+        }
+
+        getSubTree(path:string){
+            let preloads = new Array<string>()
+            if(this.depsConfig.deps[path]){
+                this.depsConfig.deps[path].js.forEach(item=> {
+                    let items = this.getSubTree(item);
+                    items.forEach(t=>this.pushTreeItem(preloads,`${t}`))
+                    this.pushTreeItem(preloads,`${item}`)
+                })
+                this.pushTreeItem(preloads,path)
+            }
+            return preloads;
+        }
+
+        pushTreeItem(preloads:Array<string>,path:string){
+            if(preloads.filter(t=>t === path).length === 0){
+                preloads.push(path)
+            }
         }
     
     })();
