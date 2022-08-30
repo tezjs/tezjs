@@ -60,8 +60,12 @@ const cacheStrategy:
 
         async fetchRequestAndCache(request) {
             const networkResponse = await fetch(request);
-            return await this.addToCache(request, networkResponse);
+            return this.isIgnoreCache(request) ? networkResponse : await this.addToCache(request, networkResponse);
         };
+
+        isIgnoreCache(request){
+            return request.url.indexOf(location.host) === -1;
+        }
 
         networkFirstStrategy(request) {
             return fetch(request).then(async response => {
