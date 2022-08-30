@@ -16,3 +16,4 @@ export * from './models/html/html'
 export * from './models/build-options'
 export * from './models/strapi/payload-generator-config';
 export * from "./models/tez-module-config";
+export * from "./models/pwa/pwa-config";
