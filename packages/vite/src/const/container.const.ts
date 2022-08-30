@@ -1,7 +1,7 @@
 import { commonContainer, CommonPathResolver, writeFileSync } from "@tezjs/common";
-import getUrl from "../functions/get-url";
 import { ImportState } from "../interface/import-state";
 import { RouteBuild } from "../interface/route-build";
+import { getAddLib } from "./add-lib.template";
 import { tezTemplate } from "./tez.template";
 
 export const appContainer:
@@ -28,11 +28,8 @@ export const appContainer:
                 if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.imports)
                     commonContainer.tezConfig.client.imports.forEach(item=>refrenceState.imports += `import '${item}';`)
                 
-                
-                if(existsFilesorFolders.addLib){
-                    refrenceState.imports +=`\nimport addLib from '/@/add-lib'; addLib();`
+                    refrenceState.imports += getAddLib(existsFilesorFolders.addLib)
                     delete existsFilesorFolders.addLib;
-                }
             }else
                 refrenceState = this.importState;
         refrenceState.props=this.getProps(existsFilesorFolders)

@@ -8,6 +8,7 @@ const IMMUTABLE_CACHE_NAME="immutable";
 const INSTALL_EVENT: string = "install";
 const ACTIVATE_EVENT: string = "activate";
 const FETCH_EVENT: string = "fetch";
+const MESSAGE_EVENT: string = "message";
 const IS_IMAGE_IMMUTABLE_CACHE:string = "#IS_IMAGE_IMMUTABLE_CACHE"
 const IMMUTABLE:{[key:string]:any}= {
     images:/\.(gif|jpe?g|tiff?|png|webp|bmp|svg|ico)$/i
@@ -102,6 +103,18 @@ self.addEventListener(ACTIVATE_EVENT, function (event) {
 
 self.addEventListener(FETCH_EVENT, function (event) {
     return event.respondWith(cacheStrategy.makeRequest(event.request));
+});
+
+self.addEventListener(MESSAGE_EVENT, function (event) {
+    let cacheItem = event.data;
+    if(cacheItem && cacheItem.cacheName){
+      event.waitUntil(caches
+      .open(cacheItem.cacheName)
+      .then(async (cache) =>{
+        return cache.addAll(cacheItem.assets);
+      }
+        ))
+    }
 });
 
 
