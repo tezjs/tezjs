@@ -4,9 +4,14 @@ export type { };
 declare const self: ServiceWorkerGlobalScope;
 
 const CACHE_VERSION: string = "#CACHE_VERSION";
+const IMMUTABLE_CACHE_NAME="immutable";
 const INSTALL_EVENT: string = "install";
 const ACTIVATE_EVENT: string = "activate";
 const FETCH_EVENT: string = "fetch";
+const IS_IMAGE_IMMUTABLE_CACHE:string = "#IS_IMAGE_IMMUTABLE_CACHE"
+const IMMUTABLE:{[key:string]:any}= {
+    images:/\.(gif|jpe?g|tiff?|png|webp|bmp|svg|ico)$/i
+}
 
 const cacheStrategy:
     {
@@ -19,9 +24,15 @@ const cacheStrategy:
         async addToCache(request, networkResponse): Promise<any> {
             var cacheKey = `${request.url}`;
             const clonedResponse = networkResponse.clone();
-            const cache = await caches.open(CACHE_VERSION);
+            const cache = await caches.open(this.getCacheName(request));
             cache.put(cacheKey, clonedResponse);
             return networkResponse;
+        }
+
+        getCacheName(request){
+            if(IS_IMAGE_IMMUTABLE_CACHE === "true" && IMMUTABLE.images.test(request.url))
+                return IMMUTABLE_CACHE_NAME;
+            return CACHE_VERSION;
         }
 
         async getCache(request): Promise<any> {
@@ -64,7 +75,8 @@ const cacheStrategy:
             return caches.keys().then(function (cacheNames) {
                 return Promise.all(
                     cacheNames.filter(function (cacheName) {
-                        return [CACHE_VERSION].filter(name => name === cacheName).length === 0
+                        let names =IS_IMAGE_IMMUTABLE_CACHE === "true" ? [CACHE_VERSION,IMMUTABLE_CACHE_NAME]:[CACHE_VERSION] ;
+                        return names.filter(name => name === cacheName).length === 0;
                     }).map(function (cacheName) {
                         return caches.delete(cacheName);
                     })

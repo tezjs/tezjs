@@ -10,6 +10,7 @@ import { DeploymentConfig } from "./deployment-config";
 import { BuildConfig } from "./build-config";
 import { TezModuleConfig } from "./tez-module-config";
 import { GenerateConfig } from "./generate-config";
+import { PwaConfig } from "./pwa/pwa-config";
 export interface TezConfig {
     generate?:GenerateConfig;
     sourceCodePath?:string
@@ -18,7 +19,7 @@ export interface TezConfig {
     payloadPath?:string;
     strapi?:boolean | StrapiModuleConfig;
     express?:Express;
-    pwa?:{[key:string]:any};
+    pwa?:PwaConfig | boolean;
     image?:ImageTransform;
     pages?:Page[];
     robots?:{[key:string]:string}
