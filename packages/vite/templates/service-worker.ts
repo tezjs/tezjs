@@ -77,7 +77,8 @@ const cacheStrategy:
 
         isIgnoreCache(request){
             const url:string = request.url;
-            return !this.runOriginCachRules(url) || url.indexOf(location.host) === -1;
+            const isPassed = this.runOriginCachRules(url);
+            return isPassed ? false : url.indexOf(location.host) === -1;
         }
 
         runOriginCachRules(url:string){
