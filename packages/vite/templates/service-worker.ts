@@ -1,5 +1,11 @@
 /// <reference lib="WebWorker" />
 
+import { PwaConfig } from "@tezjs/types";
+declare const pwaConfig:{default:()=>PwaConfig}
+
+
+
+
 export type { };
 declare const self: ServiceWorkerGlobalScope;
 
@@ -9,7 +15,6 @@ const INSTALL_EVENT: string = "install";
 const ACTIVATE_EVENT: string = "activate";
 const FETCH_EVENT: string = "fetch";
 const MESSAGE_EVENT: string = "message";
-const IS_IMAGE_IMMUTABLE_CACHE:string = "#IS_IMAGE_IMMUTABLE_CACHE"
 const IMMUTABLE:{[key:string]:any}= {
     images:/\.(gif|jpe?g|tiff?|png|webp|bmp|svg|ico)$/i
 }
@@ -20,8 +25,12 @@ const cacheStrategy:
         getCache(request): Promise<any>;
         makeRequest(request): Promise<any>;
         removeOldCache(): Promise<any>;
+        pwaConfig:PwaConfig;
     } = new (class {
-
+        pwaConfig:PwaConfig;
+        constructor(){
+            this.pwaConfig  = pwaConfig.default();
+        }
         async addToCache(request, networkResponse): Promise<any> {
             var cacheKey = `${request.url}`;
             const clonedResponse = networkResponse.clone();
@@ -29,9 +38,11 @@ const cacheStrategy:
             cache.put(cacheKey, clonedResponse);
             return networkResponse;
         }
-
+        isImageImmutableCacheEnable(){
+            return this.pwaConfig?.cache?.immutable?.images;
+        }
         getCacheName(request){
-            if(IS_IMAGE_IMMUTABLE_CACHE === "true" && IMMUTABLE.images.test(request.url))
+            if(this.isImageImmutableCacheEnable() && IMMUTABLE.images.test(request.url))
                 return IMMUTABLE_CACHE_NAME;
             return CACHE_VERSION;
         }
@@ -65,7 +76,21 @@ const cacheStrategy:
         };
 
         isIgnoreCache(request){
-            return request.url.indexOf(location.host) === -1;
+            const url:string = request.url;
+            return !this.runOriginCachRules(url) || url.indexOf(location.host) === -1;
+        }
+
+        runOriginCachRules(url:string){
+            let isPassed = false;
+            if(this.pwaConfig?.cache?.originCacheRules){
+                const cacheRules = this.pwaConfig.cache.originCacheRules;
+                for(var cacheRule of cacheRules){
+                    isPassed = cacheRule.test(url);
+                    if(isPassed)
+                        break;
+                }
+            }
+            return isPassed;
         }
 
         networkFirstStrategy(request) {
@@ -80,7 +105,7 @@ const cacheStrategy:
             return caches.keys().then(function (cacheNames) {
                 return Promise.all(
                     cacheNames.filter(function (cacheName) {
-                        let names =IS_IMAGE_IMMUTABLE_CACHE === "true" ? [CACHE_VERSION,IMMUTABLE_CACHE_NAME]:[CACHE_VERSION] ;
+                        let names =this.isImageImmutableCacheEnable() ? [CACHE_VERSION,IMMUTABLE_CACHE_NAME]:[CACHE_VERSION] ;
                         return names.filter(name => name === cacheName).length === 0;
                     }).map(function (cacheName) {
                         return caches.delete(cacheName);

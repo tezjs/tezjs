@@ -49,3 +49,5 @@ export const WINDOW_TEZ_DATA = "window.TEZ_DATA = ";
 export const SERVICE_WORKER_CACHE_VERSION = "#CACHE_VERSION";
 
 export const IS_IMAGE_IMMUTABLE_CACHE = "#IS_IMAGE_IMMUTABLE_CACHE";
+
+export const IMPORT_SCRIPT_SERVICE_WORKER = "declare const pwaConfig:{default:()=>PwaConfig}"
