@@ -52,7 +52,7 @@ export class HtmlGen{
                     style:commonContainer.tezConfig.build.bundleCss ? this.bundleCss(path):[],
                 }
             }
-            this.addPreCacheAsset(page,jsGenCode)
+            this.addServiceWrokerDeps(page,jsGenCode)
             await this.minifyJs([`${path}/${this.commonPathResolver.preScriptName}`,`${path}/${this.commonPathResolver.postScriptName}`])
             const htmlPage = new HtmlPage(route);
             htmlPage.createPage(page)
@@ -60,9 +60,10 @@ export class HtmlGen{
         await this.writeTzWebWorker();
     }
 
-    addPreCacheAsset(page:iHtmlPage,jsCodeGen:JsCodeGen){
+    addServiceWrokerDeps(page:iHtmlPage,jsCodeGen:JsCodeGen){
         if(commonContainer.tezConfig.pwa){
            page.body.inlineScript.push({name:'tezjs-precache-assets',code:preCacheAssets(jsCodeGen.preCacheAssets)})
+           page.head.preloads.unshift({path:`/service-worker.js`})
         }
     }
 
