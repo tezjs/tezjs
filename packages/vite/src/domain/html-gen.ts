@@ -46,7 +46,8 @@ export class HtmlGen{
                     metaTag:{},
                     inlineStyle: commonContainer.tezConfig.build.inLinCss ? this.getInlineCss(path) : new Array<{name:string,code:string}>(),
                     preloads:this.getPreloads(path),
-                    preFetch:this.getPreFetch(path)
+                    preFetch:this.getPreFetch(path),
+                    links:new Array<{[key:string]:string}>()
                 },
                 body:{
                     inlineScript:commonContainer.tezConfig.build.inLineJs ? await this.getInlineJs(path) : new Array<{name:string,code:string}>(),
@@ -76,9 +77,11 @@ export class HtmlGen{
 
            if(pwaConfig.htmlElementConfig?.appleTouchIcon){
                const touchIcon = pwaConfig.htmlElementConfig?.appleTouchIcon;
-            if(!page.head.links)
-                page.head.links = new Array<{[key:string]:string}>();
             page.head.links.push({rel:"apple-touch-icon",sizes:touchIcon.sizes,href:touchIcon.href})
+           }
+
+           if(pwaConfig.config){
+                page.head.links.push({rel:"manifest",href:'/manifest.json'})
            }
         }
     }

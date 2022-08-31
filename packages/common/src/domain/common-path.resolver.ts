@@ -106,6 +106,10 @@ export class CommonPathResolver {
         return getPath([this.distPath,"tz.js"],false);
     }
 
+    get manifestJsonPath(){
+        return getPath([this.distPath,"manifest.json"],false);
+    }
+
     get serviceWorkerJsPath(){
         return getPath([this.distPath,"service-worker.js"],false);
     }
