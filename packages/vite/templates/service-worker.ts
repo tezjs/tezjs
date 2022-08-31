@@ -102,12 +102,12 @@ const cacheStrategy:
         }
 
         removeOldCache() {
-            return caches.keys().then(function (cacheNames) {
+            return caches.keys().then((cacheNames)=> {
                 return Promise.all(
-                    cacheNames.filter(function (cacheName) {
+                    cacheNames.filter((cacheName)=> {
                         let names =this.isImageImmutableCacheEnable() ? [CACHE_VERSION,IMMUTABLE_CACHE_NAME]:[CACHE_VERSION] ;
                         return names.filter(name => name === cacheName).length === 0;
-                    }).map(function (cacheName) {
+                    }).map((cacheName)=> {
                         return caches.delete(cacheName);
                     })
                 );
