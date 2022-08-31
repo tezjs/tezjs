@@ -1,5 +1,5 @@
 export interface UserCredential{
-    email: string;
+    identifier: string;
     password: string;
 }
 
