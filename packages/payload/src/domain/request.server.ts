@@ -26,8 +26,8 @@ export class RequestService {
 
     async login() {
         if (this.userCredential) {
-            const { data } = await axios.post(`${this.apiUri}/admin/login`, this.userCredential);
-            this.token = data.data.token;
+            const { data } = await axios.post(`${this.apiUri}/api/auth/local`, this.userCredential);
+            this.token = data.jwt;
         }
     }
 
