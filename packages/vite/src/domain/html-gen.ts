@@ -10,6 +10,7 @@ import { HtmlPage } from "./html-page";
 import { JsCodeGen } from "./html/js-code-gen";
 import { routeComponentWriter } from "../const/route-component-writer";
 import { preCacheAssets } from "../const/pre-cache-asset.template";
+import { PwaConfig } from "@tezjs/types"
 let exampleOnResolvePlugin = {
     name: 'example',
     setup(build) {
@@ -42,9 +43,11 @@ export class HtmlGen{
             
             let page:iHtmlPage = {
                 head:{
+                    metaTag:{},
                     inlineStyle: commonContainer.tezConfig.build.inLinCss ? this.getInlineCss(path) : new Array<{name:string,code:string}>(),
                     preloads:this.getPreloads(path),
-                    preFetch:this.getPreFetch(path)
+                    preFetch:this.getPreFetch(path),
+                    links:new Array<{[key:string]:string}>()
                 },
                 body:{
                     inlineScript:commonContainer.tezConfig.build.inLineJs ? await this.getInlineJs(path) : new Array<{name:string,code:string}>(),
@@ -62,8 +65,24 @@ export class HtmlGen{
 
     addServiceWrokerDeps(page:iHtmlPage,jsCodeGen:JsCodeGen){
         if(commonContainer.tezConfig.pwa){
+            let pwaConfig = commonContainer.tezConfig.pwa as PwaConfig
            page.body.inlineScript.push({name:'tezjs-precache-assets',code:preCacheAssets(jsCodeGen.preCacheAssets)})
            page.head.preloads.unshift({path:`/service-worker.js`})
+           
+           if(pwaConfig.htmlElementConfig?.themeColor){
+            if(!page.head.metaTag.name)
+                page.head.metaTag.name = {};
+            page.head.metaTag.name["theme-color"] = pwaConfig.htmlElementConfig?.themeColor
+           }
+
+           if(pwaConfig.htmlElementConfig?.appleTouchIcon){
+               const touchIcon = pwaConfig.htmlElementConfig?.appleTouchIcon;
+            page.head.links.push({rel:"apple-touch-icon",sizes:touchIcon.sizes,href:touchIcon.href})
+           }
+
+           if(pwaConfig.config){
+                page.head.links.push({rel:"manifest",href:'/manifest.json'})
+           }
         }
     }
 
