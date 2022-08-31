@@ -20,6 +20,7 @@ export interface TezConfig {
     strapi?:boolean | StrapiModuleConfig;
     express?:Express;
     pwa?:PwaConfig | boolean;
+    pwaConfigPath?:string
     image?:ImageTransform;
     pages?:Page[];
     robots?:{[key:string]:string}

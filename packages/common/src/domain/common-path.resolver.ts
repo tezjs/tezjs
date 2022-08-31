@@ -32,6 +32,11 @@ export class CommonPathResolver {
         return getPath([this.depsPath, "dynamic-routes.js"],false)
     }
 
+    get serviceWorkerGenPath() {
+        return getPath([this.depsPath, "service-worker-gen.ts"],false)
+    }
+
+
     get depsPath() {
         return getPath([this.cachePath, "deps"],true)
     }
