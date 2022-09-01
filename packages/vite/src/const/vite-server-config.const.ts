@@ -33,6 +33,7 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
     server: {
       middlewareMode: 'ssr',
       watch: {
+        ignored: ['**/.tez/**'],
         usePolling: true,
         interval: 100
       }
