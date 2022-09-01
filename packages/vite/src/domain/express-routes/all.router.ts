@@ -22,20 +22,22 @@ export class AllRouter{
 
     get = async (request:express.Request,response:express.Response)=>{
         try {
-          let htmlCache = undefined;
-          await refreshData(request.url)
-          const route=this.routes.filter(route=>route.path === request.url)[0] || {"name":"","path":"/","fPath":`${path.sep}index`}
-            await appContainer.addOrUpdateTezTS(route);
-            ++appContainer.versionId;
-            var htmlPage = new HtmlPage(route)
-            htmlCache = htmlPage.createPage();
-            response.status(200).set({ 'Content-Type': 'text/html' }).end(htmlCache)
+          if(request.originalUrl && request.originalUrl.indexOf("tez/deps") === -1){
+            let htmlCache = undefined;
+            await refreshData(request.url)
+            const route=this.routes.filter(route=>route.path === request.url)[0] || {"name":"","path":"/","fPath":`${path.sep}index`}
+              await appContainer.addOrUpdateTezTS(route);
+              ++appContainer.versionId;
+              var htmlPage = new HtmlPage(route)
+              htmlCache = htmlPage.createPage();
+              response.status(200).set({ 'Content-Type': 'text/html' }).end(htmlCache)
+          }else
+            response.status(404).end();    
         } catch (e) {
           this.vite && this.vite.ssrFixStacktrace(e)
           console.log(e.stack)
           response.status(500).end(e.stack)
         }
-      response.status(200).end();
     }
 }
 export default AllRouter;
