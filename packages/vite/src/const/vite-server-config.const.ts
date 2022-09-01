@@ -21,13 +21,7 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
         { find: '/tez', replacement: pathResolver.cachePath }
       ]
     },
-    ssr: {
-      external: ["@tezjs/vue"]
-    },
     optimizeDeps: {
-      entries: [
-        pathResolver.tezTsPath
-      ],
       include: ['vue']
     },
     server: {
