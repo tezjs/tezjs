@@ -1,7 +1,8 @@
 
 export const imageLoader:
 {
-    resolve(url:string):Promise<string>
+    resolve(url:string):Promise<string>;
+    getImage(url:string):string;
 } = new (class {
     cachedImage:{[key:string]:any} = {};
     resolveRequest:{[key:string]:any} = {};
@@ -17,6 +18,10 @@ export const imageLoader:
                 }
             }
         }
+    }
+
+    getImage(url:string){
+        return this.cachedImage[url]
     }
 
     resolve(url:string){

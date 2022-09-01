@@ -6,6 +6,11 @@ import { imageLoader } from "../const/image-loader";
 export const TEZ_SRC_DIRECTIVE: Directive<any, any> =  {
     beforeMount: function (el:any, binding:DirectiveBinding<any>, vnode:VNode<any, any, { [key: string]: any; }>, prevVnode:any) {
       if (!isBot()) {
+        const cachedImage = imageLoader.getImage(binding.value);
+        if(cachedImage){
+          el.src  = cachedImage;
+          return;
+        }
         if(componentState.tezAppOptions.loaderImagePath)
           el.src = componentState.tezAppOptions.loaderImagePath;
       let observer = new IntersectionObserver(function (entries) {
