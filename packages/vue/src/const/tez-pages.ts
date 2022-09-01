@@ -22,7 +22,7 @@ export const tezPages:
     setComponents(components:{[key:string]:any}){
         Object.keys(components).forEach(key=>{
             if(!this.components[key])
-                this.components[key] = Object.freeze(components[key]);
+                this.components[key] = components[key];
         })
     }
 
@@ -30,7 +30,7 @@ export const tezPages:
         if(masterPage)
             Object.keys(masterPage).forEach(key=>{
                 if(!this.masterPages[key])
-                    this.masterPages[key] = Object.freeze(masterPage[key]);
+                    this.masterPages[key] = masterPage[key];
             })
     }
 
