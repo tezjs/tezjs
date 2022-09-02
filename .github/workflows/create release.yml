@@ -16,6 +16,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@main
+        
+        
+      - name: Creating temp.md
+        run: |
+            cd scripts/
+            npm install axios --save
+            node changelog.js ${{ secrets.gitKey }}
 
       - name: Create Release
         id: create_release
@@ -25,7 +32,7 @@ jobs:
         with:
           tag_name: ${{ env.tag }}
           release_name: ${{ env.tag }}
-          body: |
-            Please refer to [CHANGELOG.md](https://github.com/tezjs/tez.js/blob/main/CHANGELOG.md) for details.
+          body_path: |
+            temp.md
           draft: false
           prerelease: false
