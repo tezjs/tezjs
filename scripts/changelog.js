@@ -1,9 +1,9 @@
 const fs = require("fs");
 const axios = require("axios");
-var changelog = `## Please refer to [CHANGELOG.md](https://github.com/tezjs/tez.js/blob/main/CHANGELOG.md) for details.`;
+var changelog = `Please refer to [CHANGELOG.md](https://github.com/tezjs/tez.js/blob/main/CHANGELOG.md) for details.`;
 var exceptList = ["ajayojha"];
 
-var Msg = `### Special thanks to Contributors: \n`;
+var Msg = `\n\n**Special thanks to Contributors:** \n\n\n`;
 
 const repoOwner = "tezjs";
 const repo = "tezjs";
