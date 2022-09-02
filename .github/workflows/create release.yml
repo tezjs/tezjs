@@ -22,7 +22,7 @@ jobs:
         run: |
             cd scripts/
             npm install axios --save
-            node changelog.js ${{ secrets.gitKey }}
+            node changelog.js ${{ secrets.GIT_KEY }}
 
       - name: Create Release
         id: create_release
