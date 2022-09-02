@@ -14,10 +14,12 @@ export const tezPages:
     getPayload(to?:string):any;
     refreshRoute(url:string);
     isExits(url:string):boolean;
+    setUrlReference(url:string,referenceStateUrl:string):void;
 } = new (class {
     components:{[key:string]:DefineComponent} = {};
     masterPages:{[key:string]:DefineComponent} = {};
     pages:{[key:string]:PayloadConfig} = {};
+    urlReference:{[key:string]:string} = {};
     isInitializationMode:boolean = true;
     setComponents(components:{[key:string]:any}){
         Object.keys(components).forEach(key=>{
@@ -32,6 +34,14 @@ export const tezPages:
                 if(!this.masterPages[key])
                     this.masterPages[key] = masterPage[key];
             })
+    }
+
+    setUrlReference(url:string,referenceStateUrl:string){
+        this.urlReference[url] = referenceStateUrl;
+    }
+
+    getUrlReference(url:string){
+        return this.urlReference[url];
     }
 
     setPage(page:TezPage){
@@ -62,7 +72,8 @@ export const tezPages:
             setMetaInfo(page.payload.tags)
     }
     refreshRoute(url:string){
-        let currentPage = this.pages[url];
+        let urlReference = this.getUrlReference(url) || url;
+        let currentPage = this.pages[urlReference];
                 activePageState.setActivePage({
                     layoutName:currentPage.layoutName,
                     slots:currentPage.slots,

@@ -63,6 +63,7 @@ function failedRoute(url,resolve){
                 if(route.resolvePath){
                     resolvePreloadCode(componentState.tezAppOptions,route.resolvePath).then(t=>{
                         componentState.changeRouteValue({params:route.params})
+                        tezPages.setUrlReference(url,route.resolvePath)
                         resolve(true)
                     })
                 }
