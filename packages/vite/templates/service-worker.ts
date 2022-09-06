@@ -32,10 +32,12 @@ const cacheStrategy:
             this.pwaConfig  = pwaConfig.default();
         }
         async addToCache(request, networkResponse): Promise<any> {
-            var cacheKey = `${request.url}`;
-            const clonedResponse = networkResponse.clone();
-            const cache = await caches.open(this.getCacheName(request));
-            cache.put(cacheKey, clonedResponse);
+            if(networkResponse.status == 200){
+                var cacheKey = `${request.url}`;
+                const clonedResponse = networkResponse.clone();
+                const cache = await caches.open(this.getCacheName(request));
+                cache.put(cacheKey, clonedResponse);
+            }
             return networkResponse;
         }
         isImageImmutableCacheEnable(){
