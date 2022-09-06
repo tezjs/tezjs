@@ -29,7 +29,6 @@ export const appContainer:
                     commonContainer.tezConfig.client.imports.forEach(item=>refrenceState.imports += `import '${item}';`)
                 
                     refrenceState.imports += getAddLib(existsFilesorFolders.addLib)
-                    delete existsFilesorFolders.addLib;
             }else
                 refrenceState = this.importState;
         refrenceState.props=this.getProps(existsFilesorFolders)
@@ -56,6 +55,8 @@ export const appContainer:
             props+=`isDevMode:${commonContainer.buildOptions.commandName === "dev"},`
             if(existsFilesorFolders.useVue)
                 props += `useVue:useVue,`;
+            if(existsFilesorFolders.addLib)
+                props += `libConfig:LIB_CONFIG,`;
             props+=`buildVersion:${commonContainer.buildOptions.buildVersion},`
             props+=`maxPreComponentCount:${this.getPreComponentCount()},`
             return props;
