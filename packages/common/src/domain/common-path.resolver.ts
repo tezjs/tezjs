@@ -24,6 +24,10 @@ export class CommonPathResolver {
         return getPath([commonContainer.buildOptions.rootDir, 'public'], true);
     }
 
+    get fontsPath(){
+        return getPath([this.publicFolder,"fonts"],true)
+    }
+
     get cachePath() {
         return getPath([commonContainer.buildOptions.rootDir, CACHE_PATH],true)
     }
@@ -141,6 +145,10 @@ export class CommonPathResolver {
         if(commonContainer.buildOptions.commandName === "build")
             return `preload.${commonContainer.buildOptions.buildVersion}.js`
         return 'preload.js'
+    }
+
+    getFontFilePath(fileName:string){
+        return getPath([this.fontsPath,fileName],false)
     }
 
     getExistsFilesOrFolders(){

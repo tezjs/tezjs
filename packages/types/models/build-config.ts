@@ -3,4 +3,5 @@ export interface BuildConfig{
     inLinCss?:boolean;
     bundleCss?:boolean;
     minifyHtml?:boolean;
+    inlineFontCss?:Array<string>;
 }
