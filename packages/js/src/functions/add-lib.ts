@@ -1,8 +1,8 @@
 import { jsContainer } from "../const/container.const";
-import { ThirdPartyLibConfig } from "../models/third-party-lib-config";
+import { LibConfig } from "@tezjs/types";
 
-export function addLib(config:ThirdPartyLibConfig){
-return (additionalConfig?:ThirdPartyLibConfig)=>{
+export function addLib(config:LibConfig){
+return (additionalConfig?:LibConfig)=>{
     if(additionalConfig && additionalConfig.afterUserInteraction){
         if(config && config.afterUserInteraction)
             additionalConfig.afterUserInteraction.forEach(item=>config.afterUserInteraction.push(item))
@@ -10,6 +10,6 @@ return (additionalConfig?:ThirdPartyLibConfig)=>{
 
     if(config.afterUserInteraction)
         jsContainer.addAfterInteration(config.afterUserInteraction)
-        
+     return config;   
 }
 }

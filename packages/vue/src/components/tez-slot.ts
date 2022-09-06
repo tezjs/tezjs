@@ -8,6 +8,7 @@ import { idleCallback,isMobile } from '@tezjs/js';
 import { PageState } from '../models/page-state';
 import { registerTezPage } from '../funcs/register-tez-page';
 import { componentState } from '../const/component-state';
+import { runAddLib } from '../funcs/run-idle';
 
 interface DataPoint {
     scrollFunction:Function;
@@ -131,8 +132,8 @@ export default defineComponent({
                     }
                     _components.forEach(component=>this.components.push(component))
                 }
-            }
-
+            }else if(this.slotCategory === "page")
+                runAddLib();
         },
         loadPostScript() {
             if(this.postScript)

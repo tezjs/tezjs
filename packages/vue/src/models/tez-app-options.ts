@@ -1,3 +1,5 @@
+import { LibConfig } from "@tezjs/types";
+
 export interface TezAppOptions {
     
     components?:Record<string, () => Promise<{
@@ -24,5 +26,7 @@ export interface TezAppOptions {
     
     buildVersion?:number;
 
-    maxPreComponentCount?:number
+    maxPreComponentCount?:number;
+
+    libConfig?:LibConfig;
 }
