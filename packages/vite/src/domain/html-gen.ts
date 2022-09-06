@@ -1,6 +1,7 @@
 import { commonContainer, CommonPathResolver, getPath, readFileSync, writeFileSync } from "@tezjs/common";
+import axios from 'axios';
 import { HtmlPage as iHtmlPage } from "@tezjs/types";
-import { TEZCSS_PATH, TEZJS_PATH, TZ_JS_PATH } from "../const/core.const";
+import { EXTRACT_URI_REGEX, TEZCSS_PATH, TEZJS_PATH, TZ_JS_PATH } from "../const/core.const";
 import { depsContainer } from "../const/deps-container.const";
 import getUrl from "../functions/get-url";
 import { DependencyConfig } from "../interface/dependency-config";
@@ -36,6 +37,7 @@ export class HtmlGen{
         
     }
     async build(){
+        const inlineStyles = await this.getInlineFontCss();
         for(var route of this.routes){
                 let jsGenCode = new JsCodeGen(route);
                 jsGenCode.gen();
@@ -55,12 +57,40 @@ export class HtmlGen{
                     style:commonContainer.tezConfig.build.bundleCss ? this.bundleCss(path):[],
                 }
             }
+            inlineStyles.forEach(item =>page.head.inlineStyle.push(item));
             this.addServiceWrokerDeps(page,jsGenCode)
             await this.minifyJs([`${path}/${this.commonPathResolver.preScriptName}`,`${path}/${this.commonPathResolver.postScriptName}`])
             const htmlPage = new HtmlPage(route);
             htmlPage.createPage(page)
         }
         await this.writeTzWebWorker();
+    }
+
+    async getInlineFontCss(){
+        let inlineStyles = new Array<{name:string,code:string}>();
+        if(commonContainer.tezConfig.build?.inlineFontCss){
+            const uris = commonContainer.tezConfig.build?.inlineFontCss;
+            for(const cssUri of uris){
+                const { data } = await axios.get(cssUri);
+                if(data){
+                    let cssString = data;
+                    console.log(cssString)
+                    const uris = data.match(EXTRACT_URI_REGEX);
+                    for(let uri  of uris){
+                        uri = uri.replace(")","");
+                        let fileName = uri.split('/').pop();
+                        cssString = cssString.replace(uri,`/fonts/${fileName}`);
+                        const {data} = await axios.get(uri,{
+                            responseType: 'arraybuffer'
+                        })
+                        
+                        writeFileSync(this.commonPathResolver.getFontFilePath(fileName),data,true)
+                    }
+                    inlineStyles.push({name:cssUri,code:cssString})
+                }
+            }   
+        }
+        return inlineStyles;
     }
 
     addServiceWrokerDeps(page:iHtmlPage,jsCodeGen:JsCodeGen){
