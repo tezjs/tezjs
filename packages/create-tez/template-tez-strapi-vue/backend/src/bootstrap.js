@@ -141,7 +141,7 @@ const {
   async function importArticles() {
     return Promise.all(
       articles.map((article) => {
-        const files = {"Image":getFileData(`${article.Title.replace(/ /g,"_").replace(/'/g,"_").toLowerCase()}.jpg`)}
+        const files = {"Image":getFileData(`${article.Title.replace(/ /g,"_").replace(/'/g,"_").replace(/;/g,"").toLowerCase()}.jpg`)}
         return createEntry({ model: "article", entry: article,files });
       })
     );

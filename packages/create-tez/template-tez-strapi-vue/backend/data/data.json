@@ -2,149 +2,221 @@
     "categories": [
         {
             "id": 1,
-            "Name": "News",
-            "Slug": "/categories/news"
+            "Name": "Adventure",
+            "Slug": "/categories/adventure"
         },
         {
             "id": 2,
-                "Name": "Tech",
-                "Slug": "/categories/tech"
+            "Name": "Art",
+            "Slug": "/categories/art"
         },
         {
             "id": 3,
-                "Name": "Nature",
-                "Slug": "/categories/nature"
+            "Name": "Spiritual",
+            "Slug": "/categories/spiritual"
         },
         {
             "id": 4,
-                "Name": "Story",
-                "Slug": "/categories/story"
+            "Name": "Nature And Wildlife",
+            "Slug": "/categories/nature-and-wildlife"
         },
         {
             "id": 5,
-                "Name": "Food",
-                "Slug": "/categories/food"
+            "Name": "Heritage",
+            "Slug": "/categories/heritage"
         }
     ],
     "articles":[
         {
             "id": 1,
-                "Title": "A bug is becoming a meme on the internet",
-                "Content": "It's the story of a user named **Omer Barnir** who reported a bug in 2005 on the MySQL [bug report platform](https://bugs.mysql.com/)\n\nBut the thing is that Omer never get an answer. 15 years later, the bug has never been fix and people are starting to make fun out of it. We let you take a look at the conversation [here](https://bugs.mysql.com/bug.php?id=11472), it's pretty funny\n\nOct 8th 20",
-                "Slug": "/articles/a-bug-is-becoming-a-meme-on-the-internet",
+            "Title": "Khushboo Gujarat Ki",
+            "Content": "Vibrant Gujarat stretches out into the Arabian Sea, with a hint of the desert and a coastline of 1600 km. It is  the home state of Mahatma Gandhi, the Father of the Nation. It is renowned for its beaches, temple towns and historic capitals. Wildlife sanctuaries, hill resorts and natural grandeur are gifts of Gujarat. Sculpture, handicrafts, arts, festivals also make the state rich. Gujarat is also among the most technologically advanced, housing the largest petrochemical complex in the country.\n\n## Experiences In Gujarat\n\n### Kite Festival\n\n The International Kite Festival (Uttarayan) is regarded as one of the biggest festivals. Months before the festival, homes in Gujarat begin to manufacture kites.\n\nDuring the festival, local food such as Undhiyu (a mixed vegetable including yam and beans), sesame seed brittle and jalebi is served to the crowds. Days before the festival, the market is filled with participants buying their supplies. In 2012, the Tourism Corporation of Gujarat mentioned that the International Kite Festival in Gujarat was attempting to enter the Guinness World Records book due to the participation of 42 countries in it that year. The best place to enjoy this festival is the Sabarmati Riverfront or the Ahmedabad Police Stadium, where people lie down to see the sky filled with thousands of kites.\n\n### Navratri\n\nNavratri, meaning 'nine nights', is one of the most popular and widely celebrated Hindu festivals in many parts of India. Gujarat, however, is the only state that erupts into a nine-night dance festival, perhaps the longest in the world. Each night, all over the state, villages and cities alike, people gather in open spaces to celebrate feminine divinity, referred to as Shakti.\n\nThe dance form known as ras garba (also joined sometimes by dandiya, which uses small wooden sticks), comes from Lord Krishna's worship rather than Goddess worship, from the Gop culture of Saurashtra and Kutch.\n\n## Things To Do In Gujarat\n\n- Cuisine\n- Tourist Attractions\n- Culture\n- Flora And Fauna\n\n## UNESCO World Heritage Sites\n\n###  Rani Ki Vav, Patan\n\nThe stepwell was built in 1063 by Rani Udayamati of the Chaulukya Dynasty to commemorate her husband, Bhimdev I. The stepwell was rediscovered in 1940s, and the Archeological Survey of India restored it in the 1980s. \n\n### Champaner and Pavagadh Archaeological Park\n\nA UNESCO Heritage site, Champaner and Pavagadh, are often clubbed together as one of the most engaging historical attractions of Gujarat. The duo makes a rich heritage site dotted with forts, mosques, monuments, tombs, arches, temples, step-wells and fortresses from 8th to 14th centuries.\n\n### Ahmedabad World Heritage City \n\nSituated in the heart of Gujarat, Ahmedabad has a character like no other, defined by a spirit of enterprise. Although Ahmedabad is a bustling metropolitan with reputed institutes and a rapidly growing economy, it is deeply rooted in tradition. The city is known for its association with Mahatma Gandhi, and in addition to a complex maze of neighborhood called pols, hosts some of the country’s finest medieval Islamic Architecture.\n\n## Top Attractions & Destinations In Gujarat\n\n### RannUtsav\n\nA plethora of varied hues, profusion of design, superfluity of culture, cornucopia of music and dance, all together in the arid lands of Kutch create a mosaic of exquisiteness, which reflects the identity and spirit of the region. Kutch, one of the most ecologically and ethnically diverse districts of the state is a celebratory land of art, crafts, music, dance, people, and nature. During the full moon night of winters, amid the awe-inspiring and contrasting landscape, each year a three-day festive extravaganza brimming with hospitality, vigor and traditional flavor of the area is hosted and known as the Kutch of Rannutsav.\n\n### Sasan Gir\n\nThis forested, hilly, 1412-sq-km sanctuary, about halfway between Veraval and Junagadh, is the last refuge of the Asiatic lion (Panthera leopersica). Taking a safari through the thick, undisturbed forests is a joy – even without the added excitement of spotting lions, other wildlife, and myriad bird species. Access to the sanctuary is by safari permit only, bookable in advance online.\n\n### Statue Of Unity\n\nOctober 31st, 2018, marked the inauguration of the world’s tallest statue – the Statue of Unity, against the backdrop of the dramatic Satpura and Vindhyachal hills in Kevadia, Gujarat. The 182-metre (600 feet approx.) statue is dedicated to Sardar Vallabhbhai Patel, the architect of independent India. The colossal monument towers over River Narmada, a tribute to India ‘from the people of Gujarat’ to the leader who placed people’s welfare first. The Statue of Unity overlooks a vast area, including the river basin of the Narmada and the sprawling Sardar Sarovar dam. ",
+            "Slug": "/articles/gujarat",
                 "ComponentName": "article",
                 "Image": null,
                 "Seo": {
                     "id": 1,
-                    "Title": "{{title}} changed",
-                    "Description": "A bug is becoming a meme on the internet",
-                    "Canonical": "/articles/a-bug-is-becoming-a-meme-on-the-internet",
+                    "Title": "Khushboo Gujarat Ki",
+                    "Description": "Vibrant Gujarat stretches out into the Arabian Sea, with a hint of the desert and a coastline of 1600 km.",
+                    "Canonical": "/articles/gujarat",
                     "LinkingData": null
                 },
-                "categories": [{"id":2}],
-                "author": [{"id":2}]
+                "categories": [{"id":5}],
+                "author": [{"id":6}]
         },
         {
             "id": 2,
-                "Title": "What's inside a Black Hole",
-                "Content": "Well, we don't know yet...\n\nOct 8th 20",
-                "Slug": "/articles/what-s-inside-a-black-hole",
+            "Title": "Adventure Sports In Ladakh",
+            "Content": "The stark and pristine landscape of Ladakh, bound by rugged mountains, deep gorges and harsh terrain is ideal for adventure sports like trekking, mountain climbing, camping, etc. Moreover, the gurgling Indus and Zanskar rivers cutting through the scenery provide perfect backdrops for adventure in the water. \n\n**Mountain Biking**   \n\nThere are several mountain biking trails across Leh-Ladakh. Adventure seekers can bike on Khardung La, which is considered to be among the highest motorable roads in the world, along the shores of Pangong Lake, through the Warila pass, in the Nubra Valley, and by the banks of rivers Indus and Zanskar. Several tour companies organise day-long or multiple-day biking tours for individuals and groups. Along the way, bikers are treated to local cultures, homestays and food. Since this is a strenuous activity, bikers must make sure they are fully acclimatised and in good shape before they embark on this adventure. Mountain biking is a great way to see the Leh-Ladakh region for those who like to ride and are up for the adventure in the mountains. Some companies may need visitors to prove they are fit for the adventure with short exercises or fitness certificates. The tours vary in their levels of difficulty.\n\n**Chadar Trek**  \n\nChadar Trek can only be enjoyed during the winter months in Ladakh. It gets its name from the fact that, during winter, the rivers freeze and form a blanket of ice that forms the main terrain of this trek. Throughout the adventure, trekkers are walking on precarious icy formations, staying in caves filled with stalactites and stalagmites and encountering other snowy landscape. It is very important to have an experienced guide who leads the trek. The trek covers a distance of approximately 62 km, which takes about nine days to cover and scales a height of up to 11,000 ft. The trek is mostly covered on the frozen River Zanskar and begins from the village of Chilling. February is considered to be the best time to complete this trek as the ice is most stable during that month.\n\n**River Rafting**   \n\nDue to the presence of two prominent rivers—the Indus and the Zanskar—Ladakh offers amazing river rafting opportunities to thrill-lovers. The Zanskar river features one of the best gorges for navigation in the world. Whitewater rapids are found in abundance as rafters head down the river and witness spectacular geological formations all around. There is also the chance to enjoy the hospitality of the Zanskari people. There are various tours that can feature a rafting distance of 5 km to almost 30 km. Even shorter rafting tours can be organised for a few hours. Some of the places that feature on these rafting routes include Tsogsti, Nimoo, Scorpoche, and Chilling. This adventure activity is best enjoyed in groups.\n\n  \n**Trekking** \n\nLeh-Ladakh’s diverse terrain includes mountains, valleys and rivers, making it a haven for trekking enthusiasts. These treks navigate through remote villages and pristine locations, offering a peek into the life of villagers. Some of these treks may last for a few hours or a few days. Some popular routes include Lamayuru to Alchi trek, Ripchar Valley trek, Padum to Darcha trek, Lamayuru to Stok Kangri trek, Markha Valley trek, Jhulum Hemis trek and the famous Chadar trek. The Chadar Trek can only be enjoyed during the winter months in Ladakh. \n\n**Bactrian Camel Ride**   \n\nA prominent location on the ancient Silk Route, Nubra Valley, in Ladakh, is home to two-humped Bactrian camels, who were brought to the region from Central Asia. Today, these camels are the remnants of this glorious trading past and offer enjoyable rides around the sand dunes of Hunder in Nubra Valley. This experience can also be enjoyed at Agling, which is a Tibetan village close to Leh. The camel ride takes visitors to Stok and this journey takes about four hours to complete. Along the way, the terrain changes from lush greenery to a desert. Riding on the back of a camel is one of the most thrilling ways to explore this high altitude cold desert. Perched at an elevation of about 10,000 ft, Hunder is bordered by snow-clad mountains that present a picturesque backdrop to the arid but mesmerising landscape.\n\n**Mountain Climbing**   \n\nSince the region of Leh-Ladakh is blessed with the towering Himalayas and Karakoram ranges, it offers mountain climbers plenty of options to choose from. The most popular mountains for this activity are Stok Kangri, Kang Yatse, Mentok Kangri, Chamsher, and Lingser Kangri. Most of these aren’t tough to climb. However, climbers need to possess excellent skills. They must also ensure that they are fully acclimatised to the weather to prevent any breathlessness or Acute Mountain Sickness. Leh-Ladakh is one of the few places in the world where mountain climbers can scale a height of 6,000 m within a week or more. These expeditions take climbers through surreal terrains where they can encounter fauna like blue sheep and birds. On the way, pristine lakes and the unique cultures of the nomadic Changpa people can also be experienced.\n\n  \n**Trekking in Markha Valley**   \n\nThe best season to embark on the Markha Valley trek is from June to September. It scales a height of approximately 3,700 m above sea level and takes about eight days to complete. There are mesmeric sights and experiences to be enjoyed along the route. Trekking along the Markha river will bring you to the village of Nimaling, where you can witness the tall peak of Kangyatse. Other peaks that can be viewed along the route include Saser Kangri, Stok Kangri, and Nun Kun. The most delightful part of this trekking route has got to be when it makes its way through the Hemis National Park. This place is unlike any other park and is famed for creatures like snow leopards, ibexes and blue sheep. Wildlife enthusiasts must not miss out on this trek. Being properly acclimatised is important before embarking on this adventure. It is best to complete the trek in a group with a professional guide.\n\n  \n**Camping**   \n\nCamping in Ladakh is one of the most amazing experiences. Be it on the side of crystal-clear lakes, near Buddhist monasteries or gorgeous locations amidst a stark scenery, camping in Ladakh is must-try. Camps here feature semi-luxurious and luxurious tents with bathrooms, warm bedding and other amenities. They also have a central dining room. Camp Martsemik La, Wonderland Camp and Camp Watermark are the popular camps near Pangong Lake. The Mystique Meadows Camp, Valley Flower Camp and Double Humped Camp Hunder are some of the popular spots in Nubra Valley. The Chamba Camp at Thiksey is one of the most luxurious camps in India. The camps vary in their costs: some are great for backpackers, other are mid-budget while the rest are luxurious. The camps usually help guests chart out itineraries, organise local tours and also set up bonfires and other activities within the premises.",
+            "Slug": "/articles/adventure-sports",
                 "ComponentName": "article",
                 "Image": null,
                 "Seo": {
                     "id": 2,
-                    "Title": "What's inside a Black Hole",
-                    "Description": null,
-                    "Canonical": null,
-                    "LinkingData": "{\"@context\": \"http://www.schema.org\",\"@type\": \"Corporation\",\"name\": \"Radixweb\",\"url\": \"https://radixweb.com\",\"sameAs\": [\"https://www.facebook.com/radixweb\",\"https://twitter.com/radixweb\",\"https://www.instagram.com/radixweb\",\"https://www.youtube.com/user/Radixweb2000\",\"https://www.linkedin.com/company/radixweb\",\"https://in.pinterest.com/pin/141511613270009577/\",\"https://radixweb.com/\"],\"logo\": \"https://s3.ap-south-1.amazonaws.com/stage.radixweb.com/logo_radix_4c5179b806.png\",\"description\": \"Radixweb is India’s top software development and consulting company for 20+ years offering customized software and web development services. Contact us now.\",\"address\": {\"@type\": \"PostalAddress\",\"streetAddress\": \"Ekyarth, B/H Nirma University, Chharodi\",\"addressLocality\": \"Ahmedabad\",\"addressRegion\": \"Gujarat\",\"postalCode\": \"382481\",\"addressCountry\": \"India\"},\"geo\": {\"@type\": \"GeoCoordinates\",\"latitude\": \"23.1202° N\",\"longitude\": \"72.5470° E\"},\"hasMap\": \"https://g.page/radixweb\"}\n--\n{\"@context\": \"http://www.schema.org\",\"@type\": \"Corporation\",\"name\": \"Ajay\",\"url\": \"https://radixweb.com\",\"sameAs\": [\"https://www.facebook.com/radixweb\",\"https://twitter.com/radixweb\",\"https://www.instagram.com/radixweb\",\"https://www.youtube.com/user/Radixweb2000\",\"https://www.linkedin.com/company/radixweb\",\"https://in.pinterest.com/pin/141511613270009577/\",\"https://radixweb.com/\"],\"logo\": \"https://s3.ap-south-1.amazonaws.com/stage.radixweb.com/logo_radix_4c5179b806.png\",\"description\": \"Radixweb is India’s top software development and consulting company for 20+ years offering customized software and web development services. Contact us now.\",\"address\": {\"@type\": \"PostalAddress\",\"streetAddress\": \"Ekyarth, B/H Nirma University, Chharodi\",\"addressLocality\": \"Ahmedabad\",\"addressRegion\": \"Gujarat\",\"postalCode\": \"382481\",\"addressCountry\": \"India\"},\"geo\": {\"@type\": \"GeoCoordinates\",\"latitude\": \"23.1202° N\",\"longitude\": \"72.5470° E\"},\"hasMap\": \"https://g.page/radixweb\"}"
+                    "Title": "Adventure Sports In Ladakh",
+                    "Description": "The stark and pristine landscape of Ladakh, bound by rugged mountains,",
+                    "Canonical": "/articles/adventure-sports",
+                    "LinkingData":null
                 },
-                "categories": [{"id":1}],
-                "author": [{"id":2}]
+                "categories": [{"id":1},{"id":4}],
+                "author": [{"id":4}]
         },
         {
             "id": 3,
-            "Title": "We love Pizza",
-            "Content": "We love pizza at Strapi, what about you?\n\nOct 8th 20",
-            "Slug": "/articles/we-love-pizza",
+            "Title": "Most Popular Heritage",
+            "Content": "Among the seven wonders of the world, the Taj Mahal, in Agra, is a delight to explore. It has also been described as a “teardrop on the cheek of eternity” by Nobel laureate Rabindranath Tagore. Every year, thousands of tourists from around the world make a beeline for this breathtakingly ethereal marble monument, considered by many as the most beautiful building constructed by man.\n\nLying at the heart of Delhi, the majestic [Red Fort](https://www.incredibleindia.org/content/incredible-india-v2/en/destinations/delhi/red-fort.html), made of fine red sandstone, stands as a testament to the architectural legacy of the Mughals. One of the most beautiful monuments in the world, this UNESCO World Heritage Site, famous as qila-e-mubaraq, is replete with palaces, pavilions and mosques.  \n\nAlmost as old as the history of the Delhi Sultanate, the iconic [Qutub Minar](https://www.incredibleindia.org/content/incredible-india-v2/en/destinations/delhi/qutub-minar.html), the world's tallest brick minaret, dominates the skyline of the city. Standing 73 foot tall, this five-storeyed tower, a UNESCO World Heritage Site, remains one of the most magnificent buildings of India from the medieval era. \n\nSurrounded by neatly manicured lawns, the massive [Humayun’s Tomb](https://www.incredibleindia.org/content/incredible-india-v2/en/destinations/delhi/humayuns-tomb1.html) is a spectacular monument that was the first garden mausoleum built in the Indian subcontinent. The first of the grand tombs synonymous with Mughal architecture, this monument narrates a timeless saga of love and longing. Built by Mughal emperor Humayun's first wife, empress Haji Begum, in her husband's memory, the tomb houses the graves of both the emperor and his wife and stands as a testament to their eternal love.\n\n## Taj Mahal\n\nMughal emperor Shah Jahan, the creator of the Taj Mahal, said that the beauty of the monument made “the sun and the moon shed tears from their eyes”. It has also been described as a “teardrop on the cheek of eternity” by Nobel laureate Rabindranath Tagore. Every year, thousands of tourists from around the world make a beeline for this breathtakingly ethereal marble monument, considerd by many as the most beautiful building constructed by man. The monument was built as a memorial by Mughal emperor Shah Jahan for his deceased wife, Mumtaz Mahal. It is one of the seven wonders of the world and is a monument of pride for not just Agra but also India.\n\nA UNESCO World Heritage Site, it is featured in almost all literature about India and is one of the most enduring images of the country. Its name is believed to have been drawn from the Persian language: ‘taj’ means crown and ‘mahal’ means palace, thus making this the palace of the crown. Interestingly, the queen it was built in memory of, originally named Arjumand Begum, held the name Mumtaz Mahal, which meant the crown of the palace. Although it is best known as a symbol of love, a grieving emperor’s ode to his deceased queen, another legend sees the Taj Mahal as an embodiment of Shah Jahan’s vision of kingship. The story goes that he sought to build something akin to heaven on earth, a spectacular, unbelievably beautiful monument that reinforced the power as well as the perceived divinity of the monarch as next only to the Almighty.\n\nIt is also widely believed that emperor Shah Jahan invited artisans from Italy and Persia to work on this marble monument. It is said that Ustad Ahmad Lahori was the chief of the project while Ustad Isa Afandi made the site plan. The calligraphic work has been credited to Amanat Ali Khan Shirazi. A fascinating aspect of this structure is that it looks the same from all four sides, except the one that faces River Yamuna. This side is said to have been especially embellished to serve as the main entrance for the emperor. Shah Jahan would approach the Taj Mahal from the river, aboard a barge, while the entrance used by tourists today served, at the time, as an entryway for soldiers and common people. There are intricate inscriptions on all four entrances, while marble carvings and pietra dura mosaics adorn the walls. Lapis-lazuli, cornelian, mother of pearl, agate and emerald are some of the precious gems and stones that were once used in its design. It is said that work on its construction began in 1631. Legend has it that it took 20 years to complete this architectural marvel!",
+            "Slug": "/articles/most-popular-hertitage",
                 "ComponentName": "article",
                 "Image": null,
                 "Seo": {
                     "id": 3,
-                    "Title": "We love Pizza",
-                    "Description": "We love Pizza",
-                    "Canonical": "/articles/we-love-pizza",
+                    "Title": "Most Popular Heritage",
+                    "Description": "Among the seven wonders of the world",
+                    "Canonical": "/articles/most-popular-hertitage",
                     "LinkingData": null
                 },
-                "categories": [{"id":3}],
+                "categories": [{"id":5}],
                 "author": {
-                        "id": 1
+                        "id": 7
                 }
         },
         {
             "id": 4,
-                "Title": "This shrimp is awesome",
-                "Content": "# Badass\n\nMantis shrimps, or stomatopods, are marine crustaceans of the order Stomatopoda. Some species have specialised calcified \"clubs\" that can strike with **great power**, while others have sharp forelimbs used to capture prey. They branched from other members of the class Malacostraca around 340 million years ago. Mantis shrimps typically grow to around 10 cm (3.9 in) in length. A few can reach up to 38 cm (15 in). The largest mantis shrimp ever caught had a length of 46 cm (18 in); it was caught in the Indian River near Fort Pierce, Florida, in the United States. A mantis shrimp's carapace (the bony, thick shell that covers crustaceans and some other species) covers only the rear part of the head and the first four segments of the thorax. Varieties range in color from shades of brown to vivid colors, with more than 450 species of mantis shrimps being known. They are among the most important predators in many shallow, tropical and subtropical marine habitats. However, despite being common, they are poorly understood, as many species spend most of their lives tucked away in burrows and holes.\n\nCalled \"sea locusts\" by ancient Assyrians, \"prawn killers\" in Australia, and now sometimes referred to as \"thumb splitters\"—because of the animal's ability to inflict painful gashes if handled incautiously—mantis shrimps have powerful claws that are used to attack and kill prey by spearing, stunning, or dismembering.\n\n\nMantis shrimps have, like mantis, ravishing legs. But theirs are so resilient that they inspire the military to make the armor of the future. Above all, their speed and striking power are the responsibility of the superpowers. As the comic book The Oatmeal recounts, the squid's ravishing legs move at the speed of a bullet fired by a 22 caliber and can strike a prey in 1/3000 of a second, with a force of 1,500 Newtons. One tenth of that speed, deployed by a human arm, \"would be enough to send a baseball into orbit.\"\n\nA speed such as it boils water around ravishing legs and creates a shock wave capable of killing a prey missed by the strike.\n\nKept in an aquarium, crustaceans make carnage by dismembering and devouring crabs, shrimps, octopuses, snails and shells (whose shells they break). They would even be able to break the windows of overly fragile aquariums.\n\nOct 8th 20",
-                "Slug": "/articles/this-shrimp-is-awesome",
+            "Title": "Tiger Reserves",
+            "Content": "Tiger, the national animal of India, is among the most prized sightings in the country's jungles, which boast more than half of the world's population of the feline. To protect this majestic denizen of the forest, Project Tiger, a conservation project, was launched in 1972. Initially, nine tiger reserves were dedicated to the conservation of the animal, with Jim Corbett National Park and Tiger Reserve being the first among them. Today, the country is home to about 50 reserves that offer a unique opportunity to sight the majestic tiger in the wild.   \n  \n**Nagarjunasagar Srisailam Tiger Reserve, Andhra Pradesh**  \nLocated in Srisailam, Nagarjunasagar is sprawled over an area of 3,568 sq km and lies adjacent to the popular Nagarjunasagar Reservoir. Some of the faunae you can spot here include tigers, jackals, langur, macaques and more than 150 species of birds such as pea fouls and grey hornbills. The reserve also shelters reptiles like marsh crocodiles, pythons, monitor lizard, soft-shelled turtles, etc. The forest is watered by River Krishna that ensures lush and rich biodiversity. The best time to visit is from October to May.  \n  \n**Namdapha Tiger Reserve, Arunachal Pradesh**  \nCovering a core area of 1,807 sq km, the Namdapha Tiger Reserve, in Arunachal Pradesh, is one of the biggest biodiversity hotspots in the country. While the tiger remains the most popular sighting here, you can also spot rare species like the snow leopard, clouded leopard, red panda, Himalayan bear, etc. In addition, the forest is home to wolves, red foxes, Eurasian otter, spotted linsang, Oriental small-clawed otter, small Indian civet, marbled cat, Asiatic golden cat, and many others.   \n  \n**Pakke Tiger Reserve, Arunachal Pradesh**  \nPakke or Pakhui Tiger Reserve is home to the royal Bengal tiger and provides a great opportunity to sight the cat in the wild. Besides, it shelters species of leopards, clouded leopards, Himalayan black bears, elephants, jackals, barking deer, sambar, hog deer, etc.\n\n**Kamlang Tiger Reserve, Arunachal Pradesh**  \nLocated in Lohit, this reserve shelters a variety of fauna besides tigers. These include elephant, boar, civets, stump-tailed macaque, deer, capped langur, flying squirrels, hornbills, etc. The reserve is spread over an area of 783 sq km and offers an amazing opportunity to spot the tiger in the wild.  \n  \n**Manas Tiger Reserve, Assam**   \nLocated in the foothills of the Himalayas, which give way to tropical forests and alluvial grasslands, the Manas Tiger Reserve is teeming with diverse fauna. These include endangered species like tiger, Indian rhinoceros, Indian elephant and pygmy hog. Some of the other animals you can spot include golden langurs, bison, deer, red panda etc. The reserve offers amazing opportunities for birdwatching as well. You can spot avifauna like Bengal florican, great pied hornbill, wreathed hornbill, greater adjutant, and many more. Since the reserve is watered by the Manas river, aquatic life flourishes richly in it. It has also been minted as a UNESCO World Heritage Site.  \n  \n**Nameri Tiger Reserve, Assam**   \nNameri Tiger Reserve, along with the adjoining Pakhui (Pakke) Tiger Reserve of Arunachal Pradesh, is spread over an area of 1,000 sq km. The landscape majorly comprises semi-evergreen, moist deciduous forests with cane and bamboo brakes and narrow strips of open grassland along rivers. The park lies around 35 km from Tezpur, in the foothills of the eastern Himalayas. Besides tigers, you can spot faunae like leopards, sambars, clouded leopards, gaurs, wild boars, sloth bears, Himalayan black bears as well as elephants. A paradise for birdwatchers, the reserve boasts around 300 species of avifauna, including hornbills, black storks, ibisbills, babblers, plovers etc. Declared a reserve forest in 1978, it was minted a national park two decades later. Set on a jungle safari and explore the teeming biodiversity of the park for an unforgettable experience of your life.",
+            "Slug": "/articles/tiger-reserves",
                 "ComponentName": "article",
                 "Image": null,
                 "Seo": {
                     "id": 4,
-                    "Title": "This shrimp is awesome",
-                    "Description": "This shrimp is awesome",
-                    "Canonical": "/articles/this-shrimp-is-awesome",
+                    "Title": "Tiger Reserves",
+                    "Description": "Tiger, the national animal of India",
+                    "Canonical": "/articles/tiger-reserves",
                     "LinkingData": null
                 },
                 "categories": [{"id":4}],
-                "author": {"id":1}
+                "author": {"id":8}
         },
         {
             "id": 5,
-                "Title": "Beautiful picture",
-                "Content": "This is an empty blog post with a beautiful picture\n\nOct 8th 20",
-                "Slug": "/articles/beautiful-picture",
+            "Title": "Dance; an eloquent form of expression",
+            "Content": "Dance is an eloquent form of expression. From classical and traditional to folk and tribal, there are various dance forms in India. The most popularly recognised classical dance forms are eight, which find themselves steeped in a rich mythological and religious history and have been mentioned in the ancient Hindu text of Natya Shastra. These are Bharat Natyam (Tamil Nadu), Sattriya (Assam), Manipuri (Manipur), Kathak (northern and western India), Odissi (Odisha), Kuchipudi (Andhra Pradesh and Telangana), Kathakali (Kerala), Mohiniyattam (Kerala).  \n\nRead More\n\n## Bharat Natyam\n\nConsidered to be the oldest dance and an inspiration to all other styles, Bharat Natyam, a temple dance of Tamil Nadu, is an enchanting performance that relates scenes from religious texts and myths. In a series of quick and complicated neat motions, dancers dressed in vibrant attires and ornamented heavily from head to toe, execute moves that are a sight to behold. The continuously varying tempo and the stunning synchronisation of the dancers is a breathtaking sight.  \n\n![Bharat Natyam](https://www.incredibleindia.org/content/dam/incredible-india-v2/images/experiences/art/bharatnatyam-dance/bharatnatyam-dance.jpg/jcr:content/renditions/cq5dam.web.1800.737.jpeg \"Bharat Natyam\")\n\n## Sattriya\n\nA dance-drama performance, native to Assam, Sattriya dance was created in the 15th century and has been a living tradition since. A regale of religious sagas, it is generally performed in monasteries, where the dancers dressed in stunning pat silks and adorned with traditional Assamese jewellery weave magic to the beats of cymbals, drums, flutes and even harmonium and violin.   \n\n## Manipuri\n\nManipuri dance, originating from the state of Manipur, is a spiritual experience that transcends art and seems more like a divine dance. Mostly revolving around Goddess Radha and Lord Krishna, this soft, mild and modest dance form sees dancers execute graceful and delicate movements to lyrical undertones. While the women are clad in a wrap-around skirt called sarong, the men wear a dhoti and a turban.  \n\n## Kathak\n\nSaid to have introduced by the bards travelling around the regions of north India, Kathak involves the recounting of religious tales and legends in a rhythmic fashion. From tapping of feet and hand gestures to eye movements and facial expressions, Kathak leaves one reeling with wonder at the finesse and skill of the dancers clad in a long embroidered skirt, complemented with a choli (blouse) and chunni (a long scarf).  \n\n## Odissi\n\nDancers dressed in brightly coloured silk sarees, decked in silver jewellery and musical anklets (ghungroo), perform Odissi, which originated in Odisha. A dance illustrating mythical stories and legends, Odissi involves the use of impressive body movements and excellent expressions.  \n\n## Kuchipudi\n\nLargely featuring scenes and stories from the life of Lord Krishna, Kuchipudi, from Andhra Pradesh and Telangana, is essentially a temple dance. While a female dancer wears a pleated sari that opens like a hand fan, a male dancer is clad in a dhoti. The dancers are adorned with traditional jewellery and dance to the rhythmic beats of cymbals, flute, veena, tambura etc.  \n\n## Kathakali\n\nA classical dance-drama native to the state of Kerala, Kathakali is believed to be almost 300 years old. It recounts the tales of the past, from epics, legends and myths, and while the dance and music resound with devotion, what really awes is the striking make-up of the dancers. The participants are clad in elaborate attires and don vibrant hues of make-up. Every flicker of the eye, twirling of the fingers or the quivering of lips has a special significance.  \n\n## Mohiniyattam\n\nMohiniyattam is a gentle, graceful and feminine form of dance that originated in the state of Kerala. The dance derives its name from the word 'Mohini', which means the female avatar of Lord Vishnu. Usually performed by a solo female dancer, the performance emotes a play through music and elegant movements. The song is generally a mix of Sanskrit and Malayalam languages.  \n\n## Dance Festivals\n\nThere are hundreds of other folk dance forms which proliferate through the many cultures in the country and which are the life and soul of festivities across regions. The most exquisite way of experiencing these graceful evocations is through the many prestigious dance festivals",
+            "Slug": "/articles/dance-forms",
                 "ComponentName": "article",
                 "Image": null,
                 "Seo": {
                     "id": 5,
-                    "Title": "Beautiful picture",
-                    "Description": "Beautiful picture",
-                    "Canonical": "/articles/beautiful-picture",
+                    "Title": "Dance; an eloquent form of expression",
+                    "Description": "Dance; an eloquent form of expression",
+                    "Canonical": "/articles/dance-forms",
                     "LinkingData": null
                 },
-                "categories": [{"id":4}],
-                "author": {"id":2}
+                "categories": [{"id":2}],
+                "author": {"id":5}
         },
         {
             "id": 6,
-                "Title": "The internet's Own boy",
-                "Content": "# The Story of Aaron Swartz\n\nAaron Hillel Swartz (November 8, 1986 – January 11, 2013) was an American computer programmer, entrepreneur, writer, political organizer, and Internet hacktivist. He was involved in the development of the web feed format RSS, the Markdown publishing format, the organization Creative Commons, and the website framework [web.py](http://web.py/), and was a co-founder of the social news site [Reddit](https://reddit.com/). He was given the title of co-founder of Reddit by Y Combinator owner [Paul Graham](https://en.wikipedia.org/wiki/Paul_Graham_(programmer)) after the formation of Not a Bug, Inc. (a merger of Swartz's project Infogami and Redbrick Solutions, a company run by Alexis Ohanian and Steve Huffman).\n\nSwartz's work also focused on civic awareness and activism. He helped launch the Progressive Change Campaign Committee in 2009 to learn more about effective online activism. In 2010, he became a research fellow at Harvard University's Safra Research Lab on Institutional Corruption, directed by Lawrence Lessig. He founded the online group Demand Progress, known for its campaign against the Stop Online Piracy Act.\n\n\nIn 2011, Swartz was arrested by Massachusetts Institute of Technology (MIT) police on state breaking-and-entering charges, after connecting a computer to the MIT network in an unmarked and unlocked closet, and setting it to download academic journal articles systematically from JSTOR using a guest user account issued to him by MIT. Federal prosecutors later charged him with two counts of wire fraud and eleven violations of the Computer Fraud and Abuse Act,[14] carrying a cumulative maximum penalty of $1 million in fines, 35 years in prison, asset forfeiture, restitution, and supervised release.\n\nSwartz declined a plea bargain under which he would have served six months in federal prison. Two days after the prosecution rejected a counter-offer by Swartz, he was found dead in his Brooklyn apartment, where he had hanged himself.\n\nIn 2013, Swartz was inducted posthumously into the [Internet Hall of Fame](https://www.internethalloffame.org//).\n\nOct 8th 20",
-                "Slug": "/articles/the-internet-s-own-boy",
+            "Title": "Mountain Ranges",
+            "Content": "The Indian peninsula is home to many majestic and mighty mountain peaks and ranges. The most prominent among these are the Great Himalayas that boast almost all the high peaks in the world. The Mount Everest is the highest point, reaching an elevation of almost 8,848 m. [Leh-Ladakh](https://www.incredibleindia.org/content/incredible-india-v2/en/destinations/leh-ladakh.html) lying in the northern part of the Great Himalayas is a surreal tourist destination, where one can visit to admire natural retreats, soak in serenity and spirituality, and indulge in adventure sports like trekking, mountain biking, mountain climbing etc. Moreover, the meadows of [Tapovan](https://www.incredibleindia.org/content/incredible-india-v2/en/destinations/gangotri/tapovan.html) in Uttarakhand provide enchanting views of the peaks of the Garhwal Himalayas. To explore the Kumaon Himalayas, head to [Munsiyari](https://www.incredibleindia.org/content/incredible-india-v2/en/destinations/pithoragarh/munsiyari.html), a tiny hill town, which makes an excellent vantage point to sight the spectacular Panchachuli group of peaks.\n\nThe Karakoram range borders India on the north-west and is home to the maximum glaciers on the planet, save the polar regions. The Siachen and the Biafo glaciers are also located in this range and are believed to be among the largest glaciers in the world. Starting from Himachal Pradesh and running into the state of Jammu and Kashmir is the stunning Pir Panjal range, also called the Lower Himalayas. This range encompasses valleys and hill stations like [Gulmarg](https://www.incredibleindia.org/content/incredible-india-v2/en/destinations/gulmarg.html), which look like nothing less than paradise.\n\nAlong the eastern part of the country runs the Purvanchal Range, which covers most of the states of the Northeast. Even central India boasts verdant mountains and the popular Satpura and Vindhaya Range stand parallel to each other. Housing many beautiful hill stations, teeming national parks and spiritual sites, these ranges make for a great tourist getaway.\n\nOne of the oldest mountain ranges in the country and the world is the Aravalli Range, which is spread across areas of Rajasthan, Haryana, Delhi and Gujarat. These mountains stand as a buffer for the monsoon winds that try to reach the Thar desert. The beautiful hill station of [Mount Abu](https://www.incredibleindia.org/content/incredible-india-v2/en/destinations/udaipur/mount-abu.html) is nestled amidst these ranges.\n\nOne of the UNESCO World Heritage Sites, the mountain range of Western Ghats is about 1600 m long and passes through Gujarat and [Kanyakumari.](https://www.incredibleindia.org/content/incredible-india-v2/en/destinations/kanyakumari.html) Known as the Sahyadri mountains, it comprises the ranges of Nilgiris (known for its tea plantations) and Anaimalai (one of the highest peaks in Kerala).\n\nComparatively lower in altitude than the Western Ghats, the Eastern Ghats run parallel to the Bay of Bengal, through the states of West Bengal, [Odisha](https://www.incredibleindia.org/content/incredible-india-v2/en/destinations/states/odisha.html), [andhra-pradesh](https://www.incredibleindia.org/content/incredible-india-v2/en/destinations/states/andhra-pradesh.html) and [Tamil Nadu](https://www.incredibleindia.org/content/incredible-india-v2/en/destinations/states/tamil-nadu.html). These mountains are home to many rivers that contribute to the fertility of the land, like the Godavari, Krishna, Mahanadi and Kaveri. These ghats also boast many prominent pilgrim spots.",
+            "Slug": "/articles/mountain-ranges",
                 "ComponentName": "article",
                 "Image": null,
                 "Seo": {
                     "id": 6,
-                    "Title": "The internet's Own boy",
-                    "Description": "The internet's Own boy",
-                    "Canonical": "/articles/the-internet-s-own-boy",
+                    "Title": "Mountain Range",
+                    "Description": "The Indian peninsula is home to many majestic and mighty mountain peaks and ranges",
+                    "Canonical": "/articles/mountain-ranges",
                     "LinkingData": null
                 },
-                "categories": [{"id":5}],
-                "author": {"id":1}
+                "categories": [{"id":4}],
+                "author": {"id":4}
+        },
+        {
+            "id": 7,
+            "Title": "The most popular attractions in Varanasi-new",
+            "Content": "## Vishwanath Mandir\n\nOne of the most popular attractions in Varanasi, the Vishwanath Mandir, also known as Kashi Vishwanath Temple, is dedicated to Lord Shiva, the presiding god of the city. Also referred to as the golden temple, due to its gold-plating, this temple holds a very special place among Hindu devotees. Given its present shape in 1780 by queen Ahilya Bai Holkar of Indore, the temple's iconic 15.5-metre-high gold spire and gold dome were donated by Ranjeet Singh, the ruler of Punjab in 1839. The temple is ensconced within a maze of other shrines and narrow galis or walkways lined by shops selling sweetmeats, paan (betel leaf), handicrafts and other knick-knacks. The time for darshan (general visit) is from 4 am to 11 pm. Adjacent to the temple are Annapurna Temple dedicated to the goddess of food and Dundiraj Vinayak dedicated to Lord Ganesha, which are equally revered. The temple is located on the banks of River Ganges and the jyotirlinga (devotional shrine of Lord Shiva) present here is believed to be the 12th jyotirlinga. The temple campus also has a well called Jnana Vapi or wisdom well. Many believe that the jyotirlinga was kept in the well to protect it and the main saint of the temple jumped into the well to keep it from intruders. The temple finds immense significance in Hindu mythology as many great saints from the religion are believed to have visited this site to get the darshan of the jyotirlinga and to bathe in the holy waters of the Ganga.\n\n## Kal Bhairava Temple\n\nKal Bhairav Temple, as is evident from the name, is dedicated to Lord Kal Bhairav, the fiercest form of Lord Shiva. The main idol in the temple features a man wearing a garland with a skull for a face. A popular belief here is that Kal Bhairava decides who stays in Varanasi, and perhaps that is why those coming to the city, first visit the temple, and those leaving stop here to take the god's permission. The entrance to the temple is narrow and one can see the deity from it. Devotees like to offer sesame oil and flowers to the deity. The inner sanctum has a back entrance but only priests can access it. There are many shops lined outside the premises in case visitors need to buy offerings for the god.\n\n## Durga Mandir\n\nknown as Monkey Temple due to the presence of a number of monkeys there. Within the compound is a kund (pond), lined by stone stairs on all sides and watch-pillars standing at each corner.  The temple is an important pilgrimage site for Hindu devotees, especially during Navaratri (a Hindu festival during which the goddess is worshipped). Among the devotees, there is a popular belief that the idol of Goddess Durga came into being on its own, and the red hues of the temple are a tribute to the goddess who is associated with the colour. Many believe that the goddess protects devotees from problems. \n\nThere is another famous Durga temple in Varanasi that goes by the name of Brahmacharini Durga Temple. It is located close to the Durga Ghat (means Durga Kund) at the bank of Ganga.  \n\n## Tulsi Manas Mandir\n\nPaying homage to the 6th-century Indian bhakti poet Goswami Tulsidas, the author of the epic Ramcharitramanas, the Tulsi Manas Mandir was constructed in 1964. Made with white marble, the temple is beautifully landscaped and has verses and scenes from the Ramcharitramanas engraved on its walls. Located close to the Banaras Hindu University, it has a lot of historic and cultural importance primarily because Goswami Tulsidas is credited with popularising the Indian epic Ramayan, by writing it in Awadhi, a dialect of the Hindi language, thereby making it accessible to the masses. The temple is dedicated to Lord Rama and lies in close proximity to the famous Durga temple. It houses beautiful idols of Lord Rama, Goddess Sita, Lord Lakshmana and Lord Hanuman. It also has a lovely garden.\n\n## Parshavnath Jain Temple\n\nDedicated to the 23rd tirthankara (saint) of the Jain religion, Parshavnath, the Parshavnath Jain Temple is located away from the city centre, at Bhelapur. Primarily managed by the Digambara sect of Jainism, the temple is a prominent pilgrimage centre for members of the Jain community. It is believed to date back to the time of Bhagawan Adinath. It is said that that the svayamvar of the daughter of the king of Kashi, Sulochana, was held here. The tirth also finds mention in Vividh Tirth Kalpa, which was written by Acharya Jinaprabhsurisvarji, a scholar, in the 14th century. The lattice work of the temple is delicate and intricate and the carvings along the walls of the structure add to its value.",
+            "Slug": "/articles/varanasi",
+                "ComponentName": "article",
+                "Image": null,
+                "Seo": {
+                    "id": 26,
+                    "Title": "The most popular attractions in Varanasi-new",
+                    "Description": "The most popular attractions in Varanasi",
+                    "Canonical": "/articles/varanasi",
+                    "LinkingData": null
+                },
+                "categories": [{"id":3}],
+                "author": {"id":7}
+        },
+        {
+            "id": 8,
+            "Title": "Ooty",
+            "Content": "A quaint hill town, perched against the backdrop of Doddabetta (2,637 m), the highest peak in the Nilgiris, Ootacamund, in Tamil Nadu, is lined with traditional and colonial-style buildings, which make it the perfect fusion of the new and the old. Clear blue skies, lush green hills, deep verdant valleys and pleasant weather culminate to make this gem of the Nilgiris (Blue Mountains) one of the most attractive tourist destinations in South India. Peppered with coffee and tea plantations, forests of eucalyptus, conifers and pines, and a thick cover of shola trees, Ootacamund is the perfect getaway for nature lovers. Such is the renown of its beauty that it is popularly referred to as the 'Queen of Hill Stations' and the 'Switzerland of India'.\n\nA popular summer retreat for Britishers, as well as the capital of the Madras residency in British India, Ootacamund or Ooty or Udhagamandalam (as it was earlier called) has been bestowed with many architectural wonders, thanks to its colonial heritage. The most prominent of these is the Raj Bhavan or the Government House, which is a cream-coloured sprawling bungalow, with a stunning ballroom. It was the erstwhile residence of the governor of Madras and draws tourists from around the area.  \nThe best way to explore this quaint hill town is via the toy train, which runs on one of the steepest tracks in Asia. Going from a height of 1,069 ft to 7,228 ft, it winds through several breathtaking and picturesque spots, letting one drink in the spectacular size of the rocky terrain, ravines and lush green hills. Some of the scenic stops of this toy train include Coonoor, Wellington and Lovedale.  \nOoty is predominantly inhabited by the Toda tribe, who have been calling the area their home since centuries.\n\n## Ooty Lake\n\nThe pride of Ootacamund, the artificial Ooty Lake is the centre of attraction in this part of the Nilgiris. A popular tourist recreational spot, this L-shaped lake provides boating facilities. You can sail a boat in the dazzling blue waters yourself or hire a boatman to row you through. The lake is surrounded by lush greenery and eucalyptus trees that add to the serenity of the spot. With an exotic backdrop of the Nilgiris, the lake makes for a beautiful photography point. The lake also holds some appeal for birdwatchers as it shelters a variety of birds.\n\nThe lake is the venue for several boat races that take place throughout they year. In close vicinity, lie a mini-garden and an amusement park. The 65-acre lake was formed in 1824 under the supervision of John Sullivan, the then Collector of Coimbatore.\n\n## Rose Garden\n\nMaintained by the Tamil Nadu Horticulture Department, the Rose Garden was set up to commemorate the 100th Flower Festival of the Botanical Garden in 1995. Sprawled across 4 hectare, Rose Garden has over 2,500 varieties of roses, said to be the largest collection in India.\n\nTake a leisurely stroll in the garden, and soak in the sights and the smells of beautiful roses across a five-terrace setup. Situated on the lower slopes of Elk Hill, the garden, decorated with rose creepers, boasts varieties like hybrid tea roses, miniature rose, florbunda and ramblers. There are even green and black roses here! To captivate the senses, there is a viewpoint in the garden called Nila Maadam, from where one can get a breathtaking view of the entire landscape.\n\n## Kalhatti Falls\n\nAbout 13 km away from Ootacamund lies the Kalahatti Village. After a two-mile trek from here, one can reach the magnificent Kalahatti Falls. The trek through the dense foliage is an adventure in itself. Before reaching the waterfall, one will have to cross a stone path and a bridge built during the colonial era. It is fabled that the waterfall site was once home to saint Agastya. The 100-ft-high waterfall houses a vast variety of flora on its land, making it a sight to behold. One can also come across herds of wild buffaloes, bisons, spotted deer, wild dogs, the extremely rare black panther and the sambar deer. The nearby Bandipur Forest is filled with cardamom trees that send their scent wafting through. The picturesque landscape is spotted with greenery and also makes for a great birdwatching spot. Located near the Ooty-Mysore road that is famous for its 36 hairpin bends, the area is home to plantations of spices like cinnamon, clove, pepper, nutmeg, rosemary, sandalwood, amongst others.",
+            "Slug": "/articles/ooty",
+                "ComponentName": "article",
+                "Image": null,
+                "Seo": {
+                    "id": 16,
+                    "Title": "Ooty",
+                    "Description": "The pride of Ootacamund, the artificial Ooty Lake is the centre of attraction in this part of the Nilgiris.",
+                    "Canonical": "/articles/ooty",
+                    "LinkingData": null
+                },
+                "categories": [{"id":4}],
+                "author": {"id":7}
+        },
+        {
+            "id": 9,
+            "Title": "Kedarnath",
+            "Content": "Ensconced in the snow-capped Garhwal Himalayas, surrounded by a lush cover of alpine meadows and brushed by the pristine and holy Mandakini river, Kedarnath is a prominent pilgrimage spot. One of the char dhams, which are considered important pilgrimage destinations by Hindus, Kedarnath is said to be the abode of Lord Shiva, who is worshipped in the main shrine. Thousands of devotees from all over the country, undertake an arduous but devotional journey to reach this 3,584-m-high temple, which is the highest of the 12 jyotirlingas (devotional shrines of Lord Shiva) in India.\n\nCrystal clear lakes, curative hot springs and colourful valley beds of rhododendrons, make Kedarnath a nature lover's delight. For those who want to hike their way into the heart of the Himalayas, there are trekking options galore. The most popular of these is the trek from the sacred Gaurikund to the temple and from the temple to the serene Vasuki Lake.\n\n## Chorabari Tal\n\nThe crystal-clear Chorabari Tal offers magnificent views of the surrounding Himalayan peaks. Also known as the Gandhi Sarovar or Gandhi Tal, the lake lies about 3 km from the Kedarnath temple. An easy trek from the temple leads you to the lake, which was originally known as Kanti Sarovar. In 1948, some of the ashes of Mahatma Gandhi were immersed in the lake after which it was renamed Gandhi Sarovar. Legend has it that it was at Chorabari Lake that Lord Shiva imparted the knowledge of yoga to the Saptrishis. Perched at an altitude of 3,900 m above sea level, the lake originates from the Chorabari Bamak Glacier. You can also visit the nearby Bhairava Temple. The mesmeric Madhu Ganga Waterfalls falling on the way makes for a serene stopover.\n\n## Shankaracharya Samadhi\n\nLying slightly behind the Kedarnath Temple is the grave of Adi guru Shankaracharya, the saint who is said to have established the four sacred dhams in India that are an important pilgrimage for Hindus. The famous Hindu philosopher had attained nirvana (enlightenment) at a young age of 32. It is said that Shakaracharya merged with the land itself. Visited by thousands of pilgrims, the Shankaracharya Samadhi is one of the most popular tourist attractions in Kedarnath. Legend has it that Shankaracharya came to Kedarnath in the 8th century and built the Kedarnath shrine and established one of his four mathas. A hot water spring believed to have been created by Shankaracharya is visited by his disciples to get relief from the extreme climatic conditions in the area.\n\n## Gaurikund\n\nThe hot water spring of Gaurikund is one of the holiest sites for Hindus, who come to take a dip in it. It is believed that taking a dip in the holy water of the pond will make a person pure. Surrounded by panoramic views, Gaurikund also serves as the starting point of the famous Kedarnath temple trek. The spring lies at a height of about 6,000 ft in the Garhwal Himalayas. Devotees also visit the Gauri Devi Temple dedicated to Goddess Parvati. It is believed that this was the site where Goddess Parvati had meditated for a long time to win Lord Shiva as her husband. The area is also associated with the legend of Lord Ganesha acquiring his elephant head.",
+            "Slug": "/articles/kedarnath",
+                "ComponentName": "article",
+                "Image": null,
+                "Seo": {
+                    "id": 76,
+                    "Title": "Kedarnath - Abode of Lord Shiva",
+                    "Description": "Ensconced in the snow-capped Garhwal Himalayas, surrounded by a lush cover of alpine meadows and brushed by the pristine and holy Mandakini river,",
+                    "Canonical": "/articles/kedarnath",
+                    "LinkingData": null
+                },
+                "categories": [{"id":3}],
+                "author": {"id":5}
         }
     ],
     "authors":[
         {
-            "id": 1,
-                "Name": "David Doe",
-                "Info": "Professional Writer",
-                "Slug": "authors/david-doe",
+            "id": 4,
+            "Name": "Avinash Shah",
+            "Info": "Traveller",
+            "Slug": "/authors/avinash-shah",
                 "Picture": null
         },
         {
-            "id": 2,
-                "Name": "Sarah Baker",
-                "Info": "Profession Writer",
-                "Slug": "authors/sarah-baker",
+            "id": 5,
+            "Name": "Priya Sharma",
+            "Info": "Traveller",
+            "Slug": "/authors/priya-Sharma",
+                "Picture": null
+        },
+        {
+            "id": 6,
+            "Name": "Jigar Verma",
+            "Info": "Traveller",
+            "Slug": "/authors/jigar-verma",
+                "Picture": null
+        },
+        {
+            "id": 7,
+            "Name": "Deepika Mukherjee",
+            "Info": "Traveller",
+            "Slug": "/authors/deepika-mukherjee",
+                "Picture": null
+        },
+        {
+            "id": 8,
+            "Name": "Mukesh Goyal",
+            "Info": "Travller",
+            "Slug": "/authors/mukesh-goyal",
                 "Picture": null
         }
     ],
@@ -168,8 +240,8 @@
     "masterpages":[
         {
             "id": 1,
-                "Title": "Standard Layout",
-                "LayoutName": "main",
+            "Title": "Blog Detail Standard",
+            "LayoutName": "main",
                 "Seo": {
                     "id": 8,
                     "Title": "Blogs Site",
@@ -199,8 +271,8 @@
     "pages":[
         {
             "id": 1,
-                "Title": "My Personal Strapi Blog",
-                "Slug": "/",
+            "Title": "Discover India",
+            "Slug": "/",
                 "ReferencePages": null,
                 "GenericCollections": [
                     {
@@ -215,8 +287,8 @@
                 ],
                 "Seo": {
                     "id": 7,
-                    "Title": "My Personal Strapi Blog",
-                    "Description": "My Personal Strapi Blog",
+                    "Title": "Discover India",
+                    "Description": "",
                     "Canonical": "/",
                     "LinkingData": null
                 },
@@ -226,9 +298,9 @@
         },
         {
             "id": 3,
-                "Title": "Categories",
-                "Slug": "/*",
-                "ReferencePages": "Categories",
+            "Title": "Categories",
+            "ReferencePages": "Categories",
+            "Slug": "/*",
                 "GenericCollections": [
                     {
                         "id": 4,
@@ -278,6 +350,29 @@
                     "LinkingData": null
                 },
                 "MasterPage": {"id":1}
+        },
+        {
+            "id": 5,
+            "Title": "About TezJS",
+            "Slug": "/about-tezjs",
+                "ReferencePages": null,
+                "GenericCollections": [
+                    {
+                        "id": 14,
+                        "__component": "components.component-only",
+                        "ComponentName": "about-tezjs",
+                        "SlotName": null
+                    }
+                ],
+                "Seo": {
+                    "id": 15,
+                    "Title": "About TezJS",
+                    "Description": "Brief Insight on TezJS",
+                    "Canonical": "/about-tezjs",
+                    "LinkingData": null
+                },
+                "MasterPage": {"id":1}
         }
+        
     ]
 }

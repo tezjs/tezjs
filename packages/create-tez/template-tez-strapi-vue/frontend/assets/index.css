@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*, ::after, :before {
+    box-sizing: border-box;
+}
+::-webkit-scrollbar {
+    display: none;
+  }
