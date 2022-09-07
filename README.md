@@ -50,6 +50,14 @@ npm run develop
 - Run `npx yarn stub` to activate passive development
 - Run the respective project available in the playground folder `(npm run dev:playground:env)`
 
+### Roadmap
+Our framework roadmap gives you a glimpse of our work on the features/fixes and the upcoming releases for features/fixes. We do prefer Just-In-Time planning, at most 1 Month in advance. Within this window, we reprioritize the work based on your feedback or get the priority requests from our sponsors/open source contributors/prioritized users. We also prioritize features based on votes on the features from our [Github Discussion Board](https://github.com/tezjs/tezjs/discussions/categories/polls). Our focus is to improve the stability & relevance of the features/fixes.
+
+If you'd like to have an interesting use case and would like to be available in our upcoming release then you just create a new issue or comment on an existing issue. We would be happy to work on the features/fixes.
+
+If you have any suggestions to improve our current convergence, We are happy to know your suggestions to make our framework better. Also, if you wish to contribute to existing roadmaps or add a new roadmap, please open an issue.
+
+The [planned items](https://github.com/orgs/tezjs/projects/9) are **NOT an exhaustive list** and are also subject to change.
 
 ## License
 
