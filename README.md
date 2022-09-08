@@ -1,4 +1,4 @@
-<h2 align="center">TezJs - Next Generation Atonishingly Fast Frontend App With VUE ⚡</h2>
+<h2 align="center">TezJs - Next Generation Astonishingly Fast Frontend App With VUE ⚡</h2>
 <p align="center">
   <a href="#">
     <img width="180" src="https://user-images.githubusercontent.com/20392302/166857418-b5f88b27-bc0a-4afa-bda1-4f4006b000e4.png" alt="Tez logo">
