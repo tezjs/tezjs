@@ -46,6 +46,7 @@ export class Router{
     }
 
     changeRouteState(to,isPopState=false){
+        this.changeScrollPosition();
         return this.resolve(to).then(t=>{
             this.refreshPageMetaTags(to)
             if(!isPopState){
@@ -63,7 +64,6 @@ export class Router{
             }
                 this.currentUrl = to;
                 tezPages.refreshRoute(to);
-                this.changeScrollPosition();
         })
       }
 
