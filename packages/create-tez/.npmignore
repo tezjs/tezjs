@@ -113,3 +113,5 @@ template-tez-strapi-vue/frontend/dist/
 template-tez-strapi-vue/frontend/node_modules/
 template-tez-strapi-vue/frontend/.firebase/
 template-tez-strapi-vue/frontend/.tez/
+template-tez-vue/frontend/.tez/
+template-tez-vue/frontend/node_modules/
