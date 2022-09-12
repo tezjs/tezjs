@@ -22,7 +22,7 @@ export const VITE_SERVER_CONFIG = (config?:UserConfig)=> {
       ]
     },
     optimizeDeps: {
-      include: ['vue']
+      include: ['vue',"@tezjs/vue"]
     },
     server: {
       middlewareMode: 'ssr',
