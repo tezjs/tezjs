@@ -10,11 +10,11 @@ export function getAddLib(isAddLib:boolean){
         }
         if(isAddLib){
             codes.push(`import addLib from '/@/add-lib';`);
-            codes.push(`const LIB_CONFIG = addLib({afterUserInteraction:CACHE_ASSETS});`);
+            codes.push(`const LIB_CONFIG = addLib({runOn:{idleTime:CACHE_ASSETS}});`);
         }
         else{
             codes.push(`import { addLib } from '@tezjs/js';`);
-            codes.push(`const LIB_CONFIG = addLib({afterUserInteraction:CACHE_ASSETS})();`);
+            codes.push(`const LIB_CONFIG = addLib({runOn:{idleTime:CACHE_ASSETS}})();`);
         }
         return codes.join("\n");
     }
