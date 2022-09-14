@@ -19,10 +19,8 @@ export class MasterPageCollection{
         this.pageSlot = new PageSlot();
     }
 
-    async setMasterPageInfo(uri:string,filterJson:{[key:string]:any},item:{[key:string]:any}) {
-        let result = await this.request.get(`/${uri}?${getFilterQueryParams(filterJson,"deep")}`);
-        item.masterPage = result[0].masterPage || {};
-        item.seo = result[0].seo || {};
+    async setMasterPageInfo(pageData:{[key:string]:any},referenceData:{[key:string]:any}) {
+        const item = referenceData && referenceData.masterPage && Object.keys(referenceData.masterPage).length > 0 ? referenceData : pageData ;
         if(!this.isGenerated && item.masterPage && item.masterPage.title){
             let masterPage = await parseStrapiData(item.masterPage, undefined, undefined,undefined);
             const directoryPath = path.join(this.pathResolver.payloadPath, "master-pages");
@@ -47,6 +45,6 @@ export class MasterPageCollection{
             await writeFileSync(filePath, {layoutName:item.masterPage.layoutName,slots:this.pageSlot.slots});
             this.isGenerated  = true;
         }
-        
+        return item.masterPage;
     }
 }

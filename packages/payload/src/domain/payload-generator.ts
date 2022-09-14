@@ -36,7 +36,6 @@ export class PayloadGenerator extends BaseGenerator{
             referenceData = dynamicPageRoute[url].referenceData;
             collectionName = dynamicPageRoute[url].collectionName;
             url = dynamicPageRoute[url].url;
-            
         }
         const directoryPath = path.join(this.pathResolver.payloadPath, baseUrl);
         const isNotExits = createPath(directoryPath);
@@ -48,7 +47,7 @@ export class PayloadGenerator extends BaseGenerator{
             
             const result = await this.requestService.get(`/${this.pageCollectionConfig.name}?${getFilterQueryParams(filterQuery)}`);
             let item = (result && result[0]) ? result[0]:{}
-            await this.masterPageCollection.setMasterPageInfo(this.pageCollectionConfig.name,filterQuery,item);
+            item.masterPage =  await this.masterPageCollection.setMasterPageInfo(item,referenceData);
             const page = await parseStrapiData(item, baseUrl, dynamicData,referenceData);
             
             if (page) {
