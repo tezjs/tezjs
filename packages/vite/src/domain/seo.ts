@@ -39,15 +39,11 @@ export class Seo extends JsCodeGen  {
         this.setMetaTags();
         this.addPageSchema();
         this.addFavicon();
-        this.addViewport();
         this.addPreFetch();
         this.addLinks();
         this.addBody();
     }
 
-    addViewport(){
-        this.addHeadChildElement(`<meta name="viewport" content="width=device-width" />`,true)
-    }
     addTitle() {
         if (this.htmlMeta.head.title)
             this.addHeadChildElement(`<title data-head="tezjs">${this.htmlMeta.head.title}</title>`,true)
