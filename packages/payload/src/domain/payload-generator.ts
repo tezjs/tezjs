@@ -21,10 +21,10 @@ export class PayloadGenerator extends BaseGenerator{
         super(redirectRoute,sitemap,globWriter);
         const { pageCollectionConfig } = commonContainer.getStrapiConfig();
         this.pageCollectionConfig = pageCollectionConfig;
-        this.masterPageCollection = new MasterPageCollection(globWriter);
     }
 
     async generate(route: Route, dynamicPageRoute: { [key: string]: any }): Promise<{ [key: string]: any } | null> {
+        this.masterPageCollection = new MasterPageCollection(this.globWriter);
         let url = getUrl(route.path);
         let baseUrl = url;
         let dynamicData = undefined;
