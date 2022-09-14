@@ -5,7 +5,7 @@ defineProps<{ data: any }>()
 </script>
 <template>
   <div class="mt-16">
-    <div class="relative h-screen lg:h-[70vh] w-full bg-cover bg-center bg-no-repeat uppercase" v-bind:style="[
+    <div class="relative h-screen lg:h-[70vh] xl:h-[50vh] w-full bg-cover bg-center bg-no-repeat uppercase" v-bind:style="[
             data.image.url
               ? { backgroundImage: 'url(' + data.image.url + ')' }
               : '',
