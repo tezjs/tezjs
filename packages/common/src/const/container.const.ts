@@ -25,7 +25,7 @@ export const commonContainer:
             payload:{
                 page:{maxPreLoadComponent:3 }
             },build:{
-                inLinCss:true,
+                inLineCss:true,
                 inLineJs:true,
                 minifyHtml:true
             },

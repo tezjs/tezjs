@@ -46,7 +46,7 @@ export class HtmlGen{
             let page:iHtmlPage = {
                 head:{
                     metaTag:{},
-                    inlineStyle: commonContainer.tezConfig.build.inLinCss ? this.getInlineCss(path) : new Array<{name:string,code:string}>(),
+                    inlineStyle: commonContainer.tezConfig.build.inLineCss ? this.getInlineCss(path) : new Array<{name:string,code:string}>(),
                     preloads:this.getPreloads(path,jsGenCode),
                     preFetch:this.getPreFetch(path),
                     links:new Array<{[key:string]:string}>()
