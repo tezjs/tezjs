@@ -12,5 +12,8 @@ export interface Head extends TezSeo{
     preConnect?:Array<string>;
     preFetchDns?:Array<string>;
     preFetch?:Array<string>;
-    links?:Array<{[key:string]:string}>
+    links?:Array<{[key:string]:string}>;
+    handler?:{
+        preloads?:(url:string,pagePayload:any)=>Array<{path:string,type?:string}>
+    }
 }

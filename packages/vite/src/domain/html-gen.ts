@@ -47,7 +47,7 @@ export class HtmlGen{
                 head:{
                     metaTag:{},
                     inlineStyle: commonContainer.tezConfig.build.inLinCss ? this.getInlineCss(path) : new Array<{name:string,code:string}>(),
-                    preloads:this.getPreloads(path),
+                    preloads:this.getPreloads(path,jsGenCode),
                     preFetch:this.getPreFetch(path),
                     links:new Array<{[key:string]:string}>()
                 },
@@ -137,7 +137,7 @@ export class HtmlGen{
         return [`${path}/${this.commonPathResolver.postScriptName}`]
     }
 
-    getPreloads(path:string):Array<{path:string,type?:string}>{
+    getPreloads(path:string,jsCodeGen:JsCodeGen):Array<{path:string,type?:string}>{
         const depPath = this.commonPathResolver.tezJsPath;
         const prePath = `${path}/${this.commonPathResolver.preScriptName}`;
         let preloads  = this.getPreloadTags(depPath);
@@ -149,6 +149,11 @@ export class HtmlGen{
             preloadDeps.forEach(path=>this.pushPreload(preloads,path))
             preloads.push({path:`${prePath}`,type:"module"});
             preloads.push({path:`/${depPath}`,type:"module"});
+        }
+        if(commonContainer.tezConfig.htmlMeta?.head?.handler?.preloads){
+            let customPreloads = commonContainer.tezConfig.htmlMeta?.head?.handler?.preloads(path,jsCodeGen.components);
+            if(customPreloads && Array.isArray(customPreloads))
+                customPreloads.forEach(item=> preloads.push(item))
         }
         return preloads;
     }
