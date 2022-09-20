@@ -4,11 +4,12 @@ export const imageLoader:
 {
     resolve(url:string):Promise<string>;
     getImage(url:string):string;
+    register():void;
 } = new (class {
     cachedImage:{[key:string]:any} = {};
     resolveRequest:{[key:string]:any} = {};
     imageRequestBroadcaster:Worker = undefined
-    constructor(){
+    register(){
         if(window.location.hostname.indexOf("localhost") === -1){
             this.imageRequestBroadcaster = new Worker(`/tz.${componentState.tezAppOptions.buildVersion}.js`);
             this.imageRequestBroadcaster.onmessage = (event) => {
