@@ -141,6 +141,10 @@ export class CommonPathResolver {
         return `assets/tez.${commonContainer.buildOptions.buildVersion}.css`
     }
 
+    getBundleCSSPath(path:string){
+        return `${path}/bundle.${commonContainer.buildOptions.buildVersion}.css`
+    }
+
     get preloadScriptName(){
         if(commonContainer.buildOptions.commandName === "build")
             return `preload.${commonContainer.buildOptions.buildVersion}.js`

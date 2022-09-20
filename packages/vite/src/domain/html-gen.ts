@@ -177,7 +177,7 @@ export class HtmlGen{
     }
 
     bundleCss(path:string){
-        let bundleCssPath = `${path}/bundle.css`;
+        let bundleCssPath = this.commonPathResolver.getBundleCSSPath(path);
         const cssReferences = this.getInlineCss(path,true);
         let code:string[] = [];
         if(cssReferences.length > 0){
