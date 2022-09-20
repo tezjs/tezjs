@@ -107,7 +107,11 @@ export class CommonPathResolver {
     }
 
     get tzJsPath(){
-        return getPath([this.distPath,"tz.js"],false);
+        return getPath([this.distPath,this.tzJsHtmlRefPath],false);
+    }
+
+    get tzJsHtmlRefPath(){
+        return `tz.${commonContainer.buildOptions.buildVersion}.js`;
     }
 
     get manifestJsonPath(){

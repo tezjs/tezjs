@@ -141,7 +141,7 @@ export class HtmlGen{
         const depPath = this.commonPathResolver.tezJsPath;
         const prePath = `${path}/${this.commonPathResolver.preScriptName}`;
         let preloads  = this.getPreloadTags(depPath);
-        preloads.unshift({path:'/tz.js'});
+        preloads.unshift({path:`/${this.commonPathResolver.tzJsHtmlRefPath}`});
         if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.loaderImage)
             preloads.push({path:`${commonContainer.tezConfig.client.loaderImage}`,type:"image"});
         if(!commonContainer.tezConfig.build.inLineJs) {

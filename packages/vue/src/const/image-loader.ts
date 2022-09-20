@@ -1,3 +1,4 @@
+import { componentState } from "./component-state";
 
 export const imageLoader:
 {
@@ -9,7 +10,7 @@ export const imageLoader:
     imageRequestBroadcaster:Worker = undefined
     constructor(){
         if(window.location.hostname.indexOf("localhost") === -1){
-            this.imageRequestBroadcaster = new Worker("/tz.js");
+            this.imageRequestBroadcaster = new Worker(`/tz.${componentState.tezAppOptions.buildVersion}.js`);
             this.imageRequestBroadcaster.onmessage = (event) => {
                 if(this.resolveRequest[event.data.url]){
                     this.cachedImage[event.data.url] = event.data.baseString;
