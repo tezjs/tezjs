@@ -4,7 +4,7 @@ import { Page } from "./page/page";
 import { StrapiModuleConfig } from "./strapi/strapi-module-config";
 
 import {  HtmlPage } from './html/html'
-import { ClientEntry } from "./client-entry";
+import { ClientConfig } from "./client-config";
 import { PayloadConfig } from "./strapi/payload-config";
 import { DeploymentConfig } from "./deployment-config";
 import { BuildConfig } from "./build-config";
@@ -26,7 +26,7 @@ export interface TezConfig {
     robots?:{[key:string]:string}
     envName?:string;
     htmlMeta?:HtmlPage;
-    client?:ClientEntry;
+    client?:ClientConfig;
     payload?:PayloadConfig;
     deployment?:DeploymentConfig;
     build?:BuildConfig;

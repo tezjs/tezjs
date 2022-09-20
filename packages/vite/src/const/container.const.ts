@@ -50,6 +50,8 @@ export const appContainer:
             pages: boolean;
         }){
             let props = '';
+            if(commonContainer.tezConfig.client)
+                props += `clientConfig: ${JSON.stringify(commonContainer.tezConfig.client)},`
             if(commonContainer.tezConfig.client && commonContainer.tezConfig.client.loaderImage)
                 props += `loaderImagePath:"${commonContainer.tezConfig.client.loaderImage}",`
             props+=`isDevMode:${commonContainer.buildOptions.commandName === "dev"},`

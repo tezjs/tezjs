@@ -1,4 +1,5 @@
 import { LibConfig } from "@tezjs/types";
+import { ClientConfig  } from "@tezjs/types";
 
 export interface TezAppOptions {
     
@@ -29,4 +30,7 @@ export interface TezAppOptions {
     maxPreComponentCount?:number;
 
     libConfig?:LibConfig;
+
+    clientConfig:ClientConfig;
+
 }

@@ -1,4 +1,5 @@
 import { afterUserInteraction } from "@tezjs/js";
+import { cacheState } from "../const/cache-state";
 import { componentState } from "../const/component-state";
 
 let isExecuted: boolean = false;
@@ -17,6 +18,7 @@ export function runAddLib() {
                 if(libConfig.afterUserInteraction)
                     afterUserInteraction(libConfig.afterUserInteraction)
             }
+            cacheState.preCacheRoutes();
         },2500)
     }
 }

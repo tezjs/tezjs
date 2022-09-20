@@ -19,3 +19,4 @@ export * from "./models/tez-module-config";
 export * from "./models/pwa/pwa-config";
 export * from './models/client/run-on-config';
 export * from './models/client/lib-config';
+export * from './models/client-config';
