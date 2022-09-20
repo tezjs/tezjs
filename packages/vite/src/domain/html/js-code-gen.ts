@@ -27,7 +27,7 @@ export class JsCodeGen extends PayloadReader{
         this.addAssets(postAssets,assets);
         this.addAssets(preAssets,assets);
         this.addAssets(tezAssets,assets);
-        this.addAssets([this.route.path,'tz.js'],assets);
+        this.addAssets([this.route.path,this.commonPath.tzJsHtmlRefPath],assets);
         return assets;
     }
 
