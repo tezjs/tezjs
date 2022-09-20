@@ -1,3 +1,4 @@
+import { afterUserInteraction } from "@tezjs/js";
 import { componentState } from "../const/component-state";
 
 let isExecuted: boolean = false;
@@ -13,6 +14,8 @@ export function runAddLib() {
                         idleTimeFunc();
                     }
                 }
+                if(libConfig.afterUserInteraction)
+                    afterUserInteraction(libConfig.afterUserInteraction)
             }
         },2500)
     }
