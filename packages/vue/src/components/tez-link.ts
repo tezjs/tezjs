@@ -1,4 +1,5 @@
 import { defineComponent ,h} from "vue"
+import { cacheState } from "../const/cache-state";
 const TAG:string = "a";
 function isPush(event){
     if (event.metaKey || event.altKey || event.ctrlKey || event.shiftKey)
@@ -18,6 +19,9 @@ function isPush(event){
 }
 export default defineComponent({
     props: ["to","class"],
+    mounted(){
+      cacheState.addRoute(this.to)
+    },
     render() {
         let children = this.$slots.default ? this.$slots.default():undefined;
             return h(TAG,{
