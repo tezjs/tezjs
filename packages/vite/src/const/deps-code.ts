@@ -7,12 +7,13 @@ import { POST_SCRIPT_COMMENT } from "./core.const";
 function getPreComponents(pageSlots:{[key:string]:any},masterPageSlots:{[key:string]:any},isPre:boolean){
     let preComponents = new Array<string>();
     let maxPreLoadComponent =isPre? commonContainer.tezConfig.payload.page.maxPreLoadComponent : pageSlots && pageSlots.default ? pageSlots.default.length : 0;
-    let propName = isPre?'header':'footer'
-    if(masterPageSlots && masterPageSlots[propName])
+    for(const propName of ['header','footer']){
+        if(masterPageSlots && masterPageSlots[propName])
         masterPageSlots[propName].forEach(item=>{
-        if(preComponents.filter(x=>x!==pageSlots.default[i].name).length === 0){
+        if(preComponents.filter(x=>pageSlots.default.filter(y=>x !== y).length == 0).length === 0){
             preComponents.push(item.name);
         } });
+    }
         if(pageSlots && pageSlots.default){
             for(var i=0;i<maxPreLoadComponent;i++){
                 if(pageSlots.default.length > i && preComponents.filter(x=>x===pageSlots.default[i].name).length === 0){
