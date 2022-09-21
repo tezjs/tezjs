@@ -74,7 +74,7 @@ export class JsCodeGen extends PayloadReader{
             {
                 url:this.route.path,
                 slots:this.getSlots(this.components,true),
-                masterPageSlots:this.getSlots(this.masterPage,false),
+                masterPageSlots:this.getSlots(this.masterPage,false, this.components.slots ? Object.keys(this.components.slots).length : 0),
                 tags:this.tags,
                 layoutName:this.masterPage.layoutName,
                 postScript: this.isPostCode ? commonContainer.buildOptions.commandName === "dev" ? `/tez/deps${getUrl(this.route.path)}/post.js` : `./${this.commonPath.postScriptName}` : ''
@@ -94,7 +94,7 @@ export class JsCodeGen extends PayloadReader{
         );
     }
 
-    getSlots(page:any,isPageSlot:boolean= true){
+    getSlots(page:any,isPageSlot:boolean= true,componentsCount:number = 0){
         let pageSlot = {};
         if(page.slots){
                const slots = Object.keys(page.slots);
@@ -125,12 +125,17 @@ export class JsCodeGen extends PayloadReader{
                             if(jObject.data && jObject.data.mobileComponentName)
                             jObject["mobileComponentName"] = jObject.data.mobileComponentName;
                         this.postSlots.slots[slotName].push(jObject);
-                    }else if(slotName === "footer" && !isPageSlot){
-                        if(!this.postSlots.masterPageSlots[slotName])
-                        this.postSlots.masterPageSlots[slotName] = []
-                    this.postSlots.masterPageSlots[slotName].push({
-                        name:componentName,data:data, id:itemName
-                    });
+                    }else if(slotName === "footer"){
+                        let slotConfig = {
+                            name:componentName,data:data, id:itemName
+                        };
+                        if(!isPageSlot && componentsCount >0 && commonContainer.tezConfig.payload.page.maxPreLoadComponent > componentsCount){
+                            pageSlot[slotName] = [slotConfig];
+                        }else {
+                            if(!this.postSlots.masterPageSlots[slotName])
+                                this.postSlots.masterPageSlots[slotName] = []
+                            this.postSlots.masterPageSlots[slotName].push(slotConfig);
+                        }
                     }
                     itemCount++;
                   }
