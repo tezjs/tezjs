@@ -181,16 +181,19 @@ export class Seo extends JsCodeGen  {
 
     addBody(){
         this.addDevScript();
+        if(this.htmlMeta.head)
+            this.addReferences(this.htmlMeta.head,false)
         if(this.htmlMeta.body)
-        {
-            let body = this.htmlMeta.body;
-            if(body.inlineScript)
-                body.inlineScript.forEach((item)=>{this.addInlineScript(item.name,item.code)})
-            if(body.script)
-                body.script.forEach(script=>this.addScript(script.src,true))
-            if(body.style)
-                body.style.forEach(style=>this.addStyle(style.href,true))
-        }
+            this.addReferences(this.htmlMeta.body,true)
+    }
+
+    addReferences(referenceInfo:any,isAppendToBody:boolean){
+        if(referenceInfo.inlineScript)
+            referenceInfo.inlineScript.forEach((item)=>{this.addInlineScript(item.name,item.code)})
+        if(referenceInfo.script)
+            referenceInfo.script.forEach(script=>this.addScript(script.src,isAppendToBody))
+        if(referenceInfo.style)
+            referenceInfo.style.forEach(style=>this.addStyle(style.href,isAppendToBody))
     }
 
     addInlineStyle(){
@@ -199,6 +202,7 @@ export class Seo extends JsCodeGen  {
             this.htmlMeta.head?.inlineStyle.forEach((item)=>{
                 let attribute = `data-href="${item.name}" ${this.customAttribute.tezjs}`
                 if(this.route.isAmpPage){
+                    console.log(this.route)
                     inlineCode +=`${item.code}\n`
                 }else
                     this.addHeadChildElement(`<style  ${attribute} >${item.code}</style>`,true)
