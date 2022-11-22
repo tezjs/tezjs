@@ -13,12 +13,21 @@ export class Seo extends JsCodeGen  {
     preHeadElements:string[]
     postHeadElements:string[]
     bodyElements:string[]
-    constructor(route: {name:string,path:string,fPath:string}) {
+    customAttribute = {
+        tezjs:`data-head="tezjs"`,
+        preload:`data-head="tezjs-preload"`
+    }
+    constructor(route: {name:string,path:string,fPath:string,isAmpPage:boolean}) {
         super(route);
         this.htmlMeta = mergeConfig(commonContainer.tezConfig.htmlMeta,{head:this.tags});
         this.preHeadElements = new Array<string>();
         this.postHeadElements = new Array<string>();
         this.bodyElements = new Array<string>();
+        if(route.isAmpPage){
+            this.customAttribute.tezjs = ''
+            this.customAttribute.preload = ''
+        }
+            
     }
 
     get headChildElements(){
@@ -46,12 +55,12 @@ export class Seo extends JsCodeGen  {
 
     addTitle() {
         if (this.htmlMeta.head.title)
-            this.addHeadChildElement(`<title data-head="tezjs">${this.htmlMeta.head.title}</title>`,true)
+            this.addHeadChildElement(`<title ${this.customAttribute.tezjs}>${this.htmlMeta.head.title}</title>`,true)
     }
 
     addCanonical() {
         if (this.htmlMeta.head.canonical)
-            this.addHeadChildElement(`<link data-head="tezjs" rel="canonical" href="${this.htmlMeta.head.canonical}"/>`,false)
+            this.addHeadChildElement(`<link ${this.customAttribute.tezjs} rel="canonical" href="${this.htmlMeta.head.canonical}"/>`,false)
     }
 
     setMetaTags(){
@@ -71,7 +80,7 @@ export class Seo extends JsCodeGen  {
     }
 
     addMeta(type:string,key:string,content:string){
-        this.addHeadChildElement(`<meta data-head="tezjs" ${type}="${key}" content="${content}">`,false)
+        this.addHeadChildElement(`<meta ${this.customAttribute.tezjs} ${type}="${key}" content="${content}">`,false)
     }
 
     addFavicon(){
@@ -97,7 +106,7 @@ export class Seo extends JsCodeGen  {
         if(this.htmlMeta.head.linkingData){
             const splitLinkingData = this.htmlMeta.head.linkingData.split("--");
             splitLinkingData.forEach(data=>{
-                this.addHeadChildElement(`<script data-head="tezjs"  type="application/ld+json">${JSON.stringify(JSON.parse(this.replaceText(data.trim())))}</script>`,false)
+                this.addHeadChildElement(`<script ${this.customAttribute.tezjs}  type="application/ld+json">${JSON.stringify(JSON.parse(this.replaceText(data.trim())))}</script>`,false)
             })
         }
     }
@@ -134,13 +143,13 @@ export class Seo extends JsCodeGen  {
     }
 
     addPreload(path:string,as:string,forAll:boolean=false){
-        this.addHeadChildElement(`<link data-head="tezjs-preload" rel="preload" as="${as}" ${as === "script" ? "crossorigin":''}  href="${forAll? path : `/${path.replace(/\/\//g, "/")}`}">`,true)
+        this.addHeadChildElement(`<link ${this.customAttribute.preload} rel="preload" as="${as}" ${as === "script" ? "crossorigin":''}  href="${forAll? path : `/${path.replace(/\/\//g, "/")}`}">`,true)
     }
 
 
     addModulePreload(path:string,forAll:boolean=false){
         path = path.charAt(0) === '/'? path: `/${path}`;
-        this.addHeadChildElement(`<link data-head="tezjs-preload"  rel="modulepreload" href="${forAll? path : `${path}`}">`,true)
+        this.addHeadChildElement(`<link ${this.customAttribute.preload}  rel="modulepreload" href="${forAll? path : `${path}`}">`,true)
     }
 
     addScript(path:string,isAppendToBody:boolean= false){
@@ -163,11 +172,11 @@ export class Seo extends JsCodeGen  {
 
     
     addManifestJson(){
-        this.addHeadChildElement(`<link data-head="tezjs" rel="manifest" href="/manifest.json" crossorigin="use-credentials">`,true)
+        this.addHeadChildElement(`<link ${this.customAttribute.tezjs} rel="manifest" href="/manifest.json" crossorigin="use-credentials">`,true)
     }
 
     addInlineScript(name:string,code:string){
-        this.addBodyChildElement(`<script type="module" data-head="tezjs" >${code}</script>`)
+        this.addBodyChildElement(`<script type="module" ${this.customAttribute.tezjs} >${code}</script>`)
     }
 
     addBody(){
@@ -187,7 +196,7 @@ export class Seo extends JsCodeGen  {
     addInlineStyle(){
         if(this.htmlMeta.head?.inlineStyle)
         this.htmlMeta.head?.inlineStyle.forEach((item)=>{
-            this.addHeadChildElement(`<style data-href="${item.name}" data-head="tezjs" >${item.code}</style>`,true)
+            this.addHeadChildElement(`<style data-href="${item.name}" ${this.customAttribute.tezjs} >${item.code}</style>`,true)
         })
     }
 
