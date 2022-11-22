@@ -48,15 +48,16 @@ export class HtmlGen{
             let page:iHtmlPage = {
                 head:{
                     metaTag:{},
-                    inlineStyle: commonContainer.tezConfig.build.inLineCss ? this.getInlineCss(path) : new Array<{name:string,code:string}>(),
+                    inlineStyle: commonContainer.tezConfig.build.inLineCss || this.htmlPageRoute.isAmpPage ? this.getInlineCss(path) : new Array<{name:string,code:string}>(),
                     preloads:this.getPreloads(path,jsGenCode),
                     preFetch:this.getPreFetch(path),
-                    links:new Array<{[key:string]:string}>()
+                    links:new Array<{[key:string]:string}>(),
+                    script: this.htmlPageRoute.isAmpPage ?[{src:this.commonPathResolver.tezJsPath}] :[],
                 },
                 body:{
                     inlineScript:commonContainer.tezConfig.build.inLineJs ? await this.getInlineJs(path) : new Array<{name:string,code:string}>(),
-                    script:!commonContainer.tezConfig.build.inLineJs ?[{src:this.commonPathResolver.tezJsPath}] :[],
-                    style:commonContainer.tezConfig.build.bundleCss ? this.bundleCss(path):[],
+                    script:!commonContainer.tezConfig.build.inLineJs && !this.htmlPageRoute.isAmpPage ?[{src:this.commonPathResolver.tezJsPath}] :[],
+                    style:commonContainer.tezConfig.build.bundleCss && !this.htmlPageRoute.isAmpPage ? this.bundleCss(path):[],
                 }
             }
             inlineStyles.forEach(item =>page.head.inlineStyle.push(item));
