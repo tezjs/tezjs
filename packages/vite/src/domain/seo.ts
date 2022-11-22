@@ -202,7 +202,6 @@ export class Seo extends JsCodeGen  {
             this.htmlMeta.head?.inlineStyle.forEach((item)=>{
                 let attribute = `data-href="${item.name}" ${this.customAttribute.tezjs}`
                 if(this.route.isAmpPage){
-                    console.log(this.route)
                     inlineCode +=`${item.code}\n`
                 }else
                     this.addHeadChildElement(`<style  ${attribute} >${item.code}</style>`,true)
