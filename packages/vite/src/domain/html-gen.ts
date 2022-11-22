@@ -23,7 +23,8 @@ let exampleOnResolvePlugin = {
     },
   }
 export class HtmlGen{
-    routes:Array<{path:string,name:string,fPath:string}>;
+    routes:Array<{path:string,name:string,fPath:string,isAmpPage:boolean}>;
+    activeRoute:{path:string,name:string,fPath:string,isAmpPage:boolean};
     depsConfig:DepsContainerConfig;
     mainDependency:DependencyConfig;
     externals:Array<string>;
@@ -39,6 +40,7 @@ export class HtmlGen{
     async build(){
         const inlineStyles = await this.getInlineFontCss();
         for(var route of this.routes){
+            this.activeRoute = route;
                 let jsGenCode = new JsCodeGen(route);
                 jsGenCode.gen();
             const path = getUrl(route.path);
@@ -96,7 +98,8 @@ export class HtmlGen{
     addServiceWrokerDeps(page:iHtmlPage,jsCodeGen:JsCodeGen){
         if(commonContainer.tezConfig.pwa){
             let pwaConfig = commonContainer.tezConfig.pwa as PwaConfig
-           page.body.inlineScript.push({name:'tezjs-precache-assets',code:preCacheAssets(jsCodeGen.preCacheAssets)})
+            if(!this.activeRoute.isAmpPage)
+                page.body.inlineScript.push({name:'tezjs-precache-assets',code:preCacheAssets(jsCodeGen.preCacheAssets)})
            page.head.preloads.unshift({path:`/service-worker.js`})
            
            if(pwaConfig.htmlElementConfig?.themeColor){
