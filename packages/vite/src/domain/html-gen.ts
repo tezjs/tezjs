@@ -24,7 +24,7 @@ let exampleOnResolvePlugin = {
   }
 export class HtmlGen{
     routes:Array<{path:string,name:string,fPath:string,isAmpPage:boolean}>;
-    activeRoute:{path:string,name:string,fPath:string,isAmpPage:boolean};
+    htmlPageRoute:{path:string,name:string,fPath:string,isAmpPage:boolean};
     depsConfig:DepsContainerConfig;
     mainDependency:DependencyConfig;
     externals:Array<string>;
@@ -40,7 +40,7 @@ export class HtmlGen{
     async build(){
         const inlineStyles = await this.getInlineFontCss();
         for(var route of this.routes){
-            this.activeRoute = route;
+            this.htmlPageRoute = route;
                 let jsGenCode = new JsCodeGen(route);
                 jsGenCode.gen();
             const path = getUrl(route.path);
@@ -98,7 +98,7 @@ export class HtmlGen{
     addServiceWrokerDeps(page:iHtmlPage,jsCodeGen:JsCodeGen){
         if(commonContainer.tezConfig.pwa){
             let pwaConfig = commonContainer.tezConfig.pwa as PwaConfig
-            if(!this.activeRoute.isAmpPage)
+            if(!this.htmlPageRoute.isAmpPage)
                 page.body.inlineScript.push({name:'tezjs-precache-assets',code:preCacheAssets(jsCodeGen.preCacheAssets)})
            page.head.preloads.unshift({path:`/service-worker.js`})
            
