@@ -7,7 +7,7 @@ export const indexTemplate = (seo:Seo)=>{
     imageLoader = `<img src="${commonContainer.tezConfig?.client?.loaderImage}" style="position:absolute;top:20%;left:36%; margin:0 auto;" />`;
   }
     return `<!DOCTYPE html>
-<html lang="${seo.htmlMeta.lang || 'en'}">
+<html ${seo.route.isAmpPage ? `amp=""` :""} lang="${seo.htmlMeta.lang || 'en'}">
 <head>
         ${seo.headChildElements}
 </head>
