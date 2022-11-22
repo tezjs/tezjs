@@ -194,13 +194,19 @@ export class Seo extends JsCodeGen  {
     }
 
     addInlineStyle(){
-        if(this.htmlMeta.head?.inlineStyle)
-        this.htmlMeta.head?.inlineStyle.forEach((item)=>{
-            let attribute = `data-href="${item.name}" ${this.customAttribute.tezjs}`
-            if(this.route.isAmpPage)
-                attribute = `amp-custom=""`
-            this.addHeadChildElement(`<style  ${attribute} >${item.code}</style>`,true)
-        })
+        if(this.htmlMeta.head?.inlineStyle){
+            let inlineCode:string = '';
+            this.htmlMeta.head?.inlineStyle.forEach((item)=>{
+                let attribute = `data-href="${item.name}" ${this.customAttribute.tezjs}`
+                if(this.route.isAmpPage){
+                    inlineCode +=`${item.code}\n`
+                }else
+                    this.addHeadChildElement(`<style  ${attribute} >${item.code}</style>`,true)
+            })
+            if(inlineCode)
+                this.addHeadChildElement(`<style  amp-custom="" >${inlineCode}</style>`,true)
+        }
+        
     }
 
 
