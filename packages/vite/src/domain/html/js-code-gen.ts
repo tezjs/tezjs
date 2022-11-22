@@ -9,7 +9,7 @@ import { getPreloadCodeTemplate, postScriptPreloadCodeTemplate } from "../../fun
 export class JsCodeGen extends PayloadReader{
     postSlots:{slots:any,masterPageSlots:any} = {slots:{},masterPageSlots:{}};
         
-    constructor(public route:{name:string,path:string,fPath:string,isPage:boolean}){
+    constructor(public route:{name:string,path:string,fPath:string,isPage:boolean,isAmpPage:boolean}){
         super(route);
     }
     private getAssetUrl(path:string,name:string){
