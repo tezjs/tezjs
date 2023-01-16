@@ -3,6 +3,7 @@ import { TezSeo } from "@tezjs/types";
 import { getUrlLastPath } from "../functions/get-last-url-path";
 import { getPath } from "../functions/get-path";
 import { readFileSync } from "../functions/read-file-sync";
+import { commonContainer } from "../const/container.const";
 
 export class PayloadReader {
     _components:{slots:{[key:string]:any[]},masterPage;string};
@@ -31,6 +32,11 @@ export class PayloadReader {
     get tagsPath(){
         return getPath([this.commonPath.payloadPath, this.route.fPath,"tags.json"]);
     }
+
+    get ampTemplate(){
+        if(this.route.isAmpPage)
+          return commonContainer.tezConfig.amp?.page?.template(this.route.path,this.components.slots.default[0][0])
+      }
 
     get components():Partial<{slots:{[key:string]:any[]},masterPage;string}>{
         if(!this._components && this.isComponentExists )

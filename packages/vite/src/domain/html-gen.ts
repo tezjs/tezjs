@@ -48,16 +48,17 @@ export class HtmlGen{
             let page:iHtmlPage = {
                 head:{
                     metaTag:{},
-                    inlineStyle: commonContainer.tezConfig.build.inLineCss || this.htmlPageRoute.isAmpPage ? this.getInlineCss(path) : new Array<{name:string,code:string}>(),
-                    preloads:this.getPreloads(path,jsGenCode),
-                    preFetch:this.getPreFetch(path),
-                    links:new Array<{[key:string]:string}>(),
-                    script: this.htmlPageRoute.isAmpPage ?[{src:this.commonPathResolver.tezJsPath}] :[],
+                    inlineStyle: this.htmlPageRoute.isAmpPage ? commonContainer.tezConfig.amp?.page?.head?.inlineStyle || []: commonContainer.tezConfig.build.inLineCss ? this.getInlineCss(path) : new Array(),
+                    preloads: this.htmlPageRoute.isAmpPage ? new Array(): this.getPreloads(path, jsGenCode),
+                    preFetch:this.htmlPageRoute.isAmpPage ? new Array(): this.getPreFetch(path),
+                    links: new Array(),
+                    script: this.htmlPageRoute.isAmpPage ? commonContainer.tezConfig.amp?.page?.head?.scripts || [] : [],
+                    handler:commonContainer.tezConfig.amp?.page?.head?.handler
                 },
                 body:{
                     inlineScript:commonContainer.tezConfig.build.inLineJs ? await this.getInlineJs(path) : new Array<{name:string,code:string}>(),
-                    script:!commonContainer.tezConfig.build.inLineJs && !this.htmlPageRoute.isAmpPage ?[{src:this.commonPathResolver.tezJsPath}] :[],
-                    style:commonContainer.tezConfig.build.bundleCss && !this.htmlPageRoute.isAmpPage ? this.bundleCss(path):[],
+                    script: this.htmlPageRoute.isAmpPage ? []:!commonContainer.tezConfig.build.inLineJs ? [{ src: this.commonPathResolver.tezJsPath }] : [],
+                    style:this.htmlPageRoute.isAmpPage ? []: commonContainer.tezConfig.build.bundleCss ? this.bundleCss(path) : [],
                 }
             }
             inlineStyles.forEach(item =>page.head.inlineStyle.push(item));

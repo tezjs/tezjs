@@ -11,6 +11,7 @@ import { BuildConfig } from "./build-config";
 import { TezModuleConfig } from "./tez-module-config";
 import { GenerateConfig } from "./generate-config";
 import { PwaConfig } from "./pwa/pwa-config";
+import { AmpConfig } from "./amp-config";
 export interface TezConfig {
     generate?:GenerateConfig;
     sourceCodePath?:string
@@ -31,4 +32,5 @@ export interface TezConfig {
     deployment?:DeploymentConfig;
     build?:BuildConfig;
     modules?:TezModuleConfig[];
+    amp?: AmpConfig;   
 }

@@ -51,7 +51,13 @@ export class Seo extends JsCodeGen  {
         this.addPreFetch();
         this.addLinks();
         this.addBody();
+        this.runCustomHandler();
     }
+
+    runCustomHandler(){
+        if(this.htmlMeta.head && this.htmlMeta.head.handler)
+            this.addHeadChildElement(this.htmlMeta.head.handler.code(this.route),false);
+      }
 
     addTitle() {
         if (this.htmlMeta.head.title)
@@ -152,8 +158,18 @@ export class Seo extends JsCodeGen  {
         this.addHeadChildElement(`<link ${this.customAttribute.preload}  rel="modulepreload" href="${forAll? path : `${path}`}">`,true)
     }
 
-    addScript(path:string,isAppendToBody:boolean= false){
-        const elementString = `<script crossorigin="" type="module" src="/${path}"></script>`;
+    getAttributes(attributes:{[key:string]:any}){
+        let aString = '';
+        if(attributes){
+            Object.keys(attributes).forEach(key=>{
+                aString+=`${key}="${attributes[key]}" `
+            })
+        }
+        return aString;
+    }
+
+    addScript(path:string,attributes:{[key:string]:any},isAppendToBody:boolean= false){
+        const elementString = `<script ${this.getAttributes(attributes)} ${this.route.isAmpPage ? "async":`crossorigin="" type="module"`} src="${path.indexOf("https") === -1 ? `/${path}`: path}"><\/script>`;
         if(!isAppendToBody)
             this.addHeadChildElement(elementString,false)
         else
@@ -161,9 +177,9 @@ export class Seo extends JsCodeGen  {
         
     }
 
-    addStyle(path:string,isAppendToBody:boolean= false){
+    addStyle(path:string,attributes:{[key:string]:any},isAppendToBody:boolean= false){
         path = path.charAt(0) === '/'? path: `/${path}`;
-        const elementString = `<link rel="stylesheet" href="${path}"></link>`;
+        const elementString = `<link ${this.getAttributes(attributes)} rel="stylesheet" href="${path}"></link>`;
         if(!isAppendToBody)
             this.addHeadChildElement(elementString,false)
         else
@@ -191,9 +207,9 @@ export class Seo extends JsCodeGen  {
         if(referenceInfo.inlineScript)
             referenceInfo.inlineScript.forEach((item)=>{this.addInlineScript(item.name,item.code)})
         if(referenceInfo.script)
-            referenceInfo.script.forEach(script=>this.addScript(script.src,isAppendToBody))
+            referenceInfo.script.forEach(script=>this.addScript(script.src,script.attributes,isAppendToBody))
         if(referenceInfo.style)
-            referenceInfo.style.forEach(style=>this.addStyle(style.href,isAppendToBody))
+            referenceInfo.style.forEach(style=>this.addStyle(style.href,style.attributes,isAppendToBody))
     }
 
     addInlineStyle(){
@@ -202,7 +218,7 @@ export class Seo extends JsCodeGen  {
             this.htmlMeta.head?.inlineStyle.forEach((item)=>{
                 let attribute = `data-href="${item.name}" ${this.customAttribute.tezjs}`
                 if(this.route.isAmpPage){
-                    inlineCode +=`${item.code}\n`
+                    this.addHeadChildElement(`<style ${this.getAttributes(item.attributes)} >${item.code}</style>`, true);
                 }else
                     this.addHeadChildElement(`<style  ${attribute} >${item.code}</style>`,true)
             })
