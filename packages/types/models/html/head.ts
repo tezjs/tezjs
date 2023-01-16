@@ -15,5 +15,6 @@ export interface Head extends TezSeo{
     links?:Array<{[key:string]:string}>;
     handler?:{
         preloads?:(url:string,pagePayload:any)=>Array<{path:string,type?:string}>
+        code:(route:any)=>string;
     }
 }
