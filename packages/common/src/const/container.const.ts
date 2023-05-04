@@ -1,7 +1,5 @@
-import { existsSync } from "fs";
 import { CommonPathResolver } from "../domain/common-path.resolver";
 import { readFileSync } from "../functions/read-file-sync";
-import { resolvePath } from "../functions/resolve-path";
 import { StrapiModuleConfig, TezConfig } from "@tezjs/types"
 import { DEFAULT_STRAPI_URL } from "./app.const";
 import { deepMerge } from "../functions/deep-merge";
