@@ -1,4 +1,3 @@
-import { Express } from "./express/express";
 import { ImageTransform } from "./image/image";
 import { Page } from "./page/page";
 import { StrapiModuleConfig } from "./strapi/strapi-module-config";
@@ -19,7 +18,7 @@ export interface TezConfig {
     viteOptions?:any;
     payloadPath?:string;
     strapi?:boolean | StrapiModuleConfig;
-    express?:Express;
+    express?:any;
     pwa?:PwaConfig | boolean;
     pwaConfigPath?:string
     image?:ImageTransform;
