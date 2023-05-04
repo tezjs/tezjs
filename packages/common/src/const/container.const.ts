@@ -70,7 +70,6 @@ export const commonContainer:
             if(tezConfig){
                 this.tezConfig = tezConfig
                 this.setDefaultStrapi();
-                this.setExpress();
                 this.tezConfig = deepMerge(this.defaultTezConfig, this.tezConfig)
             }
             
@@ -95,13 +94,5 @@ export const commonContainer:
             var commonPath = new CommonPathResolver();
             let routes:any = readFileSync(commonPath.routesJsonPath)
             return routes || [];
-        }
-
-        setExpress(){
-            if(this.tezConfig && this.tezConfig.express && this.tezConfig.express.path){
-                let configPath = resolvePath(this.tezConfig.express.path);
-                if(existsSync(configPath))
-                this.expressConfig = require(configPath)
-            }
         }
     })();

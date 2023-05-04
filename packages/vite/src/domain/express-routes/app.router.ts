@@ -12,8 +12,8 @@ export class AppRouter {
         
         this.app.use(this.vite.middlewares);
 
-        if(commonContainer.expressConfig && commonContainer.expressConfig.routes)
-            this.app.use(commonContainer.expressConfig.routes)
+        if(commonContainer.tezConfig.express)
+            this.app.use(commonContainer.tezConfig.express)
 
         this.routers.forEach(router=>{
             this.app.use(router.router)
