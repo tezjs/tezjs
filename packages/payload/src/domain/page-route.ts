@@ -81,7 +81,15 @@ export class PageRoute {
                 })
             }
         }
-        
+        routes= routes.sort((routeA, routeB) => {
+            if (routeA.path < routeB.path) {
+              return -1;
+            } else if (routeA.path > routeB.path) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
         return { routes: routes, dynamicPageRoute: dynamicPageRoute };
     }
 
