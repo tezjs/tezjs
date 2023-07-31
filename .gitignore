@@ -128,3 +128,4 @@ yarn.lock
 playgrounds/env/public/robots.txt
 playgrounds/env/public/sitemap-not-mapped.json
 playgrounds/env/public/sitemap.xml
+yarn.lock

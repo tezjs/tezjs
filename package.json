@@ -14,6 +14,7 @@
   "scripts": {
     "lint": "eslint",
     "test": "jest",
+
     "tez": "set TEZ_DEVELOPMENT=1 && node ./packages/cli/tez.mjs",
     "build:strapi": "yarn run tez build playgrounds/strapi",
     "dev:strapi": "yarn run tez dev playgrounds/strapi",
@@ -28,9 +29,9 @@
     "dev:template:strapi:backend": "yarn --cwd ./packages/create-tez/template-tez-strapi-vue/backend develop",
     "dev:template:vue": "yarn run tez dev packages/create-tez/template-tez-vue",
     "build:template:vue": "yarn run tez build packages/create-tez/template-tez-vue",
-    "stub": "lerna run stub -- --stub && npm run build:vue",
-    "build:vue": "lerna run build --stream --no-prefix",
-    "build": "lerna run stub --stream --no-prefix && npm run build:vue",
+    "stub": "node node_modules/lerna/cli.js  run stub -- --stub && npm run build:vue",
+    "build:vue": "node node_modules/lerna/cli.js  run build --stream --no-prefix",
+    "build": "node node_modules/lerna/cli.js run stub --stream --no-prefix && npm run build:vue",
     "develop:package": "tsc --watch",
     "develop:strapi": "yarn --cwd ./tz-app/tez-strapi-app/strapi develop",
     "develop:tez": "wait-on http://localhost:1337/admin && yarn --cwd ./tz-app/tez-strapi-app/tez dev",
