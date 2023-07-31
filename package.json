@@ -1,6 +1,6 @@
 {
   "name": "tez",
-  "version": "1.0.0-beta.13",
+  "version": "1.0.0-beta.14",
   "description": "",
   "main": "index.js",
   "private": true,
@@ -14,7 +14,6 @@
   "scripts": {
     "lint": "eslint",
     "test": "jest",
-
     "tez": "set TEZ_DEVELOPMENT=1 && node ./packages/cli/tez.mjs",
     "build:strapi": "yarn run tez build playgrounds/strapi",
     "dev:strapi": "yarn run tez dev playgrounds/strapi",
