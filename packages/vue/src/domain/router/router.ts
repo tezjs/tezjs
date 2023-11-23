@@ -5,24 +5,24 @@ import { resolveRoute } from "../../funcs/resolve-pre-code";
 import { setMetaInfo } from "../../funcs/set-meta-tags";
 import { HistoryState } from "../../models/history-state";
 const assign = Object.assign;
-if(history && history.state && history.state.back){
-    const item  = window.sessionStorage.getItem("back");
-    if(item)
+if (history && history.state && history.state.back) {
+    const item = window.sessionStorage.getItem("back");
+    if (item)
         history.state.back = item;
     window.sessionStorage.removeItem("back");
 }
 
-export class Router{
-    
-    historyState:{value:HistoryState } = {value:history.state};
-    url:string  = getCurrentUrl();
-    currentUrl:string=this.url;
-    routeOptions:{path:string;query?:{[key:string]:string}}
-    constructor(){
+export class Router {
+
+    historyState: { value: HistoryState } = { value: history.state };
+    url: string = getCurrentUrl();
+    currentUrl: string = this.url;
+    routeOptions: { path: string; query?: { [key: string]: string } }
+    constructor() {
         const { pathname, search, hash } = location;
-        this.url= pathname+search+hash;
-        
-        if(!this.historyState.value)
+        this.url = pathname + search + hash;
+
+        if (!this.historyState.value)
             this.changeRoute(this.url, {
                 back: null,
                 current: this.url,
@@ -30,99 +30,104 @@ export class Router{
                 position: history.length - 1,
                 replaced: true,
                 scroll: null,
-            }, true);  
-        window.addEventListener("popstate",({ state })=>{
+            }, true);
+        window.addEventListener("popstate", ({ state }) => {
             this.historyState.value = state;
-            this.changeRouteState(state && state.current ?  state.current : getCurrentUrl(),true).then(t=>{
-                const hash:string = location.hash;
-                if(hash){
-                    let element = document.getElementById(hash.replace("#","")) ;
-                    if(element)
+            const hash: string = location.hash;
+            if (!hash) {
+                this.changeRouteState(state && state.current ? state.current : getCurrentUrl(), true).then(t => {
+
+                })
+            } else {
+                if (hash) {
+                    let element = document.getElementById(hash.replace("#", ""));
+                    if (element)
                         element.scrollIntoView();
                 }
-            })
+            }
+
         })
     }
-    
-    push(to:string | {path:string;query?:{[key:string]:string}}){
-        if(typeof to === "string")
+
+    push(to: string | { path: string; query?: { [key: string]: string } }) {
+        if (typeof to === "string")
             this.changeRouteState(to);
-        else if(to.path){
-            this.routeOptions= to;
+        else if (to.path) {
+            this.routeOptions = to;
             this.changeRouteState(to.path)
         }
     }
 
-    changeRouteState(to,isPopState=false){
+    changeRouteState(to, isPopState = false) {
         this.changeScrollPosition();
-        return this.resolve(to).then(t=>{
+        return this.resolve(to).then(t => {
             this.refreshPageMetaTags(to)
-            if(!isPopState){
+            if (!isPopState) {
                 const currentState = assign(
-                    {}, 
+                    {},
                     this.historyState.value, history.state, {
-                        forward: to,
-                        scroll: getCurrentScrollPosition(),
-                    });
-                    
-                    this.changeRoute(currentState.current, currentState, true);
-                    const state = assign({}, this.createState({back:this.currentUrl,current: to, forward:null}), { position: currentState.position + 1 });
-                    this.changeRoute(to, state, false);
-                    this.routeOptions= undefined;
-            }
-                this.currentUrl = to;
-                tezPages.refreshRoute(to);
-        })
-      }
+                    forward: to,
+                    scroll: getCurrentScrollPosition(),
+                });
 
-    resolve(url:string){
+                this.changeRoute(currentState.current, currentState, true);
+                const state = assign({}, this.createState({ back: this.currentUrl, current: to, forward: null }), { position: currentState.position + 1 });
+                this.changeRoute(to, state, false);
+                this.routeOptions = undefined;
+            }
+            this.currentUrl = to;
+            tezPages.refreshRoute(to);
+        })
+    }
+
+    resolve(url: string) {
         return resolveRoute(url)
     }
 
-    refreshPageMetaTags(to:string){
+    refreshPageMetaTags(to: string) {
         let payload = tezPages.getPayload(to)
         if (payload && payload.tags)
-              setMetaInfo(payload.tags);
+            setMetaInfo(payload.tags);
     }
 
-    changeRoute(url:string,state:HistoryState,replace:boolean){
-        if(state.back)
-            window.sessionStorage.setItem("back",state.back)
-            history[replace ? 'replaceState' : 'pushState'](state, '',!replace?this.getFullUrl(url):url);
-            this.historyState.value = state;
+    changeRoute(url: string, state: HistoryState, replace: boolean) {
+        if (state.back)
+            window.sessionStorage.setItem("back", state.back)
+        history[replace ? 'replaceState' : 'pushState'](state, '', !replace ? this.getFullUrl(url) : url);
+        this.historyState.value = state;
     }
 
-    getFullUrl(url:string){
+    getFullUrl(url: string) {
         let queryParams = '';
-        if(this.routeOptions && this.routeOptions.query){
-            queryParams="?"
-            Object.keys(this.routeOptions.query).forEach(key=>{
-                queryParams+=`${key}=${this.routeOptions.query[key]}`
+        if (this.routeOptions && this.routeOptions.query) {
+            queryParams = "?"
+            Object.keys(this.routeOptions.query).forEach(key => {
+                queryParams += `${key}=${this.routeOptions.query[key]}`
             })
         }
         return `${url}${queryParams}`
     }
 
-    changeScrollPosition(){
+    changeScrollPosition() {
         if ('scrollBehavior' in document.documentElement.style)
-        window.scrollTo({
-            behavior:'smooth',
-            top:0
-        });
+            window.scrollTo({
+                behavior: 'smooth',
+                top: 0
+            });
         else {
-        window.scrollTo(window.pageXOffset,0);
+            window.scrollTo(window.pageXOffset, 0);
+        }
     }
-    }
-    createState(state:HistoryState) {
+    createState(state: HistoryState) {
         return {
-            back:state.back,
-            current:state.current,
-            forward:state.forward,
-            replaced:state.replaced,
+            back: state.back,
+            current: state.current,
+            forward: state.forward,
+            replaced: state.replaced,
             position: window.history.length,
             scroll: getCurrentScrollPosition(),
         };
     }
 
-    
+
 }

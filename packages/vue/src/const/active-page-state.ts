@@ -16,16 +16,18 @@ export const activePageState:
     }
     
     setActivePage(pageState:PageState){
-        this.page.slots =pageState.slots;
-        this.page.masterPageSlots  = pageState.masterPageSlots ;
-        this.page.layoutName = pageState.layoutName;
-        this.page.url = pageState.url;
-        this.page.layoutComponent = pageState.layoutComponent;
-        this.page.postScript = pageState.postScript;
-        this.hooks.callHook('tez:activePageChanged',this.page)
-        this.hooks.callHook('tez:layoutNameChanged',this.page.layoutName)
-        this.hooks.callHook('tez:slotsChanged',{slots:this.page.slots,masterPageSlots:this.page.masterPageSlots})
-        this.hooks.callHook("tez:layoutComponentChanged",{component:this.page.layoutComponent})
+        if(this.page.url != pageState.url){
+            this.page.slots =pageState.slots;
+            this.page.masterPageSlots  = pageState.masterPageSlots ;
+            this.page.layoutName = pageState.layoutName;
+            this.page.url = pageState.url;
+            this.page.layoutComponent = pageState.layoutComponent;
+            this.page.postScript = pageState.postScript;
+            this.hooks.callHook('tez:activePageChanged',this.page)
+            this.hooks.callHook('tez:layoutNameChanged',this.page.layoutName)
+            this.hooks.callHook('tez:slotsChanged',{slots:this.page.slots,masterPageSlots:this.page.masterPageSlots})
+            this.hooks.callHook("tez:layoutComponentChanged",{component:this.page.layoutComponent})
+        }
     }
 
     updateActivePageSlots(){
