@@ -5,6 +5,13 @@ import { resolveRoute } from "../../funcs/resolve-pre-code";
 import { setMetaInfo } from "../../funcs/set-meta-tags";
 import { HistoryState } from "../../models/history-state";
 const assign = Object.assign;
+if(history && history.state && history.state.back){
+    const item  = window.sessionStorage.getItem("back");
+    if(item)
+        history.state.back = item;
+    window.sessionStorage.removeItem("back");
+}
+
 export class Router{
     
     historyState:{value:HistoryState } = {value:history.state};
@@ -14,6 +21,7 @@ export class Router{
     constructor(){
         const { pathname, search, hash } = location;
         this.url= pathname+search+hash;
+        
         if(!this.historyState.value)
             this.changeRoute(this.url, {
                 back: null,
@@ -78,6 +86,8 @@ export class Router{
     }
 
     changeRoute(url:string,state:HistoryState,replace:boolean){
+        if(state.back)
+            window.sessionStorage.setItem("back",state.back)
             history[replace ? 'replaceState' : 'pushState'](state, '',!replace?this.getFullUrl(url):url);
             this.historyState.value = state;
     }
