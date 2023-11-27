@@ -5,11 +5,10 @@ import { resolveRoute } from "../../funcs/resolve-pre-code";
 import { setMetaInfo } from "../../funcs/set-meta-tags";
 import { HistoryState } from "../../models/history-state";
 const assign = Object.assign;
-if (history && history.state && history.state.back) {
+if (history && history.state) {
     const item = window.sessionStorage.getItem("back");
     if (item)
         history.state.back = item;
-    window.sessionStorage.removeItem("back");
 }
 
 export class Router {
