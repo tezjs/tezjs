@@ -9,25 +9,28 @@ import TzTickedMixin from '../mixins/tz-ticked.mixin'
 import { TezAppOptions } from "../models/tez-app-options";
 import { TEZ_SRC_DIRECTIVE } from "../directives/tez-src";
 export const tez:
-{
-    register:(tezAppOptions:TezAppOptions)=> any 
-} = new (class {
-    register(tezAppOptions:TezAppOptions){
-      
-    return {
-      install (Vue:any) {
-        if(tezAppOptions.useVue)
-          tezAppOptions.useVue(Vue);
-        componentState.defineGlobalProps(Vue);
-        Vue.component("TezIndex", TezIndex);
-        Vue.component("TezSlot", TezSlot);
-        Vue.component("TezLazy", TezLazy);
-        Vue.component("TezPage", TezPage);
-        Vue.component("TezLink", TezLink);
-        Vue.component("TezIterator", TezIterator);
-        Vue.directive("tez-src",TEZ_SRC_DIRECTIVE);
-        Vue.mixin(TzTickedMixin)
+  {
+    register: (tezAppOptions: TezAppOptions) => any
+  } = new (class {
+    register(tezAppOptions: TezAppOptions) {
+
+      return {
+        install(Vue: any) {
+          const item = window.sessionStorage.getItem("back");
+          if (!history.state && !item)
+            window.sessionStorage.setItem("back", location.pathname);
+          if (tezAppOptions.useVue)
+            tezAppOptions.useVue(Vue);
+          componentState.defineGlobalProps(Vue);
+          Vue.component("TezIndex", TezIndex);
+          Vue.component("TezSlot", TezSlot);
+          Vue.component("TezLazy", TezLazy);
+          Vue.component("TezPage", TezPage);
+          Vue.component("TezLink", TezLink);
+          Vue.component("TezIterator", TezIterator);
+          Vue.directive("tez-src", TEZ_SRC_DIRECTIVE);
+          Vue.mixin(TzTickedMixin)
+        }
       }
     }
-  }
-})
+  })
