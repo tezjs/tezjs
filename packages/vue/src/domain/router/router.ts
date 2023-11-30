@@ -6,7 +6,10 @@ import { setMetaInfo } from "../../funcs/set-meta-tags";
 import { HistoryState } from "../../models/history-state";
 const assign = Object.assign;
 
-
+if (history && history.state) {
+    const t = window.sessionStorage.getItem("back");
+    t && (history.state.back = t)
+}
 export class Router {
 
     historyState: { value: HistoryState } = { value: history.state };
