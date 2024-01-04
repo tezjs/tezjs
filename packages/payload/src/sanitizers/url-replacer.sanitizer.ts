@@ -4,7 +4,7 @@ import { commonContainer } from "@tezjs/common"
 export default function urlReplacer(value:string,columnName?:string) {
     if (typeof value === "string" && value.indexOf('https://') !== -1) {
         let strapiConfig = commonContainer.getStrapiConfig();
-        if (strapiConfig.media.cdnUri && strapiConfig.media.uris.length > 0) {
+        if (strapiConfig.media && strapiConfig.media.cdnUri && strapiConfig.media.uris.length > 0) {
             const imageHostUris = typeof strapiConfig.media.uris === "string" ? JSON.parse(strapiConfig.media.uris) : strapiConfig.media.uris;
             const cdnHost = strapiConfig.media.cdnUri;
             imageHostUris.forEach(host => {
