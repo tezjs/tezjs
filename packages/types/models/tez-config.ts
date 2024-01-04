@@ -11,6 +11,8 @@ import { TezModuleConfig } from "./tez-module-config";
 import { GenerateConfig } from "./generate-config";
 import { PwaConfig } from "./pwa/pwa-config";
 import { AmpConfig } from "./amp-config";
+import { TezSeo } from "./seo/seo";
+import { Sitemap } from "./seo/sitemap";
 export interface TezConfig {
     generate?:GenerateConfig;
     sourceCodePath?:string
@@ -22,6 +24,7 @@ export interface TezConfig {
     pwa?:PwaConfig | boolean;
     pwaConfigPath?:string
     image?:ImageTransform;
+    extendPages?:{[key:string]:{seo?:TezSeo, sitemap?:Sitemap;}},
     pages?:Page[];
     robots?:{[key:string]:string}
     envName?:string;

@@ -64,7 +64,7 @@ export class PageCollection {
             
         if(commonContainer.tezConfig.pages)
             await this.customPagePayload.generate(routePath)
-        await this.moduleRunner.runPayload(config);
+        await this.moduleRunner.runPayload(config,commonContainer.tezConfig.extendPages);
         this.pageRoute.save();
         if(commonContainer.tezConfig.generate.sitemap)
             this.sitemap.save()
