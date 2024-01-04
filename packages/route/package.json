@@ -1,11 +1,10 @@
 {
   "name": "@tezjs/route",
-  "version": "1.0.0-beta.20",
+  "version": "1.0.0-beta.21",
   "description": "",
   "module": "./dist/index.mjs",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
- 
   "files": [
     "dist"
   ],
@@ -30,6 +29,6 @@
   },
   "dependencies": {
     "globby": "13.1.1",
-    "@tezjs/common": "1.0.0-beta.20"
+    "@tezjs/common": "1.0.0-beta.21"
   }
 }
