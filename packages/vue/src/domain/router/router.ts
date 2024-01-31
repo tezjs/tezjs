@@ -6,7 +6,7 @@ import { setMetaInfo } from "../../funcs/set-meta-tags";
 import { HistoryState } from "../../models/history-state";
 import { Tracking } from "./tracking";
 const assign = Object.assign;
-
+const cta = 'cta'
 if (history && history.state) {
     const t = window.sessionStorage.getItem("back");
     t && (history.state.back = t)
@@ -52,6 +52,7 @@ export class Router {
     getTrackingInfo(isStandAlone){
         let track = this.tracking.track;
         track.leadUrl = isStandAlone?history.state.back: this.url;
+        track.cta = window.sessionStorage.getItem(cta);
         return track;
     }
 

@@ -12,7 +12,14 @@ export class Tracking{
             this.setReferrer()
         if(!this.track.entryUrl)
             this.setEntryUrl()
-        this.pushUrl(window.location.href)
+        this.pushUrl(window.location.href);
+        document.addEventListener("click",(event:any)=>{
+            if(event.target.innerText)
+                this.setCTA(event.target.innerText)
+        })
+    }
+    setCTA(text){
+        window.sessionStorage.setItem('cta',text)
     }
 
     setEntryUrl(){
