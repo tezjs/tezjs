@@ -4,6 +4,7 @@ import { getCurrentUrl } from "../../funcs/payload/get-current-url";
 import { resolveRoute } from "../../funcs/resolve-pre-code";
 import { setMetaInfo } from "../../funcs/set-meta-tags";
 import { HistoryState } from "../../models/history-state";
+import { Tracking } from "./tracking";
 const assign = Object.assign;
 
 if (history && history.state) {
@@ -16,7 +17,9 @@ export class Router {
     url: string = getCurrentUrl();
     currentUrl: string = this.url;
     routeOptions: { path: string; query?: { [key: string]: string } }
+    tracking:Tracking;
     constructor() {
+        this.tracking = new Tracking();
         const { pathname, search, hash } = location;
         this.url = pathname + search + hash;
 
@@ -45,6 +48,11 @@ export class Router {
             }
 
         })
+    }
+    getTrackingInfo(isStandAlone){
+        let track = this.tracking.track;
+        track.leadUrl = isStandAlone?history.state.back: this.url;
+        return track;
     }
 
     push(to: string | { path: string; query?: { [key: string]: string } }) {
@@ -95,6 +103,10 @@ export class Router {
         window.sessionStorage.setItem("back", state.current),
             history[replace ? 'replaceState' : 'pushState'](state, '', !replace ? this.getFullUrl(url) : url);
         this.historyState.value = state;
+        if(!replace){
+            this.tracking.pushUrl(state.current);
+            console.log(this.getTrackingInfo(true))
+        }
     }
 
     getFullUrl(url: string) {
