@@ -23,15 +23,17 @@ export class Tracking{
     }
 
     setEntryUrl(){
+        let track = this.track;
         if(!this.track.entryUrl)
-            this._track.entryUrl = window.location.href;
-        this.save();
+            track.entryUrl = window.location.href;
+        this.save(track);
     }
 
     setReferrer(){
-        if(document.referrer)
-        this._track.referrer = document.referrer
-    this.save()
+        let track = this.track
+        if(document.referrer && !this.track.entryUrl)
+        track.referrer = document.referrer
+    this.save(track)
     }
 
     pushUrl(url){
@@ -39,7 +41,7 @@ export class Tracking{
         if(this._track.uris[this._track.uris.length-1] != url){
             this._track.pagesVisited++;
             this.addUrl(this._track,url)
-            this.save();
+            this.save(this._track);
         }
         
     }
@@ -60,7 +62,7 @@ export class Tracking{
         return this._track;
     }
 
-    save(){
-        window.localStorage.setItem(state,JSON.stringify(this._track))
+    save(track:any){
+        window.localStorage.setItem(state,JSON.stringify(track))
     }
 }
