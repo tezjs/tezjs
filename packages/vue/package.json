@@ -1,6 +1,6 @@
 {
   "name": "@tezjs/vue",
-  "version": "1.0.0-beta.22",
+  "version": "1.0.0-beta.23",
   "description": "",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
@@ -33,7 +33,7 @@
     "unbuild": "^0.7.4"
   },
   "dependencies": {
-    "@tezjs/js": "1.0.0-beta.22",
+    "@tezjs/js": "1.0.0-beta.23",
     "tslib": "^2.3.1",
     "vue": "^3.2.25",
     "hookable": "5.1.1"
