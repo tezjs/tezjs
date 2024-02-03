@@ -105,7 +105,7 @@ export class Router {
             history[replace ? 'replaceState' : 'pushState'](state, '', !replace ? this.getFullUrl(url) : url);
         this.historyState.value = state;
         if(!replace){
-            this.tracking.pushUrl(state.current);
+            this.tracking.pushUrl(`${location.origin}${state.current}`);
             console.log(this.getTrackingInfo(true))
         }
     }
