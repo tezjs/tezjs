@@ -51,7 +51,7 @@ export class Router {
     }
     getTrackingInfo(isStandAlone){
         let track = this.tracking.track;
-        track.leadUrl = isStandAlone?history.state.back: this.url;
+        track.leadUrl = this.tracking.getLeadUrl(isStandAlone,this.url)
         track.cta = window.sessionStorage.getItem(cta);
         return track;
     }
@@ -106,7 +106,6 @@ export class Router {
         this.historyState.value = state;
         if(!replace){
             this.tracking.pushUrl(`${location.origin}${state.current}`);
-            console.log(this.getTrackingInfo(true))
         }
     }
 

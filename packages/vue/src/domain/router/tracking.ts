@@ -22,6 +22,14 @@ export class Tracking{
         window.sessionStorage.setItem('cta',text)
     }
 
+    getLeadUrl(isStandAlone:boolean,currentUrl:string){
+        return isStandAlone?this.getFullUrl(history.state.back): this.getFullUrl(currentUrl);
+    }
+
+    getFullUrl(url:string){
+        return `${location.origin}${url}`
+    }
+
     setEntryUrl(){
         let track = this.track;
         if(!this.track.entryUrl)
@@ -48,10 +56,9 @@ export class Tracking{
 
     addUrl(track,uri){
             if (track.uris.length === 10) {
-                track.uris.shift();
+                track.uris.pop();
             }
-            
-            track.uris.push(uri);
+            track.uris.unshift(uri);
         
     }
 
