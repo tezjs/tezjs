@@ -19,7 +19,19 @@ export class Tracking{
         })
     }
     setCTA(text){
-        window.sessionStorage.setItem('cta',text)
+        const json:any = window.sessionStorage.getItem("cta");
+        let data = [];
+        if(json)
+            data = json;
+        data.push(text);
+        window.sessionStorage.setItem('cta',JSON.stringify(data))
+    }
+
+    getCTA(){
+        const ctaData = window.sessionStorage.getItem("cta");;
+        if(ctaData)
+            return JSON.parse(ctaData);
+        return 
     }
 
     getLeadUrl(isStandAlone:boolean,currentUrl:string){
