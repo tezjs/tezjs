@@ -19,7 +19,7 @@ export class Tracking{
         })
     }
     setCTA(text){
-        const json:any = window.sessionStorage.getItem("cta");
+        const json:any = this.getCTA()
         let data = [];
         if(json && Array.isArray(json))
             data = json;
