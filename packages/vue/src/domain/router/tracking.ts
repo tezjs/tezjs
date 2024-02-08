@@ -14,24 +14,26 @@ export class Tracking{
             this.setEntryUrl()
         this.pushUrl(window.location.href);
         document.addEventListener("click",(event:any)=>{
-            if(event.target.innerText)
+            const element = event.target;
+            if(event.target.innerText && !this.shouldExcludeElement(element))
                 this.setCTA(event.target.innerText)
         })
     }
     setCTA(text){
-        const json:any = this.getCTA()
-        let data = [];
-        if(json && Array.isArray(json))
-            data = json;
-        data.push(text);
-        window.sessionStorage.setItem('cta',JSON.stringify(data))
+        window.sessionStorage.setItem('cta',JSON.stringify(text))
+    }
+
+    shouldExcludeElement(element) {
+        // Exclude form elements from tracking
+        if (element.tagName === 'INPUT' || element.tagName === 'BUTTON' || element.tagName === 'SELECT' || element.tagName === 'TEXTAREA') {
+            return true;
+        }
+    
+        return false;
     }
 
     getCTA(){
-        const ctaData = window.sessionStorage.getItem("cta");;
-        if(ctaData)
-            return JSON.parse(ctaData);
-        return 
+        return window.sessionStorage.getItem("cta");
     }
 
     getLeadUrl(isStandAlone:boolean,currentUrl:string){
