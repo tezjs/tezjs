@@ -11,6 +11,8 @@ export function tez(): Plugin {
 	return {
 		name: "vite:tez",
 		async closeBundle(){
+			const pageCollection = new PageCollection();
+      		await pageCollection.generate();
 			if(depsContainer.deps){
 				const htmlGen = new HtmlGen();
 				await htmlGen.build();

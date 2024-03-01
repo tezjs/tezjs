@@ -21,6 +21,11 @@ export class GlobWriter{
         components.forEach(component=>this.addLayout(component)) 
     }
 
+    async setComponents(){
+        let components = await this.pathResolver.commonPath.getFiles("components","vue");
+        components.forEach(component=>this.addComponent(component)) 
+    }
+
     addComponent(name:string){
         const isPathExits = this.pathResolver.pathExists(getPath([this.pathResolver.componentsPath,`${name}.vue`],false));
         if(this.components.filter(t=>t === name).length === 0 && isPathExits)
