@@ -33,7 +33,7 @@ export class Tracking{
     }
 
     getCTA(){
-        return window.sessionStorage.getItem("cta");
+        return window.sessionStorage.getItem("cta") || "";
     }
 
     getLeadUrl(isStandAlone:boolean,currentUrl:string){
