@@ -2,7 +2,7 @@ import { commonContainer, CommonPathResolver, convertDateToTicks } from "@tezjs/
 import {build as viteBuild,mergeConfig, UserConfig} from 'vite'
 import { VITE_SERVER_CONFIG } from "../const/vite-server-config.const";
 import { readConfig } from "../functions/read-config";
-import { PageCollection,GlobWriter  } from "@tezjs/payload";
+import {GlobWriter  } from "@tezjs/payload";
 import { writeDepsAndGlob } from "../functions/write-deps";
 import { addUpdateInputs } from "../functions/add-update-inputs";
 import { appContainer } from "../const/container.const";
@@ -17,7 +17,7 @@ export  async function build(config?:BuildConfig){
     await globWriter.setComponents();
     await globWriter.setLayoutComponents();
     globWriter.write();
-    
+
     let tezConfig = commonContainer.tezConfig;
     const pathResolver = new CommonPathResolver();
     const userConfig = tezConfig.viteOptions || {};
