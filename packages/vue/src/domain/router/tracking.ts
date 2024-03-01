@@ -41,7 +41,7 @@ export class Tracking{
     }
 
     getFullUrl(url:string){
-        return `${location.origin}${url}`
+        return `${location.origin}${url ? url:'/'}`
     }
 
     setEntryUrl(){
