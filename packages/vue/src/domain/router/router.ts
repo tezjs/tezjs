@@ -51,7 +51,7 @@ export class Router {
     }
     getTrackingInfo(isStandAlone){
         let track = this.tracking.track;
-        track.leadUrl = this.tracking.getLeadUrl(isStandAlone,window.location.href)
+        track.leadUrl = this.tracking.getLeadUrl(isStandAlone,window.location.pathname)
         const ctaData = this.tracking.getCTA();
         track.cta = ctaData;
         return track;
