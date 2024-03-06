@@ -24,7 +24,7 @@ export class AllRouter{
         try {
           if(request.originalUrl && request.originalUrl.indexOf("tez/deps") === -1){
             let htmlCache = undefined;
-            await refreshData(request.url)
+            // await refreshData(request.url)
             const route=this.routes.filter(route=>route.path === request.url)[0] || {"name":"","path":"/","fPath":`${path.sep}index`}
               await appContainer.addOrUpdateTezTS(route);
               ++appContainer.versionId;
