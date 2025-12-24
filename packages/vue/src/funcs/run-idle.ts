@@ -6,8 +6,9 @@ let isExecuted: boolean = false;
 export function runAddLib() {
     if (!isExecuted) {
         isExecuted = true;
+        let libConfig = componentState.tezAppOptions.libConfig;
+        const waitToInject = !libConfig? 2500 : libConfig.waitToInject || 2500
         setTimeout(()=>{
-            let libConfig = componentState.tezAppOptions.libConfig;
             const preCache = ()=>cacheState.preCacheRoutes();
             if(!libConfig)
                 componentState.tezAppOptions.libConfig = {afterUserInteraction:[preCache]}
@@ -26,6 +27,6 @@ export function runAddLib() {
                 if(libConfig.afterUserInteraction)
                     afterUserInteraction(libConfig.afterUserInteraction)
             }
-        },2500)
+        },waitToInject)
     }
 }
