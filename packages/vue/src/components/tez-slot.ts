@@ -131,7 +131,7 @@ export default defineComponent({
                         }
                     }
                     _components.forEach(component=>this.components.push(component))
-                    if(this.slotCategory === "page" && components.length === this.components.length && components.length === 1)
+                    if(this.slotCategory === "page" && this.nextIndex === 1)
                         runAddLib();
                 }
             }else if(this.slotCategory === "page")
