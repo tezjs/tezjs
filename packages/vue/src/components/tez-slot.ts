@@ -9,6 +9,7 @@ import { PageState } from '../models/page-state';
 import { registerTezPage } from '../funcs/register-tez-page';
 import { componentState } from '../const/component-state';
 import { runAddLib } from '../funcs/run-idle';
+import { restoreSsrHtml } from '../funcs/ssr-html';
 
 interface DataPoint {
     scrollFunction:Function;
@@ -102,44 +103,62 @@ export default defineComponent({
         getMaxPreComponentCount(){
             return componentState.tezAppOptions.maxPreComponentCount;
         },
-        async goToNextComponent(isContinue:boolean) {
-            if(isContinue === false)
-                return;
-            if (!this.observer && !isBot()) {
-                this.subscribeLazy();
-                this.isInView = isContinue;
-                if(!this.isInView)
-                return;
-            }
-            this.isInView = isContinue || isBot() || this.isInView;
-            if (this.isInView) {
-                let components = this.getSlotComponents(this.slotName, this.slotCategory);
-                let _components=[];
-                if((this.nextIndex == this.getMaxPreComponentCount() && this.postScript) || (this.postScript && isBot()))
-                        (await this.loadPostScript())
-                if (components.length > this.nextIndex && !this.components[this.nextIndex]) {
-                    let increCount = isBot()? components.length : this.nextIndex == (this.getMaxPreComponentCount() + 1)?components.length:this.nextIndex+1;
-                    let startIndex = this.nextIndex;
-                    for(var i=startIndex;i<increCount;i++){
-                        let componentItem = components[this.nextIndex]
-                        let componentName = this.getComponentName(componentItem);
-                        if(tezPages.components[componentName]){
-                            _components.push(componentItem);
-                            this.nextIndex++;
-                            if(increCount !== components.length)
-                                idleCallback(() => this.goToNextComponent(), { timeout: 0 })
-                        }
-                    }
-                    _components.forEach(component=>this.components.push(component))
-                    if(this.slotCategory === "page" && this.nextIndex === 1)
-                        runAddLib();
+        async goToNextComponent(isContinue?:boolean) {
+            try {
+                if(isContinue === false)
+                    return;
+                if (!this.observer && !isBot()) {
+                    this.subscribeLazy();
+                    this.isInView = isContinue;
+                    if(!this.isInView)
+                    return;
                 }
-            }else if(this.slotCategory === "page")
-                runAddLib();
+                this.isInView = isContinue || isBot() || this.isInView;
+                if (this.isInView) {
+                    let components = this.getSlotComponents(this.slotName, this.slotCategory);
+                    let _components=[];
+                    if((this.nextIndex == this.getMaxPreComponentCount() && this.postScript) || (this.postScript && isBot()))
+                            (await this.loadPostScript())
+                    if (isBot() && this.postScript) {
+                        return;
+                    }
+                    if (components.length > this.nextIndex && !this.components[this.nextIndex]) {
+                        let increCount = isBot()? components.length : this.nextIndex == (this.getMaxPreComponentCount() + 1)?components.length:this.nextIndex+1;
+                        let startIndex = this.nextIndex;
+                        for(var i=startIndex;i<increCount;i++){
+                            let componentItem = components[this.nextIndex]
+                            let componentName = this.getComponentName(componentItem);
+                            if(tezPages.components[componentName]){
+                                _components.push(componentItem);
+                                this.nextIndex++;
+                                if(increCount !== components.length)
+                                    idleCallback(() => this.goToNextComponent(), { timeout: 0 })
+                            }
+                        }
+                        _components.forEach(component=>this.components.push(component))
+                        if(this.slotCategory === "page" && this.nextIndex === 1)
+                            runAddLib();
+                    }
+                }else if(this.slotCategory === "page")
+                    runAddLib();
+            } catch (error) {
+                if (isBot()) {
+                    restoreSsrHtml();
+                }
+            }
         },
-        loadPostScript() {
-            if(this.postScript)
-            return this.postScript().then((postScript) => {postScript.default(registerTezPage);this.postScript = null});
+        async loadPostScript() {
+            if(this.postScript){
+                try {
+                    const postScript = await this.postScript();
+                    postScript.default(registerTezPage);
+                    this.postScript = null;
+                } catch (error) {
+                    if (isBot()) {
+                        restoreSsrHtml();
+                    }
+                }
+            }
         },
         getComponentName(component:any){
             return isMobile() && component.mobileComponentName ? component.mobileComponentName : component.name;
@@ -147,18 +166,32 @@ export default defineComponent({
         
     },
 
-    render() {
-        let vNodes: Array<VNode> = new Array<VNode>();
-        for (let component of this.components) {
-            let componentName = this.getComponentName(component) 
-                let vNode = cacheState.getVNode(component.id);
-                if (!vNode)
-                    vNode = cacheState.cacheVNode(component.id, h(tezPages.components[componentName], { data: component.data }));
-                vNodes.push(h(KeepAlive, { key: `${getCurrentUrl()}${component.itemName}` }, vNode))
+    errorCaptured(err: any) {
+        if (isBot()) {
+            restoreSsrHtml();
+            return false;
         }
-        if (!this.lazyRef)
-            this.lazyRef = h('div', { ref: 'divLazy', style: { 'height': '2px' } }, "");
-        vNodes.push(this.lazyRef)
-        return h('div', vNodes)
+    },
+
+    render() {
+        try {
+            let vNodes: Array<VNode> = new Array<VNode>();
+            for (let component of this.components) {
+                let componentName = this.getComponentName(component) 
+                    let vNode = cacheState.getVNode(component.id);
+                    if (!vNode)
+                        vNode = cacheState.cacheVNode(component.id, h(tezPages.components[componentName], { data: component.data }));
+                    vNodes.push(h(KeepAlive, { key: `${getCurrentUrl()}${component.itemName}` }, vNode))
+            }
+            if (!this.lazyRef)
+                this.lazyRef = h('div', { ref: 'divLazy', style: { 'height': '2px' } }, "");
+            vNodes.push(this.lazyRef)
+            return h('div', vNodes)
+        } catch (error) {
+            if (isBot()) {
+                restoreSsrHtml();
+            }
+            throw error;
+        }
     }
 })

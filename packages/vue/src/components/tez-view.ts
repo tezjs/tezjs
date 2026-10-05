@@ -4,6 +4,8 @@ import { cacheState } from "../const/cache-state";
 import { tezPages } from "../const/tez-pages";
 import TezIndex from './tez-index'
 import TezPage from "./tez-page"
+import { isBot } from '@tezjs/js'
+import { restoreSsrHtml } from '../funcs/ssr-html'
 const CACHE_KEY_LAYOUT_TEZ_PAGE:string = "layout_tezpage";
 export default defineComponent({
     data(){
@@ -29,6 +31,12 @@ export default defineComponent({
             activePageState.hooks.hook("tez:layoutComponentChanged",(component:DefineComponent)=>{
                 this.layoutComponent = component;
             })
+        }
+    },
+    errorCaptured(err: any) {
+        if (isBot()) {
+            restoreSsrHtml();
+            return false;
         }
     },
     render() {
